@@ -19,8 +19,8 @@ const MenuItems = [
 
 const HeaderWrapper = styled.header`
   background: #020202;
-  margin-bottom: 1.45rem;
-  border-bottom: 3px solid #C00A0A;
+  margin-bottom: 2px;
+  border-bottom: 1px solid #C00A0A;
 `
 
 const Nav = styled.nav`
@@ -69,8 +69,8 @@ const Navbox = styled.div`
     width: 70%;
     padding-top: 10vh;
     background-color: #020202;
-    border-top: 3px solid #C00A0A;
-    border-left: 3px solid #C00A0A;
+    border-top: 1px solid #C00A0A;
+    border-left: 1px solid #C00A0A;
     transition: all 0.3s ease-in;
     top: 70px;
     right: ${props => (props.open ? "-100%" : "0")};

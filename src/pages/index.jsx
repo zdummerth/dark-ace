@@ -1,22 +1,35 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql } from "gatsby"
+import Img from "gatsby-image"
+import styled from "styled-components"
 
 import Layout from "../components/layout"
-import Logo from "../components/logo"
+// import Logo from "../components/logo"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
+const ImgWrapper = styled.div`
+  // border: 1px solid #C00A0A;
+`
+
+const IndexPage = ({data}) => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Logo />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
+    <ImgWrapper>
+      <Img fluid={data.file.childImageSharp.fluid} />
+    </ImgWrapper>
   </Layout>
 )
+
+export const query = graphql`
+query {
+  file(relativePath: { eq: "motto.png" }) {
+    childImageSharp {
+      fluid(maxWidth: 1200) {
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+}
+`
 
 export default IndexPage
