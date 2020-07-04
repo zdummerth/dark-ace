@@ -1,7 +1,7 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React, { useState } from "react"
-import styled from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 import { FaFacebookF, FaInstagram, FaExternalLinkAlt } from 'react-icons/fa';
 
 import Logo from "./logo"
@@ -16,6 +16,13 @@ const MenuItems = [
     title: "Contact"
   },
 ]
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    overflow: ${props => (props.open ? "" : "hidden")};
+    height: ${props => (props.open ? "" : "100vh")};
+  }
+`
 
 const HeaderWrapper = styled.header`
   background: #020202;
@@ -203,11 +210,13 @@ const Header = ({ siteTitle }) => {
         </Toggle>
         {navbarOpen ? (
           <Navbox>
+            <GlobalStyle />
             {links}
             {extLinks}
           </Navbox>
         ) : (
           <Navbox open>
+            <GlobalStyle open/>
             {links}
             {extLinks}
           </Navbox>
