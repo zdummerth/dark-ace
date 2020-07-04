@@ -39,10 +39,10 @@ const Footer = styled.footer`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-top: 1px solid red;
+  border-top: 1px solid #C00A0A;
   padding: 0 2vh;
   margin-top: 3vh;
-  background-color: #5B585A;
+  background-color: #262626;
   @media (max-width: 900px) {
     flex-direction: column;
     p {
@@ -102,7 +102,7 @@ const StyledLink = styled(Link)`
   @media (max-width: 768px) {
     padding: 20px 0;
     // font-size: 1.5rem;
-    z-index: 6;
+    // z-index: 6;
   }
 `
 
