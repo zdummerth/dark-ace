@@ -3,22 +3,33 @@ import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
 
+import Gallery from '@browniebroke/gatsby-image-gallery'
+import '@browniebroke/gatsby-image-gallery/dist/style.css'
+
 import Layout from "../components/layout"
 // import Logo from "../components/logo"
 import SEO from "../components/seo"
 
+
 const ImgWrapper = styled.div`
-  // border: 1px solid #C00A0A;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
 `
 
-const IndexPage = ({data}) => (
-  <Layout>
-    <SEO title="Home" />
-    <ImgWrapper>
-      <Img fluid={data.file.childImageSharp.fluid} />
-    </ImgWrapper>
-  </Layout>
-)
+const IndexPage = ({data}) => {
+  // console.log(data.slideshow.edges)
+  const images = data.gallery.edges.map(({ node }) => node.childImageSharp)
+  // console.log({images})
+  return (
+    <Layout>
+      <SEO title="Home" />
+      <ImgWrapper>
+        <Img fluid={data.file.childImageSharp.fluid} />
+      </ImgWrapper>
+      <Gallery images={images} />
+    </Layout>
+  )
+}
 
 export const query = graphql`
 query {
@@ -26,6 +37,20 @@ query {
     childImageSharp {
       fluid(maxWidth: 1200) {
         ...GatsbyImageSharpFluid
+      }
+    }
+  }
+  gallery: allFile(filter: {relativeDirectory: {eq: "slideshow"}}) {
+    edges {
+      node {
+        childImageSharp {
+          thumb: fluid(maxWidth: 270, maxHeight: 270) {
+            ...GatsbyImageSharpFluid
+          }
+          full: fluid(maxWidth: 1024) {
+            ...GatsbyImageSharpFluid
+          }
+        }
       }
     }
   }

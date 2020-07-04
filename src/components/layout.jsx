@@ -16,6 +16,7 @@ import "./layout.css"
 const GlobalStyle = createGlobalStyle`
   body {
     background: #020202;
+    // background: white;
     color: white;
   }
 `
@@ -24,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
 // `
 
 const Wrapper = styled.main`
-  width: 90vw;
+  width: 88vw;
   max-width: 1200px;
   margin: 0 auto;
   color: white;
