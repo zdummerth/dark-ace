@@ -16,6 +16,15 @@ const ImgWrapper = styled.div`
   margin-bottom: 5vh;
 `
 
+const GalleryWrapper = styled.div`
+  img {
+    border: 2px solid #C00A0A;
+    :hover {
+      cursor: pointer;
+    }
+  }
+`
+
 const IndexPage = ({data}) => {
   // console.log(data.slideshow.edges)
   const images = data.gallery.edges.map(({ node }) => node.childImageSharp)
@@ -26,7 +35,9 @@ const IndexPage = ({data}) => {
       <ImgWrapper>
         <Img fluid={data.file.childImageSharp.fluid} />
       </ImgWrapper>
-      <Gallery images={images} />
+      <GalleryWrapper>
+        <Gallery images={images} />
+      </GalleryWrapper>
     </Layout>
   )
 }
