@@ -2,6 +2,7 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React, { useState } from "react"
 import styled from "styled-components"
+import { FaFacebookF, FaInstagram, FaExternalLinkAlt } from 'react-icons/fa';
 
 import Logo from "./logo"
 
@@ -150,13 +151,44 @@ const StyledLink = styled(Link)`
     z-index: 6;
   }
 `
+const IconWrapper = styled.div`
+  display: flex;
 
+  @media (max-width: 900px) {
+    margin-top: 2rem;
+  }
+`
+const FbIcon = styled(FaFacebookF)`
+  font-size: 22px;
+  @media (max-width: 900px) {
+    font-size: 28px;
+  }
+`
+const IgIcon = styled(FaInstagram)`
+  font-size: 22px;
+  @media (max-width: 900px) {
+    font-size: 28px;
+  }
+`
+const ExtIcon = styled(FaExternalLinkAlt)`
+  font-size: 15px;
+  margin-left: 5px;
+`
 const Header = ({ siteTitle }) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   
   const links = MenuItems.map((menuItem, index) => (
   <StyledLink key={index} to={menuItem.path}>{menuItem.title}</StyledLink>
   ))
+  const extLinks = 
+    <>
+      <StyledLink as='a' href='https://www.byjack.com/collections/dark-ace' target='_blank'>Shop <ExtIcon /></StyledLink>
+      <IconWrapper>
+        <StyledLink as='a' href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' target='_blank'><FbIcon /></StyledLink>
+        <StyledLink as='a' href='https://www.instagram.com/darkaceapparel/' target='_blank'><IgIcon /></StyledLink>
+      </IconWrapper>
+    </>
+
   return (
     <HeaderWrapper>
       <Nav>
@@ -172,10 +204,12 @@ const Header = ({ siteTitle }) => {
         {navbarOpen ? (
           <Navbox>
             {links}
+            {extLinks}
           </Navbox>
         ) : (
           <Navbox open>
-              {links}
+            {links}
+            {extLinks}
           </Navbox>
         )}
       </Nav>
