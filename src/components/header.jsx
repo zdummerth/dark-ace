@@ -80,6 +80,7 @@ const Navbox = styled.div`
     border-left: 1px solid #C00A0A;
     transition: all 0.3s ease-in;
     top: 70px;
+    bottom: 0;
     right: ${props => (props.open ? "-100%" : "0")};
   }
   a[aria-current="page"] {
