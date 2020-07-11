@@ -3,8 +3,7 @@ import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
 
-import Gallery from '@browniebroke/gatsby-image-gallery'
-import '@browniebroke/gatsby-image-gallery/dist/style.css'
+import Slideshow from '../components/slideshow'
 
 import Layout from "../components/layout"
 // import Logo from "../components/logo"
@@ -35,9 +34,7 @@ const IndexPage = ({data}) => {
       <ImgWrapper>
         <Img fluid={data.file.childImageSharp.fluid} />
       </ImgWrapper>
-      <GalleryWrapper>
-        <Gallery images={images} />
-      </GalleryWrapper>
+      <Slideshow />
     </Layout>
   )
 }

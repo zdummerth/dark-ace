@@ -19,7 +19,7 @@ const MenuItems = [
 
 const GlobalStyle = createGlobalStyle`
   body {
-    overflow: ${props => (props.open ? "" : "hidden")};
+    overflow-y: ${props => (props.open ? "" : "hidden")};
     height: ${props => (props.open ? "" : "100vh")};
   }
 `
