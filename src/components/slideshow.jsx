@@ -19,12 +19,16 @@ const SlideshowContainer = styled.div`
 const ImgContainer = styled.div`
   // height: 50%;
 `
+const StyledImg = styled(Img)`
+  max-height: 80%;
+`
 const SlideshowControls = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 80%;
   margin: 5px auto;
+  height: 20%;
 `
 const SlideshowButton = styled.button`
   display: flex;
@@ -93,7 +97,7 @@ const SlideShow = () => {
       <h1>SlideShow</h1>
       <SlideshowContainer >
             {/* <ImgContainer> */}
-              <Img
+              <StyledImg
                   fluid={images[index].childImageSharp.fluid}
                   alt={'slideshow for feature images'}
                   fadeIn={true}
