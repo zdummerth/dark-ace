@@ -39,7 +39,7 @@ const Nav = styled.nav`
   text-transform: uppercase;
   margin: 0 auto;
   padding: 0 5vw;
-  z-index: 2;
+  z-index: 50;
   align-self: center;
   align-items: center;
 
