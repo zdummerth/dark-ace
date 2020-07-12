@@ -80,12 +80,12 @@ const SlideShow = () => {
 
   const [index, setIndex] = useState(0);
 
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     handleNext()
-  //   }, 3000); //duration
-  //   return () => clearInterval(timer); //cleanup
-  // }, [handleNext]);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      handleNext()
+    }, 3000); //duration
+    return () => clearInterval(timer); //cleanup
+  });
 
   const fluid = data.allFile.edges.map(({ node }) => node.full.fluid)
   const dots = fluid.map((el, ind) => <Dot active={index === ind} onClick={() => setIndex(ind)} />)

@@ -15,19 +15,8 @@ const ImgWrapper = styled.div`
   margin-bottom: 5vh;
 `
 
-const GalleryWrapper = styled.div`
-  img {
-    border: 2px solid #C00A0A;
-    :hover {
-      cursor: pointer;
-    }
-  }
-`
 
 const IndexPage = ({data}) => {
-  // console.log(data.slideshow.edges)
-  const images = data.gallery.edges.map(({ node }) => node.childImageSharp)
-  // console.log({images})
   return (
     <Layout>
       <SEO title="Home" />
@@ -45,20 +34,6 @@ query {
     childImageSharp {
       fluid(maxWidth: 1200) {
         ...GatsbyImageSharpFluid
-      }
-    }
-  }
-  gallery: allFile(filter: {relativeDirectory: {eq: "slideshow"}}) {
-    edges {
-      node {
-        childImageSharp {
-          thumb: fluid(maxWidth: 270, maxHeight: 270) {
-            ...GatsbyImageSharpFluid
-          }
-          full: fluid(maxWidth: 1024) {
-            ...GatsbyImageSharpFluid
-          }
-        }
       }
     }
   }
