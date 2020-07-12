@@ -8,31 +8,25 @@ import { RiArrowLeftLine } from "react-icons/ri"
 const SlideshowContainer = styled.div`
   display: flex;
   flex-direction: column;
-  // justify-content: space-between;
+  justify-content: center;
   // border: 1px solid #C00A0A;
   position: relative;
   margin: 15px auto;
-  max-width: 800px;
-  height: 50vh;
-  max-height: 500px;
-  img {
-    // border: 3px solid blue;
+  max-width: 1000px;
+  max-height: 600px;
+  @media (max-width: 768px) {
+    height: 50vh;
   }
 `
 
 
 const SlideshowControls = styled.div`
   display: flex;
+  // justify-content: center;
   justify-content: space-between;
-  // align-items: center;
-  width: 100%;
-  height: 100%;
-  // margin: 5px auto;
-  position: absolute;
-  z-index: 2;
-  button {
-
-  }
+  align-items: center;
+  margin: 10px auto;
+  max-width: 60%;
 `
 const SlideshowButton = styled.button`
   display: flex;
@@ -40,33 +34,32 @@ const SlideshowButton = styled.button`
   background: none;
   border: none;
   outline: none;
-  font-size: 50px;
+  font-size: 40px;
   color: #C00A0A;
   :hover {
       cursor: pointer;
   }
-  svg {
-    // border: 1px solid #C00A0A;
-  }
 `
-const ThumbsContainer = styled.div`
+
+const DotContainer = styled.div`
   display: flex;
 `
-const ThumbWrapper = styled.div`
-  position: relative;
-  height: 50px;
-  width: 50px;
-  overflow: hidden;
-  margin-left: 1.5px;
-  margin-right: 1.5px;
+const Dot = styled.div`
+  border: 2px solid #C00A0A;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background: ${props => (props.active ? '#C00A0A' : '')};
   :hover {
-      cursor: pointer;
+    cursor: pointer;
   }
-  @media (max-width: 786px) {
-      height: 30px;
-      width: 30px;
+
+  @media (max-width: 500px) {
+    height: 10px;
+    width: 10px;
   }
-`
+  `
 
 const SlideShow = () => {
   const data = useStaticQuery(graphql`
@@ -85,13 +78,7 @@ const SlideShow = () => {
   }
 `)
 
-  const fullImages = data.allFile.edges.map(({ node }) => node.full.fluid)
   const [index, setIndex] = useState(0);
-
-  const handleNext = () =>
-    index === fullImages.length - 1 ? setIndex(0) : setIndex(index + 1)
-  const handlePrevious = () =>
-    index === 0 ? setIndex(fullImages.length - 1) : setIndex(index - 1)
 
   // useEffect(() => {
   //   const timer = setInterval(() => {
@@ -100,21 +87,28 @@ const SlideShow = () => {
   //   return () => clearInterval(timer); //cleanup
   // }, [handleNext]);
 
+  const fluid = data.allFile.edges.map(({ node }) => node.full.fluid)
+  const dots = fluid.map((el, ind) => <Dot active={index === ind} onClick={() => setIndex(ind)} />)
+
+  const handleNext = () =>
+    index === fluid.length - 1 ? setIndex(0) : setIndex(index + 1)
+  const handlePrevious = () =>
+    index === 0 ? setIndex(fluid.length - 1) : setIndex(index - 1)
 
   return(
       <SlideshowContainer >
             <Img
-                fluid={fullImages[index]}
+                fluid={fluid[index]}
                 alt={'slideshow for feature images'}
-                fadeIn={true}
+                // fadeIn={true}
                 style={{height: '100%'}}
                 imgStyle={{ objectFit: 'contain' }}
             />
             <SlideshowControls>
               <SlideshowButton onClick={handlePrevious}><RiArrowLeftLine/></SlideshowButton>
-              {/* <ThumbsContainer>
-                {thumbs}
-              </ThumbsContainer> */}
+                <DotContainer>
+                  {dots}  
+                </DotContainer>
               <SlideshowButton className='slideshow-button' onClick={handleNext}><RiArrowRightLine/></SlideshowButton>
             </SlideshowControls>
       </SlideshowContainer>
