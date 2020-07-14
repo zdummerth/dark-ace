@@ -80,14 +80,23 @@ const SlideShow = () => {
 
   const [index, setIndex] = useState(0);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      handleNext()
-    }, 3000); //duration
-    return () => clearInterval(timer); //cleanup
-  });
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     handleNext()
+  //   }, 3000); //duration
+  //   return () => clearInterval(timer); //cleanup
+  // });
 
   const fluid = data.allFile.edges.map(({ node }) => node.full.fluid)
+  const images = data.allFile.edges.map(({ node }) => (
+    <Img 
+      fluid={node.full.fluid} 
+      alt={'slideshow for feature images'}
+      fadeIn={true}
+      style={{height: '100%'}}
+      imgStyle={{ objectFit: 'contain', opacity: '0' }}
+    />
+  ))
   const dots = fluid.map((el, ind) => <Dot active={index === ind} onClick={() => setIndex(ind)} />)
 
   const handleNext = () =>
@@ -97,13 +106,14 @@ const SlideShow = () => {
 
   return(
       <SlideshowContainer >
-            <Img
+            {/* <Img
                 fluid={fluid[index]}
                 alt={'slideshow for feature images'}
-                // fadeIn={true}
+                fadeIn={true}
                 style={{height: '100%'}}
                 imgStyle={{ objectFit: 'contain' }}
-            />
+            /> */}
+            {images[index]}
             <SlideshowControls>
               <SlideshowButton onClick={handlePrevious}><RiArrowLeftLine/></SlideshowButton>
                 <DotContainer>
