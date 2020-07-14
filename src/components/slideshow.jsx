@@ -18,7 +18,10 @@ const SlideshowContainer = styled.div`
     height: 50vh;
   }
 `
-
+const ImageContainer = styled.div`
+  position: relative;
+  height: 400px;
+`
 
 const SlideshowControls = styled.div`
   display: flex;
@@ -80,22 +83,41 @@ const SlideShow = () => {
 
   const [index, setIndex] = useState(0);
 
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     handleNext()
-  //   }, 3000); //duration
-  //   return () => clearInterval(timer); //cleanup
-  // });
+  useEffect(() => {
+    const timer = setInterval(() => {
+      handleNext()
+    }, 3700); //duration
+    return () => clearInterval(timer); //cleanup
+  });
+
+  const handleClick = () => {
+    console.log(index)
+  }
 
   const fluid = data.allFile.edges.map(({ node }) => node.full.fluid)
-  const images = data.allFile.edges.map(({ node }) => (
-    <Img 
-      fluid={node.full.fluid} 
-      alt={'slideshow for feature images'}
-      fadeIn={true}
-      style={{height: '100%'}}
-      imgStyle={{ objectFit: 'contain', opacity: '0' }}
-    />
+  const images = data.allFile.edges.map(({ node }, ind) => (
+    <>
+      <Img 
+      onClick={handleClick}
+        fluid={node.full.fluid} 
+        alt={'slideshow for feature images'}
+        fadeIn={true}
+        style={{
+          height: '100%',
+          position: 'absolute',
+          top: '0',
+          bottom: '0',
+          left: '0',
+          right: '0'
+        }}
+        imgStyle={{ 
+          objectFit: 'contain', 
+          opacity: `${index === ind ? '1' : '0'}`,
+          zIndex: `${index === ind ? '1' : '-10'}`,
+          transition: 'opacity 1s ease-in'  
+        }}
+      />
+    </>
   ))
   const dots = fluid.map((el, ind) => <Dot active={index === ind} onClick={() => setIndex(ind)} />)
 
@@ -106,21 +128,16 @@ const SlideShow = () => {
 
   return(
       <SlideshowContainer >
-            {/* <Img
-                fluid={fluid[index]}
-                alt={'slideshow for feature images'}
-                fadeIn={true}
-                style={{height: '100%'}}
-                imgStyle={{ objectFit: 'contain' }}
-            /> */}
-            {images[index]}
-            <SlideshowControls>
-              <SlideshowButton onClick={handlePrevious}><RiArrowLeftLine/></SlideshowButton>
-                <DotContainer>
-                  {dots}  
-                </DotContainer>
-              <SlideshowButton className='slideshow-button' onClick={handleNext}><RiArrowRightLine/></SlideshowButton>
-            </SlideshowControls>
+        <ImageContainer>
+          {images}
+        </ImageContainer>
+        <SlideshowControls>
+          <SlideshowButton onClick={handlePrevious}><RiArrowLeftLine/></SlideshowButton>
+            <DotContainer>
+              {dots}  
+            </DotContainer>
+          <SlideshowButton className='slideshow-button' onClick={handleNext}><RiArrowRightLine/></SlideshowButton>
+        </SlideshowControls>
       </SlideshowContainer>
   )
 }
