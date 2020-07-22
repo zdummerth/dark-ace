@@ -8,6 +8,7 @@ import SEO from '../components/seo'
 
 const BgWrapper = styled.div`
     position: relative;
+    color: white;
 `
 const Overlay = styled.div`
   position: absolute;
