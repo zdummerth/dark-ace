@@ -32,12 +32,12 @@ const ContactPage = ({data}) => {
     return (
         <Layout>
             <SEO title='Contact' />
-            {/* <BackgroundSection /> */}
             <BgWrapper>
                 <Img 
                     fluid={data.file.childImageSharp.fluid} 
                     alt={'bone basket background'}
                     style={{
+                        //Not exactly sure how this works, but this makes the image appear bigger and more center on smaller screens
                         paddingTop: '100px',
                     }}
                 />

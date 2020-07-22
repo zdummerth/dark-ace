@@ -13,14 +13,15 @@ import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 
 import Header from "./header"
 import 'normalize.css';
-// import "./layout.css"
 
 const GlobalStyle = createGlobalStyle`
   body {
     background: #020202;
-    // background: white;
-    color: white;
-    margin-bottom: 0;
+    color: #C00A0A;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 `
 const Wrapper = styled.div`
@@ -35,7 +36,6 @@ const ContentWrapper = styled.main`
   width: 100vw;
   max-width: 1000px;
   margin: 0 auto;
-  color: white;
 `
 
 const Footer = styled.footer`
