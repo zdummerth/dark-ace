@@ -13,7 +13,7 @@ const TextWrapper = styled.div`
     font-size: 1.5rem;
     text-align: center;
     padding-top: 20vh;
-    background-color: rgba(0,0,0,0.6);
+    // background-color: rgba(0,0,0,0.6);
 
     @media (max-width: 500px) {
         font-size: 1.2rem;;
@@ -38,10 +38,10 @@ const BackgroundSection = ({ className }) => (
       const imageData = data.file.childImageSharp.fluid
       return (
             <StyledBackgroundImage
-            Tag="section"
-            className={className}
-            fluid={imageData}
-            backgroundColor={`#040e18`}
+              Tag="section"
+              className={className}
+              fluid={imageData}
+              backgroundColor={`#040e18`}
             >
                 <TextWrapper>
                     <p>For sponsorship’s of any kind, custom artwork, or to share your favorite band, please send us an email :</p>

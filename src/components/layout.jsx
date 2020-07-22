@@ -12,25 +12,28 @@ import styled, { createGlobalStyle } from "styled-components"
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 
 import Header from "./header"
-import "./layout.css"
+import 'normalize.css';
+// import "./layout.css"
 
 const GlobalStyle = createGlobalStyle`
   body {
     background: #020202;
     // background: white;
     color: white;
+    margin-bottom: 0;
   }
 `
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow: hidden;
 `
 
 const ContentWrapper = styled.main`
   flex: 1;
-  width: 88vw;
-  max-width: 1200px;
+  width: 100vw;
+  max-width: 1000px;
   margin: 0 auto;
   color: white;
 `
