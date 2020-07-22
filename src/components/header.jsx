@@ -15,6 +15,10 @@ const MenuItems = [
     path: "/contact",
     title: "Contact"
   },
+  {
+    path: "/exclusives",
+    title: "Exclusives"
+  },
 ]
 
 const GlobalStyle = createGlobalStyle`
@@ -73,7 +77,7 @@ const Navbox = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     position: fixed;
-    width: 70%;
+    width: 85%;
     padding-top: 10vh;
     background-color: #020202;
     border-top: 1px solid #C00A0A;
