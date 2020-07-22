@@ -79,23 +79,23 @@ const InStoreLink = styled.a`
 const SlideShow = () => {
 
 const data = useStaticQuery(graphql`
-query {
-  markdownRemark(frontmatter: {title: {eq: "slideshow"}}) {
-    frontmatter {
-      slides {
-        link
-        image {
-          full: childImageSharp {
-            fluid(maxWidth: 800, quality: 100, fit: CONTAIN) {
-              ...GatsbyImageSharpFluid
+  query {
+    markdownRemark(frontmatter: {title: {eq: "slideshow"}}) {
+      frontmatter {
+        slides {
+          link
+          image {
+            full: childImageSharp {
+              fluid(maxWidth: 800, quality: 100, fit: CONTAIN) {
+                ...GatsbyImageSharpFluid
+              }
             }
           }
         }
       }
     }
   }
-}
-`)
+  `)
 
   const [index, setIndex] = useState(0);
 
@@ -148,7 +148,7 @@ query {
             <DotContainer>
               {dots}  
             </DotContainer>
-          <SlideshowButton className='slideshow-button' onClick={handleNext}><RiArrowRightLine/></SlideshowButton>
+          <SlideshowButton onClick={handleNext}><RiArrowRightLine/></SlideshowButton>
         </SlideshowControls>
       </SlideshowContainer>
   )
