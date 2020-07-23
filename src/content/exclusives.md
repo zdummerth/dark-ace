@@ -13,7 +13,7 @@ items:
         link: https://www.byjack.com/collections/dark-ace/products/graveyard-tee?variant=31880322121831,
         price: '19.99',
         sizes: [S, M, L],
-        colors: [White, Red, Black]
+        colors: [White, Red, Black, Yellow]
         }
     - {
         image: ../images/exclusives/ex3.jpg, 
