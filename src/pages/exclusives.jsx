@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
+import { FiShoppingCart } from 'react-icons/fi';
 
 
 import Layout from '../components/layout'
@@ -48,6 +49,9 @@ const PriceAndCart = styled.div`
   align-items: center;
   align-self: stretch;
 `
+const CartIcon = styled(FiShoppingCart)`
+color: #C00A0A;
+`
 const Shop = ({data}) => {
   console.log({data})
   const images = data.markdownRemark.frontmatter.items.map(({image, price, colors, sizes}) => (
@@ -76,6 +80,7 @@ const Shop = ({data}) => {
     <Layout>
         <SEO title="Shop" />
         <Title>Exclusive Items</Title>
+        <CartIcon />
         <ItemGrid>
           {images}
         </ItemGrid>
