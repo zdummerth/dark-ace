@@ -36,15 +36,14 @@ const HeaderWrapper = styled.header`
 
 const Nav = styled.nav`
   height: 70px;
-  width: 100vw;
+  width: 100%;
   display: flex;
   position: relative;
   justify-content: space-between;
   text-transform: uppercase;
-  margin: 0 auto;
-  padding: 0 5vw;
+  // margin: 0 auto;
   z-index: 50;
-  align-self: center;
+  // align-self: center;
   align-items: center;
 
   @media (max-width: 768px) {
@@ -124,8 +123,7 @@ const Hamburger = styled.div`
   }
 `
 const LogoLink = styled(Link)`
-  // height: 100%;
-  // border: 1px solid red;
+  margin-left: 5%;
 `
 const StyledLink = styled(Link)`
   display: inline-block;
@@ -183,7 +181,7 @@ const IgIcon = styled(FaInstagram)`
 `
 const ExtIcon = styled(FaExternalLinkAlt)`
   font-size: 15px;
-  margin-left: 5px;
+  // margin-left: 5px;
 `
 const Header = ({ siteTitle }) => {
   const [navbarOpen, setNavbarOpen] = useState(false);

@@ -31,13 +31,24 @@ const ItemInfo = styled.div`
 
 
 const Shop = ({data}) => {
-  const images = data.markdownRemark.frontmatter.items.map(({image, price}) => (
+  console.log({data})
+  const images = data.markdownRemark.frontmatter.items.map(({image, price, colors, sizes}) => (
     <div>
       <Img 
         fluid={image.childImageSharp.fluid} 
         alt={'item description'}
       />
-      <ItemInfo>${price}</ItemInfo>
+      <ItemInfo>
+        ${price}
+        <label for="colors">Choose Color:</label>
+        <select name="colors" id="colors">
+          {colors.map(c => <option value={c}>{c}</option>)}
+        </select>
+        <label for="sizes">Choose Size:</label>
+        <select name="sizes" id="sizes">
+          {sizes.map(s => <option value={s}>{s}</option>)}
+        </select>
+      </ItemInfo>
     </div>
   ))
   return (
@@ -57,6 +68,8 @@ query {
     frontmatter {
       items {
         price
+        sizes
+        colors
         image {
           childImageSharp {
             fluid(maxWidth: 400, quality: 100) {
