@@ -29,6 +29,7 @@ const TextWrapper = styled.div`
       }
 
 `
+
 const ContactPage = ({data}) => {
     return (
         <Layout>
