@@ -123,17 +123,8 @@ query {
   markdownRemark(frontmatter: {title: {eq: "Exclusives"}}) {
     frontmatter {
       items {
-        item
         price
         sizes
-        colors
-        image {
-          childImageSharp {
-            fluid(maxWidth: 400, quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
         images {
           color
           image {

@@ -2,8 +2,13 @@
 title: Exclusives
 items: 
     - {
-        image: ../images/exclusives/ex1.jpg, 
-        images: [ {color: White, image: ../images/exclusives/ex1.jpg}, {color: Black, image: ../images/exclusives/ex2.jpg}],
+        images: 
+            [
+                {color: White, image: ../images/exclusives/dri-fit-white.png},
+                {color: Blue, image: ../images/exclusives/dri-fit-blue.png},
+                {color: Red, image: ../images/exclusives/dri-fit-red.png},
+                {color: Yellow, image: ../images/exclusives/dri-fit-yellow.png},
+            ],
         link: https://www.byjack.com/collections/dark-ace/products/chain-out-tee?variant=31879580844135,
         price: '19.99',
         sizes: [S, M, L],
@@ -11,7 +16,6 @@ items:
         item: chain-out-tee
         }
     - {
-        image: ../images/exclusives/ex2.jpg, 
         images: [ {color: White, image: ../images/exclusives/ex1.jpg}, {color: Black, image: ../images/exclusives/ex2.jpg}],
         link: https://www.byjack.com/collections/dark-ace/products/graveyard-tee?variant=31880322121831,
         price: '19.99',
