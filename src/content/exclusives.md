@@ -12,7 +12,6 @@ items:
         link: https://www.byjack.com/collections/dark-ace/products/chain-out-tee?variant=31879580844135,
         price: '19.99',
         sizes: [S, M, L],
-        colors: [White, Red, Black],
         item: chain-out-tee
         }
     - {
@@ -20,7 +19,6 @@ items:
         link: https://www.byjack.com/collections/dark-ace/products/graveyard-tee?variant=31880322121831,
         price: '19.99',
         sizes: [S, M, L],
-        colors: [White, Red, Black, Yellow],
         item: graveyard-tee
         }
     - {
@@ -29,7 +27,6 @@ items:
         link: https://www.byjack.com/collections/dark-ace/products/dark-ace-can-cooler,
         price: '19.99',
         sizes: [S, M, L],
-        colors: [White, Red, Black],
         item: can-cooler
         }
     - {
@@ -38,7 +35,6 @@ items:
         link: https://www.byjack.com/collections/dark-ace/products/death-font-hat?variant=32091874820199,
         price: '19.99',
         sizes: [S, M, L],
-        colors: [White, Red, Black],
         item: death-font-hat
         }
     - {
@@ -47,7 +43,6 @@ items:
         link: https://www.byjack.com/collections/dark-ace/products/chain-out-tee?variant=31879580844135,
         price: '19.99',
         sizes: [S, M, L],
-        colors: [White, Red, Black],
         item: chain-out-dri-fit
         }
     - {
@@ -56,7 +51,6 @@ items:
         link: https://www.byjack.com/collections/dark-ace/products/chain-out-tee?variant=31879580844135,
         price: '19.99',
         sizes: [S, M, L],
-        colors: [White, Red, Black],
         item: hoodie
         }
 ---

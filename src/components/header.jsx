@@ -19,6 +19,10 @@ const MenuItems = [
     path: "/exclusives",
     title: "Exclusives"
   },
+  {
+    path: "/checkout",
+    title: "checkout"
+  },
 ]
 
 const GlobalStyle = createGlobalStyle`
