@@ -23,7 +23,7 @@ const PriceAndCart = styled.div`
   align-self: stretch;
 `
 
-const ExclusiveItem = ({ images, price, colors, sizes, addToCart }) => {
+const ExclusiveItem = ({ images, price, setCart, cart, sizes }) => {
     const [index, setIndex] = useState(0);
 //     const data = useStaticQuery(graphql`
 //     query SiteTitleQuery {
@@ -37,19 +37,25 @@ const ExclusiveItem = ({ images, price, colors, sizes, addToCart }) => {
 
 const handleChange = e => {
     e.preventDefault()
-    console.log(e.target)
+    console.log(e.target.value)
+}
+
+const addToCart = (e) => {
+  e.preventDefault()
+  setCart([...cart, price])
+  console.log(cart)
 }
 
     return (
         <div>
             <Img 
-            fluid={images[index].image.childImageSharp.fluid} 
-            alt={'item description'}
+              fluid={images[index].image.childImageSharp.fluid} 
+              alt={'item description'}
             />
             <ItemInfo>
             <PriceAndCart>
                 <span>${price}</span>
-                <button onClick={() => addToCart}>Add to cart</button>
+                <button onClick={addToCart}>Add to cart</button>
             </PriceAndCart>
             <label for="colors">Choose Color:</label>
             <Select name="colors" id="colors" onChange={handleChange}>

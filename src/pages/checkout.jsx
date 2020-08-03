@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 // import Img from 'gatsby-image'
 // import styled from 'styled-components'
 
-import Layout from "../components/layout"
+import Layout from '../components/layout'
 import { GlobalStateContext } from '../context/GlobalContextProvider'
 
 

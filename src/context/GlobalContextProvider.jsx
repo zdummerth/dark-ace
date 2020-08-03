@@ -22,7 +22,7 @@ export const GlobalStateContext = React.createContext()
 
 const GlobalContextProvider = ({ children }) => {
 //   const [state, dispatch] = React.useReducer(reducer, initialState)
-  const [cart, setCart] = useState(['item1'])
+  const [cart, setCart] = useState([])
 
   return (
     <GlobalStateContext.Provider value={{cart, setCart}}>
