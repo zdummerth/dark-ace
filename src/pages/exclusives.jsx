@@ -8,7 +8,6 @@ import { FiShoppingCart } from 'react-icons/fi';
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import ExclusiveItem from '../components/exclusive-item'
-import { GlobalStateContext } from '../context/GlobalContextProvider'
 // import { string } from 'prop-types'
 
 const Title = styled.h1`
@@ -57,16 +56,12 @@ color: #C00A0A;
 
 
 const Shop = ({data}) => {
-  const { cart, setCart } = useContext(GlobalStateContext)
 
-  const items = data.markdownRemark.frontmatter.items.map(({images, price, colors, sizes}) => (
+  const items = data.markdownRemark.frontmatter.items.map(({price, colors, sizes}) => (
       <ExclusiveItem 
-        images={images} 
         price={price}
         colors={colors}
         sizes={sizes}
-        cart={cart}
-        setCart={setCart}
       />
   ))
   return (
@@ -88,7 +83,7 @@ query {
       items {
         price
         sizes
-        images {
+        colors {
           color
           image {
             childImageSharp {

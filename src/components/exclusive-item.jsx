@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
-import { useStaticQuery, graphql } from "gatsby"
+import React, { useState, useContext } from 'react'
+// import { useStaticQuery, graphql } from "gatsby"
 import Img from 'gatsby-image'
 import styled from 'styled-components'
+
+import { GlobalStateContext } from '../context/GlobalContextProvider'
 
 const ItemInfo = styled.div`
   display: flex;
@@ -23,33 +25,37 @@ const PriceAndCart = styled.div`
   align-self: stretch;
 `
 
-const ExclusiveItem = ({ images, price, setCart, cart, sizes }) => {
-    const [index, setIndex] = useState(0);
-//     const data = useStaticQuery(graphql`
-//     query SiteTitleQuery {
-//       site {
-//         siteMetadata {
-//           title
-//         }
-//       }
-//     }
-//   `)
+const ExclusiveItem = ({ colors, price, sizes }) => {
+  
+  const { cart, setCart } = useContext(GlobalStateContext)
+  
+  const [currentColor, setCurrentColor] = useState(colors[0])
+  
+  const [currentSize, setCurrentSize] = useState(sizes[0])
+  
+  const handleColorChange = e => {
+    e.preventDefault()
+    const color = colors.find(c => c.color === e.target.value)
+    setCurrentColor(color)
+  }
 
-const handleChange = e => {
+  const handleSizeChange = e => {
     e.preventDefault()
     console.log(e.target.value)
-}
+    setCurrentSize(e.target.value)
+  }
 
-const addToCart = (e) => {
-  e.preventDefault()
-  setCart([...cart, price])
-  console.log(cart)
-}
+  const addToCart = (e) => {
+    e.preventDefault()
+    const image = colors.find(c => c.color === currentColor.color).image
+    setCart([...cart, {price, image, color: currentColor.color, size: currentSize }])
+    console.log(cart)
+  }
 
     return (
         <div>
             <Img 
-              fluid={images[index].image.childImageSharp.fluid} 
+              fluid={currentColor.image.childImageSharp.fluid} 
               alt={'item description'}
             />
             <ItemInfo>
@@ -58,12 +64,22 @@ const addToCart = (e) => {
                 <button onClick={addToCart}>Add to cart</button>
             </PriceAndCart>
             <label for="colors">Choose Color:</label>
-            <Select name="colors" id="colors" onChange={handleChange}>
-                {images.map((i, ind) => <option onClick={() => setIndex(ind)} value={i.color}>{i.color}</option>)}
+            <Select name="colors" id="colors" onChange={handleColorChange}>
+                {colors.map(c => (
+                  c.color === currentColor ?
+                    <option value={currentColor.color}>{currentColor.color}</option>
+                    :
+                    <option value={c.color}>{c.color}</option>
+                ))}
             </Select>
             <label for="sizes">Choose Size:</label>
-            <Select name="sizes" id="sizes">
-                {sizes.map(s => <option value={s}>{s}</option>)}
+            <Select name="sizes" id="sizes" onChange={handleSizeChange}>
+                {sizes.map(s => (
+                  s.size === currentSize ?
+                    <option value={currentSize}>{currentSize}</option>
+                    :
+                    <option value={s}>{s}</option>
+                ))}
             </Select>
             </ItemInfo>
         </div>
