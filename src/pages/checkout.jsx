@@ -28,6 +28,9 @@ const Checkout = () => {
           fluid={item.image.childImageSharp.fluid} 
           alt={'item description'}
           style={{width: '40%', maxWIdth: '400px', maxHeight: '400px'}}
+          imgStyle={{ 
+            objectFit: 'contain', 
+          }}
           />
         <Description>
           <p>{item.item}</p>

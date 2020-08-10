@@ -25,17 +25,18 @@ const PriceAndCart = styled.div`
   align-self: stretch;
 `
 
-const ExclusiveItem = ({ colors, price, sizes, item }) => {
+const ExclusiveItem = ({ images, price, sizes, item }) => {
   
   const { cart, setCart } = useContext(GlobalStateContext)
   
-  const [currentColor, setCurrentColor] = useState(colors[0])
-  
-  const [currentSize, setCurrentSize] = useState(sizes[0])
+  const [currentColor, setCurrentColor] = useState(images[0])
+   
+  const defaultSize = sizes ? sizes[0] : null
+  const [currentSize, setCurrentSize] = useState(defaultSize)
   
   const handleColorChange = e => {
     e.preventDefault()
-    const color = colors.find(c => c.color === e.target.value)
+    const color = images.find(c => c.color === e.target.value)
     setCurrentColor(color)
   }
 
@@ -47,8 +48,9 @@ const ExclusiveItem = ({ colors, price, sizes, item }) => {
 
   const addToCart = (e) => {
     e.preventDefault()
-    const image = colors.find(c => c.color === currentColor.color).image
-    setCart([...cart, {price, image, color: currentColor.color, size: currentSize, item }])
+    const image = images.find(c => c.color === currentColor.color).image
+    const color = currentColor ? currentColor.color : null
+    setCart([...cart, {price, image, color, size: currentSize, item }])
   }
 
     return (
@@ -63,24 +65,36 @@ const ExclusiveItem = ({ colors, price, sizes, item }) => {
                 <span>${price}</span>
                 <button onClick={addToCart}>Add to cart</button>
             </PriceAndCart>
-              <label htmlFor="colors" id='color-label'>Choose Color:</label>
-              <Select name="colors" id="colors" onChange={handleColorChange}>
-                  {colors.map(c => (
-                    c.color === currentColor ?
-                      <option value={currentColor.color}>{currentColor.color}</option>
-                      :
-                      <option value={c.color}>{c.color}</option>
-                  ))}
-              </Select>
-              <label htmlFor="sizes">Choose Size:</label>
-              <Select name="sizes" id="sizes" onChange={handleSizeChange}>
-                  {sizes.map(s => (
-                    s.size === currentSize ?
-                      <option value={currentSize}>{currentSize}</option>
-                      :
-                      <option value={s}>{s}</option>
-                  ))}
-              </Select>
+            {images.length > 1 ? 
+              <>
+                <label htmlFor="colors" id='color-label'>Choose Color:</label>
+                <Select name="colors" id="colors" onChange={handleColorChange}>
+                    {images.map(c => (
+                      c.color === currentColor ?
+                        <option value={currentColor.color}>{currentColor.color}</option>
+                        :
+                        <option value={c.color}>{c.color}</option>
+                    ))}
+                </Select>
+              </>
+                : 
+                null
+            }
+            {sizes ?
+              <>
+                <label htmlFor="sizes">Choose Size:</label>
+                <Select name="sizes" id="sizes" onChange={handleSizeChange}>
+                    {sizes.map(s => (
+                      s.size === currentSize ?
+                        <option value={currentSize}>{currentSize}</option>
+                        :
+                        <option value={s}>{s}</option>
+                    ))}
+                </Select>
+              </>
+              :
+              null
+            }
             </ItemInfo>
         </div>
     )
