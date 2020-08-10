@@ -9,10 +9,9 @@ items:
                 {color: Red, image: ../images/exclusives/dri-fit-red.png},
                 {color: Yellow, image: ../images/exclusives/dri-fit-yellow.png},
             ],
-        link: https://www.byjack.com/collections/dark-ace/products/chain-out-tee?variant=31879580844135,
         price: '19.99',
         sizes: [S, M, L],
-        item: Dark Ace Dri Fit
+        name: Dark Ace Dri Fit
         }
     - {
         images: 
@@ -23,36 +22,40 @@ items:
                 {color: Yellow, image: ../images/exclusives/bb-yellow.png},
 
             ],
-        link: https://www.byjack.com/collections/dark-ace/products/graveyard-tee?variant=31880322121831,
         price: '19.99',
         sizes: [S, M, L],
-        item: Bone Basket Tee
+        name: Bone Basket Tee
         }
     - {
-        images: [ {color: White, image: ../images/exclusives/can-cooler.jpg} ],
-        link: https://www.byjack.com/collections/dark-ace/products/dark-ace-can-cooler,
+        images: [ {image: ../images/exclusives/can-cooler.jpg} ],
         price: '19.99',
-        item: Can Cooler
+        name: Can Cooler
         }
     - {
-        images: [ {color: White, image: ../images/exclusives/ex1.jpg}, {color: Black, image: ../images/exclusives/ex2.jpg}],
-        link: https://www.byjack.com/collections/dark-ace/products/death-font-hat?variant=32091874820199,
+        images: 
+            [ 
+                {color: Green, image: ../images/exclusives/death-font-hat-green.png}, 
+                {color: Black, image: ../images/exclusives/death-font-hat-black.png},
+                {color: Red, image: ../images/exclusives/death-font-hat-red.png},
+            ],
+        price: '19.99',
+        name: Death Font Hat
+        }
+    - {
+        images: 
+            [ 
+                {color: White, image: ../images/exclusives/chain-out-tee-white.png}, 
+                {color: Red, image: ../images/exclusives/chain-out-tee-red.png}, 
+                {color: Yellow, image: ../images/exclusives/chain-out-tee-yellow.png}, 
+            ],
         price: '19.99',
         sizes: [S, M, L],
-        item: death-font-hat
+        name: Chain Out Tee
         }
     - {
-        images: [ {color: White, image: ../images/exclusives/ex1.jpg}, {color: Black, image: ../images/exclusives/ex2.jpg}],
-        link: https://www.byjack.com/collections/dark-ace/products/chain-out-tee?variant=31879580844135,
+        images: [ {image: ../images/exclusives/ex3.jpg} ],
         price: '19.99',
         sizes: [S, M, L],
-        item: Chain Out Dri Fit
-        }
-    - {
-        images: [ {color: White, image: ../images/exclusives/ex3.jpg}, {color: Black, image: ../images/exclusives/ex3.jpg}],
-        link: https://www.byjack.com/collections/dark-ace/products/chain-out-tee?variant=31879580844135,
-        price: '19.99',
-        sizes: [S, M, L],
-        item: Dark Ace Zip Hoodie
+        name: Dark Ace Zip Hoodie
         }
 ---

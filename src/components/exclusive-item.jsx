@@ -25,11 +25,11 @@ const PriceAndCart = styled.div`
   align-self: stretch;
 `
 
-const ExclusiveItem = ({ images, price, sizes, item }) => {
+const ExclusiveItem = ({ images, price, sizes, name }) => {
   
   const { cart, setCart } = useContext(GlobalStateContext)
   
-  const [currentColor, setCurrentColor] = useState(images[0])
+  const [currentItem, setCurrentItem] = useState(images[0])
    
   const defaultSize = sizes ? sizes[0] : null
   const [currentSize, setCurrentSize] = useState(defaultSize)
@@ -37,7 +37,7 @@ const ExclusiveItem = ({ images, price, sizes, item }) => {
   const handleColorChange = e => {
     e.preventDefault()
     const color = images.find(c => c.color === e.target.value)
-    setCurrentColor(color)
+    setCurrentItem(color)
   }
 
   const handleSizeChange = e => {
@@ -48,19 +48,19 @@ const ExclusiveItem = ({ images, price, sizes, item }) => {
 
   const addToCart = (e) => {
     e.preventDefault()
-    const image = images.find(c => c.color === currentColor.color).image
-    const color = currentColor ? currentColor.color : null
-    setCart([...cart, {price, image, color, size: currentSize, item }])
+    const image = images.find(c => c.color === currentItem.color).image
+    const color = currentItem ? currentItem.color : null
+    setCart([...cart, {price, image, color, size: currentSize, name }])
   }
 
     return (
         <div>
             <Img 
-              fluid={currentColor.image.childImageSharp.fluid} 
+              fluid={currentItem.image.childImageSharp.fluid} 
               alt={'item description'}
             />
             <ItemInfo>
-            <div>{item}</div>
+            <div>{name}</div>
             <PriceAndCart>
                 <span>${price}</span>
                 <button onClick={addToCart}>Add to cart</button>
@@ -70,8 +70,8 @@ const ExclusiveItem = ({ images, price, sizes, item }) => {
                 <label htmlFor="colors" id='color-label'>Choose Color:</label>
                 <Select name="colors" id="colors" onChange={handleColorChange}>
                     {images.map(c => (
-                      c.color === currentColor ?
-                        <option value={currentColor.color}>{currentColor.color}</option>
+                      c.color === currentItem ?
+                        <option value={currentItem.color}>{currentItem.color}</option>
                         :
                         <option value={c.color}>{c.color}</option>
                     ))}

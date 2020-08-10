@@ -36,12 +36,12 @@ color: #C00A0A;
 
 const Shop = ({data}) => {
 
-  const items = data.markdownRemark.frontmatter.items.map(({price, images, sizes, item}) => (
+  const items = data.markdownRemark.frontmatter.items.map(({price, images, sizes, name}) => (
       <ExclusiveItem 
         price={price}
         images={images}
         sizes={sizes}
-        item={item}
+        name={name}
       />
   ))
   return (
@@ -63,7 +63,7 @@ query {
       items {
         price
         sizes
-        item
+        name
         images {
           color
           image {

@@ -33,7 +33,7 @@ const Checkout = () => {
           }}
           />
         <Description>
-          <p>{item.item}</p>
+          <p>{item.name}</p>
           <p>{item.price}</p>
           <p>{item.size} {item.color}</p>
         </Description>
