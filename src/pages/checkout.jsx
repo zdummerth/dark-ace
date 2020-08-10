@@ -8,20 +8,16 @@ import { GlobalStateContext } from '../context/GlobalContextProvider'
 
 const Item = styled.div`
   display: flex;
+  // flex-direction: column;
   // align-items: flex-start;
   margin-bottom: 15px;
 `
-const ItemContainer = styled.div`
+const Description = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  // margin-bottom: 5px;
-
-  & > * {
-    margin: 5px;
-  }
+  // align-items: flex-start;
+  margin-bottom: 15px;
 `
-
 const Checkout = () => {
     const { cart, setCart } = useContext(GlobalStateContext)
     console.log(setCart)
@@ -31,11 +27,13 @@ const Checkout = () => {
         <Img 
           fluid={item.image.childImageSharp.fluid} 
           alt={'item description'}
-          style={{width: '40%', maxWIdth: '400px'}}
-        />
-        <p>{item.price}</p>
-        <p>{item.color}</p>
-        <p>{item.size}</p>
+          style={{width: '40%', maxWIdth: '400px', maxHeight: '400px'}}
+          />
+        <Description>
+          <p>{item.item}</p>
+          <p>{item.price}</p>
+          <p>{item.size} {item.color}</p>
+        </Description>
       </Item>
     ))
     return (

@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { graphql } from 'gatsby'
-import Img from 'gatsby-image'
 import styled from 'styled-components'
 import { FiShoppingCart } from 'react-icons/fi';
 
@@ -8,7 +7,6 @@ import { FiShoppingCart } from 'react-icons/fi';
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import ExclusiveItem from '../components/exclusive-item'
-// import { string } from 'prop-types'
 
 const Title = styled.h1`
   text-align: center;
@@ -31,25 +29,6 @@ const ItemGrid = styled.div`
   }
 `
 
-const ItemInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 5px;
-
-  & > * {
-    margin: 5px;
-  }
-`
-const Select = styled.select`
-  // color: red;
-`
-const PriceAndCart = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-`
 const CartIcon = styled(FiShoppingCart)`
 color: #C00A0A;
 `
@@ -57,11 +36,12 @@ color: #C00A0A;
 
 const Shop = ({data}) => {
 
-  const items = data.markdownRemark.frontmatter.items.map(({price, colors, sizes}) => (
+  const items = data.markdownRemark.frontmatter.items.map(({price, colors, sizes, item}) => (
       <ExclusiveItem 
         price={price}
         colors={colors}
         sizes={sizes}
+        item={item}
       />
   ))
   return (
@@ -83,6 +63,7 @@ query {
       items {
         price
         sizes
+        item
         colors {
           color
           image {

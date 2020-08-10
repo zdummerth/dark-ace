@@ -25,7 +25,7 @@ const PriceAndCart = styled.div`
   align-self: stretch;
 `
 
-const ExclusiveItem = ({ colors, price, sizes }) => {
+const ExclusiveItem = ({ colors, price, sizes, item }) => {
   
   const { cart, setCart } = useContext(GlobalStateContext)
   
@@ -48,8 +48,7 @@ const ExclusiveItem = ({ colors, price, sizes }) => {
   const addToCart = (e) => {
     e.preventDefault()
     const image = colors.find(c => c.color === currentColor.color).image
-    setCart([...cart, {price, image, color: currentColor.color, size: currentSize }])
-    console.log(cart)
+    setCart([...cart, {price, image, color: currentColor.color, size: currentSize, item }])
   }
 
     return (
@@ -59,28 +58,29 @@ const ExclusiveItem = ({ colors, price, sizes }) => {
               alt={'item description'}
             />
             <ItemInfo>
+            <div>{item}</div>
             <PriceAndCart>
                 <span>${price}</span>
                 <button onClick={addToCart}>Add to cart</button>
             </PriceAndCart>
-            <label for="colors">Choose Color:</label>
-            <Select name="colors" id="colors" onChange={handleColorChange}>
-                {colors.map(c => (
-                  c.color === currentColor ?
-                    <option value={currentColor.color}>{currentColor.color}</option>
-                    :
-                    <option value={c.color}>{c.color}</option>
-                ))}
-            </Select>
-            <label for="sizes">Choose Size:</label>
-            <Select name="sizes" id="sizes" onChange={handleSizeChange}>
-                {sizes.map(s => (
-                  s.size === currentSize ?
-                    <option value={currentSize}>{currentSize}</option>
-                    :
-                    <option value={s}>{s}</option>
-                ))}
-            </Select>
+              <label htmlFor="colors" id='color-label'>Choose Color:</label>
+              <Select name="colors" id="colors" onChange={handleColorChange}>
+                  {colors.map(c => (
+                    c.color === currentColor ?
+                      <option value={currentColor.color}>{currentColor.color}</option>
+                      :
+                      <option value={c.color}>{c.color}</option>
+                  ))}
+              </Select>
+              <label htmlFor="sizes">Choose Size:</label>
+              <Select name="sizes" id="sizes" onChange={handleSizeChange}>
+                  {sizes.map(s => (
+                    s.size === currentSize ?
+                      <option value={currentSize}>{currentSize}</option>
+                      :
+                      <option value={s}>{s}</option>
+                  ))}
+              </Select>
             </ItemInfo>
         </div>
     )

@@ -108,7 +108,7 @@ const data = useStaticQuery(graphql`
 
   const currentLink = data.markdownRemark.frontmatter.slides[index].link
   const images = data.markdownRemark.frontmatter.slides.map((slide, ind) => (
-    <a href={slide.link} target='_blank'>
+    <a href={slide.link} target='_blank' rel='noreferrer'>
       <Img 
         fluid={slide.image.full.fluid} 
         alt={'slideshow for feature images'}
@@ -142,7 +142,7 @@ const data = useStaticQuery(graphql`
         <ImagesContainer>
           {images}
         </ImagesContainer>
-        <InStoreLink href={currentLink} target='_blank'>Click to view in shop<ExtIcon /></InStoreLink>
+        <InStoreLink href={currentLink} target='_blank' rel='noreferrer'>Click to view in shop<ExtIcon /></InStoreLink>
         <SlideshowControls>
           <SlideshowButton onClick={handlePrevious}><RiArrowLeftLine/></SlideshowButton>
             <DotContainer>

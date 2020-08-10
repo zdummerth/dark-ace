@@ -12,14 +12,21 @@ items:
         link: https://www.byjack.com/collections/dark-ace/products/chain-out-tee?variant=31879580844135,
         price: '19.99',
         sizes: [S, M, L],
-        item: chain-out-tee
+        item: Dark Ace Dri Fit
         }
     - {
-        colors: [ {color: White, image: ../images/exclusives/ex1.jpg}, {color: Black, image: ../images/exclusives/ex2.jpg}],
+        colors: 
+            [ 
+                {color: White, image: ../images/exclusives/bb-white.png}, 
+                {color: Black, image: ../images/exclusives/bb-black.png},
+                {color: Purple, image: ../images/exclusives/bb-purple.png},
+                {color: Yellow, image: ../images/exclusives/bb-yellow.png},
+
+            ],
         link: https://www.byjack.com/collections/dark-ace/products/graveyard-tee?variant=31880322121831,
         price: '19.99',
         sizes: [S, M, L],
-        item: graveyard-tee
+        item: Bone Basket Tee
         }
     - {
         image: ../images/exclusives/ex3.jpg, 
@@ -27,7 +34,7 @@ items:
         link: https://www.byjack.com/collections/dark-ace/products/dark-ace-can-cooler,
         price: '19.99',
         sizes: [S, M, L],
-        item: can-cooler
+        item: can cooler
         }
     - {
         colors: [ {color: White, image: ../images/exclusives/ex1.jpg}, {color: Black, image: ../images/exclusives/ex2.jpg}],
@@ -41,13 +48,13 @@ items:
         link: https://www.byjack.com/collections/dark-ace/products/chain-out-tee?variant=31879580844135,
         price: '19.99',
         sizes: [S, M, L],
-        item: chain-out-dri-fit
+        item: Chain Out Dri Fit
         }
     - {
-        colors: [ {color: White, image: ../images/exclusives/ex1.jpg}, {color: Black, image: ../images/exclusives/ex2.jpg}],
+        colors: [ {color: White, image: ../images/exclusives/ex3.jpg}, {color: Black, image: ../images/exclusives/ex3.jpg}],
         link: https://www.byjack.com/collections/dark-ace/products/chain-out-tee?variant=31879580844135,
         price: '19.99',
         sizes: [S, M, L],
-        item: hoodie
+        item: Dark Ace Zip Hoodie
         }
 ---
