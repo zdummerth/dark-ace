@@ -37,6 +37,15 @@ module.exports = {
                 icon: `src/images/icon.png`, // This path is relative to the root of the site.
             },
         },
+        {
+            resolve: `gatsby-source-shopify`,
+            options: {
+              // The domain name of your Shopify shop.
+              shopName: `dark-ace-apparel.myshopify.com`,
+              // The storefront access token
+              accessToken: `022ab4c61d06b91c29a626df8da73d60`,
+            },
+          },
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.dev/offline
         // `gatsby-plugin-offline`,
