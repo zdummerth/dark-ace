@@ -16,8 +16,8 @@ const MenuItems = [
     title: "Contact"
   },
   {
-    path: "/exclusives",
-    title: "Exclusives"
+    path: "/products",
+    title: "Products"
   },
   {
     path: "/checkout",
