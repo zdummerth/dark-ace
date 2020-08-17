@@ -26,11 +26,12 @@ const ItemGrid = styled.div`
 const ProductsPage = ({ data }) => {
 
   const products = data.allShopifyProduct.edges.map(({ node }) => {
-    const price = node.priceRange.minVariantPrice.amount === node.priceRange.maxVariantPrice.amount 
-      ? 
-      node.priceRange.minVariantPrice.amount 
-      : 
-      `${node.priceRange.minVariantPrice.amount} - ${node.priceRange.maxVariantPrice.amount}`
+
+    const price = Intl.NumberFormat(undefined, {
+      currency: node.priceRange.minVariantPrice.currencyCode,
+      minimumFractionDigits: 2,
+      style: 'currency',
+    }).format(node.priceRange.minVariantPrice.amount)
 
     return   (
       <div key={node.shopifyId}>
@@ -42,7 +43,7 @@ const ProductsPage = ({ data }) => {
         </Link>
         <h3>
           <Link to={`/product/${node.handle}`}>{node.title}</Link>
-          {" - "}${price}
+          {" - "}{price}
         </h3>
         <p>{node.description}</p>
       </div>
@@ -72,9 +73,11 @@ export const query = graphql`
           priceRange {
             minVariantPrice {
               amount
+              currencyCode
             }
             maxVariantPrice {
               amount
+              currencyCode
             }
           }
           images {

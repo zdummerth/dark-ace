@@ -1,3 +1,7 @@
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+  })
+
 module.exports = {
     siteMetadata: {
         title: `Dark Ace Apparel`,
@@ -41,9 +45,9 @@ module.exports = {
             resolve: `gatsby-source-shopify`,
             options: {
               // The domain name of your Shopify shop.
-              shopName: `dark-ace-apparel.myshopify.com`,
+              shopName: process.env.GATSBY_SHOP_NAME,
               // The storefront access token
-              accessToken: `022ab4c61d06b91c29a626df8da73d60`,
+              accessToken: process.env.GATSBY_ACCESS_TOKEN,
             },
           },
         // this (optional) plugin enables Progressive Web App + Offline functionality

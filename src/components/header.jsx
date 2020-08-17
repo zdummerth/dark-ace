@@ -20,8 +20,8 @@ const MenuItems = [
     title: "Products"
   },
   {
-    path: "/checkout",
-    title: "checkout"
+    path: "/cart",
+    title: "Cart"
   },
 ]
 
