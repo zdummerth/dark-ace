@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
 import { GlobalStateContext } from '../context/GlobalContextProvider'
+import Button from '../components/button'
+
 import Layout from '../components/layout'
 
 import LineItem from '../components/line-item'
@@ -19,7 +21,7 @@ const Cart = () => {
 
   return (
     <Layout>
-      <div>
+      <div style={{color: 'white'}}>
         {lineItems}
         <h2>Subtotal</h2>
         <p>$ {checkout.subtotalPrice}</p>
@@ -30,12 +32,12 @@ const Cart = () => {
         <h2>Total</h2>
         <p>$ {checkout.totalPrice}</p>
         <br />
-        <button
+        <Button
           onClick={handleCheckout}
           disabled={checkout.lineItems.length === 0}
         >
           Check out
-        </button>
+        </Button>
       </div>
     </Layout>
   )

@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
+import Button from '../components/button'
 import { GlobalStateContext } from '../context/GlobalContextProvider'
 
 
@@ -14,6 +15,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   margin-top: 3rem;
+  color: white;
 
   @media (max-width: 630px) {
     flex-direction: column;
@@ -30,10 +32,18 @@ const ImgContainer = styled.div`
 `
 
 const FormContainer = styled.div`
-& > * {
-  margin: 1rem;
-}
+  width: 90%;
+  margin-bottom: 2rem;
+  & > * {
+    margin: 1rem;
+  }
   
+`
+const Span = styled.span`
+  color: black;
+  background: white;
+  border-radius: 50%;
+  padding: 3px;
 `
 
 const ProductPage = ({ data }) => {
@@ -41,6 +51,7 @@ const ProductPage = ({ data }) => {
   const {
     variants: [initialVariant],
   } = product
+
   const [imageFluid, setImageFluid] = useState(initialVariant.image.localFile.childImageSharp.fluid)
 
   const {
@@ -51,8 +62,10 @@ const ProductPage = ({ data }) => {
     <>
       <SEO title={product.title} description={product.description} />
       <Layout>
-        <Link to='/products'>{'<<< Back To Store'}</Link>
         <Container>
+          <Button>
+            <Link to='/products'>{'<< Back To Store'}</Link>
+          </Button>
           <ImgContainer>
             <Img
                 fluid={imageFluid}
@@ -64,7 +77,9 @@ const ProductPage = ({ data }) => {
             <div>{product.title}</div>
             <ProductForm product={product} setImageFluid={setImageFluid} />
           </FormContainer>
-          <Link to='/cart'>View Cart {lineItems.length}</Link>
+          <Button>
+            <Link as='button' to='/cart'>View Cart <Span>{lineItems.length}</Span></Link>
+          </Button>
         </Container>
       </Layout>
     </>

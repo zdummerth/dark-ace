@@ -2,8 +2,33 @@ import React, { useState, useContext, useEffect, useCallback } from 'react'
 import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import Button from './button'
 
 import { GlobalStateContext } from '../context/GlobalContextProvider'
+
+const Span = styled.span`
+    border: ${props => (props.selected ? '1px solid #C00A0A' : 'none')};
+    padding: 4px;
+    border-radius: 5%;
+    
+`
+const OptionContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+
+    :hover {
+        color: orange;
+      }
+`
+
+const QuantityInput = styled.input`
+    width: 40px;
+`
 
 const ProductForm = ({ product, setImageFluid }) => {
   const {
@@ -58,12 +83,32 @@ const ProductForm = ({ product, setImageFluid }) => {
     const selectedVariant = find(variants, ({ selectedOptions }) =>
       isEqual(currentOptions, selectedOptions)
     )
-    console.log('Slected Vriance', selectedVariant)
+
+    setImageFluid(selectedVariant.image.localFile.childImageSharp.fluid)
+    setVariant({ ...selectedVariant })
+  }
+
+  const handleOptionClick = (name, value) => {
+    const currentOptions = [...variant.selectedOptions]
+    // console.log({currentOptions})
+    const index = currentOptions.findIndex(opt => opt.name === name)
+    
+    currentOptions[index] = {
+      ...currentOptions[index],
+      value,
+    }
+
+    const selectedVariant = find(variants, ({ selectedOptions }) =>
+      isEqual(currentOptions, selectedOptions)
+    )
+
+    console.log({selectedVariant})
     setImageFluid(selectedVariant.image.localFile.childImageSharp.fluid)
     setVariant({ ...selectedVariant })
   }
 
   const handleAddToCart = () => {
+      console.log({productVariant})
     addVariantToCart(productVariant.shopifyId, quantity)
   }
 
@@ -90,11 +135,24 @@ const ProductForm = ({ product, setImageFluid }) => {
     return true
   }
 
+  const checkSelected = (name, value) => {
+    //   console.log('selected values', name, value)
+    //   console.log('current', variant)
+    const currentOptions = [...variant.selectedOptions]
+    const index = variant.selectedOptions.findIndex(opt => opt.name === name)
+    if(currentOptions[index].value === value) {
+        return true
+    }
+    return false
+  }
+
   const price = Intl.NumberFormat(undefined, {
     currency: minVariantPrice.currencyCode,
     minimumFractionDigits: 2,
     style: 'currency',
   }).format(variant.price)
+
+//   const images = product.map
 
   return (
     <>
@@ -102,13 +160,30 @@ const ProductForm = ({ product, setImageFluid }) => {
       {/* {Product with no variants produces option with name === 'Title', So check for that to prevent unwanted select menu} */}
       {options.map(({ id, name, values }, index) => name !== 'Title' ? (
         <React.Fragment key={id}>
-          <label htmlFor={name}>{name} </label>
+          {/* <label htmlFor={name}>{name} </label>
           <select
             name={name}
             key={id}
             onChange={event => handleOptionChange(index, event)}
-          >
-            {values.map(value => (
+          > */}
+          <OptionContainer>
+              <span>{name} :</span>
+              {values.map((value, index) => !checkDisabled(name, value) ? (
+                <Span
+                    value={value}
+                    key={`${name}-${value}`}
+                    // disabled={checkDisabled(name, value)}
+                    selected={checkSelected(name, value)}
+                    onClick={() => handleOptionClick(name, value, index)}
+                >
+                    {value}
+                </Span>
+                )
+                :
+                null
+                )}
+          </OptionContainer>
+            {/* {values.map(value => (
               <option
                 value={value}
                 key={`${name}-${value}`}
@@ -116,13 +191,13 @@ const ProductForm = ({ product, setImageFluid }) => {
               >
                 {value}
               </option>
-            ))}
-          </select>
-          <br />
+            ))} */}
+          {/* </select> */}
+          {/* <br /> */}
         </React.Fragment>
       ) : null)}
-      <label htmlFor="quantity">Quantity </label>
-      <input
+      <label htmlFor="quantity">Quantity :</label>
+      <QuantityInput
         type="number"
         id="quantity"
         name="quantity"
@@ -132,13 +207,13 @@ const ProductForm = ({ product, setImageFluid }) => {
         value={quantity}
       />
       <br />
-      <button
+      <Button 
         type="submit"
         disabled={!available || adding}
         onClick={handleAddToCart}
       >
         Add to Cart
-      </button>
+      </Button>
       {!available && <p>This Product is out of Stock!</p>}
     </>
   )
