@@ -11,6 +11,9 @@ const Span = styled.span`
     border: ${props => (props.selected ? '1px solid #C00A0A' : 'none')};
     padding: 4px;
     border-radius: 5%;
+    :hover {
+        cursor: pointer;
+      }
     
 `
 const OptionContainer = styled.div`
@@ -20,10 +23,6 @@ const OptionContainer = styled.div`
     flex-wrap: wrap;
     width: 90%;
     margin: 0 auto;
-
-    :hover {
-        color: orange;
-      }
 `
 
 const QuantityInput = styled.input`
