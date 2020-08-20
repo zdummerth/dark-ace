@@ -14,17 +14,20 @@ import SEO from '../components/seo'
 const Container = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 3rem;
+  margin: 3rem 0;
   color: white;
-
-  @media (max-width: 630px) {
+  width: 100%;
+  @media (max-width: 800px) {
     flex-direction: column;
   }
 
+
 `
 const ImgContainer = styled.div`
-  flex: 0 1 40%;
-  max-width: 500px;
+  flex: 0 1 80%;
+  width: 100%;
+  max-width: 600px;
+  min-width: 300px;
 
   @media (max-width: 630px) {
     width: 100%;
@@ -33,17 +36,28 @@ const ImgContainer = styled.div`
 
 const FormContainer = styled.div`
   width: 90%;
-  margin-bottom: 2rem;
   & > * {
     margin: 1rem;
   }
   
 `
+const StyledLink = styled(Link)`
+  text-align: center;
+  color: white;
+  background: #C00A0A;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-top: 2rem;
+  position: absolute;
+  right: 2rem;
+  bottom: 0;
+
+`
 const Span = styled.span`
   color: black;
   background: white;
   border-radius: 50%;
-  padding: 3px;
+  padding: .5rem;
 `
 
 const ProductPage = ({ data }) => {
@@ -63,9 +77,6 @@ const ProductPage = ({ data }) => {
       <SEO title={product.title} description={product.description} />
       <Layout>
         <Container>
-          <Button>
-            <Link to='/products'>{'<< Back To Store'}</Link>
-          </Button>
           <ImgContainer>
             <Img
                 fluid={imageFluid}
@@ -74,13 +85,11 @@ const ProductPage = ({ data }) => {
               />
           </ImgContainer>
           <FormContainer>
-            <div>{product.title}</div>
+            <h3>{product.title}</h3>
             <ProductForm product={product} setImageFluid={setImageFluid} />
           </FormContainer>
-          <Button>
-            <Link as='button' to='/cart'>View Cart <Span>{lineItems.length}</Span></Link>
-          </Button>
         </Container>
+        <StyledLink to='/cart'>View Cart <Span>{lineItems.length}</Span></StyledLink>
       </Layout>
     </>
   )

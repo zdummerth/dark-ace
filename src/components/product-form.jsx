@@ -1,28 +1,61 @@
 import React, { useState, useContext, useEffect, useCallback } from 'react'
+import { Link } from 'gatsby'
 import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Button from './button'
+// import Button from './button'
 
 import { GlobalStateContext } from '../context/GlobalContextProvider'
 
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    // max-width: 600px;
+    & > * {
+        margin-bottom: 1.3rem;
+    }
+`
 const Span = styled.span`
-    border: ${props => (props.selected ? '1px solid #C00A0A' : 'none')};
-    padding: 4px;
-    border-radius: 5%;
+    border: ${props => (props.selected ? '2px solid #C00A0A' : '1px solid rgba(232, 232, 232, .3)')};
+    padding: .5rem;
+    border-radius: 5px;
     :hover {
         cursor: pointer;
       }
     
 `
+const StyledButton = styled.button`
+    background: #C00A0A;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 0;
+    color: white;
+    width: 90%;
+`
+const StyledLink = styled(Link)`
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 10px 0;
+    width: 90%;
+
+`
 const OptionContainer = styled.div`
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    width: 90%;
-    margin: 0 auto;
+    & > * {
+        margin-right: 1rem;
+    }
+`
+
+const Values = styled.div`
+    display: flex;
+    // justify-content: space-between;
+    overflow-x: auto;
+    & > * {
+        margin-right: 1.5rem;
+    }
 `
 
 const QuantityInput = styled.input`
@@ -135,8 +168,6 @@ const ProductForm = ({ product, setImageFluid }) => {
   }
 
   const checkSelected = (name, value) => {
-    //   console.log('selected values', name, value)
-    //   console.log('current', variant)
     const currentOptions = [...variant.selectedOptions]
     const index = variant.selectedOptions.findIndex(opt => opt.name === name)
     if(currentOptions[index].value === value) {
@@ -151,48 +182,32 @@ const ProductForm = ({ product, setImageFluid }) => {
     style: 'currency',
   }).format(variant.price)
 
-//   const images = product.map
 
   return (
-    <>
+    <Container>
       <h3>{price}</h3>
       {/* {Product with no variants produces option with name === 'Title', So check for that to prevent unwanted select menu} */}
       {options.map(({ id, name, values }, index) => name !== 'Title' ? (
         <React.Fragment key={id}>
-          {/* <label htmlFor={name}>{name} </label>
-          <select
-            name={name}
-            key={id}
-            onChange={event => handleOptionChange(index, event)}
-          > */}
           <OptionContainer>
-              <span>{name} :</span>
-              {values.map((value, index) => !checkDisabled(name, value) ? (
-                <Span
-                    value={value}
-                    key={`${name}-${value}`}
-                    // disabled={checkDisabled(name, value)}
-                    selected={checkSelected(name, value)}
-                    onClick={() => handleOptionClick(name, value, index)}
-                >
-                    {value}
-                </Span>
-                )
-                :
-                null
-                )}
+              <span>{name}:</span>
+              <Values>
+                {values.map((value, index) => !checkDisabled(name, value) ? (
+                    <Span
+                        value={value}
+                        key={`${name}-${value}`}
+                        // disabled={checkDisabled(name, value)}
+                        selected={checkSelected(name, value)}
+                        onClick={() => handleOptionClick(name, value, index)}
+                    >
+                        {value}
+                    </Span>
+                    )
+                    :
+                    null
+                    )}
+              </Values>
           </OptionContainer>
-            {/* {values.map(value => (
-              <option
-                value={value}
-                key={`${name}-${value}`}
-                disabled={checkDisabled(name, value)}
-              >
-                {value}
-              </option>
-            ))} */}
-          {/* </select> */}
-          {/* <br /> */}
         </React.Fragment>
       ) : null)}
       <label htmlFor="quantity">Quantity :</label>
@@ -205,16 +220,18 @@ const ProductForm = ({ product, setImageFluid }) => {
         onChange={handleQuantityChange}
         value={quantity}
       />
-      <br />
-      <Button 
-        type="submit"
-        disabled={!available || adding}
-        onClick={handleAddToCart}
-      >
-        Add to Cart
-      </Button>
-      {!available && <p>This Product is out of Stock!</p>}
-    </>
+      {available ? 
+        <StyledButton 
+            type="submit"
+            disabled={!available || adding}
+            onClick={handleAddToCart}
+            >
+            Add to Cart
+        </StyledButton>
+        :
+        <p>This Product is out of Stock! Please select another variant.</p>}
+        <StyledLink to='/products'>Continue Shopping</StyledLink>
+    </Container>
   )
 }
 

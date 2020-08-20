@@ -1,8 +1,15 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
+import styled from 'styled-components'
 
 import { GlobalStateContext } from '../context/GlobalContextProvider'
 
+const Container = styled.div`
+    display: flex;
+    // justify-content: space-between;
+    align-items: center;
+
+`
 
 const LineItem = props => {
   const { item } = props
@@ -17,13 +24,13 @@ const LineItem = props => {
     <img
       src={item.variant.image.src}
       alt={`${item.title} product shot`}
-      height="90px"
+      height="150px"
     />
   ) : null
 
   const selectedOptions = item.variant.selectedOptions
     ? item.variant.selectedOptions.map(
-        option => `${option.name}: ${option.value} `
+        option => `${option.name}: ${option.value}, `
       )
     : null
 
@@ -32,20 +39,26 @@ const LineItem = props => {
   }
 
   return (
-    <div>
+    <Container>
       {console.log(item)}
-      <Link to={`/product/${item.variant.product.handle}/`}>
+      <Link style={{marginRight: '2rem'}} to={`/product/${item.variant.product.handle}/`}>
         {variantImage}
       </Link>
-      <p>
-        {item.title}
-        {`  `}
-        {item.variant.title === !'Default Title' ? item.variant.title : ''}
-      </p>
-      {selectedOptions}
-      {item.quantity}
-      <button onClick={handleRemove}>Remove</button>
-    </div>
+      <div>
+        <p>
+            {item.title}
+            {`  `}
+            {item.variant.title === !'Default Title' ? item.variant.title : ''}
+        </p>
+        {selectedOptions}
+        {item.quantity}
+        <button 
+            // style={{width: '50px'}}     
+            onClick={handleRemove}>
+                Delete
+        </button>
+      </div>
+    </Container>
   )
 }
 

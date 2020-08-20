@@ -23,15 +23,15 @@ const Cart = () => {
     <Layout>
       <div style={{color: 'white'}}>
         {lineItems}
-        <h2>Subtotal</h2>
+        <h3>Subtotal</h3>
         <p>$ {checkout.subtotalPrice}</p>
-        <br />
-        <h2>Taxes</h2>
+        {/* <br /> */}
+        <h3>Taxes</h3>
         <p>$ {checkout.totalTax}</p>
-        <br />
-        <h2>Total</h2>
+        {/* <br /> */}
+        <h3>Total</h3>
         <p>$ {checkout.totalPrice}</p>
-        <br />
+        {/* <br /> */}
         <Button
           onClick={handleCheckout}
           disabled={checkout.lineItems.length === 0}
