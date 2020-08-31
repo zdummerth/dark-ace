@@ -12,6 +12,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     // max-width: 600px;
+    width: 90%;
     & > * {
         margin-bottom: 1.3rem;
     }
@@ -31,21 +32,25 @@ const StyledButton = styled.button`
     border-radius: 5px;
     padding: 10px 0;
     color: white;
-    width: 90%;
+    // width: 90%;
+    :hover {
+      cursor: pointer;
+      background: red;
+    }
 `
 const StyledLink = styled(Link)`
     text-align: center;
     border: 1px solid white;
     border-radius: 5px;
     padding: 10px 0;
-    width: 90%;
+    // width: 100%;
 
 `
 const OptionContainer = styled.div`
     display: flex;
     align-items: center;
     & > * {
-        margin-right: 1rem;
+        // margin-right: 1rem;
     }
 `
 
@@ -54,7 +59,7 @@ const Values = styled.div`
     // justify-content: space-between;
     overflow-x: auto;
     & > * {
-        margin-right: 1.5rem;
+        margin-left: 1.5rem;
     }
 `
 
@@ -103,22 +108,22 @@ const ProductForm = ({ product, setImageFluid }) => {
     setQuantity(target.value)
   }
 
-  const handleOptionChange = (optionIndex, { target }) => {
-    const { value } = target
-    const currentOptions = [...variant.selectedOptions]
+  // const handleOptionChange = (optionIndex, { target }) => {
+  //   const { value } = target
+  //   const currentOptions = [...variant.selectedOptions]
 
-    currentOptions[optionIndex] = {
-      ...currentOptions[optionIndex],
-      value,
-    }
+  //   currentOptions[optionIndex] = {
+  //     ...currentOptions[optionIndex],
+  //     value,
+  //   }
 
-    const selectedVariant = find(variants, ({ selectedOptions }) =>
-      isEqual(currentOptions, selectedOptions)
-    )
+  //   const selectedVariant = find(variants, ({ selectedOptions }) =>
+  //     isEqual(currentOptions, selectedOptions)
+  //   )
 
-    setImageFluid(selectedVariant.image.localFile.childImageSharp.fluid)
-    setVariant({ ...selectedVariant })
-  }
+  //   setImageFluid(selectedVariant.image.localFile.childImageSharp.fluid)
+  //   setVariant({ ...selectedVariant })
+  // }
 
   const handleOptionClick = (name, value) => {
     const currentOptions = [...variant.selectedOptions]
@@ -226,10 +231,11 @@ const ProductForm = ({ product, setImageFluid }) => {
             disabled={!available || adding}
             onClick={handleAddToCart}
             >
-            Add to Cart
+            {adding ? 'Adding...': 'Add to Cart'}
         </StyledButton>
         :
-        <p>This Product is out of Stock! Please select another variant.</p>}
+        <p>This Product is out of Stock! Please select another variant.</p>
+      }
         <StyledLink to='/products'>Continue Shopping</StyledLink>
     </Container>
   )

@@ -47,8 +47,8 @@ const StyledLink = styled(Link)`
   background: #C00A0A;
   border-radius: 5px;
   padding: 1rem;
-  margin-top: 2rem;
-  position: absolute;
+  // margin-top: 2rem;
+  // position: absolute;
   right: 2rem;
   bottom: 0;
 
@@ -72,6 +72,9 @@ const ProductPage = ({ data }) => {
     store: { checkout: { lineItems } },
   } = useContext(GlobalStateContext)
 
+  const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
+
+
   return (
     <>
       <SEO title={product.title} description={product.description} />
@@ -88,8 +91,8 @@ const ProductPage = ({ data }) => {
             <h3>{product.title}</h3>
             <ProductForm product={product} setImageFluid={setImageFluid} />
           </FormContainer>
+          <StyledLink to='/cart'>Cart <Span>{totalQuantity}</Span></StyledLink>
         </Container>
-        <StyledLink to='/cart'>View Cart <Span>{lineItems.length}</Span></StyledLink>
       </Layout>
     </>
   )
