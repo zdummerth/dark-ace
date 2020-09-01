@@ -47,7 +47,7 @@ const StyledLink = styled(Link)`
 
 
 const OptionContainer = styled.div`
-    display: flex;
+    // display: flex;
     align-items: center;
 `
 
@@ -192,7 +192,7 @@ const ProductForm = ({ product, setImageFluid }) => {
       {options.map(({ id, name, values }, index) => name !== 'Title' ? (
         <React.Fragment key={id}>
           <OptionContainer>
-              <span>{name}:</span>
+              <p>{name}:</p>
               <Values>
                 {values.map((value, index) => !checkDisabled(name, value) ? (
                     <Span
