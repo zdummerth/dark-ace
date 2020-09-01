@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
+import { Link } from 'gatsby'
 import { GlobalStateContext } from '../context/GlobalContextProvider'
-import Button from '../components/button'
 
 import Layout from '../components/layout'
 
@@ -32,12 +32,13 @@ const Cart = () => {
         <h3>Total</h3>
         <p>$ {checkout.totalPrice}</p>
         {/* <br /> */}
-        <Button
+        <button
           onClick={handleCheckout}
           disabled={checkout.lineItems.length === 0}
         >
           Check out
-        </Button>
+        </button>
+        <Link to='/products'>Back to all products</Link>
       </div>
     </Layout>
   )

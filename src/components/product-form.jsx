@@ -4,14 +4,14 @@ import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-// import Button from './button'
+import CartLink from './cart-link'
 
 import { GlobalStateContext } from '../context/GlobalContextProvider'
+
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    // max-width: 600px;
     width: 90%;
     & > * {
         margin-bottom: 1.3rem;
@@ -32,7 +32,7 @@ const StyledButton = styled.button`
     border-radius: 5px;
     padding: 10px 0;
     color: white;
-    // width: 90%;
+
     :hover {
       cursor: pointer;
       background: red;
@@ -43,15 +43,12 @@ const StyledLink = styled(Link)`
     border: 1px solid white;
     border-radius: 5px;
     padding: 10px 0;
-    // width: 100%;
-
 `
+
+
 const OptionContainer = styled.div`
     display: flex;
     align-items: center;
-    & > * {
-        // margin-right: 1rem;
-    }
 `
 
 const Values = styled.div`
@@ -74,8 +71,10 @@ const ProductForm = ({ product, setImageFluid }) => {
     variants: [initialVariant],
     priceRange: { minVariantPrice },
   } = product
+
   const [variant, setVariant] = useState({ ...initialVariant })
   const [quantity, setQuantity] = useState(1)
+
   const {
     addVariantToCart,
     store: { client, adding },
@@ -127,7 +126,7 @@ const ProductForm = ({ product, setImageFluid }) => {
 
   const handleOptionClick = (name, value) => {
     const currentOptions = [...variant.selectedOptions]
-    // console.log({currentOptions})
+    
     const index = currentOptions.findIndex(opt => opt.name === name)
     
     currentOptions[index] = {
@@ -139,13 +138,11 @@ const ProductForm = ({ product, setImageFluid }) => {
       isEqual(currentOptions, selectedOptions)
     )
 
-    console.log({selectedVariant})
     setImageFluid(selectedVariant.image.localFile.childImageSharp.fluid)
     setVariant({ ...selectedVariant })
   }
 
   const handleAddToCart = () => {
-      console.log({productVariant})
     addVariantToCart(productVariant.shopifyId, quantity)
   }
 
@@ -237,6 +234,7 @@ const ProductForm = ({ product, setImageFluid }) => {
         <p>This Product is out of Stock! Please select another variant.</p>
       }
         <StyledLink to='/products'>Continue Shopping</StyledLink>
+        <CartLink/>
     </Container>
   )
 }

@@ -12,6 +12,7 @@ import styled, { createGlobalStyle } from "styled-components"
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 
 import Header from "./header"
+
 import 'normalize.css';
 
 const GlobalStyle = createGlobalStyle`
@@ -35,7 +36,7 @@ const ContentWrapper = styled.main`
   flex: 1;
   position: relative;
   width: 100vw;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
 `
 

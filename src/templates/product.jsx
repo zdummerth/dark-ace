@@ -1,8 +1,7 @@
 import React, { useState, useContext } from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
-import Button from '../components/button'
 import { GlobalStateContext } from '../context/GlobalContextProvider'
 
 
@@ -13,51 +12,31 @@ import SEO from '../components/seo'
 
 const Container = styled.div`
   display: flex;
-  align-items: center;
+  // align-items: center;
   margin: 3rem 0;
   color: white;
   width: 100%;
   @media (max-width: 800px) {
     flex-direction: column;
+    align-items: center;
   }
 
 
 `
 const ImgContainer = styled.div`
-  flex: 0 1 80%;
+  // flex: 0 1 80%;
   width: 100%;
   max-width: 600px;
   min-width: 300px;
-
-  @media (max-width: 630px) {
-    width: 100%;
-  }
 `
 
 const FormContainer = styled.div`
+  height: 100%;
   width: 90%;
   & > * {
     margin: 1rem;
   }
   
-`
-const StyledLink = styled(Link)`
-  text-align: center;
-  color: white;
-  background: #C00A0A;
-  border-radius: 5px;
-  padding: 1rem;
-  // margin-top: 2rem;
-  // position: absolute;
-  right: 2rem;
-  bottom: 0;
-
-`
-const Span = styled.span`
-  color: black;
-  background: white;
-  border-radius: 50%;
-  padding: .5rem;
 `
 
 const ProductPage = ({ data }) => {
@@ -91,7 +70,6 @@ const ProductPage = ({ data }) => {
             <h3>{product.title}</h3>
             <ProductForm product={product} setImageFluid={setImageFluid} />
           </FormContainer>
-          <StyledLink to='/cart'>Cart <Span>{totalQuantity}</Span></StyledLink>
         </Container>
       </Layout>
     </>
