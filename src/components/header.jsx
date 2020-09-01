@@ -1,34 +1,19 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import styled, { createGlobalStyle } from "styled-components"
 import { FaFacebookF, FaInstagram, FaExternalLinkAlt } from 'react-icons/fa';
+import { GlobalStateContext } from '../context/GlobalContextProvider'
 
 import Logo from "./logo"
 
-const MenuItems = [
-  {
-    path: "/",
-    title: "Home"
-  },
-  {
-    path: "/contact",
-    title: "Contact"
-  },
-  {
-    path: "/products",
-    title: "Products"
-  },
-  {
-    path: "/cart",
-    title: "Cart"
-  },
-]
+import CartLink from './cart-link'
+
 
 const GlobalStyle = createGlobalStyle`
   body {
-    overflow-y: ${props => (props.open ? "" : "hidden")};
-    height: ${props => (props.open ? "" : "100vh")};
+    overflow-y: ${props => (props.closed ? "" : "hidden")};
+    height: ${props => (props.closed ? "" : "100vh")};
   }
 `
 
@@ -36,6 +21,13 @@ const HeaderWrapper = styled.header`
   background: #020202;
   margin-bottom: 2px;
   border-bottom: 1px solid #C00A0A;
+  padding: 0 1rem;
+  @media (min-width: 900px) {
+    font-size: .9rem;
+  }
+  @media (min-width: 1000px) {
+    font-size: 1rem;
+  }
 `
 
 const Nav = styled.nav`
@@ -45,7 +37,6 @@ const Nav = styled.nav`
   position: relative;
   justify-content: space-between;
   text-transform: uppercase;
-  // margin: 0 auto;
   z-index: 50;
   // align-self: center;
   align-items: center;
@@ -63,7 +54,7 @@ const Toggle = styled.div`
   display: none;
   height: 100%;
   cursor: pointer;
-  margin: 0 10vw;
+  // margin: 0 10vw;
 
   @media (max-width: 900px) {
     display: flex;
@@ -80,14 +71,15 @@ const Navbox = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     position: fixed;
-    width: 85%;
+    width: 100%;
     padding-top: 10vh;
     background-color: #020202;
+    opacity: .95;
     border-top: 1px solid #C00A0A;
     border-left: 1px solid #C00A0A;
     transition: all 0.3s ease-in;
     top: 70px;
-    right: ${props => (props.open ? "-100%" : "0")};
+    left: ${props => (props.closed ? "-100%" : "0")};
   }
   a[aria-current="page"] {
     color: #C00A0A;
@@ -102,7 +94,7 @@ const Hamburger = styled.div`
   transition: all .3s linear;
   align-self: center;
   position: relative;
-  transform: ${props => (props.open ? "rotate(-45deg)" : "inherit")};
+  transform: ${props => (props.closed ? "inherit" : "rotate(-45deg)")};
 
   ::before,
   ::after {
@@ -116,13 +108,13 @@ const Hamburger = styled.div`
 
   ::before {
     transform: ${props =>
-      props.open ? "rotate(-90deg) translate(-10px, 0px)" : "rotate(0deg)"};
+      props.closed ? "rotate(0deg)" : "rotate(-90deg) translate(-10px, 0px)"};
     top: -10px;
   }
 
   ::after {
-    opacity: ${props => (props.open ? "0" : "1")};
-    transform: ${props => (props.open ? "rotate(90deg) " : "rotate(0deg)")};
+    opacity: ${props => (props.closed ? "1" : "0")};
+    transform: ${props => (props.closed ? "rotate(0deg) " : "rotate(90deg)")};
     top: 10px;
   }
 `
@@ -134,7 +126,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   white-space: nowrap;
   color: white;
-  margin: 2vw;
+  margin: 1rem;
   transition: all 200ms ease-in;
   position: relative;
 
@@ -188,7 +180,32 @@ const ExtIcon = styled(FaExternalLinkAlt)`
   // margin-left: 5px;
 `
 const Header = ({ siteTitle }) => {
-  const [navbarOpen, setNavbarOpen] = useState(false);
+  const {
+    store: { checkout: { lineItems } },
+  } = useContext(GlobalStateContext)
+  
+  const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
+
+  const MenuItems = [
+    {
+      path: "/",
+      title: "Home"
+    },
+    {
+      path: "/contact",
+      title: "Contact"
+    },
+    {
+      path: "/products",
+      title: "Products"
+    },
+    {
+      path: '/cart',
+      title: `Cart (${totalQuantity})`
+    }
+  ]
+
+  const [navbarClosed, setNavbarClosed] = useState(true);
   
   const links = MenuItems.map((menuItem, index) => (
   <StyledLink key={index} to={menuItem.path}>{menuItem.title}</StyledLink>
@@ -205,28 +222,21 @@ const Header = ({ siteTitle }) => {
   return (
     <HeaderWrapper>
       <Nav>
+        <Toggle
+            navbarClosed={navbarClosed}
+            onClick={() => setNavbarClosed(!navbarClosed)}
+          >
+          <Hamburger closed={navbarClosed} />
+        </Toggle>
         <LogoLink to='/'>
             <Logo />
         </LogoLink>
-        <Toggle
-          navbarOpen={navbarOpen}
-          onClick={() => setNavbarOpen(!navbarOpen)}
-        >
-          {navbarOpen ? <Hamburger open /> : <Hamburger />}
-        </Toggle>
-        {navbarOpen ? (
-          <Navbox>
-            <GlobalStyle />
-            {links}
-            {extLinks}
-          </Navbox>
-        ) : (
-          <Navbox open>
-            <GlobalStyle open/>
-            {links}
-            {extLinks}
-          </Navbox>
-        )}
+        <CartLink useIcon={true}/>
+        <Navbox closed={navbarClosed}>
+          <GlobalStyle closed={navbarClosed}/>
+          {links}
+          {extLinks}
+        </Navbox>
       </Nav>
     </HeaderWrapper>
   )

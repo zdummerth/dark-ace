@@ -234,7 +234,6 @@ const ProductForm = ({ product, setImageFluid }) => {
         <p>This Product is out of Stock! Please select another variant.</p>
       }
         <StyledLink to='/products'>Continue Shopping</StyledLink>
-        <CartLink/>
     </Container>
   )
 }

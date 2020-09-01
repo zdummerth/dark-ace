@@ -12,6 +12,8 @@ import styled, { createGlobalStyle } from "styled-components"
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 
 import Header from "./header"
+// import CartLink from './cart-link'
+
 
 import 'normalize.css';
 

@@ -142,7 +142,7 @@ const data = useStaticQuery(graphql`
         <ImagesContainer>
           {images}
         </ImagesContainer>
-        <InStoreLink href={currentLink} target='_blank' rel='noreferrer'>Click to view in shop<ExtIcon /></InStoreLink>
+        <InStoreLink href={currentLink} target='_blank' rel='noreferrer'>View in shop<ExtIcon /></InStoreLink>
         <SlideshowControls>
           <SlideshowButton onClick={handlePrevious}><RiArrowLeftLine/></SlideshowButton>
             <DotContainer>

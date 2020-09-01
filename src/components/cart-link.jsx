@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import styled from 'styled-components'
 import { Link } from 'gatsby'
-import { GiShoppingCart } from 'react-icons/gi';
+import { RiShoppingCartLine } from 'react-icons/ri';
 
 import { GlobalStateContext } from '../context/GlobalContextProvider'
 
@@ -9,6 +9,9 @@ import { GlobalStateContext } from '../context/GlobalContextProvider'
 const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
+  @media (min-width: 900px) {
+    display: none;
+  }
 `
 
 const Span = styled.span`
@@ -18,15 +21,7 @@ const Span = styled.span`
 const Container = styled.div`
   display: flex;
   align-items: center;
-  // align-self: flex-end;
-  width: 50px;
-  height: 50px;
-  color: white;
-  background: #C00A0A;
-  border-radius: 50%;
-  padding: .8rem;
-  margin: 1rem 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 
   :hover {
     cursor: pointer;
@@ -35,16 +30,17 @@ const Container = styled.div`
 `
 
 const TotalItems = styled.span`
-  font-size: 1.2rem;
+  // font-size: 1.4rem;
+  // color: white;
 `
 
-const CartIcon = styled(GiShoppingCart)`
-  font-size: 2rem;
+const CartIcon = styled(RiShoppingCartLine)`
+  font-size: 1.7rem;
   margin-right: .3rem;
 `
 
 
-const CartLink = () => {
+const CartLink = ({children, useIcon}) => {
   const {
     store: { checkout: { lineItems } },
   } = useContext(GlobalStateContext)
@@ -53,17 +49,13 @@ const CartLink = () => {
 
   return (
     <>
-    {totalQuantity > 0 ? 
       <StyledLink to='/cart'>
+        {children}
         <Container>
-          <CartIcon/>
-          <TotalItems>{totalQuantity}</TotalItems>
+          {useIcon ? <CartIcon /> : null}
+          (<TotalItems>{totalQuantity}</TotalItems>)
         </Container>
-        <Span>View Cart</Span>
       </StyledLink>
-      :
-      <></>
-    }
   </>
   )
 }
