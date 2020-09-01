@@ -8,6 +8,8 @@ const Container = styled.div`
     display: flex;
     // justify-content: space-between;
     align-items: center;
+    padding: .5rem 0;
+    border-bottom: 1px solid #C00A0A;
 
 `
 
@@ -28,10 +30,8 @@ const LineItem = props => {
     />
   ) : null
 
-  const selectedOptions = item.variant.selectedOptions
-    ? item.variant.selectedOptions.map(
-        option => `${option.name}: ${option.value}, `
-      )
+  const selectedValues = item.variant.selectedOptions
+    ? item.variant.selectedOptions.map(option => `${option.value} / `)
     : null
 
   const handleRemove = () => {
@@ -48,9 +48,9 @@ const LineItem = props => {
         <p>
             {item.title}
             {`  `}
-            {item.variant.title === !'Default Title' ? item.variant.title : ''}
+            {item.variant.title !== 'Default Title' ? item.variant.title : ''}
         </p>
-        {selectedOptions}
+        {selectedValues}
         {item.quantity}
         <button 
             // style={{width: '50px'}}     
