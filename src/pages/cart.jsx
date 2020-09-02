@@ -31,7 +31,7 @@ const CheckoutLink = styled.a`
   display: block;
   background: #C00A0A;
   padding: .8rem 0;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   text-align: center;
   border-radius: 5px;
 `

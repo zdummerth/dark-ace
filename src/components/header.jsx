@@ -76,7 +76,7 @@ const Navbox = styled.div`
     background-color: #020202;
     opacity: .95;
     border-top: 1px solid #C00A0A;
-    border-left: 1px solid #C00A0A;
+    // border-left: 1px solid #C00A0A;
     transition: all 0.3s ease-in;
     top: 70px;
     left: ${props => (props.closed ? "-100%" : "0")};
