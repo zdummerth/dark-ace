@@ -34,6 +34,7 @@ const CheckoutLink = styled.a`
   margin-bottom: 2rem;
   text-align: center;
   border-radius: 5px;
+  max-width: 300px;
 `
 
 const StyledLink = styled(Link)`
@@ -43,6 +44,7 @@ const StyledLink = styled(Link)`
     border-radius: 5px;
     padding: 10px 0;
     margin: 2rem 0;
+    max-width: 300px;
 `
 
 const Cart = () => {
@@ -67,20 +69,15 @@ const Cart = () => {
           <p>{`Subtotal (${totalQuantity} ${totalQuantity > 1 ? 'items' : 'item'}): `}</p>
           <h4>$ {checkout.subtotalPrice}</h4>
         </Subtotal>
-        <CheckoutLink href={checkout.webUrl}>Proceed to checkout</CheckoutLink>
+        {checkout.lineItems.length === 0 
+          ? 
+          'Your Cart is empty' 
+          : 
+          <CheckoutLink href={checkout.webUrl}>Proceed to checkout</CheckoutLink>
+          }
         <div id='lineItems'>
           {lineItems}
         </div>
-        {/* <h3>Taxes</h3>
-        <p>$ {checkout.totalTax}</p>
-        <h3>Total</h3>
-        <p>$ {checkout.totalPrice}</p>
-        <button
-          onClick={handleCheckout}
-          disabled={checkout.lineItems.length === 0}
-        >
-          Check out
-        </button> */}
         <StyledLink to='/products'>Continue Shopping</StyledLink>
       </Container>
     </Layout>

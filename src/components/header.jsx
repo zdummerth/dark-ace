@@ -72,17 +72,15 @@ const Navbox = styled.div`
     justify-content: flex-start;
     position: fixed;
     width: 100%;
-    padding-top: 10vh;
     background-color: #020202;
     opacity: .95;
     border-top: 1px solid #C00A0A;
-    // border-left: 1px solid #C00A0A;
     transition: all 0.3s ease-in;
     top: 70px;
     left: ${props => (props.closed ? "-100%" : "0")};
   }
   a[aria-current="page"] {
-    color: #C00A0A;
+    // color: #C00A0A;
     border-bottom: 1px solid #C00A0A;
   }
 `
@@ -159,9 +157,9 @@ const StyledLink = styled(Link)`
 const IconWrapper = styled.div`
   display: flex;
 
-  @media (max-width: 900px) {
-    margin-top: 2rem;
-  }
+  // @media (max-width: 900px) {
+  //   margin-top: 2rem;
+  // }
 `
 const FbIcon = styled(FaFacebookF)`
   font-size: 22px;
