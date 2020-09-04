@@ -187,7 +187,6 @@ const ProductForm = ({ product, setImageFluid }) => {
 
   return (
     <Container>
-      <h3>{price}</h3>
       {/* {Product with no variants produces option with name === 'Title', So check for that to prevent unwanted select menu} */}
       {options.map(({ id, name, values }, index) => name !== 'Title' ? (
         <React.Fragment key={id}>
@@ -222,6 +221,8 @@ const ProductForm = ({ product, setImageFluid }) => {
         onChange={handleQuantityChange}
         value={quantity}
       />
+      <h3>{product.title}</h3>
+      <h3>{price}</h3>
       {available ? 
         <StyledButton 
             type="submit"

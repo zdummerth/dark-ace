@@ -13,9 +13,9 @@ import SEO from '../components/seo'
 const Container = styled.div`
   display: flex;
   // align-items: center;
-  margin: 3rem 0;
+  margin: 3rem auto;
   color: white;
-  width: 100%;
+  width: 90%;
   @media (max-width: 800px) {
     flex-direction: column;
     align-items: center;
@@ -51,8 +51,6 @@ const ProductPage = ({ data }) => {
     store: { checkout: { lineItems } },
   } = useContext(GlobalStateContext)
 
-  const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
-
 
   return (
     <>
@@ -67,9 +65,10 @@ const ProductPage = ({ data }) => {
               />
           </ImgContainer>
           <FormContainer>
-            <h3>{product.title}</h3>
+            {/* <h3>{product.title}</h3> */}
             <ProductForm product={product} setImageFluid={setImageFluid} />
           </FormContainer>
+          <div dangerouslySetInnerHTML={{__html: product.descriptionHtml}}/>
         </Container>
       </Layout>
     </>
