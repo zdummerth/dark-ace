@@ -18,7 +18,7 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
    & > * {
-     margin-top: 10vh
+     margin-top: 15vh;
    }
 `
 
@@ -27,6 +27,11 @@ const ImgWrapper = styled.div`
   margin-bottom: 5vh;
   width: 90%;
   // max-width: 1200px;
+`
+
+const Hr = styled.hr`
+   color: #C00A0A;
+   width: 90%;
 `
 
 
@@ -39,9 +44,9 @@ const IndexPage = ({data}) => {
         <ImgWrapper>
           <Img fluid={data.file.childImageSharp.fluid} />
         </ImgWrapper>
-        <hr style={{color:'red', width: '100%'}}/>
+        <Hr/>
         <Youtube />
-        <hr style={{color:'red', width: '100%'}}/>
+        <Hr/>
         <Slideshow />
       </Container>
     </>
