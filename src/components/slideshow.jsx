@@ -12,6 +12,7 @@ const SlideshowContainer = styled.div`
   // border: 1px solid #C00A0A;
   position: relative;
   margin: 15px auto;
+  width: 100%;
   max-width: 1200px;
   height: 70vh;
   max-height: 900px;

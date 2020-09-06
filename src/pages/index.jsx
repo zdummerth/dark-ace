@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 
 import Slideshow from '../components/slideshow'
-// import Spotify from '../components/spotify'
+import Spotify from '../components/spotify'
 import Youtube from '../components/youtube'
 
 
@@ -14,15 +14,16 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const Container = styled.div`
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 `
 
 const ImgWrapper = styled.div`
   margin-top: 5vh;
   margin-bottom: 5vh;
-  // width: 90%;
+  width: 90%;
   // max-width: 1200px;
 `
 
@@ -31,12 +32,14 @@ const IndexPage = ({data}) => {
   return (
     <Layout>
       <SEO title="Home" />
-      {/* <Spotify /> */}
       <Container>
+        <Spotify />
         <ImgWrapper>
           <Img fluid={data.file.childImageSharp.fluid} />
         </ImgWrapper>
+        <hr style={{color:'red', width: '100%'}}/>
         <Youtube />
+        <hr style={{color:'red', width: '100%'}}/>
         <Slideshow />
       </Container>
     </Layout>
