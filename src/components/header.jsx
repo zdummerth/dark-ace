@@ -20,8 +20,9 @@ const GlobalStyle = createGlobalStyle`
 const HeaderWrapper = styled.header`
   background: #020202;
   margin-bottom: 2px;
+  width: 100%;
   border-bottom: 1px solid #C00A0A;
-  padding: 0 1rem;
+  // padding: 0 1rem;
   @media (min-width: 900px) {
     font-size: .9rem;
   }
@@ -35,7 +36,7 @@ const Nav = styled.nav`
   width: 100%;
   display: flex;
   position: relative;
-  justify-content: space-between;
+  justify-content: space-around;
   text-transform: uppercase;
   z-index: 50;
   // align-self: center;
@@ -206,7 +207,13 @@ const Header = ({ siteTitle }) => {
   const [navbarClosed, setNavbarClosed] = useState(true);
   
   const links = MenuItems.map((menuItem, index) => (
-  <StyledLink key={index} to={menuItem.path}>{menuItem.title}</StyledLink>
+  <StyledLink
+   key={index} 
+   to={menuItem.path}
+   onClick={() => setNavbarClosed(true)}
+   >
+     {menuItem.title}
+  </StyledLink>
   ))
   const extLinks = 
     <>

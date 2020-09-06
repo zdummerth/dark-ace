@@ -12,6 +12,8 @@ import styled, { createGlobalStyle } from "styled-components"
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 
 import Header from "./header"
+import Spotify from './spotify'
+
 // import CartLink from './cart-link'
 
 
@@ -30,6 +32,7 @@ const GlobalStyle = createGlobalStyle`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   min-height: 100vh;
   overflow: hidden;
 `
@@ -47,6 +50,7 @@ const Footer = styled.footer`
   justify-content: space-around;
   align-items: center;
   border-top: 1px solid #C00A0A;
+  width: 100%;
   padding: 0 2vh;
   margin-top: 3vh;
   background-color: #262626;
@@ -129,6 +133,7 @@ const Layout = ({ children }) => {
       <GlobalStyle />
       <Wrapper>
         <Header siteTitle={data.site.siteMetadata.title} />
+        <Spotify />
         <ContentWrapper>{children}</ContentWrapper>
         <Footer>
           <StyledLink as='a' href='mailto:darkaceapparel@gamil.com'>DARKACEAPPAREL@GMAIL.COM</StyledLink>

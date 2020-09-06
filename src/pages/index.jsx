@@ -30,10 +30,11 @@ const ImgWrapper = styled.div`
 
 const IndexPage = ({data}) => {
   return (
-    <Layout>
+    // <Layout>
+    <>
       <SEO title="Home" />
       <Container>
-        <Spotify />
+        {/* <Spotify /> */}
         <ImgWrapper>
           <Img fluid={data.file.childImageSharp.fluid} />
         </ImgWrapper>
@@ -42,7 +43,8 @@ const IndexPage = ({data}) => {
         <hr style={{color:'red', width: '100%'}}/>
         <Slideshow />
       </Container>
-    </Layout>
+    </>
+    // </Layout>
   )
 }
 

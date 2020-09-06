@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
-import Layout from '../components/layout'
+// import Layout from '../components/layout'
 import SEO from '../components/seo'
 
 const BgWrapper = styled.div`
@@ -32,7 +32,7 @@ const TextWrapper = styled.div`
 
 const ContactPage = ({data}) => {
     return (
-        <Layout>
+        <>
             <SEO title='Contact' />
             <BgWrapper>
                 <Img 
@@ -50,7 +50,7 @@ const ContactPage = ({data}) => {
                     </TextWrapper>
                 </Overlay>
             </BgWrapper>
-        </Layout>
+        </>
     )
 }
 

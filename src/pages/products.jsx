@@ -3,14 +3,14 @@ import { Link, graphql } from "gatsby"
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
-import Layout from "../components/layout"
+// import Layout from "../components/layout"
 
 
 const ItemGrid = styled.div`
   display: grid;
   align-items: center;
   grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 400px));
   color: white;
 
   & > * {
@@ -51,12 +51,12 @@ const ProductsPage = ({ data }) => {
   })
 
   return (
-    <Layout>
+    <>
       <h1>Products</h1>
       <ItemGrid>
         {products}
       </ItemGrid>
-    </Layout>
+    </>
   )
 }
 

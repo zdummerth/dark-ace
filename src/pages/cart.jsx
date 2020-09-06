@@ -4,7 +4,7 @@ import { GlobalStateContext } from '../context/GlobalContextProvider'
 import styled from 'styled-components'
 
 
-import Layout from '../components/layout'
+// import Layout from '../components/layout'
 
 import LineItem from '../components/line-item'
 
@@ -63,7 +63,6 @@ const Cart = () => {
   ))
 
   return (
-    <Layout>
       <Container>
         <Subtotal>
           <p>{`Subtotal (${totalQuantity} ${totalQuantity > 1 ? 'items' : 'item'}): `}</p>
@@ -73,14 +72,13 @@ const Cart = () => {
           ? 
           'Your Cart is empty' 
           : 
-          <CheckoutLink href={checkout.webUrl}>Proceed to checkout</CheckoutLink>
+          <CheckoutLink href={checkout.webUrl} target='_blank'>Proceed to checkout</CheckoutLink>
           }
         <div id='lineItems'>
           {lineItems}
         </div>
         <StyledLink to='/products'>Continue Shopping</StyledLink>
       </Container>
-    </Layout>
   )
 }
 

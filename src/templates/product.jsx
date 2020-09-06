@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { GlobalStateContext } from '../context/GlobalContextProvider'
 
 
-import Layout from '../components/layout'
+// import Layout from '../components/layout'
 import ProductForm from '../components/product-form'
 
 import SEO from '../components/seo'
@@ -55,7 +55,7 @@ const ProductPage = ({ data }) => {
   return (
     <>
       <SEO title={product.title} description={product.description} />
-      <Layout>
+      {/* <Layout> */}
         <Container>
           <ImgContainer>
             <Img
@@ -70,7 +70,7 @@ const ProductPage = ({ data }) => {
           </FormContainer>
           <div dangerouslySetInnerHTML={{__html: product.descriptionHtml}}/>
         </Container>
-      </Layout>
+      {/* </Layout> */}
     </>
   )
 }
