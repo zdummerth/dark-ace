@@ -4,12 +4,11 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 
 import Slideshow from '../components/slideshow'
-import Spotify from '../components/spotify'
 import Youtube from '../components/youtube'
 
 
 
-import Layout from "../components/layout"
+// import Layout from "../components/layout"
 // import Logo from "../components/logo"
 import SEO from "../components/seo"
 
@@ -18,6 +17,9 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+   & > * {
+     margin-top: 10vh
+   }
 `
 
 const ImgWrapper = styled.div`
@@ -34,7 +36,6 @@ const IndexPage = ({data}) => {
     <>
       <SEO title="Home" />
       <Container>
-        {/* <Spotify /> */}
         <ImgWrapper>
           <Img fluid={data.file.childImageSharp.fluid} />
         </ImgWrapper>

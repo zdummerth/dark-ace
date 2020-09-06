@@ -50,6 +50,7 @@ const ProductsPage = ({ data }) => {
     )
   })
 
+  
   return (
     <>
       <h1>Products</h1>
