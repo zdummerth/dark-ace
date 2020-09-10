@@ -4,7 +4,6 @@ import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import CartLink from './cart-link'
 
 import { GlobalStateContext } from '../context/GlobalContextProvider'
 
@@ -49,14 +48,28 @@ const StyledLink = styled(Link)`
 const OptionContainer = styled.div`
     // display: flex;
     align-items: center;
+
+    p {
+      margin-top: 0;
+    }
 `
 
 const Values = styled.div`
     display: flex;
-    // justify-content: space-between;
-    overflow-x: auto;
+    flex-wrap: wrap;
+
     & > * {
         margin-left: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    @media (max-width: 800px) {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+
+      & > * {
+        margin-bottom: 0;
+      }
     }
 `
 

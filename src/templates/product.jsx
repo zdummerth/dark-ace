@@ -31,7 +31,7 @@ const ImgContainer = styled.div`
 `
 
 const FormContainer = styled.div`
-  height: 100%;
+  // height: 100%;
   width: 90%;
   & > * {
     margin: 1rem;
@@ -65,10 +65,9 @@ const ProductPage = ({ data }) => {
               />
           </ImgContainer>
           <FormContainer>
-            {/* <h3>{product.title}</h3> */}
             <ProductForm product={product} setImageFluid={setImageFluid} />
+            <div dangerouslySetInnerHTML={{__html: product.descriptionHtml}}/>
           </FormContainer>
-          <div dangerouslySetInnerHTML={{__html: product.descriptionHtml}}/>
         </Container>
       {/* </Layout> */}
     </>
