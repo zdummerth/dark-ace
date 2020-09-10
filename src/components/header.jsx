@@ -74,7 +74,7 @@ const Navbox = styled.div`
     position: fixed;
     width: 100%;
     background-color: #020202;
-    opacity: .95;
+    // opacity: .95;
     border-top: 1px solid #C00A0A;
     transition: all 0.3s ease-in;
     top: 70px;
