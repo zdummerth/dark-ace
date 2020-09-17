@@ -10,7 +10,7 @@ const ItemGrid = styled.div`
   display: grid;
   align-items: center;
   grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 400px));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   color: white;
 
   & > * {
