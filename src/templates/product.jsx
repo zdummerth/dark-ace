@@ -47,10 +47,6 @@ const ProductPage = ({ data }) => {
 
   const [imageFluid, setImageFluid] = useState(initialVariant.image.localFile.childImageSharp.fluid)
 
-  const {
-    store: { checkout: { lineItems } },
-  } = useContext(GlobalStateContext)
-
 
   return (
     <>
