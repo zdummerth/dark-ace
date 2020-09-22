@@ -21,7 +21,7 @@ const Spotify = () => {
   return (
     <Container>
       <iframe 
-          src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWOaP4H0w5b0" 
+          src="https://open.spotify.com/embed/playlist/7zcIKw7G0LJixjMKnASf9s?si=B66XDLQ-Q-W3lsPX1_ZLig" 
           width="100%"
           height={minimized ? '80' : '380'} 
           frameborder="0" 
