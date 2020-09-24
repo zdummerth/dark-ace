@@ -64,6 +64,7 @@ const GlobalContextProvider = ({ children }) => {
   }, [store.client.checkout])
   
   useEffect(() => () => { isRemoved = true; }, [])
+  
   return (
     <GlobalStateContext.Provider 
     value={{

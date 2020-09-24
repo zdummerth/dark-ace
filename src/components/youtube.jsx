@@ -2,6 +2,7 @@ import React from 'react'
 import styled from "styled-components"
 
 const Container = styled.div`
+  align-self: center;
   position: relative; 
   padding-bottom: 56.25%; 
   // height: 0; 

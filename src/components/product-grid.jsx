@@ -4,8 +4,6 @@ import styled from 'styled-components'
 import Img from 'gatsby-image'
 
 // import Layout from "../components/layout"
-import ProductGrid from "../components/product-grid"
-
 
 
 const ItemGrid = styled.div`
@@ -14,6 +12,7 @@ const ItemGrid = styled.div`
   grid-gap: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   color: white;
+  
 
   & > * {
     // padding-bottom: 2rem;
@@ -113,9 +112,9 @@ const Product = ({node}) => {
   )
 }
 
-const ProductsPage = ({ data }) => {
+const ProductGrid = ({ products }) => {
 
-  const products = data.allShopifyProduct.edges.map(({ node }) => {
+  const productsList = products.map(({ node }) => {
 
     return   (
       <Product node={node} />
@@ -124,56 +123,12 @@ const ProductsPage = ({ data }) => {
 
   
   return (
-    <>
-      {/* <h1>Products</h1>
+    <div>
       <ItemGrid>
-        {products}
-      </ItemGrid> */}
-      <ProductGrid products={data.allShopifyProduct.edges} />
-    </>
+        {productsList}
+      </ItemGrid>
+    </div>
   )
 }
 
-export default ProductsPage
-
-export const query = graphql`
-  {
-    allShopifyProduct(sort: { fields: [title] }) {
-      edges {
-        node {
-          handle
-          title
-          shopifyId
-          priceRange {
-            minVariantPrice {
-              amount
-              currencyCode
-            }
-            maxVariantPrice {
-              amount
-              currencyCode
-            }
-          }
-          images {
-            localFile {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-          thumbs: images {
-            localFile {
-              childImageSharp {
-                fixed(height: 60, width: 48) {
-                  ...GatsbyImageSharpFixed
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
+export default ProductGrid
