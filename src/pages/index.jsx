@@ -4,6 +4,8 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 
 import Slideshow from '../components/slideshow'
+import SnapScroll from '../components/snap-scroll'
+
 import Youtube from '../components/youtube'
 
 
@@ -44,6 +46,7 @@ const StyledProductGrid = styled(ProductGrid)`
 
 
 const IndexPage = ({data}) => {
+  const products = [...data.allShopifyProduct.edges, ...data.allShopifyProduct.edges, ...data.allShopifyProduct.edges]
   return (
     // <Layout>
     <>
@@ -56,7 +59,9 @@ const IndexPage = ({data}) => {
         <Youtube style={{alignSelf: 'center'}} />
         <Hr/>
         <h2 style={{alignSelf: 'center'}} >Pre-Order</h2>
-        <ProductGrid products={data.allShopifyProduct.edges} />
+        {/* <ProductGrid products={products} /> */}
+        <SnapScroll products={products} />
+
         <Slideshow />
       </Container>
       {/* <ProductGrid products={data.allShopifyProduct.edges} /> */}
