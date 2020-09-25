@@ -10,14 +10,14 @@ const Container = styled.div`
   display: flex;
   overflow-x: auto;
   color: white;
-  scroll-snap-type: x mandatory;
-  scroll-padding: 0 50%;
+  // scroll-snap-type: x mandatory;
+  // scroll-padding: 0 50%;
   border-bottom: 1px solid #C00A0A;
   width: 95%;
   margin: 0 auto;
 
   & > * {
-    scroll-snap-align: start;
+    // scroll-snap-align: start;
     }
   }
 
