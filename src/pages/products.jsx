@@ -8,7 +8,7 @@ import HorizontalScroll from '../components/horizontal-scroll'
 
 const Title = styled.h2`
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
 `
 
 

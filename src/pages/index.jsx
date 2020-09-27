@@ -22,7 +22,7 @@ const Container = styled.div`
 
 const Title = styled.h2`
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
 `
 
 const ImgWrapper = styled.div`
