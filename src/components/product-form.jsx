@@ -234,7 +234,7 @@ const ProductForm = ({ product, setImageFluid }) => {
         onChange={handleQuantityChange}
         value={quantity}
       />
-      <h3>{product.title}</h3>
+      {/* <h3>{product.title}</h3> */}
       <h3>{price}</h3>
       {available ? 
         <StyledButton 

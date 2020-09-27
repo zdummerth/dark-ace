@@ -10,14 +10,11 @@ const Container = styled.div`
   display: flex;
   overflow-x: auto;
   color: white;
-  // scroll-snap-type: x mandatory;
-  // scroll-padding: 0 50%;
-  border-bottom: 1px solid #C00A0A;
   width: 95%;
   margin: 0 auto;
 
   & > * {
-    // scroll-snap-align: start;
+      border-bottom: 1px solid #C00A0A;
     }
   }
 
@@ -50,7 +47,6 @@ const ImgContainer = styled.div`
   height: 40vh;
 
   @media (max-width: 1000px) {
-    // height: 40vh;
     width: 70vw;
     max-width: 400px;
   }
@@ -109,13 +105,9 @@ const Product = ({node}) => {
   return (
       <ProductContainer key={node.shopifyId}>
         <ImgContainer>
-        <Link 
-          to={`/product/${node.handle}`} 
-        >
-          {/* <ImgContainer> */}
-            {images}
-          {/* </ImgContainer> */}
-        </Link>
+          <Link to={`/product/${node.handle}`} >
+              {images}
+          </Link>
         </ImgContainer>
         <div className='thumb-container'>
           {/* <span>Colors</span> */}
@@ -132,7 +124,7 @@ const Product = ({node}) => {
 
 const ProductHorizontal = ({ products }) => {
 
-  const productsList = products.map(({ node }) => {
+  const productsList = products.map(node => {
 
     return   (
       <Product node={node} />

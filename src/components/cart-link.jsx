@@ -9,6 +9,8 @@ import { GlobalStateContext } from '../context/GlobalContextProvider'
 const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
+  color: #C00A0A;
+
   @media (min-width: 900px) {
     display: none;
   }

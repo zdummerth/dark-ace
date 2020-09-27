@@ -15,7 +15,8 @@ import 'normalize.css';
 const GlobalStyle = createGlobalStyle`
   body {
     background: #020202;
-    color: #C00A0A;
+    color: white;
+    // color: #C00A0A;
   }
   a {
     text-decoration: none;

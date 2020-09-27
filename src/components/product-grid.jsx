@@ -16,7 +16,7 @@ const ItemGrid = styled.div`
 
   & > * {
     // padding-bottom: 2rem;
-    border-bottom: 1px solid #C00A0A;
+    border: 1px solid #C00A0A;
     text-align: center; 
 
     .thumb-container {

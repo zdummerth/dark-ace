@@ -10,6 +10,12 @@ import ProductForm from '../components/product-form'
 
 import SEO from '../components/seo'
 
+const Title = styled.h1`
+  margin: 1rem auto;
+  color: white;
+  width: 90%;
+`
+
 const Container = styled.div`
   display: flex;
   // align-items: center;
@@ -51,7 +57,7 @@ const ProductPage = ({ data }) => {
   return (
     <>
       <SEO title={product.title} description={product.description} />
-      {/* <Layout> */}
+        <Title>{product.title}</Title>
         <Container>
           <ImgContainer>
             <Img
@@ -65,7 +71,6 @@ const ProductPage = ({ data }) => {
             <div dangerouslySetInnerHTML={{__html: product.descriptionHtml}}/>
           </FormContainer>
         </Container>
-      {/* </Layout> */}
     </>
   )
 }

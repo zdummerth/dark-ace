@@ -5,6 +5,8 @@ const Container = styled.div`
   align-self: center;
   position: relative; 
   padding-bottom: 56.25%; 
+  // border-top: 1px solid #C00A0A;
+  border-bottom: 1px solid #C00A0A;
   // height: 0; 
   // overflow: hidden; 
   width: 90%;
@@ -17,6 +19,11 @@ const Container = styled.div`
     width: 100%; 
     height: 100%;
   }
+`
+
+const Title = styled.h2`
+  text-align: center;
+  font-size: 2.5rem;
 `
 
 const Youtube = () => {

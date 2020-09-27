@@ -4,14 +4,9 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 
 import Slideshow from '../components/slideshow'
-import SnapScroll from '../components/snap-scroll'
-
+import HorizontalScroll from '../components/horizontal-scroll'
 import Youtube from '../components/youtube'
 
-
-
-// import Layout from "../components/layout"
-import ProductGrid from "../components/product-grid"
 import SEO from "../components/seo"
 
 const Container = styled.div`
@@ -21,9 +16,13 @@ const Container = styled.div`
   width: 100%;
 
    & > * {
-    //  align-self: center;
      margin-top: 1.5rem;
    }
+`
+
+const Title = styled.h2`
+  text-align: center;
+  font-size: 2.5rem;
 `
 
 const ImgWrapper = styled.div`
@@ -31,43 +30,26 @@ const ImgWrapper = styled.div`
   margin-bottom: 5vh;
   width: 90%;
   align-self: center;
-  // max-width: 1200px;
-`
-
-const Hr = styled.hr`
-   color: #C00A0A;
-   width: 90%;
-`
-
-const StyledProductGrid = styled(ProductGrid)`
-   border: 2px solid blue;
-   background: blue;
 `
 
 
 const IndexPage = ({data}) => {
-  const products = [...data.allShopifyProduct.edges, ...data.allShopifyProduct.edges, ...data.allShopifyProduct.edges]
+  const products = data.shopifyCollection.products
   return (
-    // <Layout>
     <>
       <SEO title="Home" />
       <Container>
         <ImgWrapper>
           <Img fluid={data.file.childImageSharp.fluid} />
         </ImgWrapper>
-        <Hr/>
+        <Title>2020 Ledgestone Commercial</Title>
         <Youtube style={{alignSelf: 'center'}} />
-        <Hr/>
-        <h2 style={{alignSelf: 'center'}} >Pre-Order</h2>
-        {/* <ProductGrid products={products} /> */}
-        <SnapScroll products={products} />
-
+        <Title>Pre-Order</Title>
+        <HorizontalScroll products={products} />
         <Slideshow />
       </Container>
-      {/* <ProductGrid products={data.allShopifyProduct.edges} /> */}
 
     </>
-    // </Layout>
   )
 }
 
@@ -80,43 +62,42 @@ query {
       }
     }
   }
-  allShopifyProduct(sort: { fields: [title] }) {
-    edges {
-      node {
-        handle
-        title
-        shopifyId
-        priceRange {
-          minVariantPrice {
-            amount
-            currencyCode
+  shopifyCollection(handle: {eq: "pre-order"}) {
+        handle 
+        products {
+          handle
+          title
+          shopifyId
+          priceRange {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+            maxVariantPrice {
+              amount
+              currencyCode
+            }
           }
-          maxVariantPrice {
-            amount
-            currencyCode
-          }
-        }
-        images {
-          localFile {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid
+          images {
+            localFile {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
               }
             }
           }
-        }
-        thumbs: images {
-          localFile {
-            childImageSharp {
-              fixed(height: 60, width: 48) {
-                ...GatsbyImageSharpFixed
+          thumbs: images {
+            localFile {
+              childImageSharp {
+                fixed(height: 60, width: 48) {
+                  ...GatsbyImageSharpFixed
+                }
               }
             }
           }
         }
       }
-    }
-  }
 }
 `
 
