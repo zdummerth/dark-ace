@@ -197,20 +197,22 @@ const ProductForm = ({ product, setImageFluid }) => {
     style: 'currency',
   }).format(variant.price)
 
+  console.log({options})
 
   return (
     <Container>
       {/* {Product with no variants produces option with name === 'Title', So check for that to prevent unwanted select menu} */}
-      {options.map(({ id, name, values }, index) => name !== 'Title' ? (
+      {options.map(({ id, name, values }) => name !== 'Title' ? (
         <React.Fragment key={id}>
           <OptionContainer>
               <p>{name}:</p>
               <Values>
-                {values.map((value, index) => !checkDisabled(name, value) ? (
+                {/* {values.map((value, index) => !checkDisabled(name, value) ? ( */}
+                  {values.map((value, index) => true ? (
                     <Span
                         value={value}
                         key={`${name}-${value}`}
-                        // disabled={checkDisabled(name, value)}
+                        disabled={checkDisabled(name, value)}
                         selected={checkSelected(name, value)}
                         onClick={() => handleOptionClick(name, value, index)}
                     >
@@ -234,7 +236,6 @@ const ProductForm = ({ product, setImageFluid }) => {
         onChange={handleQuantityChange}
         value={quantity}
       />
-      {/* <h3>{product.title}</h3> */}
       <h3>{price}</h3>
       {available ? 
         <StyledButton 
