@@ -191,7 +191,6 @@ const ProductForm = ({ product, setImageFluid }) => {
     style: 'currency',
   }).format(variant.price)
 
-  console.log({options})
 
   return (
     <Container>
@@ -240,7 +239,11 @@ const ProductForm = ({ product, setImageFluid }) => {
             {adding ? 'Adding...': 'Add to Cart'}
         </StyledButton>
         :
-        <p className='out-of-stock'>This Product is out of Stock! Please select another color or size.</p>
+        <p className='out-of-stock'>
+          {`This Product is out of Stock! Please select another `}
+          {variant.selectedOptions.length === 1 ? variant.selectedOptions[0].name : `${variant.selectedOptions[0].name} or ${variant.selectedOptions[1].name}`}
+          .
+        </p>
       }
         <StyledLink to='/products'>Continue Shopping</StyledLink>
     </Container>
