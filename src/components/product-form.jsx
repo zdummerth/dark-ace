@@ -12,6 +12,16 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     width: 90%;
+
+    & .out-of-stock {
+      font-size: 1.5rem;
+    }
+
+    & .price {
+      font-size: 1.75rem;
+      font-weight: bold;
+    }
+
     & > * {
         margin-bottom: 1.3rem;
     }
@@ -120,22 +130,6 @@ const ProductForm = ({ product, setImageFluid }) => {
     setQuantity(target.value)
   }
 
-  // const handleOptionChange = (optionIndex, { target }) => {
-  //   const { value } = target
-  //   const currentOptions = [...variant.selectedOptions]
-
-  //   currentOptions[optionIndex] = {
-  //     ...currentOptions[optionIndex],
-  //     value,
-  //   }
-
-  //   const selectedVariant = find(variants, ({ selectedOptions }) =>
-  //     isEqual(currentOptions, selectedOptions)
-  //   )
-
-  //   setImageFluid(selectedVariant.image.localFile.childImageSharp.fluid)
-  //   setVariant({ ...selectedVariant })
-  // }
 
   const handleOptionClick = (name, value) => {
     const currentOptions = [...variant.selectedOptions]
@@ -236,7 +230,7 @@ const ProductForm = ({ product, setImageFluid }) => {
         onChange={handleQuantityChange}
         value={quantity}
       />
-      <h3>{price}</h3>
+      <p className='price'>{price}</p>
       {available ? 
         <StyledButton 
             type="submit"
@@ -246,7 +240,7 @@ const ProductForm = ({ product, setImageFluid }) => {
             {adding ? 'Adding...': 'Add to Cart'}
         </StyledButton>
         :
-        <p>This Product is out of Stock! Please select another variant.</p>
+        <p className='out-of-stock'>This Product is out of Stock! Please select another color or size.</p>
       }
         <StyledLink to='/products'>Continue Shopping</StyledLink>
     </Container>
