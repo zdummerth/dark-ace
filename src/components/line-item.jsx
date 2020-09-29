@@ -29,7 +29,7 @@ const LineItem = props => {
   const { item } = props
   const {
     removeLineItem,
-    updateLineItem,
+    // updateLineItem,
     store: { client, checkout },
   } = useContext(StoreContext)
 

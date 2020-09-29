@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Link, graphql } from "gatsby"
+import { Link } from "gatsby"
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
@@ -37,7 +37,11 @@ const ProductContainer = styled.div`
     align-items: center;
     margin-top: 5px;
     & > * {
+      position: relative;
       margin-right: 8px;
+      width: 48px;
+      height: 60px;
+      border: none;
     }
   }
 `
@@ -84,22 +88,27 @@ const Product = ({node}) => {
   ))
 
   const thumbs = node.thumbs.map((variant, ind) => (
-      <div 
-        onClick={() => setIndex(ind)}
-      >
-    <Img 
-      fixed={variant.localFile.childImageSharp.fixed} 
-      alt={'slideshow for feature images'}
-      fadeIn={false}
+    <button
+      className='thumbnail' 
       onClick={() => setIndex(ind)}
-      style={{
-
-      }}
-      imgStyle={{ 
-        objectFit: 'contain', 
-      }}
-    />
-    </div>
+    >
+      <Img 
+        fixed={variant.localFile.childImageSharp.fixed} 
+        alt={'slideshow for feature images'}
+        fadeIn={false}
+        onClick={() => setIndex(ind)}
+        style={{
+          position: 'absolute',
+          top: '0',
+          width: '100%',
+          height: '100%',
+          left: '0',
+        }}
+        imgStyle={{ 
+          objectFit: 'contain', 
+        }}
+      />
+    </button>
   ))
 
   return (

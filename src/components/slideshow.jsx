@@ -3,7 +3,6 @@ import Img from 'gatsby-image'
 import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 import { RiArrowRightLine, RiArrowLeftLine } from 'react-icons/ri'
-import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const SlideshowContainer = styled.div`
   display: flex;
@@ -65,17 +64,17 @@ const Dot = styled.div`
   }
   `
 
-const ExtIcon = styled(FaExternalLinkAlt)`
-  font-size: 15px;
-  margin-left: 5px;
-  color: #C00A0A;
-`
-const InStoreLink = styled.a`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 2px;
-`
+// const ExtIcon = styled(FaExternalLinkAlt)`
+//   font-size: 15px;
+//   margin-left: 5px;
+//   color: #C00A0A;
+// `
+// const InStoreLink = styled.a`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding-top: 2px;
+// `
 
 const SlideShow = () => {
 
@@ -107,7 +106,7 @@ const data = useStaticQuery(graphql`
     return () => clearInterval(timer); //cleanup
   });
 
-  const currentLink = data.markdownRemark.frontmatter.slides[index].link
+  // const currentLink = data.markdownRemark.frontmatter.slides[index].link
   const images = data.markdownRemark.frontmatter.slides.map((slide, ind) => (
     <a href={slide.link} target='_blank' rel='noreferrer'>
       <Img 

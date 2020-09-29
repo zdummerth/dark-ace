@@ -16,10 +16,6 @@ const StyledLink = styled(Link)`
   }
 `
 
-const Span = styled.span`
-  margin-left: 5px;
-`
-
 const Container = styled.div`
   display: flex;
   align-items: center;

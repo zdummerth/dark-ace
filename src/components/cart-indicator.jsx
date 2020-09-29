@@ -1,6 +1,8 @@
-// import React, { Component } from 'react';
+// import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 // import styled from '@emotion/styled';
+
+// import { usePrevious } from '../hooks/use-previous'
 
 // import { colors, dimensions, radius, spacing } from '../../utils/styles';
 
@@ -17,11 +19,14 @@
 //   transform: translateX(calc((100% + ${spacing.md}px) * -1));
 // `;
 
-// class CartIndicator extends Component {
-//   state = {
-//     visible: false,
-//     message: ''
-//   };
+// const CartIndicator = ({adding, itemsInCart}) => {
+
+//   const [state, setState] = useState({
+//       visible: false,
+//       message: ''
+//   })
+
+//   const prevCount = usePrevious(itemsInCart)
 
 //   componentDidUpdate(prevProps) {
 //     if (prevProps.adding !== this.props.adding) {

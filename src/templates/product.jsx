@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
 
 // import Layout from '../components/layout'
-import ProductForm from '../components/product-form'
+import ProductForm from '../components/new-product-form'
 
 import SEO from '../components/seo'
 

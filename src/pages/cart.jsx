@@ -51,10 +51,6 @@ const Cart = () => {
     store: { checkout },
   } = useContext(StoreContext)
 
-  const handleCheckout = () => {
-    window.open(checkout.webUrl)
-  }
-
   const totalQuantity = checkout.lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
 
   const lineItems = checkout.lineItems.map(item => (

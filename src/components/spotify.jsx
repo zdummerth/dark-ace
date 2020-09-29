@@ -27,7 +27,8 @@ const Spotify = () => {
           height={minimized ? '80' : '380'} 
           frameborder="0" 
           allowtransparency="true" 
-          allow="encrypted-media">    
+          allow="encrypted-media"
+          title='Dark Ace Spotify Playlist'>    
       </iframe>
       <Toggle onClick={() => setMinimized(!minimized)}>{minimized ? <FiArrowDown/> : <FiArrowUp/>}</Toggle>
     </Container>

@@ -5,6 +5,8 @@ import styled, { createGlobalStyle } from "styled-components"
 import { FaFacebookF, FaInstagram, FaExternalLinkAlt } from 'react-icons/fa';
 import { StoreContext } from '../context/StoreContextProvider'
 
+import { breakpoints, dimensions, colors } from '../utils/styles';
+
 import Logo from "./logo"
 
 import CartLink from './cart-link'
@@ -22,7 +24,7 @@ const HeaderWrapper = styled.header`
   margin-bottom: 2px;
   width: 100%;
   border-bottom: 1px solid #C00A0A;
-  // padding: 0 1rem;
+  font-weight: bold;
   @media (min-width: 900px) {
     font-size: .9rem;
   }
@@ -32,7 +34,7 @@ const HeaderWrapper = styled.header`
 `
 
 const Nav = styled.nav`
-  height: 70px;
+  height: ${dimensions.headerHeight}px;
   width: 100%;
   display: flex;
   position: relative;
@@ -42,7 +44,7 @@ const Nav = styled.nav`
   // align-self: center;
   align-items: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}px) {
     position: sticky;
     top: 0;
     left: 0;
@@ -75,14 +77,13 @@ const Navbox = styled.div`
     width: 100%;
     background-color: #020202;
     // opacity: .95;
-    border-top: 1px solid #C00A0A;
+    border-top: 1px solid ${colors.brand};
     transition: all 0.3s ease-in;
     top: 70px;
     left: ${props => (props.closed ? "-100%" : "0")};
   }
   a[aria-current="page"] {
-    // color: #C00A0A;
-    border-bottom: 1px solid #C00A0A;
+    border-bottom: 1px solid ${colors.brand};
   }
 `
 

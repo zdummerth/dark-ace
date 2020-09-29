@@ -5,10 +5,41 @@ import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { AiOutlineMinusCircle } from 'react-icons/ai';
+
+
+import { usePrevious } from '../hooks/use-previous'
+
 import { StoreContext } from '../context/StoreContextProvider'
 
+const Plus = styled(AiOutlinePlusCircle)`
+    // color: white;
+    // font-size: 24px;
+`
+const Minus = styled(AiOutlineMinusCircle)`
+    // color: white;
+    // font-size: 24px;
+`
+const QuantityContainer = styled.div`
+    display: flex;
+    align-items: center;
+    // justify-content: space-between;
 
-const Container = styled.div`
+    & button {
+        border: none;
+        background: none;
+        color: white;
+    }
+
+    & > * {
+        font-size: 24px;
+        font-weight: bold;
+        padding-right: 8px;
+    }
+`
+
+const Form = styled.form`
     display: flex;
     flex-direction: column;
     width: 90%;
@@ -54,8 +85,6 @@ const StyledLink = styled(Link)`
     border-radius: 5px;
     padding: 10px 0;
 `
-
-
 const OptionContainer = styled.div`
     // display: flex;
     align-items: center;
@@ -64,7 +93,6 @@ const OptionContainer = styled.div`
       margin-top: 0;
     }
 `
-
 const Values = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -84,10 +112,6 @@ const Values = styled.div`
     }
 `
 
-const QuantityInput = styled.input`
-    width: 40px;
-`
-
 const ProductForm = ({ product, setImageFluid }) => {
   const {
     options,
@@ -101,8 +125,44 @@ const ProductForm = ({ product, setImageFluid }) => {
 
   const {
     addVariantToCart,
-    store: { client, adding },
+    store: { client, adding, checkout: { lineItems} },
   } = useContext(StoreContext)
+
+  const [cartIndicator, setCartIndicator] = useState({
+    visible: false,
+    message: ''
+})
+
+  const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
+  const prevTotalQuantity = usePrevious(totalQuantity);
+  const prevAdding = usePrevious(adding)
+
+  useEffect(() => {
+    if (prevAdding !== adding) {
+        if (adding) {
+          setCartIndicator({
+            visible: true,
+            message: 'Updating Cart ...'
+          });
+        } else {
+          if (totalQuantity > prevTotalQuantity) {
+            const num = totalQuantity - prevTotalQuantity;
+            const message =
+              num > 1
+                ? `${num} new items added to cart`
+                : `${num} new item added to cart`;
+  
+            setCartIndicator({ ...cartIndicator, message });
+  
+            setTimeout(
+              () => setCartIndicator({ visible: false, message: '' }),
+              2000
+            );
+          }
+        }
+      }
+  }, [prevAdding, adding, totalQuantity, prevTotalQuantity, cartIndicator])
+
 
   const productVariant =
     client.product.helpers.variantForOptions(product, variant) || variant
@@ -128,8 +188,18 @@ const ProductForm = ({ product, setImageFluid }) => {
     }, [productVariant, checkAvailability, product.shopifyId])
 
 
-  const handleQuantityChange = ({ target }) => {
-    setQuantity(target.value)
+  const handleQuantityIncrease = (e) => {
+    e.preventDefault();
+
+    setQuantity(quantity + 1)
+  }
+
+  const handleQuantityDecrease = (e) => {
+    e.preventDefault();
+
+    if(quantity > 1) {
+        setQuantity(quantity - 1)
+    }
   }
 
   const handleOptionClick = (name, value) => {
@@ -150,7 +220,8 @@ const ProductForm = ({ product, setImageFluid }) => {
     setVariant({ ...selectedVariant })
   }
 
-  const handleAddToCart = () => {
+  const handleAddToCart = e => {
+    e.preventDefault();
     addVariantToCart(productVariant.shopifyId, quantity)
   }
 
@@ -194,7 +265,7 @@ const ProductForm = ({ product, setImageFluid }) => {
 
 
   return (
-    <Container>
+    <Form onSubmit={handleAddToCart}>
       {/* {Product with no variants produces option with name === 'Title', So check for that to prevent unwanted select menu} */}
       {options.map(({ id, name, values }) => name !== 'Title' ? (
         <React.Fragment key={id}>
@@ -220,26 +291,23 @@ const ProductForm = ({ product, setImageFluid }) => {
           </OptionContainer>
         </React.Fragment>
       ) : null)}
-        <label htmlFor="quantity">Quantity :
-          <QuantityInput
-            type="number"
-            inputmode="numeric"
-            id="quantity"
-            name="quantity"
-            min="1"
-            step="1"
-            onChange={handleQuantityChange}
-            value={quantity}
-          />
-        </label>
+        <QuantityContainer>
+            <p>Quantity</p>
+            <button onClick={handleQuantityDecrease}>
+                <Minus /> 
+            </button>
+            <p>{quantity}</p> 
+            <button onClick={handleQuantityIncrease}>
+                <Plus />
+            </button>
+        </QuantityContainer>
       <p className='price'>{price}</p>
       {available ? 
         <StyledButton 
             type="submit"
             disabled={!available || adding}
-            onClick={handleAddToCart}
             >
-            {adding ? 'Adding...': 'Add to Cart'}
+            {cartIndicator.visible ? cartIndicator.message : 'Add to Cart'}
         </StyledButton>
         :
         <p className='out-of-stock'>
@@ -249,7 +317,7 @@ const ProductForm = ({ product, setImageFluid }) => {
         </p>
       }
         <StyledLink to='/products'>Continue Shopping</StyledLink>
-    </Container>
+    </Form>
   )
 }
 

@@ -21,10 +21,6 @@ const Container = styled.div`
   }
 `
 
-const Title = styled.h2`
-  text-align: center;
-  font-size: 2.5rem;
-`
 
 const Youtube = () => {
 
@@ -37,6 +33,7 @@ const Youtube = () => {
           frameborder="0" 
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
           allowfullscreen='true'
+          title='2020 ledgestone commercial'
       ></iframe>
     </Container>
   )

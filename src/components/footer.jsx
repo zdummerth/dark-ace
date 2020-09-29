@@ -5,7 +5,7 @@ import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 
 
 
-import { breakpoints, colors, spacing } from '../utils/styles';
+import { breakpoints, colors } from '../utils/styles';
 
 
 const StyledFooter = styled('footer')`
