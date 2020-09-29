@@ -67,7 +67,7 @@ const Cart = () => {
           ? 
           'Your Cart is empty' 
           : 
-          <CheckoutLink href={checkout.webUrl} target='_blank'>Proceed to checkout</CheckoutLink>
+          <CheckoutLink href={checkout.webUrl}>Proceed to checkout</CheckoutLink>
           }
         <div id='lineItems'>
           {lineItems}

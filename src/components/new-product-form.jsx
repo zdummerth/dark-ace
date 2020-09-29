@@ -150,7 +150,7 @@ const ProductForm = ({ product, setImageFluid }) => {
             const message =
               num > 1
                 ? `${num} NEW ITEMS ADDED`
-                : `${num} NEW ITEMS ADDED`;
+                : `${num} NEW ITEM ADDED`;
   
             setCartIndicator({ ...cartIndicator, message });
   

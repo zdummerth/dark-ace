@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
-// import Layout from "../components/layout"
+import { breakpoints } from '../utils/styles';
 
 
 const Container = styled.div`
@@ -18,7 +18,7 @@ const Container = styled.div`
     }
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: ${breakpoints.desktop}px) {
     display: grid;
     align-items: center;
     grid-gap: 2rem;
