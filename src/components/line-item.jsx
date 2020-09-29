@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
-import { GlobalStateContext } from '../context/GlobalContextProvider'
+import { StoreContext } from '../context/StoreContextProvider'
 
 const Container = styled.div`
     display: flex;
@@ -31,7 +31,7 @@ const LineItem = props => {
     removeLineItem,
     updateLineItem,
     store: { client, checkout },
-  } = useContext(GlobalStateContext)
+  } = useContext(StoreContext)
 
   console.log("image", item.variant)
 

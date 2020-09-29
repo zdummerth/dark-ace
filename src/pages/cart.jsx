@@ -1,10 +1,9 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
-import { GlobalStateContext } from '../context/GlobalContextProvider'
 import styled from 'styled-components'
+import { StoreContext } from '../context/StoreContextProvider'
 
 
-// import Layout from '../components/layout'
 
 import LineItem from '../components/line-item'
 
@@ -50,7 +49,7 @@ const StyledLink = styled(Link)`
 const Cart = () => {
   const {
     store: { checkout },
-  } = useContext(GlobalStateContext)
+  } = useContext(StoreContext)
 
   const handleCheckout = () => {
     window.open(checkout.webUrl)

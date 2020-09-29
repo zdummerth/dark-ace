@@ -5,7 +5,7 @@ import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { GlobalStateContext } from '../context/GlobalContextProvider'
+import { StoreContext } from '../context/StoreContextProvider'
 
 
 const Container = styled.div`
@@ -101,7 +101,7 @@ const ProductForm = ({ product, setImageFluid }) => {
   const {
     addVariantToCart,
     store: { client, adding },
-  } = useContext(GlobalStateContext)
+  } = useContext(StoreContext)
 
   const productVariant =
     client.product.helpers.variantForOptions(product, variant) || variant

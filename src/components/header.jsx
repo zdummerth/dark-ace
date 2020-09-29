@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import React, { useState, useContext } from "react"
 import styled, { createGlobalStyle } from "styled-components"
 import { FaFacebookF, FaInstagram, FaExternalLinkAlt } from 'react-icons/fa';
-import { GlobalStateContext } from '../context/GlobalContextProvider'
+import { StoreContext } from '../context/StoreContextProvider'
 
 import Logo from "./logo"
 
@@ -178,10 +178,10 @@ const ExtIcon = styled(FaExternalLinkAlt)`
   font-size: 15px;
   // margin-left: 5px;
 `
-const Header = ({ siteTitle }) => {
+const Header = () => {
   const {
     store: { checkout: { lineItems } },
-  } = useContext(GlobalStateContext)
+  } = useContext(StoreContext)
   
   const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
 

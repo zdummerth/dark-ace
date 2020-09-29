@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'gatsby'
 import { RiShoppingCartLine } from 'react-icons/ri';
 
-import { GlobalStateContext } from '../context/GlobalContextProvider'
+import { StoreContext } from '../context/StoreContextProvider'
 
 
 const StyledLink = styled(Link)`
@@ -44,7 +44,7 @@ const CartIcon = styled(RiShoppingCartLine)`
 const CartLink = ({children, useIcon}) => {
   const {
     store: { checkout: { lineItems } },
-  } = useContext(GlobalStateContext)
+  } = useContext(StoreContext)
   
   const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
 

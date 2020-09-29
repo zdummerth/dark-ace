@@ -1,9 +1,9 @@
 import React from "react"
-import GlobalContextProvider from "./src/context/GlobalContextProvider"
+import StoreContextProvider from "./src/context/StoreContextProvider"
 import Layout from './src/components/layout'
 
 export const wrapRootElement = ({ element }) => {
-  return <GlobalContextProvider>{element}</GlobalContextProvider>
+  return <StoreContextProvider>{element}</StoreContextProvider>
 }
 
 

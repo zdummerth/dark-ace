@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Client from 'shopify-buy'
-export const GlobalStateContext = React.createContext()
+export const StoreContext = React.createContext()
 
 
 const client = Client.buildClient({
@@ -8,7 +8,7 @@ const client = Client.buildClient({
   domain: process.env.GATSBY_SHOP_NAME,
 })
 
-const GlobalContextProvider = ({ children }) => {
+const StoreContextProvider = ({ children }) => {
   let initialStoreState = {
     client,
     adding: false,
@@ -66,7 +66,7 @@ const GlobalContextProvider = ({ children }) => {
   useEffect(() => () => { isRemoved = true; }, [])
   
   return (
-    <GlobalStateContext.Provider 
+    <StoreContext.Provider 
     value={{
       store,
       addVariantToCart: (variantId, quantity) => {
@@ -120,8 +120,8 @@ const GlobalContextProvider = ({ children }) => {
     }}
     >
         {children}
-    </GlobalStateContext.Provider>
+    </StoreContext.Provider>
   )
 }
 
-export default GlobalContextProvider
+export default StoreContextProvider
