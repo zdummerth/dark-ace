@@ -196,8 +196,8 @@ const Header = () => {
       title: "Contact"
     },
     {
-      path: "/products",
-      title: "Products"
+      path: "/shop",
+      title: "Shop"
     },
     {
       path: '/cart',
@@ -218,7 +218,7 @@ const Header = () => {
   ))
   const extLinks = 
     <>
-      <StyledLink as='a' href='https://www.byjack.com/collections/dark-ace' target='_blank' rel="noopener">Shop <ExtIcon /></StyledLink>
+      {/* <StyledLink as='a' href='https://www.byjack.com/collections/dark-ace' target='_blank' rel="noopener">Shop <ExtIcon /></StyledLink> */}
       <IconWrapper>
         <StyledLink as='a' href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' target='_blank' rel="noopener"><FbIcon /></StyledLink>
         <StyledLink as='a' href='https://www.instagram.com/darkaceapparel/' target='_blank' rel="noopener"><IgIcon /></StyledLink>
