@@ -119,14 +119,14 @@ const Product = ({node}) => {
           </Link>
         </ImgContainer>
         <div className='thumb-container'>
-          {/* <span>Colors</span> */}
           {thumbs}
         </div>
         <h3>
-          <Link to={`/product/${node.handle}`}>{node.title}</Link>
-          {" - "}{price}
+          <Link to={`/shop/${node.handle}`}>
+            {node.title}{" - "}{price}
+          </Link>
         </h3>
-        <p>{node.description}</p>
+        {/* <p>{node.description}</p> */}
       </ProductContainer>
   )
 }
