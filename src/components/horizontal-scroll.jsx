@@ -114,7 +114,7 @@ const Product = ({node}) => {
   return (
       <ProductContainer key={node.shopifyId}>
         <ImgContainer>
-          <Link to={`/product/${node.handle}`} >
+          <Link to={`/shop/${node.handle}`} >
               {images}
           </Link>
         </ImgContainer>

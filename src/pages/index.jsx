@@ -28,7 +28,15 @@ const Title = styled.h2`
 const ImgWrapper = styled.div`
   margin-top: 5vh;
   margin-bottom: 5vh;
-  width: 90%;
+  width: 100%;
+  align-self: center;
+`
+
+const Banner = styled.div`
+  // margin-top: 5vh;
+  margin-bottom: 5vh;
+  width: 100vw;
+  max-width: 1500px;
   align-self: center;
 `
 
@@ -39,14 +47,16 @@ const IndexPage = ({data}) => {
     <>
       <SEO title="Home" />
       <Container>
-        <ImgWrapper>
-          <Img fluid={data.file.childImageSharp.fluid} />
-        </ImgWrapper>
-        <Title>2020 Ledgestone Commercial</Title>
-        <Youtube style={{alignSelf: 'center'}} />
+        <Banner>
+          <Img fluid={data.parked.childImageSharp.fluid} />
+        </Banner>
         <Title>Pre-Order</Title>
         <HorizontalScroll products={products} />
-        <Slideshow />
+        <Title>2020 Ledgestone Commercial</Title>
+        <Youtube style={{alignSelf: 'center'}} />
+        <ImgWrapper>
+          <Img fluid={data.motto.childImageSharp.fluid} />
+        </ImgWrapper>
       </Container>
 
     </>
@@ -55,7 +65,14 @@ const IndexPage = ({data}) => {
 
 export const query = graphql`
 query {
-  file(relativePath: { eq: "motto.png" }) {
+   motto: file(relativePath: { eq: "motto.png" }) {
+    childImageSharp {
+      fluid(maxWidth: 1200) {
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+  parked: file(relativePath: { eq: "parked.png" }) {
     childImageSharp {
       fluid(maxWidth: 1200) {
         ...GatsbyImageSharpFluid

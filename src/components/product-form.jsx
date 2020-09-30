@@ -248,7 +248,7 @@ const ProductForm = ({ product, setImageFluid }) => {
           .
         </p>
       }
-        <StyledLink to='/products'>Continue Shopping</StyledLink>
+        <StyledLink to='/shop'>Continue Shopping</StyledLink>
     </Container>
   )
 }
