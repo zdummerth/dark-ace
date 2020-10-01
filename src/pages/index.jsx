@@ -68,6 +68,9 @@ const IndexPage = ({data}) => {
         <ImgWrapper>
           <Img fluid={data.motto.childImageSharp.fluid} />
         </ImgWrapper>
+        <Banner>
+          <Img fluid={data.mvp.childImageSharp.fluid} />
+        </Banner>
       </Container>
 
     </>
@@ -84,6 +87,13 @@ query {
     }
   }
   parked: file(relativePath: { eq: "parked.png" }) {
+    childImageSharp {
+      fluid(maxWidth: 1200) {
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+  mvp: file(relativePath: { eq: "mvp-banner.png" }) {
     childImageSharp {
       fluid(maxWidth: 1200) {
         ...GatsbyImageSharpFluid
