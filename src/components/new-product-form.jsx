@@ -312,7 +312,10 @@ const ProductForm = ({ product, setImageFluid }) => {
         :
         <p className='out-of-stock'>
           {`This Product is out of Stock! Please select another `}
-          {variant.selectedOptions.length === 1 ? variant.selectedOptions[0].name : `${variant.selectedOptions[0].name} or ${variant.selectedOptions[1].name}`}
+          {variant.selectedOptions.length === 1 ? 
+            variant.selectedOptions[0].name 
+            : 
+            `${variant.selectedOptions[0].name} or ${variant.selectedOptions[1].name}`}
           .
         </p>
       }
