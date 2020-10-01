@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
 
-import Slideshow from '../components/slideshow'
+// import Slideshow from '../components/slideshow'
 import HorizontalScroll from '../components/horizontal-scroll'
 import Youtube from '../components/youtube'
 
@@ -23,6 +23,7 @@ const Container = styled.div`
 const Title = styled.h2`
   text-align: center;
   font-size: 2rem;
+  margin-top: 60px;
 `
 
 const ImgWrapper = styled.div`
@@ -42,7 +43,15 @@ const Banner = styled.div`
 
 
 const IndexPage = ({data}) => {
-  const products = data.shopifyCollection.products
+
+  const preOrders = data.allShopifyCollection.edges
+  .find(({node}) =>  node.handle === 'pre-order')
+  .node.products
+
+  const standards = data.allShopifyCollection.edges
+  .find(({node}) =>  node.handle === 'standards')
+  .node.products
+
   return (
     <>
       <SEO title="Home" />
@@ -51,7 +60,9 @@ const IndexPage = ({data}) => {
           <Img fluid={data.parked.childImageSharp.fluid} />
         </Banner>
         <Title>Pre-Order</Title>
-        <HorizontalScroll products={products} />
+        <HorizontalScroll products={preOrders} />
+        <Title>Dark Ace Standards</Title>
+        <HorizontalScroll products={standards} />
         <Title>2020 Ledgestone Commercial</Title>
         <Youtube style={{alignSelf: 'center'}} />
         <ImgWrapper>
@@ -79,7 +90,9 @@ query {
       }
     }
   }
-  shopifyCollection(handle: {eq: "pre-order"}) {
+  allShopifyCollection {
+    edges {
+      node {
         handle 
         products {
           handle
@@ -115,6 +128,8 @@ query {
           }
         }
       }
+    }
+  }
 }
 `
 
