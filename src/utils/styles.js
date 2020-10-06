@@ -98,6 +98,8 @@ export const fonts = {
 
 export const dimensions = {
   headerHeight: '70px',
+  spotifyHeight: '80px',
+  footerHeight: '90px',
   cartWidthDesktop: '400px',
 
   pictureBrowserAction: {

@@ -5,7 +5,7 @@ import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 
 
 
-import { breakpoints, colors } from '../utils/styles';
+import { breakpoints, colors, dimensions } from '../utils/styles';
 
 
 const StyledFooter = styled('footer')`
@@ -14,7 +14,8 @@ const StyledFooter = styled('footer')`
   align-items: center;
   color: ${colors.brand};
   width: 100%;
-  padding: 0 2vh;
+  // padding: 0 2vh;
+  height: ${dimensions.footerHeight};
   // margin-top: 3vh;
   background-color: ${colors.background};
 

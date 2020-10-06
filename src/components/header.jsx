@@ -21,10 +21,11 @@ const GlobalStyle = createGlobalStyle`
 
 const HeaderWrapper = styled.header`
   background: #020202;
-  margin-bottom: 2px;
+  margin-bottom: 70px;
   width: 100%;
   border-bottom: 1px solid #C00A0A;
   font-weight: bold;
+
   @media (min-width: 900px) {
     font-size: .9rem;
   }
@@ -37,19 +38,28 @@ const Nav = styled.nav`
   height: ${dimensions.headerHeight}px;
   width: 100%;
   display: flex;
-  position: relative;
+  background: #020202;
+  // border-bottom: 1px solid #C00A0A;
+
+  // position: relative;
   justify-content: space-around;
   text-transform: uppercase;
   z-index: 50;
   // align-self: center;
   align-items: center;
 
+  position: fixed;
+  top: 0;
+  // left: 0;
+  // right: 0;
+  // left: 0;
+
   @media (max-width: ${breakpoints.tablet}px) {
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    left: 0;
+    // position: sticky;
+    // top: 0;
+    // left: 0;
+    // right: 0;
+    // left: 0;
   }
 `
 
@@ -159,9 +169,6 @@ const StyledLink = styled(Link)`
 const IconWrapper = styled.div`
   display: flex;
 
-  // @media (max-width: 900px) {
-  //   margin-top: 2rem;
-  // }
 `
 const FbIcon = styled(FaFacebookF)`
   font-size: 22px;
@@ -175,10 +182,7 @@ const IgIcon = styled(FaInstagram)`
     font-size: 28px;
   }
 `
-const ExtIcon = styled(FaExternalLinkAlt)`
-  font-size: 15px;
-  // margin-left: 5px;
-`
+
 const Header = () => {
   const {
     store: { checkout: { lineItems } },
