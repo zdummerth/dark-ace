@@ -5,8 +5,8 @@ require("dotenv").config({
 module.exports = {
     siteMetadata: {
         title: `Dark Ace Apparel`,
-        description: `A heavy metal disc golf apparel company`,
-        author: `Zach Dummerth`,
+        description: `Established in 2020, and hailing from St. Louis, MO, Dark Ace Apparel is a brand on a mission to merge the worlds of headbangers and chainbangers. PLAY DISC GOLF. LISTEN TO METAL.`,
+        author: `George Fiorini`,
     },
     plugins: [
         `gatsby-plugin-react-helmet`,
