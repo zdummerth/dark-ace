@@ -87,7 +87,9 @@ const ContactPage = ({data}) => {
                         <p>For sponsorships of any kind, custom artwork, or to share your favorite band, please send us an email :</p>
                         <p>DARKACEAPPAREL@GMAIL.COM</p>
                     </TextWrapper> */}
-                    <Form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdZjvFQX7fwsgPXiR7MXQqXPthMldADutfaimCZLpqL4i6L2A/formResponse">
+
+
+                    {/* <Form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdZjvFQX7fwsgPXiR7MXQqXPthMldADutfaimCZLpqL4i6L2A/formResponse">
                       <div className='input-wrapper'>
                         <label htmlFor="name">Name
                           <input name="entry.2005620554" type="text" id="name" />
@@ -113,8 +115,12 @@ const ContactPage = ({data}) => {
                         </label>
                       </div>
                       <Input type="submit" value="Send" />
-                    </Form>
+                    </Form> */}
+
+
                     <BasicForm />
+
+
                 </Overlay>
             </BgWrapper>
         </>

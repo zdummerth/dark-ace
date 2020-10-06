@@ -23,6 +23,7 @@
     "gatsby-source-shopify": "^3.2.26",
     "gatsby-transformer-remark": "^2.8.25",
     "gatsby-transformer-sharp": "^2.5.7",
+    "node-fetch": "^2.6.1",
     "node-sass": "^4.14.1",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
@@ -31,7 +32,8 @@
     "react-helmet": "^6.1.0",
     "react-icons": "^3.10.0",
     "shopify-buy": "^2.11.0",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "yup": "^0.29.3"
   },
   "devDependencies": {
     "prettier": "2.0.5"
