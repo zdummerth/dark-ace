@@ -1,35 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
 
 
-const submitData = async (values) => {
-    console.log({values})
-    
-    let result
-    try {
-        const response = await fetch('/.netlify/functions/submit-form', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-              },
-            body: JSON.stringify(values)
-        })
 
-        // result = JSON.parse(response)
-        console.log({response})
-        if(response.ok) {
-            alert("success")
-        // form successfully submitted
-        }
-        
-    } catch(err) {
-        console.log({err})
-        // handle error
-    }
-
-  };
 
 const StyledForm = styled(Form)`
     display: flex;
@@ -68,6 +43,7 @@ const StyledSelect = styled.select`
 
 const StyledErrorMessage = styled.div`
   font-size: 12px;
+  font-weight: bold;
   color: red;
   width: 400px;
 //   margin-top: 0.25rem;
@@ -128,8 +104,36 @@ const MySelect = ({ label, ...props }) => {
   );
 };
 
-// And now we can use these
+
 const BasicForm = () => {
+    const [ submitted, setSubmitted ] = useState(false)
+    const [ isSubmitting, setIsSubmitting ] = useState(false)
+
+
+    const submitData = async (values) => {
+        setIsSubmitting(true)
+        try {
+            const response = await fetch('/.netlify/functions/submit-form', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                  },
+                body: JSON.stringify(values)
+            })
+
+            if(response.ok) {
+                // form successfully submitted
+                setSubmitted(true)
+                setIsSubmitting(false)
+            }
+            
+        } catch(err) {
+            console.log({err})
+            alert('Error')
+            setIsSubmitting(false)
+        }
+    
+    };
   return (
     <>
       <Formik
@@ -143,58 +147,59 @@ const BasicForm = () => {
             name: Yup.string()
             .max(50, "Must be 50 characters or less")
             .required("Required"),
-            // email: Yup.string()
-            // .email("Invalid email addresss`")
-            // .required("Required"),
-            // subject: Yup.string()
-            // // @see http://bit.ly/yup-mixed-oneOf
-            // .oneOf(
-            //     ["wholesale", "shipping", "sponsorship", "other"],
-            //     "Invalid Subject"
-            // )
-            // .required("Required"),  
-            // message: Yup.string()
-            // .required("Required"),
+            email: Yup.string()
+            .email("Invalid email addresss`")
+            .required("Required"),
+            subject: Yup.string()
+            // @see http://bit.ly/yup-mixed-oneOf
+            .oneOf(
+                ["wholesale", "shipping", "sponsorship", "other"],
+                "Invalid Subject"
+            )
+            .required("Required"),  
+            message: Yup.string()
+            .required("Required"),
         })}
-        onSubmit={async (values, { setSubmitting, resetForm }) => {
-            submitData(values)
-            setTimeout(() => {
-                // alert(JSON.stringify(formData, null, 2));
-                // submitData(formData)
-                setSubmitting(false);
-              }, 400);
+        onSubmit={async (values, { resetForm }) => {
+            await submitData(values)
             resetForm();
         }}
       >
-        <StyledForm>
-          <MyTextInput
-            label="Name"
-            name="name"
-            type="text"
-            className='form-child'
-          />
-          <MyTextInput
-            label="Email Address"
-            name="email"
-            type="email"
-            className='form-child'
-          />
-          <MySelect label="Subject" name="subject" className='form-child'>
-            <option value="">Select a subject</option>
-            <option value="wholesale">Wholesale</option>
-            <option value="shipping">Shipping</option>
-            <option value="sponsorship">Sponsorship</option>
-            <option value="other">Other</option>
-          </MySelect>
-          <MyTextArea
-            label="Message"
-            name="message"
-            className='form-child'
-            rows='5'
-            cols='50'
-          />
-          <button type="submit">Submit</button>
-        </StyledForm>
+            <StyledForm>
+                {isSubmitting ? <p>Submitting...</p> : submitted ? 
+                    <p>Thank you for your message</p> 
+                    : 
+                    <>
+                        <MyTextInput
+                        label="Name"
+                        name="name"
+                        type="text"
+                        className='form-child'
+                        />
+                        <MyTextInput
+                        label="Email Address"
+                        name="email"
+                        type="email"
+                        className='form-child'
+                        />
+                        <MySelect label="Subject" name="subject" className='form-child'>
+                        <option value="">Select a subject</option>
+                        <option value="wholesale">Wholesale</option>
+                        <option value="shipping">Shipping</option>
+                        <option value="sponsorship">Sponsorship</option>
+                        <option value="other">Other</option>
+                        </MySelect>
+                        <MyTextArea
+                        label="Message"
+                        name="message"
+                        className='form-child'
+                        rows='5'
+                        cols='50'
+                        />
+                        <button type="submit">Submit</button>
+                    </>
+                }
+            </StyledForm>
       </Formik>
     </>
   );

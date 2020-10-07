@@ -3,7 +3,6 @@ import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
-// import Layout from '../components/layout'
 import SEO from '../components/seo'
 import BasicForm from '../components/form'
 
@@ -18,18 +17,8 @@ const Overlay = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0,0,0,.5);
-`
-const TextWrapper = styled.div`
-    text-align: center;
-    // padding-top: 20vh;
-    margin: 20vh auto 0;
-    width: 90%;
-
-    @media (min-width: 500px) {
-        font-size: 1.5rem;;
-      }
-
+  background: rgba(0,0,0,.8);
+  text-align: center;
 `
 
 const ContactPage = ({data}) => {
@@ -42,16 +31,12 @@ const ContactPage = ({data}) => {
                     alt={'bone basket background'}
                     style={{
                         //Not exactly sure how this works, but this makes the image appear bigger and more center on smaller screens
-                        paddingTop: '100px',
+                        // paddingTop: '100px',
                     }}
                 />
                 <Overlay>
-                    {/* <TextWrapper>
-                        <p>For sponsorships of any kind, custom artwork, or to share your favorite band, please send us an email :</p>
-                        <p>DARKACEAPPAREL@GMAIL.COM</p>
-                    </TextWrapper> */}
-
-                    <BasicForm />
+                  <h1>Contact Us</h1>
+                  <BasicForm />
                 </Overlay>
             </BgWrapper>
         </>
