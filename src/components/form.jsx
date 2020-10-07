@@ -1,9 +1,15 @@
-import React, { useState } from "react";
-import { Formik, Form, useField } from "formik";
-import * as Yup from "yup";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import { Link } from 'gatsby'
+import { Formik, Form, useField } from 'formik';
+import * as Yup from 'yup';
+import styled from 'styled-components';
+
+import { breakpoints, colors } from '../utils/styles';
 
 
+// const Container = styled.div`
+
+// `
 
 
 const StyledForm = styled(Form)`
@@ -11,7 +17,7 @@ const StyledForm = styled(Form)`
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    height: 100%;
+    height: 80%;
     max-height: 500px;
     width: 90%;
     max-width: 600px;
@@ -23,22 +29,35 @@ const StyledForm = styled(Form)`
     width: 90%;
     }
 
+    label {
+        align-self: flex-start;
+    }
+
     .error {
         font-size: 12px;
         color: red;
         width: 400px;
-      //   margin-top: 0.25rem;
         &:before {
           content: "❌ ";
           font-size: 10px;
         }
     }
 
+    #submit-button {
+        font-family: inherit;
+        border: 0;
+        background: ${colors.brand};
+        color: ${colors.lightest};
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 90px;
+    }
+
 `
 
 // Styled components ....
 const StyledSelect = styled.select`
-//   color: var(--blue);
+
 `;
 
 const StyledErrorMessage = styled.div`
@@ -46,7 +65,7 @@ const StyledErrorMessage = styled.div`
   font-weight: bold;
   color: red;
   width: 400px;
-//   margin-top: 0.25rem;
+  margin-top: 0.25rem;
   &:before {
     content: "❌ ";
     font-size: 10px;
@@ -54,9 +73,6 @@ const StyledErrorMessage = styled.div`
 
 `;
 
-const StyledLabel = styled.label`
-//   margin-top: 1rem;
-`;
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -95,7 +111,7 @@ const MySelect = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <>
-      <StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel>
+      <label htmlFor={props.id || props.name}>{label}</label>
       <StyledSelect {...field} {...props} />
       {meta.touched && meta.error ? (
         <StyledErrorMessage>{meta.error}</StyledErrorMessage>
@@ -104,10 +120,31 @@ const MySelect = ({ label, ...props }) => {
   );
 };
 
+const ErrorMessage = () => {
+    return (
+        <div>
+            <p>There was an error submitting your message.</p>
+            <p>Please refresh the the page and try again or email us at</p>
+            <p>DARKACEAPPAREL@GMAIL.COM</p>
+        </div>
+    )
+}
+
+const SuccessMessage = () => {
+    return (
+        <div>
+            <p>Thank you for your message.</p>
+            <p>We will get back to you as soon as possible</p>
+            <Link to='/shop'>See the shop</Link>
+        </div>
+    )
+}
+
 
 const BasicForm = () => {
     const [ submitted, setSubmitted ] = useState(false)
     const [ isSubmitting, setIsSubmitting ] = useState(false)
+    const [ isError, setIsError ] = useState(false)
 
 
     const submitData = async (values) => {
@@ -121,15 +158,11 @@ const BasicForm = () => {
                 body: JSON.stringify(values)
             })
 
-            if(response.ok) {
-                // form successfully submitted
-                setSubmitted(true)
-                setIsSubmitting(false)
-            }
-            
+            response.ok ? setSubmitted(true) : setIsError(true)
+            setIsSubmitting(false)
+   
         } catch(err) {
-            console.log({err})
-            alert('Error')
+            setIsError(true)
             setIsSubmitting(false)
         }
     
@@ -166,8 +199,7 @@ const BasicForm = () => {
         }}
       >
             <StyledForm>
-                {isSubmitting ? <p>Submitting...</p> : submitted ? 
-                    <p>Thank you for your message</p> 
+                {isError ? <ErrorMessage /> : isSubmitting ? <p>Submitting...</p> : submitted ? <SuccessMessage /> 
                     : 
                     <>
                         <MyTextInput
@@ -196,7 +228,7 @@ const BasicForm = () => {
                         rows='5'
                         cols='50'
                         />
-                        <button type="submit">Submit</button>
+                        <button type='submit' id='submit-button'>Submit</button>
                     </>
                 }
             </StyledForm>

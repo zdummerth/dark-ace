@@ -33,8 +33,8 @@ const Wrapper = styled.div`
 const ContentWrapper = styled.main`
   flex: 1;
   position: relative;
-  width: 100vw;
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1300px;
   margin: 0 auto;
 `
 

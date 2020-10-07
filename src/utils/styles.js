@@ -9,8 +9,6 @@ import { keyframes } from '@emotion/core';
  *    border-color: ${colors.brand}40;
  */
 export const colors = {
-  brandDarker: '#221133',
-  brandDark: '#442266',
   brand: '#C00A0A',
   brandBright: '#e0d6eb',
   brandLight: '#f5f3f7',

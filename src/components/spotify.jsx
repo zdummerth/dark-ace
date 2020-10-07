@@ -5,7 +5,7 @@ import { FiArrowDown, FiArrowUp } from 'react-icons/fi';
 const Container = styled.div`
   width: 100%;
   max-width: 500px;
-  margin-bottom: 3vh;
+  // margin-bottom: 3vh;
 `
 const Toggle = styled.div`
   width: 100%;
