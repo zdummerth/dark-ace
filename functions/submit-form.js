@@ -30,6 +30,7 @@ exports.handler = async event => {
 
     console.log('response', response.status)
   
+    //still need to do error handling
     return {
       statusCode: response.status,
       body: 'FUck YEak',
