@@ -5,6 +5,8 @@ import styled from 'styled-components'
 
 // import Layout from '../components/layout'
 import SEO from '../components/seo'
+import BasicForm from '../components/form'
+
 
 const BgWrapper = styled.div`
     position: relative;
@@ -44,10 +46,12 @@ const ContactPage = ({data}) => {
                     }}
                 />
                 <Overlay>
-                    <TextWrapper>
+                    {/* <TextWrapper>
                         <p>For sponsorships of any kind, custom artwork, or to share your favorite band, please send us an email :</p>
                         <p>DARKACEAPPAREL@GMAIL.COM</p>
-                    </TextWrapper>
+                    </TextWrapper> */}
+
+                    <BasicForm />
                 </Overlay>
             </BgWrapper>
         </>
