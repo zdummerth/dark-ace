@@ -22,14 +22,11 @@ const GlobalStyle = createGlobalStyle`
 const HeaderWrapper = styled.header`
   margin-bottom: 2px;
   width: 100%;
-  border-bottom: 1px solid #C00A0A;
+  border-bottom: 1px solid ${colors.brand};
   font-weight: bold;
 
-  @media (min-width: 900px) {
-    font-size: .9rem;
-  }
 
-  @media (min-width: 1000px) {
+  @media (min-width: ${breakpoints.desktop}) {
     font-size: 1rem;
   }
 `
@@ -87,7 +84,7 @@ const Navbox = styled.div`
 `
 
 const Hamburger = styled.div`
-  background-color: #C00A0A;
+  background-color: ${colors.brand};
   width: 30px;
   height: 3px;
   transition: all .3s linear;
@@ -99,7 +96,7 @@ const Hamburger = styled.div`
   ::after {
     width: 30px;
     height: 3px;
-    background-color: #C00A0A;
+    background-color: ${colors.brand};
     content: "";
     position: absolute;
     transition: all 0.3s linear;
@@ -137,13 +134,13 @@ const StyledLink = styled(Link)`
     width: 0%;
     content: ".";
     color: transparent;
-    background: #C00A0A;
+    background: ${colors.brand};
     height: 1px;
     transition: all 0.4s ease-in;
   }
 
   :hover {
-    color: #C00A0A;
+    color: ${colors.brand};
     ::after {
       width: 100%;
     }
@@ -207,14 +204,15 @@ const Header = () => {
   const [navbarClosed, setNavbarClosed] = useState(true);
   
   const links = MenuItems.map((menuItem, index) => (
-  <StyledLink
-    key={index} 
-    to={menuItem.path}
-    onClick={() => setNavbarClosed(true)}
-  >
-    {menuItem.title}
-  </StyledLink>
+    <StyledLink
+      key={index} 
+      to={menuItem.path}
+      onClick={() => setNavbarClosed(true)}
+    >
+      {menuItem.title}
+    </StyledLink>
   ))
+
   const extLinks = 
     <>
       <IconWrapper>

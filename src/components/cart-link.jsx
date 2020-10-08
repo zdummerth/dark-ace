@@ -10,12 +10,12 @@ import { breakpoints } from '../utils/styles';
 
 
 const StyledLink = styled(Link)`
-  display: flex;
-  align-items: center;
-  color: #C00A0A;
+  display: none;
 
-  @media (min-width: ${breakpoints.desktop}) {
-    display: none;
+  @media (max-width: ${breakpoints.desktop}) {
+    display: flex;
+    align-items: center;
+    color: #C00A0A;
   }
 `
 

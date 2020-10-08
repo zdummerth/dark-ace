@@ -3,27 +3,26 @@ import { Link } from "gatsby"
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
-import { breakpoints } from '../utils/styles';
+import { breakpoints, colors } from '../utils/styles';
 
 
 const Container = styled.div`
-  display: flex;
-  overflow-x: auto;
+  display: grid;
+  align-items: center;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  width: 100%;
   color: white;
-  width: 95%;
-  margin: 0 auto;
 
   & > * {
-      border-bottom: 1px solid #C00A0A;
-    }
+    border-bottom: 1px solid ${colors.brand};
   }
 
-  @media (min-width: ${breakpoints.desktop}px) {
-    display: grid;
-    align-items: center;
-    grid-gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    width: 100%;
+  @media (max-width: ${breakpoints.tablet}) {
+    display: flex;
+    overflow-x: auto;
+    width: 95%;
+    margin: 0 auto;
   }
 `
 
@@ -36,6 +35,7 @@ const ProductContainer = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 5px;
+
     & > * {
       position: relative;
       margin-right: 8px;
@@ -50,7 +50,7 @@ const ImgContainer = styled.div`
   position: relative;
   height: 40vh;
 
-  @media (max-width: 1000px) {
+  @media (max-width: ${breakpoints.tablet}) {
     width: 70vw;
     max-width: 400px;
   }
@@ -77,7 +77,6 @@ const Product = ({node}) => {
         width: '100%',
         height: '100%',
         left: '0',
-        // zIndex: `${index === ind ? '1' : '-10'}`,
         opacity: `${index === ind ? '1' : '0'}`,
         transition: 'opacity .19s ease-in', 
       }}
