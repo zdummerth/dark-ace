@@ -18,7 +18,7 @@ const BgWrapper = styled.div`
 const Overlay = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   position: absolute;
   top: 0;
   right: 0;
@@ -28,28 +28,14 @@ const Overlay = styled.div`
   text-align: center;
 `
 
-const Banner = styled.div`
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1500px;
-`
-
 const ContactPage = ({data}) => {
     return (
       <>
         <SEO title='Contact' />
-        {/* <Banner>
-          <Img fluid={data.mvp.childImageSharp.fluid} />
-        </Banner> */}
         <BgWrapper>
             <Img 
                 fluid={data.boneBasket.childImageSharp.fluid} 
                 alt={'bone basket background'}
-                style={{
-                    //Not exactly sure how this works, but this makes the image appear bigger and more center on smaller screens
-                    // paddingTop: '100px',
-                    // height: '66vh'
-                }}
                 imgStyle={{
                   objectFit: 'contain'
                 }}
@@ -66,20 +52,6 @@ const ContactPage = ({data}) => {
 export const query = graphql`
 query {
   boneBasket: file(relativePath: { eq: "bone-basket.jpg" }) {
-    childImageSharp {
-      fluid(maxWidth: 1000) {
-        ...GatsbyImageSharpFluid
-      }
-    }
-  }
-  mvp: file(relativePath: { eq: "mvp.png" }) {
-    childImageSharp {
-      fluid(maxWidth: 1000) {
-        ...GatsbyImageSharpFluid
-      }
-    }
-  }
-  skullHill: file(relativePath: { eq: "skull-hill.jpg" }) {
     childImageSharp {
       fluid(maxWidth: 1000) {
         ...GatsbyImageSharpFluid

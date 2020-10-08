@@ -26,18 +26,6 @@ export const colors = {
   background: '#262626'
 };
 
-export const badgeThemes = {
-  BUILDWITHGATSBY: {
-    level: 1,
-    backgroundTheme: colors.brand,
-    textTheme: colors.lemon
-  },
-  HOLYBUCKETS: {
-    level: 2,
-    backgroundTheme: colors.lemon,
-    textTheme: colors.brandDark
-  }
-};
 
 export const spacing = {
   '3xs': 2,
@@ -52,11 +40,11 @@ export const spacing = {
 };
 
 export const breakpoints = {
-  mobile: 400,
-  phablet: 550,
-  tablet: 750,
-  desktop: 1000,
-  hd: 1300
+  mobile: '400px',
+  phablet: '550px',
+  tablet: '750px',
+  desktop: '1000px',
+  hd: '1300px'
 };
 
 export const radius = {

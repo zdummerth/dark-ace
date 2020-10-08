@@ -5,13 +5,16 @@ import { RiShoppingCartLine } from 'react-icons/ri';
 
 import { StoreContext } from '../context/StoreContextProvider'
 
+import { breakpoints } from '../utils/styles';
+
+
 
 const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
   color: #C00A0A;
 
-  @media (min-width: 900px) {
+  @media (min-width: ${breakpoints.desktop}) {
     display: none;
   }
 `
