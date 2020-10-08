@@ -9,6 +9,7 @@ import { breakpoints, colors } from '../utils/styles';
 const Container = styled.div`
   display: flex;
   overflow-x: auto;
+  justify-content: space-evenly;
   color: white;
   width: 95%;
   margin: 0 auto;
@@ -18,17 +19,15 @@ const Container = styled.div`
   }
 
   @media (min-width: ${breakpoints.desktop}) {
-    display: grid;
-    align-items: center;
-    grid-row-gap: 3rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    width: 100%;
+    overflow-x: hidden;
+    flex-wrap: wrap;
   }
 `
 
 const ProductContainer = styled.div`
-  flex: 1 1 70vw;
-  margin: 0 1rem;
+  margin: 2rem 1rem;
+  width: 60vw;
+  max-width: 300px;
   text-align: center; 
   .thumb-container {
     display: flex;
@@ -48,11 +47,9 @@ const ProductContainer = styled.div`
 const ImageLink = styled(Link)`
   position: relative;
   height: 40vh;
+  width: inherit;
+  max-width: inherit;
   display: block;
-  @media (max-width: ${breakpoints.desktop}) {
-    width: 70vw;
-    max-width: 320px;
-  }
 `
 
 const Product = ({node}) => {
