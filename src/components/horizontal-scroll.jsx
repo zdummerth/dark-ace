@@ -7,35 +7,34 @@ import { breakpoints, colors } from '../utils/styles';
 
 
 const Container = styled.div`
-  display: grid;
-  align-items: center;
-  grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  width: 100%;
+  display: flex;
+  overflow-x: auto;
   color: white;
-
+  width: 95%;
+  margin: 0 auto;
   & > * {
-    border-bottom: 1px solid ${colors.brand};
+      border-bottom: 1px solid ${colors.brand};
+    }
   }
 
-  @media (max-width: ${breakpoints.tablet}) {
-    display: flex;
-    overflow-x: auto;
-    width: 95%;
-    margin: 0 auto;
+  @media (min-width: ${breakpoints.desktop}) {
+    display: grid;
+    align-items: center;
+    grid-row-gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    width: 100%;
   }
 `
 
 const ProductContainer = styled.div`
+  flex: 1 1 70vw;
   margin: 0 1rem;
   text-align: center; 
-
   .thumb-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 5px;
-
     & > * {
       position: relative;
       margin-right: 8px;
@@ -46,15 +45,14 @@ const ProductContainer = styled.div`
   }
 `
 
-const ImgContainer = styled.div`
+const ImageLink = styled(Link)`
   position: relative;
   height: 40vh;
-
-  @media (max-width: ${breakpoints.tablet}) {
+  display: block;
+  @media (max-width: ${breakpoints.desktop}) {
     width: 70vw;
-    max-width: 400px;
+    max-width: 320px;
   }
-
 `
 
 const Product = ({node}) => {
@@ -112,11 +110,9 @@ const Product = ({node}) => {
 
   return (
       <ProductContainer key={node.shopifyId}>
-        <ImgContainer>
-          <Link to={`/shop/${node.handle}`} >
+          <ImageLink to={`/shop/${node.handle}`} >
               {images}
-          </Link>
-        </ImgContainer>
+          </ImageLink>
         <div className='thumb-container'>
           {thumbs}
         </div>
@@ -125,7 +121,6 @@ const Product = ({node}) => {
             {node.title}{" - "}{price}
           </Link>
         </h3>
-        {/* <p>{node.description}</p> */}
       </ProductContainer>
   )
 }
@@ -150,3 +145,4 @@ const ProductHorizontal = ({ products }) => {
 }
 
 export default ProductHorizontal
+
