@@ -33,7 +33,7 @@ const ProductContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5px;
+    margin-top: 4px;
     & > * {
       position: relative;
       margin-right: 8px;
