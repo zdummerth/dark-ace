@@ -53,7 +53,7 @@ const Thumbnail = styled.button`
 `
 
 const ImgLink = styled(Link)`
-  display: block;
+  display: ${props => props.visible ? 'block' : 'none'};
   overflow: hidden;
   position: relative;
 
@@ -79,31 +79,24 @@ const Product = ({node}) => {
     style: 'currency',
   }).format(node.priceRange.minVariantPrice.amount)
 
-//   const images = node.images.map((variant, ind) => (
-//         <ImgLink
-//             to={`/shop/${node.handle}`}
-//             visible={index === ind}
-//         >
-//             <Img 
-//                 fluid={variant.localFile.childImageSharp.fluid} 
-//                 alt={node.title}
-//             />
-//         </ImgLink>
-//   ))
+  const images = node.images.map((variant, ind) => (
+        <ImgLink
+            to={`/shop/${node.handle}`}
+            visible={index === ind}
+        >
+            <Img 
+                fluid={variant.localFile.childImageSharp.fluid} 
+                alt={node.title}
+            />
+        </ImgLink>
+  ))
 
   const fluid = node.images[index].localFile.childImageSharp.fluid
 
   return (
       <ProductContainer key={node.shopifyId}>
         <ImgContainer>
-        <ImgLink
-            to={`/shop/${node.handle}`}
-        >
-            <Img 
-                fluid={fluid} 
-                alt={node.title}
-            />
-        </ImgLink>
+            {images}
         </ImgContainer>
         <ThumbnailContainer>
           {node.thumbs.map((variant, ind) => (
