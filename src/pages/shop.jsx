@@ -3,6 +3,8 @@ import { graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import HorizontalScroll from '../components/horizontal-scroll'
+import ProductListing from '../components/ProductListing'
+
 
 
 const Title = styled.h2`
@@ -26,10 +28,10 @@ const ProductsPage = ({ data }) => {
   return (
     <>
       <Title>Pre-Order</Title>
-      <HorizontalScroll products={preOrders} />
+      <ProductListing products={preOrders} />
       <div style={{height: '2.5rem'}}></div>
       <Title>Dark Ace Standards</Title>
-      <HorizontalScroll products={standards} />
+      <ProductListing products={standards} />
     </>
   )
 }

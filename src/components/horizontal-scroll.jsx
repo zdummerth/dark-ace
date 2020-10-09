@@ -10,7 +10,6 @@ const Container = styled.div`
   display: flex;
   overflow-x: auto;
   justify-content: space-evenly;
-  color: white;
   width: 95%;
   margin: 0 auto;
   & > * {
@@ -25,15 +24,13 @@ const Container = styled.div`
 `
 
 const ProductContainer = styled.div`
-  margin: 2rem 1rem;
-  width: 60vw;
-  max-width: 300px;
+  margin: 0 1rem;
   text-align: center; 
   .thumb-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 4px;
+    margin-top: 5px;
     & > * {
       position: relative;
       margin-right: 8px;
@@ -47,9 +44,9 @@ const ProductContainer = styled.div`
 const ImageLink = styled(Link)`
   position: relative;
   height: 40vh;
-  width: inherit;
-  max-width: inherit;
-  display: block;
+  dsiplay: block;
+  width: 70vw;
+  max-width: 400px;
 `
 
 const Product = ({node}) => {
