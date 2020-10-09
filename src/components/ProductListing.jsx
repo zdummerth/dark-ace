@@ -54,6 +54,21 @@ const Thumbnail = styled.button`
 
 const ImgLink = styled(Link)`
   display: ${props => (props.visible ? "block" : "none")};
+
+  overflow: hidden;
+  position: relative;
+
+  .gatsby-image-wrapper {
+    transition: all 250ms;
+  }
+
+  @media (hover: hover) {
+    ${ImgContainer}:hover & {
+      .gatsby-image-wrapper {
+        transform: scale(1.1);
+      }
+    }
+  }
 `
 
 const Product = ({node}) => {
