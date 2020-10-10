@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
 
@@ -8,9 +8,11 @@ import SEO from "../components/seo"
 
 const Container = styled.div`
   width: 100%;
-  max-width: 1000px;
+  max-width: 800px;
   margin-right: auto;
   margin-left: auto;
+  text-align: center;
+  font-size: 2rem;
 `
 
 
@@ -26,6 +28,9 @@ const Wholesale = ({data}) => {
           <Img fluid={data.four.childImageSharp.fluid} />
           <Img fluid={data.five.childImageSharp.fluid} />
           <Img fluid={data.six.childImageSharp.fluid} />
+          <Link to='/contact'>
+            <p>Contact us for more information</p>
+          </Link>
       </Container>
 
     </>

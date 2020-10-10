@@ -27,6 +27,11 @@ const StyledForm = styled(Form)`
     .form-child {
     display: block;
     width: 90%;
+    background: rgba(0,0,0,.7);
+    border: 1px solid white;
+    color: white;
+    padding: 8px;
+    font-weight: bold;
     }
 
     label {

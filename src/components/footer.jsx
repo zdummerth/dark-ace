@@ -16,7 +16,7 @@ const StyledFooter = styled('footer')`
   width: 100%;
   padding: 0 2vh;
   margin-top: 3vh;
-  background-color: ${colors.background};
+  background-color: ${colors.grayBackground};
 
   @media (max-width: ${breakpoints.desktop}px) {
     flex-direction: column;

@@ -43,14 +43,6 @@ const Nav = styled.nav`
   text-transform: uppercase;
   z-index: 50;
   align-items: center;
-
-  @media (max-width: ${breakpoints.desktop}) {
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    left: 0;
-  }
 `
 
 const Toggle = styled.div`
@@ -126,6 +118,7 @@ const StyledLink = styled(Link)`
   white-space: nowrap;
   color: white;
   margin: 1rem;
+  outline: 0;
   transition: all 200ms ease-in;
   position: relative;
 
