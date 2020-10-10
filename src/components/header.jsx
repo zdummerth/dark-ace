@@ -22,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
 const HeaderWrapper = styled.header`
   margin-bottom: 2px;
   width: 100%;
-  border-bottom: 1px solid ${colors.brand};
+  // border-bottom: 1px solid ${colors.brand};
   font-weight: bold;
 
 
@@ -35,7 +35,10 @@ const Nav = styled.nav`
   height: ${dimensions.headerHeight};
   width: 100%;
   display: flex;
-  position: relative;
+  position: fixed;
+  background: ${colors.background};
+  border-bottom: 1px solid ${colors.brand};
+  top: 0;
   justify-content: space-around;
   text-transform: uppercase;
   z-index: 50;

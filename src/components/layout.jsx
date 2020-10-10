@@ -7,6 +7,7 @@ import Header from './header'
 import Footer from './footer'
 import Spotify from './spotify'
 
+// import { breakpoints, dimensions, colors } from '../utils/styles';
 
 import 'normalize.css';
 
@@ -56,7 +57,9 @@ const Layout = ({ children }) => {
       <Wrapper>
         <Header siteTitle={data.site.siteMetadata.title} />
         <Spotify />
-        <ContentWrapper>{children}</ContentWrapper>
+        <ContentWrapper>
+          {children}
+        </ContentWrapper>
         <Footer />
       </Wrapper>
     </>

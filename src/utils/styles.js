@@ -23,7 +23,8 @@ export const colors = {
   accent: `#ffb238`,
   error: `#ec1818`,
   lemon: `#ffdf37`,
-  background: '#262626'
+  grayBackground: '#262626',
+  background: '#020202'
 };
 
 
