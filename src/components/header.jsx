@@ -184,16 +184,20 @@ const Header = () => {
 
   const MenuItems = [
     {
-      path: "/",
-      title: "Home"
+      path: '/',
+      title: 'Home'
     },
     {
-      path: "/contact",
-      title: "Contact"
+      path: '/contact',
+      title: 'Contact'
     },
     {
-      path: "/shop",
-      title: "Shop"
+      path: '/shop',
+      title: 'Shop'
+    },
+    {
+      path: '/wholesale',
+      title: 'Wholesale'
     },
     {
       path: '/cart',

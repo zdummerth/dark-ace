@@ -3,8 +3,6 @@ import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
 
-// import Slideshow from '../components/slideshow'
-import HorizontalScroll from '../components/horizontal-scroll'
 import ProductListing from '../components/ProductListing'
 import Youtube from '../components/youtube'
 
@@ -61,10 +59,9 @@ const IndexPage = ({data}) => {
           <Img fluid={data.parked.childImageSharp.fluid} />
         </Banner>
         <Title>Pre-Order</Title>
-        {/* <HorizontalScroll products={preOrders} /> */}
         <ProductListing products={preOrders} />
         <Title>Dark Ace Standards</Title>
-        <HorizontalScroll products={standards} />
+        <ProductListing products={standards} />
         <Title>2020 Ledgestone Commercial</Title>
         <Youtube style={{alignSelf: 'center'}} />
         <ImgWrapper>
