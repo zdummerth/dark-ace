@@ -37,6 +37,7 @@ const Thumbnail = styled.button`
     width: 48px;
     height: 60px;
     border: none;
+    outline: 0;
     background: none;
 `
 
@@ -87,10 +88,10 @@ const ProductListingItem = ({ product }) => {
         <ThumbnailContainer>
           {product.thumbs.map((variant, ind) => (
             <Thumbnail onClick={() => setIndex(ind)}>
-            <Img 
-                fixed={variant.localFile.childImageSharp.fixed} 
-                alt={product.title}
-            />
+              <Img 
+                  fixed={variant.localFile.childImageSharp.fixed} 
+                  alt={product.title}
+              />
             </Thumbnail>
         ))}
         </ThumbnailContainer>
