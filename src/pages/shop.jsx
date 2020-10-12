@@ -2,9 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 
-import HorizontalScroll from '../components/horizontal-scroll'
-import ProductListing from '../components/ProductListing'
-
+import ProductListing from '../components/products/product-listing'
 
 
 const Title = styled.h2`
@@ -20,8 +18,8 @@ const ProductsPage = ({ data }) => {
                   .node.products
 
   const standards = data.allShopifyCollection.edges
-  .find(({node}) =>  node.handle === 'standards')
-  .node.products
+                  .find(({node}) =>  node.handle === 'standards')
+                  .node.products
 
 
   

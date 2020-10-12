@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { Link } from 'gatsby'
 import { RiShoppingCartLine } from 'react-icons/ri';
 
-import { StoreContext } from '../context/StoreContextProvider'
+import { StoreContext } from '../../context/StoreContextProvider'
 
-import { breakpoints } from '../utils/styles';
+import { breakpoints } from '../../utils/styles';
 
 
 

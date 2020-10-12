@@ -3,20 +3,8 @@ import { Link } from "gatsby"
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
-import { breakpoints, colors } from '../utils/styles';
+import { breakpoints, colors } from '../../utils/styles';
 
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  @media (max-width: ${breakpoints.desktop}) {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow-x: auto;
-  }
-`
 
 const ProductContainer = styled.div`
   margin: 2rem 1rem;
@@ -70,59 +58,49 @@ const ImgLink = styled(Link)`
   }
 `
 
-const Product = ({node}) => {
+const ProductListingItem = ({ product }) => {
   const [index, setIndex] = useState(0);
 
   const price = Intl.NumberFormat(undefined, {
-    currency: node.priceRange.minVariantPrice.currencyCode,
+    currency: product.priceRange.minVariantPrice.currencyCode,
     minimumFractionDigits: 2,
     style: 'currency',
-  }).format(node.priceRange.minVariantPrice.amount)
+  }).format(product.priceRange.minVariantPrice.amount)
 
-  const images = node.images.map((variant, ind) => (
+  const images = product.images.map((variant, ind) => (
         <ImgLink
-            to={`/shop/${node.handle}`}
+            to={`/shop/${product.handle}`}
             visible={index === ind}
         >
             <Img 
                 fluid={variant.localFile.childImageSharp.fluid} 
-                alt={node.title}
+                alt={product.title}
             />
         </ImgLink>
   ))
 
-  const fluid = node.images[index].localFile.childImageSharp.fluid
-
   return (
-      <ProductContainer key={node.shopifyId}>
+      <ProductContainer key={product.shopifyId}>
         <ImgContainer>
             {images}
         </ImgContainer>
         <ThumbnailContainer>
-          {node.thumbs.map((variant, ind) => (
+          {product.thumbs.map((variant, ind) => (
             <Thumbnail onClick={() => setIndex(ind)}>
             <Img 
                 fixed={variant.localFile.childImageSharp.fixed} 
-                alt={node.title}
+                alt={product.title}
             />
             </Thumbnail>
         ))}
         </ThumbnailContainer>
-        <Link to={`/shop/${node.handle}`}>
-          <h3>{node.title}{" - "}{price}</h3>
+        <Link to={`/shop/${product.handle}`}>
+          <h3>{product.title}{" - "}{price}</h3>
         </Link>
       </ProductContainer>
   )
 }
 
 
-const ProductListing = ({ products }) => {
-  return (
-    <Container>
-        {products.map(node => <Product node={node} />)}
-    </Container>
-  )
-}
-
-export default ProductListing
+export default ProductListingItem
 

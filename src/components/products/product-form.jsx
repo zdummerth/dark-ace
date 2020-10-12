@@ -9,9 +9,9 @@ import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { AiOutlineMinusCircle } from 'react-icons/ai';
 
 
-import { usePrevious } from '../hooks/use-previous'
+import { usePrevious } from '../../hooks/use-previous'
 
-import { StoreContext } from '../context/StoreContextProvider'
+import { StoreContext } from '../../context/StoreContextProvider'
 
 const Plus = styled(AiOutlinePlusCircle)`
     // color: white;

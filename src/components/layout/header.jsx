@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import React, { useState, useContext } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
-import { StoreContext } from '../context/StoreContextProvider'
+import { StoreContext } from '../../context/StoreContextProvider'
 
-import { breakpoints, dimensions, colors } from '../utils/styles';
+import { breakpoints, dimensions, colors } from '../../utils/styles';
 
 import Logo from "./logo"
 
-import CartLink from './cart-link'
+import CartLink from '../cart/cart-link'
 
 
 const GlobalStyle = createGlobalStyle`
@@ -22,7 +22,6 @@ const GlobalStyle = createGlobalStyle`
 const HeaderWrapper = styled.header`
   margin-bottom: 2px;
   width: 100%;
-  // border-bottom: 1px solid ${colors.brand};
   font-weight: bold;
 
 

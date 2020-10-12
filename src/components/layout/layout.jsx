@@ -5,9 +5,8 @@ import styled, { createGlobalStyle } from "styled-components"
 
 import Header from './header'
 import Footer from './footer'
-import Spotify from './spotify'
+import Spotify from '../spotify'
 
-// import { breakpoints, dimensions, colors } from '../utils/styles';
 
 import 'normalize.css';
 

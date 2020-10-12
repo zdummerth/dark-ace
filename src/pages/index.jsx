@@ -1,9 +1,10 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
+import { FiExternalLink } from 'react-icons/fi';
 
-import ProductListing from '../components/ProductListing'
+import ProductListing from '../components/products/product-listing'
 import Youtube from '../components/youtube'
 
 import SEO from "../components/seo"
@@ -11,11 +12,15 @@ import SEO from "../components/seo"
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  // align-items: center;
   width: 100%;
 
    & > * {
      margin-top: 1.5rem;
+   }
+
+   .bunker-link {
+     font-size: 1rem;
+     align-self: center;
    }
 `
 
@@ -33,7 +38,6 @@ const ImgWrapper = styled.div`
 `
 
 const Banner = styled.div`
-  // margin-top: 5vh;
   margin-bottom: 5vh;
   width: 100vw;
   max-width: 1500px;
@@ -65,6 +69,15 @@ const IndexPage = ({data}) => {
         <Title>2020 Ledgestone Commercial</Title>
         <Youtube style={{alignSelf: 'center'}} />
         <ImgWrapper>
+          <Img fluid={data.bunkerBaby.childImageSharp.fluid} />
+        </ImgWrapper>
+        <Link 
+          as='a' 
+          href="https://www.discgolfscene.com/tournaments/Revenge_Of_The_Bunker_Baby_A_Halloween_Doubles_Tournament_2020" 
+          className='bunker-link'>
+            Click here to register on disc golf scene <FiExternalLink />
+          </Link>
+        <ImgWrapper>
           <Img fluid={data.motto.childImageSharp.fluid} />
         </ImgWrapper>
       </Container>
@@ -83,6 +96,13 @@ query {
     }
   }
   parked: file(relativePath: { eq: "parked.png" }) {
+    childImageSharp {
+      fluid(maxWidth: 1200) {
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+  bunkerBaby: file(relativePath: { eq: "bunker-baby.png" }) {
     childImageSharp {
       fluid(maxWidth: 1200) {
         ...GatsbyImageSharpFluid

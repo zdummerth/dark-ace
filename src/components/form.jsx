@@ -4,12 +4,7 @@ import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
 
-import { breakpoints, colors } from '../utils/styles';
-
-
-// const Container = styled.div`
-
-// `
+import { colors } from '../utils/styles';
 
 
 const StyledForm = styled(Form)`
@@ -25,17 +20,17 @@ const StyledForm = styled(Form)`
     font-weight: bold;
 
     .form-child {
-    display: block;
-    width: 90%;
-    background: rgba(0,0,0,.7);
-    border: 1px solid white;
-    color: white;
-    padding: 8px;
-    font-weight: bold;
+      width: 90%;
+      background: rgba(0,0,0,.7);
+      border: 1px solid white;
+      color: white;
+      padding: 8px;
+      font-weight: bold;
     }
 
     label {
-        align-self: flex-start;
+        width: 100%;
+        margin-bottom: 5px;
     }
 
     .error {
@@ -60,10 +55,6 @@ const StyledForm = styled(Form)`
 
 `
 
-// Styled components ....
-const StyledSelect = styled.select`
-
-`;
 
 const StyledErrorMessage = styled.div`
   font-size: 12px;
@@ -85,8 +76,9 @@ const MyTextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <>
-      <label htmlFor={props.id || props.name}>{label}</label>
-      <input className="text-input" {...field} {...props} />
+      <label htmlFor={props.id || props.name}>{label}
+      <input {...field} {...props} />
+      </label>
       {meta.touched && meta.error ? (
         <StyledErrorMessage>{meta.error}</StyledErrorMessage>
       ) : null}
@@ -100,8 +92,9 @@ const MyTextArea = ({ label, ...props }) => {
     const [field, meta] = useField(props);
     return (
       <>
-        <label htmlFor={props.id || props.name}>{label}</label>
+        <label htmlFor={props.id || props.name}>{label}
         <textarea {...field} {...props} />
+        </label>
         {meta.touched && meta.error ? (
             <StyledErrorMessage>{meta.error}</StyledErrorMessage>
         ) : null}
@@ -116,8 +109,9 @@ const MySelect = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <>
-      <label htmlFor={props.id || props.name}>{label}</label>
-      <StyledSelect {...field} {...props} />
+      <label htmlFor={props.id || props.name}>{label}
+      <select {...field} {...props} />
+      </label>
       {meta.touched && meta.error ? (
         <StyledErrorMessage>{meta.error}</StyledErrorMessage>
       ) : null}
