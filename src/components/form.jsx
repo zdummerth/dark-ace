@@ -19,6 +19,10 @@ const StyledForm = styled(Form)`
     margin: 0 auto;
     font-weight: bold;
 
+    .success-link {
+      margin-top: 10px;
+    }
+
     .form-child {
       width: 90%;
       background: rgba(0,0,0,.7);
@@ -121,7 +125,7 @@ const MySelect = ({ label, ...props }) => {
 
 const ErrorMessage = () => {
     return (
-        <div>
+        <div className='submit-message'>
             <p>There was an error submitting your message.</p>
             <p>Please refresh the the page and try again or email us at</p>
             <p>DARKACEAPPAREL@GMAIL.COM</p>
@@ -131,10 +135,10 @@ const ErrorMessage = () => {
 
 const SuccessMessage = () => {
     return (
-        <div>
+        <div className='submit-message'>
             <p>Thank you for your message.</p>
-            <p>We will get back to you as soon as possible</p>
-            <Link to='/shop'>See the shop</Link>
+            <p>We will get back to you as soon as possible.</p>
+            <Link to='/shop' className='success-link'>Click here to see the shop</Link>
         </div>
     )
 }
