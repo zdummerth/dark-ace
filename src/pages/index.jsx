@@ -22,7 +22,7 @@ const Container = styled.div`
    }
 
    .bunker-link {
-     font-size: 1rem;
+     font-size: 1.25rem;
      align-self: center;
    }
 `

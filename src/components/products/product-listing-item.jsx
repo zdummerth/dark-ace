@@ -36,9 +36,11 @@ const Thumbnail = styled.button`
     margin-right: 8px;
     width: 48px;
     height: 60px;
-    border: none;
+    border: 0;
     outline: 0;
     background: none;
+    :focus {outline:none;}
+    ::-moz-focus-inner {border:0;}
 `
 
 const ImgLink = styled(Link)`
