@@ -3,60 +3,55 @@ import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
-// import Layout from '../components/layout'
 import SEO from '../components/seo'
+import BasicForm from '../components/form'
+
 
 const BgWrapper = styled.div`
-    position: relative;
-    color: white;
+  position: relative;
+  color: white;
+  width: 100%;
+  max-width: 600px;
+  margin-right: auto;
+  margin-left: auto;
 `
 const Overlay = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0,0,0,.5);
-`
-const TextWrapper = styled.div`
-    text-align: center;
-    // padding-top: 20vh;
-    margin: 20vh auto 0;
-    width: 90%;
-
-    @media (min-width: 500px) {
-        font-size: 1.5rem;;
-      }
-
+  background: rgba(0,0,0,.7);
+  text-align: center;
 `
 
 const ContactPage = ({data}) => {
     return (
-        <>
-            <SEO title='Contact' />
-            <BgWrapper>
-                <Img 
-                    fluid={data.file.childImageSharp.fluid} 
-                    alt={'bone basket background'}
-                    style={{
-                        //Not exactly sure how this works, but this makes the image appear bigger and more center on smaller screens
-                        paddingTop: '100px',
-                    }}
-                />
-                <Overlay>
-                    <TextWrapper>
-                        <p>For sponsorships of any kind, custom artwork, or to share your favorite band, please send us an email :</p>
-                        <p>DARKACEAPPAREL@GMAIL.COM</p>
-                    </TextWrapper>
-                </Overlay>
-            </BgWrapper>
-        </>
+      <>
+        <SEO title='Contact' />
+        <BgWrapper>
+            <Img 
+                fluid={data.boneBasket.childImageSharp.fluid} 
+                alt={'bone basket background'}
+                imgStyle={{
+                  objectFit: 'contain'
+                }}
+            />
+            <Overlay>
+              <h1>Contact Us</h1>
+              <BasicForm />
+            </Overlay>
+        </BgWrapper>
+      </>
     )
 }
 
 export const query = graphql`
 query {
-  file(relativePath: { eq: "bg.jpg" }) {
+  boneBasket: file(relativePath: { eq: "bone-basket.jpg" }) {
     childImageSharp {
       fluid(maxWidth: 1000) {
         ...GatsbyImageSharpFluid

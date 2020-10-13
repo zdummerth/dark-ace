@@ -3,16 +3,19 @@ import styled from 'styled-components'
 import { Link } from 'gatsby'
 import { RiShoppingCartLine } from 'react-icons/ri';
 
-import { StoreContext } from '../context/StoreContextProvider'
+import { StoreContext } from '../../context/StoreContextProvider'
+
+import { breakpoints } from '../../utils/styles';
+
 
 
 const StyledLink = styled(Link)`
-  display: flex;
-  align-items: center;
-  color: #C00A0A;
+  display: none;
 
-  @media (min-width: 900px) {
-    display: none;
+  @media (max-width: ${breakpoints.desktop}) {
+    display: flex;
+    align-items: center;
+    color: #C00A0A;
   }
 `
 

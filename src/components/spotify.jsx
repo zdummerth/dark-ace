@@ -2,15 +2,18 @@ import React, { useState } from 'react'
 import styled from "styled-components"
 import { FiArrowDown, FiArrowUp } from 'react-icons/fi';
 
+import { dimensions, colors } from '../utils/styles';
+
+
 const Container = styled.div`
   width: 100%;
   max-width: 500px;
-  margin-bottom: 3vh;
+  margin-top: ${dimensions.headerHeight};
 `
 const Toggle = styled.div`
   width: 100%;
   text-align: center;
-  background-color: #262626;
+  background-color: ${colors.grayBackground};
   font-size: 2rem;
   margin: 0;
 `

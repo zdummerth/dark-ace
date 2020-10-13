@@ -16,7 +16,7 @@ exports.createPages = ({ graphql, actions }) => {
     result.data.allShopifyProduct.edges.forEach(({ node }) => {
       createPage({
         path: `shop/${node.handle}/`,
-        component: path.resolve(`./src/templates/product.jsx`),
+        component: path.resolve(`./src/templates/product-page-template.jsx`),
         context: {
           // Data passed to context is available
           // in page queries as GraphQL variables.

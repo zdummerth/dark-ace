@@ -1,15 +1,15 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React, { useState, useContext } from "react"
-import styled, { createGlobalStyle } from "styled-components"
-import { FaFacebookF, FaInstagram, FaExternalLinkAlt } from 'react-icons/fa';
-import { StoreContext } from '../context/StoreContextProvider'
+import { Link } from 'gatsby'
+import PropTypes from 'prop-types'
+import React, { useState, useContext } from 'react'
+import styled, { createGlobalStyle } from 'styled-components'
+import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import { StoreContext } from '../../context/StoreContextProvider'
 
-import { breakpoints, dimensions, colors } from '../utils/styles';
+import { breakpoints, dimensions, colors } from '../../utils/styles';
 
 import Logo from "./logo"
 
-import CartLink from './cart-link'
+import CartLink from '../cart/cart-link'
 
 
 const GlobalStyle = createGlobalStyle`
@@ -20,46 +20,36 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const HeaderWrapper = styled.header`
-  background: #020202;
   margin-bottom: 2px;
   width: 100%;
-  border-bottom: 1px solid #C00A0A;
   font-weight: bold;
-  @media (min-width: 900px) {
-    font-size: .9rem;
-  }
-  @media (min-width: 1000px) {
+
+
+  @media (min-width: ${breakpoints.desktop}) {
     font-size: 1rem;
   }
 `
 
 const Nav = styled.nav`
-  height: ${dimensions.headerHeight}px;
+  height: ${dimensions.headerHeight};
   width: 100%;
   display: flex;
-  position: relative;
+  position: fixed;
+  background: ${colors.background};
+  border-bottom: 1px solid ${colors.brand};
+  top: 0;
   justify-content: space-around;
   text-transform: uppercase;
   z-index: 50;
-  // align-self: center;
   align-items: center;
-
-  @media (max-width: ${breakpoints.tablet}px) {
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    left: 0;
-  }
 `
 
 const Toggle = styled.div`
   display: none;
   height: 100%;
   cursor: pointer;
-  // margin: 0 10vw;
 
-  @media (max-width: 900px) {
+  @media (max-width: ${breakpoints.desktop}) {
     display: flex;
   }
 `
@@ -70,25 +60,25 @@ const Navbox = styled.div`
   align-items: center;
   height: 100%;
 
-  @media (max-width: 900px) {
+  @media (max-width: ${breakpoints.desktop}) {
     flex-direction: column;
     justify-content: flex-start;
     position: fixed;
     width: 100%;
     background-color: #020202;
-    // opacity: .95;
     border-top: 1px solid ${colors.brand};
     transition: all 0.3s ease-in;
-    top: 70px;
+    top: ${dimensions.headerHeight};
     left: ${props => (props.closed ? "-100%" : "0")};
   }
+
   a[aria-current="page"] {
     border-bottom: 1px solid ${colors.brand};
   }
 `
 
 const Hamburger = styled.div`
-  background-color: #C00A0A;
+  background-color: ${colors.brand};
   width: 30px;
   height: 3px;
   transition: all .3s linear;
@@ -100,7 +90,7 @@ const Hamburger = styled.div`
   ::after {
     width: 30px;
     height: 3px;
-    background-color: #C00A0A;
+    background-color: ${colors.brand};
     content: "";
     position: absolute;
     transition: all 0.3s linear;
@@ -127,6 +117,7 @@ const StyledLink = styled(Link)`
   white-space: nowrap;
   color: white;
   margin: 1rem;
+  outline: 0;
   transition: all 200ms ease-in;
   position: relative;
 
@@ -138,19 +129,19 @@ const StyledLink = styled(Link)`
     width: 0%;
     content: ".";
     color: transparent;
-    background: #C00A0A;
+    background: ${colors.brand};
     height: 1px;
     transition: all 0.4s ease-in;
   }
 
   :hover {
-    color: #C00A0A;
+    color: ${colors.brand};
     ::after {
       width: 100%;
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.desktop}) {
     padding: 20px 0;
     font-size: 1.5rem;
     z-index: 6;
@@ -159,27 +150,27 @@ const StyledLink = styled(Link)`
 const IconWrapper = styled.div`
   display: flex;
 
-  // @media (max-width: 900px) {
-  //   margin-top: 2rem;
-  // }
+  .icon {
+
+  }
 `
 const FbIcon = styled(FaFacebookF)`
   font-size: 22px;
+
   @media (max-width: 900px) {
     font-size: 28px;
   }
 `
 const IgIcon = styled(FaInstagram)`
   font-size: 22px;
+
   @media (max-width: 900px) {
     font-size: 28px;
   }
 `
-const ExtIcon = styled(FaExternalLinkAlt)`
-  font-size: 15px;
-  // margin-left: 5px;
-`
+
 const Header = () => {
+
   const {
     store: { checkout: { lineItems } },
   } = useContext(StoreContext)
@@ -188,17 +179,21 @@ const Header = () => {
 
   const MenuItems = [
     {
-      path: "/",
-      title: "Home"
+      path: '/',
+      title: 'Home'
     },
     {
-      path: "/contact",
-      title: "Contact"
+      path: '/contact',
+      title: 'Contact'
     },
     {
-      path: "/shop",
-      title: "Shop"
+      path: '/shop',
+      title: 'Shop'
     },
+    // {
+    //   path: '/wholesale',
+    //   title: 'Wholesale'
+    // },
     {
       path: '/cart',
       title: `Cart (${totalQuantity})`
@@ -208,17 +203,17 @@ const Header = () => {
   const [navbarClosed, setNavbarClosed] = useState(true);
   
   const links = MenuItems.map((menuItem, index) => (
-  <StyledLink
-   key={index} 
-   to={menuItem.path}
-   onClick={() => setNavbarClosed(true)}
-   >
-     {menuItem.title}
-  </StyledLink>
+    <StyledLink
+      key={index} 
+      to={menuItem.path}
+      onClick={() => setNavbarClosed(true)}
+    >
+      {menuItem.title}
+    </StyledLink>
   ))
+
   const extLinks = 
     <>
-      {/* <StyledLink as='a' href='https://www.byjack.com/collections/dark-ace' target='_blank' rel="noopener">Shop <ExtIcon /></StyledLink> */}
       <IconWrapper>
         <StyledLink as='a' href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' target='_blank' rel="noopener"><FbIcon /></StyledLink>
         <StyledLink as='a' href='https://www.instagram.com/darkaceapparel/' target='_blank' rel="noopener"><IgIcon /></StyledLink>

@@ -9,8 +9,6 @@ import { keyframes } from '@emotion/core';
  *    border-color: ${colors.brand}40;
  */
 export const colors = {
-  brandDarker: '#221133',
-  brandDark: '#442266',
   brand: '#C00A0A',
   brandBright: '#e0d6eb',
   brandLight: '#f5f3f7',
@@ -25,21 +23,10 @@ export const colors = {
   accent: `#ffb238`,
   error: `#ec1818`,
   lemon: `#ffdf37`,
-  background: '#262626'
+  grayBackground: '#262626',
+  background: '#020202'
 };
 
-export const badgeThemes = {
-  BUILDWITHGATSBY: {
-    level: 1,
-    backgroundTheme: colors.brand,
-    textTheme: colors.lemon
-  },
-  HOLYBUCKETS: {
-    level: 2,
-    backgroundTheme: colors.lemon,
-    textTheme: colors.brandDark
-  }
-};
 
 export const spacing = {
   '3xs': 2,
@@ -54,11 +41,11 @@ export const spacing = {
 };
 
 export const breakpoints = {
-  mobile: 400,
-  phablet: 550,
-  tablet: 750,
-  desktop: 1000,
-  hd: 1300
+  mobile: '400px',
+  phablet: '550px',
+  tablet: '750px',
+  desktop: '1000px',
+  hd: '1300px'
 };
 
 export const radius = {

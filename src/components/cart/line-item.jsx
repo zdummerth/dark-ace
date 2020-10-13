@@ -2,11 +2,10 @@ import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
-import { StoreContext } from '../context/StoreContextProvider'
+import { StoreContext } from '../../context/StoreContextProvider'
 
 const Container = styled.div`
     display: flex;
-    // justify-content: space-between;
     align-items: flex-start;
     padding: .5rem 0;
     border-bottom: 1px solid #C00A0A;

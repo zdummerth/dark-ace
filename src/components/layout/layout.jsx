@@ -5,7 +5,7 @@ import styled, { createGlobalStyle } from "styled-components"
 
 import Header from './header'
 import Footer from './footer'
-import Spotify from './spotify'
+import Spotify from '../spotify'
 
 
 import 'normalize.css';
@@ -33,8 +33,8 @@ const Wrapper = styled.div`
 const ContentWrapper = styled.main`
   flex: 1;
   position: relative;
-  width: 100vw;
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1300px;
   margin: 0 auto;
 `
 
@@ -56,7 +56,9 @@ const Layout = ({ children }) => {
       <Wrapper>
         <Header siteTitle={data.site.siteMetadata.title} />
         <Spotify />
-        <ContentWrapper>{children}</ContentWrapper>
+        <ContentWrapper>
+          {children}
+        </ContentWrapper>
         <Footer />
       </Wrapper>
     </>

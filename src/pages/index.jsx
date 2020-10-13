@@ -1,44 +1,53 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
+import { FiExternalLink } from 'react-icons/fi';
 
-// import Slideshow from '../components/slideshow'
-import HorizontalScroll from '../components/horizontal-scroll'
+import ProductListing from '../components/products/product-listing'
 import Youtube from '../components/youtube'
 
 import SEO from "../components/seo"
 
+import { colors } from '../utils/styles';
+
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  // align-items: center;
   width: 100%;
 
    & > * {
      margin-top: 1.5rem;
+   }
+
+   .bunker-link {
+     font-size: 1rem;
+     align-self: center;
    }
 `
 
 const Title = styled.h2`
   text-align: center;
   font-size: 2rem;
-  margin-top: 60px;
+  margin-top: 100px;
 `
 
 const ImgWrapper = styled.div`
-  margin-top: 5vh;
-  margin-bottom: 5vh;
   width: 100%;
   align-self: center;
 `
 
 const Banner = styled.div`
-  // margin-top: 5vh;
   margin-bottom: 5vh;
   width: 100vw;
   max-width: 1500px;
   align-self: center;
+`
+
+const Spacer = styled.div`
+   height: 10px;
+   background: ${colors.brand};
 `
 
 
@@ -60,9 +69,20 @@ const IndexPage = ({data}) => {
           <Img fluid={data.parked.childImageSharp.fluid} />
         </Banner>
         <Title>Pre-Order</Title>
-        <HorizontalScroll products={preOrders} />
+        <ProductListing products={preOrders} />
         <Title>Dark Ace Standards</Title>
-        <HorizontalScroll products={standards} />
+        <ProductListing products={standards} />
+        <Spacer />
+        <ImgWrapper>
+          <Img fluid={data.bunkerBaby.childImageSharp.fluid} />
+        </ImgWrapper>
+        <Link 
+          as='a' 
+          href="https://www.discgolfscene.com/tournaments/Revenge_Of_The_Bunker_Baby_A_Halloween_Doubles_Tournament_2020" 
+          className='bunker-link'>
+            Register on disc golf scene <FiExternalLink />
+        </Link>
+        <Spacer />
         <Title>2020 Ledgestone Commercial</Title>
         <Youtube style={{alignSelf: 'center'}} />
         <ImgWrapper>
@@ -84,6 +104,13 @@ query {
     }
   }
   parked: file(relativePath: { eq: "parked.png" }) {
+    childImageSharp {
+      fluid(maxWidth: 1200) {
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+  bunkerBaby: file(relativePath: { eq: "bunker-baby.png" }) {
     childImageSharp {
       fluid(maxWidth: 1200) {
         ...GatsbyImageSharpFluid
