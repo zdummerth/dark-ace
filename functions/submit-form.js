@@ -20,7 +20,7 @@ exports.handler = async event => {
 
     formData.append(NAME_ID, body.name)
     formData.append(EMAIL_ID, body.email)
-    formData.append(SUBJECT_ID, body.subject)
+    // formData.append(SUBJECT_ID, body.subject)
     formData.append(MESSAGE_ID, body.message)
 
     const response = await fetch(FormURL, {
