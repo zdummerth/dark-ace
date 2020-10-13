@@ -25,7 +25,7 @@ const StyledForm = styled(Form)`
 
     .form-child {
       width: 90%;
-      background: rgba(0,0,0,.7);
+      background: rgba(0,0,0, 1);
       border: 1px solid white;
       color: white;
       padding: 8px;
@@ -176,7 +176,7 @@ const BasicForm = () => {
         initialValues={{
           name: "",
           email: "",
-          subject: "",
+          // subject: "",
           message: ""
         }}
         validationSchema={Yup.object({
@@ -186,13 +186,13 @@ const BasicForm = () => {
             email: Yup.string()
             .email("Invalid email addresss`")
             .required("Required"),
-            subject: Yup.string()
-            // @see http://bit.ly/yup-mixed-oneOf
-            .oneOf(
-                ["wholesale", "shipping", "sponsorship", "other"],
-                "Invalid Subject"
-            )
-            .required("Required"),  
+            // subject: Yup.string()
+            // // @see http://bit.ly/yup-mixed-oneOf
+            // .oneOf(
+            //     ["wholesale", "shipping", "sponsorship", "other"],
+            //     "Invalid Subject"
+            // )
+            // .required("Required"),  
             message: Yup.string()
             .required("Required"),
         })}
@@ -217,19 +217,19 @@ const BasicForm = () => {
                         type="email"
                         className='form-child'
                         />
-                        <MySelect label="Subject" name="subject" className='form-child'>
-                        <option value="">Select a subject</option>
-                        <option value="wholesale">Wholesale</option>
-                        <option value="shipping">Shipping</option>
-                        <option value="sponsorship">Sponsorship</option>
-                        <option value="other">Other</option>
-                        </MySelect>
+                        {/* <MySelect label="Subject" name="subject" className='form-child'>
+                          <option value="">Select a subject</option>
+                          <option value="wholesale">Wholesale</option>
+                          <option value="shipping">Shipping</option>
+                          <option value="sponsorship">Sponsorship</option>
+                          <option value="other">Other</option>
+                        </MySelect> */}
                         <MyTextArea
-                        label="Message"
-                        name="message"
-                        className='form-child'
-                        rows='5'
-                        cols='50'
+                          label="Message"
+                          name="message"
+                          className='form-child'
+                          rows='5'
+                          cols='50'
                         />
                         <button type='submit' id='submit-button'>Submit</button>
                     </>

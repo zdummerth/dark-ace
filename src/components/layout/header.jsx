@@ -190,10 +190,10 @@ const Header = () => {
       path: '/shop',
       title: 'Shop'
     },
-    {
-      path: '/wholesale',
-      title: 'Wholesale'
-    },
+    // {
+    //   path: '/wholesale',
+    //   title: 'Wholesale'
+    // },
     {
       path: '/cart',
       title: `Cart (${totalQuantity})`

@@ -9,6 +9,9 @@ import Youtube from '../components/youtube'
 
 import SEO from "../components/seo"
 
+import { colors } from '../utils/styles';
+
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -27,12 +30,10 @@ const Container = styled.div`
 const Title = styled.h2`
   text-align: center;
   font-size: 2rem;
-  margin-top: 60px;
+  margin-top: 100px;
 `
 
 const ImgWrapper = styled.div`
-  margin-top: 5vh;
-  margin-bottom: 5vh;
   width: 100%;
   align-self: center;
 `
@@ -42,6 +43,11 @@ const Banner = styled.div`
   width: 100vw;
   max-width: 1500px;
   align-self: center;
+`
+
+const Spacer = styled.div`
+   height: 10px;
+   background: ${colors.brand};
 `
 
 
@@ -66,8 +72,7 @@ const IndexPage = ({data}) => {
         <ProductListing products={preOrders} />
         <Title>Dark Ace Standards</Title>
         <ProductListing products={standards} />
-        <Title>2020 Ledgestone Commercial</Title>
-        <Youtube style={{alignSelf: 'center'}} />
+        <Spacer />
         <ImgWrapper>
           <Img fluid={data.bunkerBaby.childImageSharp.fluid} />
         </ImgWrapper>
@@ -75,8 +80,11 @@ const IndexPage = ({data}) => {
           as='a' 
           href="https://www.discgolfscene.com/tournaments/Revenge_Of_The_Bunker_Baby_A_Halloween_Doubles_Tournament_2020" 
           className='bunker-link'>
-            Click here to register on disc golf scene <FiExternalLink />
-          </Link>
+            Register on disc golf scene <FiExternalLink />
+        </Link>
+        <Spacer />
+        <Title>2020 Ledgestone Commercial</Title>
+        <Youtube style={{alignSelf: 'center'}} />
         <ImgWrapper>
           <Img fluid={data.motto.childImageSharp.fluid} />
         </ImgWrapper>
