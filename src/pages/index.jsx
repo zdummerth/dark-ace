@@ -53,9 +53,9 @@ const Spacer = styled.div`
 
 const IndexPage = ({data}) => {
 
-  const preOrders = data.allShopifyCollection.edges
-  .find(({node}) =>  node.handle === 'pre-order')
-  .node.products
+  // const preOrders = data.allShopifyCollection.edges
+  // .find(({node}) =>  node.handle === 'pre-order')
+  // .node.products
 
   const standards = data.allShopifyCollection.edges
   .find(({node}) =>  node.handle === 'standards')
@@ -68,8 +68,8 @@ const IndexPage = ({data}) => {
         <Banner>
           <Img fluid={data.parked.childImageSharp.fluid} />
         </Banner>
-        <Title>Pre-Order</Title>
-        <ProductListing products={preOrders} />
+        {/* <Title>Pre-Order</Title> */}
+        {/* <ProductListing products={preOrders} /> */}
         <Title>Dark Ace Standards</Title>
         <ProductListing products={standards} />
         <Spacer />
