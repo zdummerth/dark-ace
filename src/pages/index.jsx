@@ -1,15 +1,14 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
-import { FiExternalLink } from 'react-icons/fi';
 
 import ProductListing from '../components/products/product-listing'
 import Youtube from '../components/youtube'
 
 import SEO from "../components/seo"
 
-import { colors } from '../utils/styles';
+// import { colors } from '../utils/styles';
 
 
 const Container = styled.div`

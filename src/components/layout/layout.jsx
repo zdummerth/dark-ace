@@ -7,6 +7,9 @@ import Header from './header'
 import Footer from './footer'
 import Spotify from '../spotify'
 
+import { dimensions } from '../../utils/styles';
+
+
 
 import 'normalize.css';
 
@@ -38,6 +41,12 @@ const ContentWrapper = styled.main`
   margin: 0 auto;
 `
 
+// When header is fixed, it's removed from doc flow
+// This offsets that
+const HeaderMargin = styled.div`
+  margin-top: ${dimensions.headerHeight};
+`
+
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -55,6 +64,7 @@ const Layout = ({ children }) => {
       <GlobalStyle />
       <Wrapper>
         <Header siteTitle={data.site.siteMetadata.title} />
+        <HeaderMargin />
         <Spotify />
         <ContentWrapper>
           {children}

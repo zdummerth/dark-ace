@@ -2,13 +2,12 @@ import React, { useState } from 'react'
 import styled from "styled-components"
 import { FiArrowDown, FiArrowUp } from 'react-icons/fi';
 
-import { dimensions, colors } from '../utils/styles';
+import { colors } from '../utils/styles';
 
 
 const Container = styled.div`
   width: 100%;
   max-width: 500px;
-  margin-top: ${dimensions.headerHeight};
 `
 const Toggle = styled.div`
   width: 100%;
