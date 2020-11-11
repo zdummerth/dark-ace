@@ -69,15 +69,6 @@ const IndexPage = ({data}) => {
         <StyledProductListing products={specials} />
         <Title>Dark Ace Standards</Title>
         <StyledProductListing products={standards} />
-        {/* <ImgWrapper>
-          <Img fluid={data.bunkerBaby.childImageSharp.fluid} />
-        </ImgWrapper>
-        <Link 
-          as='a' 
-          href="https://www.discgolfscene.com/tournaments/Revenge_Of_The_Bunker_Baby_A_Halloween_Doubles_Tournament_2020" 
-          className='bunker-link'>
-            Register on disc golf scene <FiExternalLink />
-        </Link> */}
         <Title>2020 Ledgestone Commercial</Title>
         <Youtube style={{alignSelf: 'center'}} />
         <ImgWrapper>
