@@ -1,15 +1,14 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
-import { FiExternalLink } from 'react-icons/fi';
 
 import ProductListing from '../components/products/product-listing'
 import Youtube from '../components/youtube'
 
 import SEO from "../components/seo"
 
-import { colors } from '../utils/styles';
+// import { colors } from '../utils/styles';
 
 
 const Container = styled.div`
@@ -30,7 +29,7 @@ const Container = styled.div`
 const Title = styled.h2`
   text-align: center;
   font-size: 2rem;
-  margin-top: 100px;
+  margin-bottom: 0;
 `
 
 const ImgWrapper = styled.div`
@@ -39,22 +38,20 @@ const ImgWrapper = styled.div`
 `
 
 const Banner = styled.div`
-  margin-bottom: 5vh;
   width: 100vw;
   max-width: 1500px;
   align-self: center;
 `
 
-const Spacer = styled.div`
-   height: 10px;
-   background: ${colors.brand};
+const StyledProductListing = styled(ProductListing)`
+  margin-bottom: 30px;
 `
 
 
 const IndexPage = ({data}) => {
 
-  const preOrders = data.allShopifyCollection.edges
-  .find(({node}) =>  node.handle === 'pre-order')
+  const specials = data.allShopifyCollection.edges
+  .find(({node}) =>  node.handle === 'frontpage')
   .node.products
 
   const standards = data.allShopifyCollection.edges
@@ -68,12 +65,11 @@ const IndexPage = ({data}) => {
         <Banner>
           <Img fluid={data.parked.childImageSharp.fluid} />
         </Banner>
-        <Title>Pre-Order</Title>
-        <ProductListing products={preOrders} />
+        <Title>Bunker Baby Gear</Title>
+        <StyledProductListing products={specials} />
         <Title>Dark Ace Standards</Title>
-        <ProductListing products={standards} />
-        <Spacer />
-        <ImgWrapper>
+        <StyledProductListing products={standards} />
+        {/* <ImgWrapper>
           <Img fluid={data.bunkerBaby.childImageSharp.fluid} />
         </ImgWrapper>
         <Link 
@@ -81,8 +77,7 @@ const IndexPage = ({data}) => {
           href="https://www.discgolfscene.com/tournaments/Revenge_Of_The_Bunker_Baby_A_Halloween_Doubles_Tournament_2020" 
           className='bunker-link'>
             Register on disc golf scene <FiExternalLink />
-        </Link>
-        <Spacer />
+        </Link> */}
         <Title>2020 Ledgestone Commercial</Title>
         <Youtube style={{alignSelf: 'center'}} />
         <ImgWrapper>

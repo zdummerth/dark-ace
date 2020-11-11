@@ -10,11 +10,15 @@ const Title = styled.h2`
   font-size: 2rem;
 `
 
+const StyledProductListing = styled(ProductListing)`
+  margin-bottom: 30px;
+`
+
 
 const ProductsPage = ({ data }) => {
 
-  const preOrders = data.allShopifyCollection.edges
-                  .find(({node}) =>  node.handle === 'pre-order')
+  const specials = data.allShopifyCollection.edges
+                  .find(({node}) =>  node.handle === 'frontpage')
                   .node.products
 
   const standards = data.allShopifyCollection.edges
@@ -25,11 +29,11 @@ const ProductsPage = ({ data }) => {
   
   return (
     <>
-      <Title>Pre-Order</Title>
-      <ProductListing products={preOrders} />
-      <div style={{height: '2.5rem'}}></div>
+      <Title>Bunker Baby Gear</Title>
+      <StyledProductListing products={specials} />
+      {/* {/* <div style={{height: '2.5rem'}}></div> */}
       <Title>Dark Ace Standards</Title>
-      <ProductListing products={standards} />
+      <StyledProductListing products={standards} />
     </>
   )
 }

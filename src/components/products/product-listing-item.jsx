@@ -7,15 +7,18 @@ import { breakpoints, colors } from '../../utils/styles';
 
 
 const ProductContainer = styled.div`
-  margin: 2rem 1rem;
+  margin: 0 1rem;
   text-align: center; 
-  flex: 1;
+  // flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: 300px;
   border-bottom: 1px solid ${colors.brand};
 
-  @media (max-width: ${breakpoints.desktop}) {
+  @media (max-width: ${breakpoints.tablet}) {
     &:last-child {
-          padding-right: 1rem;
+        padding-right: ${props => props.isSingleItem ? '0' : '2rem'};
       }
   }
 `
@@ -26,9 +29,9 @@ const ImgContainer = styled.div`
 `
 
 const ThumbnailContainer = styled.div`  
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
   margin-top: 5px;
 `
 
@@ -61,7 +64,7 @@ const ImgLink = styled(Link)`
   }
 `
 
-const ProductListingItem = ({ product }) => {
+const ProductListingItem = ({ product, isSingleItem }) => {
   const [index, setIndex] = useState(0);
 
   const price = Intl.NumberFormat(undefined, {
@@ -83,7 +86,7 @@ const ProductListingItem = ({ product }) => {
   ))
 
   return (
-      <ProductContainer key={product.shopifyId}>
+      <ProductContainer key={product.shopifyId} isSingleItem={isSingleItem}>
         <ImgContainer>
             {images}
         </ImgContainer>
