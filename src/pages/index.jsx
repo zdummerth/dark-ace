@@ -30,7 +30,7 @@ const Container = styled.div`
 const Title = styled.h2`
   text-align: center;
   font-size: 2rem;
-  margin-top: 100px;
+  margin-bottom: 0;
 `
 
 const ImgWrapper = styled.div`
@@ -39,10 +39,13 @@ const ImgWrapper = styled.div`
 `
 
 const Banner = styled.div`
-  margin-bottom: 5vh;
   width: 100vw;
   max-width: 1500px;
   align-self: center;
+`
+
+const StyledProductListing = styled(ProductListing)`
+  margin-bottom: 30px;
 `
 
 
@@ -64,9 +67,9 @@ const IndexPage = ({data}) => {
           <Img fluid={data.parked.childImageSharp.fluid} />
         </Banner>
         <Title>Bunker Baby Gear</Title>
-        <ProductListing products={specials} />
+        <StyledProductListing products={specials} />
         <Title>Dark Ace Standards</Title>
-        <ProductListing products={standards} />
+        <StyledProductListing products={standards} />
         {/* <ImgWrapper>
           <Img fluid={data.bunkerBaby.childImageSharp.fluid} />
         </ImgWrapper>

@@ -10,18 +10,21 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 0;
 
-  @media (max-width: ${breakpoints.desktop}) {
+  @media (max-width: ${breakpoints.tablet}) {
     flex-wrap: nowrap;
-    justify-content: flex-start;
+    // justify-content: flex-start;
+    justify-content: ${props => props.isSingleItem ? 'center' : 'flex-start'};
     overflow-x: auto;
   }
 `
 
-const ProductListing = ({ products }) => {
+const ProductListing = ({ products, className }) => {
+  const isSingleItem = products.length === 1
   return (
-    <Container>
-        {products.map(node => <ProductListingItem product={node} />)}
+    <Container className={className} isSingleItem={isSingleItem}>
+        {products.map(node => <ProductListingItem product={node} isSingleItem={isSingleItem} />)}
     </Container>
   )
 }

@@ -10,6 +10,10 @@ const Title = styled.h2`
   font-size: 2rem;
 `
 
+const StyledProductListing = styled(ProductListing)`
+  margin-bottom: 30px;
+`
+
 
 const ProductsPage = ({ data }) => {
 
@@ -26,10 +30,10 @@ const ProductsPage = ({ data }) => {
   return (
     <>
       <Title>Bunker Baby Gear</Title>
-      <ProductListing products={specials} />
+      <StyledProductListing products={specials} />
       {/* {/* <div style={{height: '2.5rem'}}></div> */}
       <Title>Dark Ace Standards</Title>
-      <ProductListing products={standards} />
+      <StyledProductListing products={standards} />
     </>
   )
 }
