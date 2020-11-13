@@ -7,13 +7,13 @@ import { breakpoints, colors } from '../../utils/styles';
 
 
 const ProductContainer = styled.div`
-  margin: 0 1rem;
+  margin: ${props => props.isFeature ? '0' : '0 1rem'};;
   text-align: center; 
-  // flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 300px;
+  width: ${props => props.isFeature ? '100%' : '60vw'};
+  max-width: ${props => props.isFeature ? '900px' : '300px'};
   border-bottom: 1px solid ${colors.brand};
 
   @media (max-width: ${breakpoints.tablet}) {
@@ -24,14 +24,11 @@ const ProductContainer = styled.div`
 `
 
 const ImgContainer = styled.div`
-  width: 60vw;
+  width: inherit;
   max-width: inherit;
 `
 
 const ThumbnailContainer = styled.div`  
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
   margin-top: 5px;
 `
 
@@ -64,7 +61,7 @@ const ImgLink = styled(Link)`
   }
 `
 
-const ProductListingItem = ({ product, isSingleItem }) => {
+const ProductListingItem = ({ product, isSingleItem, className, isFeature }) => {
   const [index, setIndex] = useState(0);
 
   const price = Intl.NumberFormat(undefined, {
@@ -86,20 +83,26 @@ const ProductListingItem = ({ product, isSingleItem }) => {
   ))
 
   return (
-      <ProductContainer key={product.shopifyId} isSingleItem={isSingleItem}>
+      <ProductContainer 
+        className={className} 
+        key={product.shopifyId} 
+        isSingleItem={isSingleItem}
+        isFeature={isFeature}>
         <ImgContainer>
             {images}
         </ImgContainer>
-        <ThumbnailContainer>
-          {product.thumbs.map((variant, ind) => (
-            <Thumbnail onClick={() => setIndex(ind)}>
-              <Img 
-                  fixed={variant.localFile.childImageSharp.fixed} 
-                  alt={product.title}
-              />
-            </Thumbnail>
-        ))}
-        </ThumbnailContainer>
+        {images.length > 1 ?
+          <ThumbnailContainer>
+            {product.thumbs.map((variant, ind) => (
+              <Thumbnail onClick={() => setIndex(ind)}>
+                <Img 
+                    fixed={variant.localFile.childImageSharp.fixed} 
+                    alt={product.title}
+                />
+              </Thumbnail>
+          ))}
+          </ThumbnailContainer>
+        : null }
         <Link to={`/shop/${product.handle}`}>
           <h3>{product.title}{" - "}{price}</h3>
         </Link>

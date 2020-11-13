@@ -4,7 +4,6 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 
 import ProductListing from '../components/products/product-listing'
-import FeaturedItem from '../components/products/featured-item'
 
 import Youtube from '../components/youtube'
 
@@ -47,18 +46,6 @@ const StyledProductListing = styled(ProductListing)`
 
 const IndexPage = ({data}) => {
 
-  const preOrders = data.allShopifyCollection.edges
-  .find(({node}) =>  node.handle === 'pre-order')
-  .node.products
-
-  const specials = data.allShopifyCollection.edges
-  .find(({node}) =>  node.handle === 'frontpage')
-  .node.products
-
-  const standards = data.allShopifyCollection.edges
-  .find(({node}) =>  node.handle === 'standards')
-  .node.products
-
   return (
     <>
       <SEO title="Home" />
@@ -67,11 +54,11 @@ const IndexPage = ({data}) => {
           <Img fluid={data.parked.childImageSharp.fluid} />
         </Banner>
         <Title>Dark Ace Feature</Title>
-        <FeaturedItem product={preOrders[0]} />
+        <StyledProductListing collection='pre-order' isFeature={true} />
         <Title>Dark Ace Specials</Title>
-        <StyledProductListing products={specials} />
+        <StyledProductListing collection='frontpage' />
         <Title>Dark Ace Standards</Title>
-        <StyledProductListing products={standards} />
+        <StyledProductListing collection='standards' />
         <Title>2020 Ledgestone Commercial</Title>
         <Youtube style={{alignSelf: 'center'}} />
         <ImgWrapper>
@@ -103,46 +90,6 @@ query {
     childImageSharp {
       fluid(maxWidth: 1200) {
         ...GatsbyImageSharpFluid
-      }
-    }
-  }
-  allShopifyCollection {
-    edges {
-      node {
-        handle 
-        products {
-          handle
-          title
-          shopifyId
-          priceRange {
-            minVariantPrice {
-              amount
-              currencyCode
-            }
-            maxVariantPrice {
-              amount
-              currencyCode
-            }
-          }
-          images {
-            localFile {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-          thumbs: images {
-            localFile {
-              childImageSharp {
-                fixed(height: 60, width: 48) {
-                  ...GatsbyImageSharpFixed
-                }
-              }
-            }
-          }
-        }
       }
     }
   }

@@ -51,6 +51,7 @@ const Form = styled.form`
     & .price {
       font-size: 1.75rem;
       font-weight: bold;
+      margin-top: 0;
     }
 
     & > * {
