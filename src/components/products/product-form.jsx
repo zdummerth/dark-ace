@@ -13,6 +13,8 @@ import { usePrevious } from '../../hooks/use-previous'
 
 import { StoreContext } from '../../context/StoreContextProvider'
 
+import { colors } from '../../utils/styles';
+
 const Plus = styled(AiOutlinePlusCircle)`
     // color: white;
     // font-size: 24px;
@@ -59,7 +61,9 @@ const Form = styled.form`
     }
 `
 const Span = styled.span`
-    border: ${props => (props.selected ? '4px solid #C00A0A' : '1px solid rgba(232, 232, 232, .3)')};
+    border: ${props => (props.selected ? `4px solid ${colors.brand}` : '1px solid rgba(232, 232, 232, .3)')};
+    background: ${props => (props.selected ? '#C00A0A' : 'black')};
+
     padding: .75rem;
     border-radius: 5px;
     font-weight: bold;
@@ -87,9 +91,6 @@ const StyledLink = styled(Link)`
     padding: 10px 0;
 `
 const OptionContainer = styled.div`
-    // display: flex;
-    align-items: center;
-
     p {
       margin-top: 0;
     }
@@ -99,17 +100,7 @@ const Values = styled.div`
     flex-wrap: wrap;
 
     & > * {
-        margin-left: 1.5rem;
-        margin-bottom: 1rem;
-    }
-
-    @media (max-width: 800px) {
-      overflow-x: auto;
-      flex-wrap: nowrap;
-
-      & > * {
-        margin-bottom: 0;
-      }
+        margin: .5rem;
     }
 `
 
