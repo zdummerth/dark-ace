@@ -20,7 +20,7 @@ const ProductsPage = ({ data }) => {
   const preOrders = data.allShopifyCollection.edges
                   .find(({node}) =>  node.handle === 'pre-order')
                   .node.products
-                  
+
   const specials = data.allShopifyCollection.edges
                   .find(({node}) =>  node.handle === 'frontpage')
                   .node.products
@@ -35,7 +35,7 @@ const ProductsPage = ({ data }) => {
     <>
       <Title>Dark Ace Feature</Title>
       <FeaturedItem product={preOrders[0]} />
-      <Title>Bunker Baby Gear</Title>
+      <Title>Dark Ace Specials</Title>
       <StyledProductListing products={specials} />
       <Title>Dark Ace Standards</Title>
       <StyledProductListing products={standards} />
