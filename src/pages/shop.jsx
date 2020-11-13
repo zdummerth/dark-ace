@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import ProductListing from '../components/products/product-listing'
+import FeaturedItem from '../components/products/featured-item'
 
 
 const Title = styled.h2`
@@ -16,7 +17,10 @@ const StyledProductListing = styled(ProductListing)`
 
 
 const ProductsPage = ({ data }) => {
-
+  const preOrders = data.allShopifyCollection.edges
+                  .find(({node}) =>  node.handle === 'pre-order')
+                  .node.products
+                  
   const specials = data.allShopifyCollection.edges
                   .find(({node}) =>  node.handle === 'frontpage')
                   .node.products
@@ -29,9 +33,10 @@ const ProductsPage = ({ data }) => {
   
   return (
     <>
+      <Title>Dark Ace Feature</Title>
+      <FeaturedItem product={preOrders[0]} />
       <Title>Bunker Baby Gear</Title>
       <StyledProductListing products={specials} />
-      {/* {/* <div style={{height: '2.5rem'}}></div> */}
       <Title>Dark Ace Standards</Title>
       <StyledProductListing products={standards} />
     </>

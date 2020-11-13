@@ -4,6 +4,8 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 
 import ProductListing from '../components/products/product-listing'
+import FeaturedItem from '../components/products/featured-item'
+
 import Youtube from '../components/youtube'
 
 import SEO from "../components/seo"
@@ -18,11 +20,6 @@ const Container = styled.div`
 
    & > * {
      margin-top: 1.5rem;
-   }
-
-   .bunker-link {
-     font-size: 1.25rem;
-     align-self: center;
    }
 `
 
@@ -50,6 +47,10 @@ const StyledProductListing = styled(ProductListing)`
 
 const IndexPage = ({data}) => {
 
+  const preOrders = data.allShopifyCollection.edges
+  .find(({node}) =>  node.handle === 'pre-order')
+  .node.products
+
   const specials = data.allShopifyCollection.edges
   .find(({node}) =>  node.handle === 'frontpage')
   .node.products
@@ -65,7 +66,9 @@ const IndexPage = ({data}) => {
         <Banner>
           <Img fluid={data.parked.childImageSharp.fluid} />
         </Banner>
-        <Title>Bunker Baby Gear</Title>
+        <Title>Dark Ace Feature</Title>
+        <FeaturedItem product={preOrders[0]} />
+        <Title>Dark Ace Specials</Title>
         <StyledProductListing products={specials} />
         <Title>Dark Ace Standards</Title>
         <StyledProductListing products={standards} />

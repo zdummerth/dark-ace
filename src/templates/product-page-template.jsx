@@ -14,6 +14,12 @@ const Title = styled.h1`
   width: 90%;
 `
 
+const Subtitle = styled.h2`
+  margin: 1rem auto;
+  color: white;
+  width: 90%;
+`
+
 const Container = styled.div`
   display: flex;
   // align-items: center;
@@ -51,11 +57,14 @@ const ProductPage = ({ data }) => {
 
   const [imageFluid, setImageFluid] = useState(initialVariant.image.localFile.childImageSharp.fluid)
 
+  console.log(product.tags)
+  const isPreOrder = product.tags.includes('pre-order')
 
   return (
     <>
       <SEO title={product.title} description={product.description} />
         <Title>{product.title}</Title>
+        {isPreOrder ? <Subtitle>This is a pre order item</Subtitle> : null}
         <Container>
           <ImgContainer>
             <Img
@@ -83,6 +92,7 @@ export const query = graphql`
       description
       descriptionHtml
       shopifyId
+      tags
       options {
         id
         name
