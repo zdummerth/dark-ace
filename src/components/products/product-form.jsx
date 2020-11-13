@@ -64,9 +64,9 @@ const Span = styled.span`
     border: ${props => (props.selected ? `4px solid ${colors.brand}` : '1px solid rgba(232, 232, 232, .3)')};
     background: ${props => (props.selected ? '#C00A0A' : 'black')};
 
-    padding: .75rem;
+    padding: .65rem;
     border-radius: 5px;
-    font-weight: bold;
+    // font-weight: bold;
     :hover {
         cursor: pointer;
       }
@@ -90,11 +90,8 @@ const StyledLink = styled(Link)`
     border-radius: 5px;
     padding: 10px 0;
 `
-const OptionContainer = styled.div`
-    p {
-      margin-top: 0;
-    }
-`
+const OptionContainer = styled.div``
+
 const Values = styled.div`
     display: flex;
     flex-wrap: wrap;

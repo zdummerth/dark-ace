@@ -42,9 +42,9 @@ const ImgContainer = styled.div`
 
 const FormContainer = styled.div`
   // height: 100%;
-  width: 90%;
+  width: 100%;
   & > * {
-    margin: 1rem;
+    // margin: 1rem;
   }
   
 `
