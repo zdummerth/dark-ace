@@ -26,7 +26,7 @@ const Container = styled.div`
   margin: 3rem auto;
   color: white;
   width: 90%;
-  @media (max-width: 800px) {
+  @media (max-width: 1000px) {
     flex-direction: column;
     align-items: center;
   }
@@ -44,7 +44,7 @@ const FormContainer = styled.div`
   // height: 100%;
   width: 100%;
   & > * {
-    // margin: 1rem;
+    margin: .75rem;
   }
   
 `
