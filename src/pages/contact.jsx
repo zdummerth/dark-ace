@@ -24,7 +24,7 @@ const Overlay = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0,0,0,.7);
+  // background: rgba(0,0,0,.7);
   text-align: center;
 `
 
@@ -51,7 +51,7 @@ const ContactPage = ({data}) => {
 
 export const query = graphql`
 query {
-  boneBasket: file(relativePath: { eq: "bone-basket.jpg" }) {
+  boneBasket: file(relativePath: { eq: "bone-basket-removebg.png" }) {
     childImageSharp {
       fluid(maxWidth: 1000) {
         ...GatsbyImageSharpFluid

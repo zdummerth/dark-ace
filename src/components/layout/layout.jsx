@@ -7,7 +7,7 @@ import Header from './header'
 import Footer from './footer'
 import Spotify from '../spotify'
 
-import { dimensions } from '../../utils/styles';
+import { dimensions, colors } from '../../utils/styles';
 
 
 
@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: #020202;
     color: white;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    font-family: Electrolize, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   a {
@@ -31,14 +31,18 @@ const Wrapper = styled.div`
   align-items: center;
   min-height: 100vh;
   overflow: hidden;
+  // background-image: linear-gradient(to right, ${colors.background} 0%, ${colors.brand} 50%, ${colors.brand} 50%, ${colors.background} 100%);
+
+
 `
 
 const ContentWrapper = styled.main`
   flex: 1;
   position: relative;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1500px;
   margin: 0 auto;
+  background-image: linear-gradient(to right, ${colors.background} 0%, ${colors.grayBackground} 50%, ${colors.grayBackground} 50%, ${colors.background} 100%);
 `
 
 // When header is fixed, it's removed from doc flow

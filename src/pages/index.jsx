@@ -17,9 +17,6 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
 
-   & > * {
-     margin-top: 1.5rem;
-   }
 `
 
 const Title = styled.h2`
@@ -31,10 +28,12 @@ const Title = styled.h2`
 const ImgWrapper = styled.div`
   width: 100%;
   align-self: center;
+  max-width: 1200px;
+  padding: 3rem 0;
 `
 
 const Banner = styled.div`
-  width: 100vw;
+  width: 100%;
   max-width: 1500px;
   align-self: center;
 `
@@ -72,7 +71,7 @@ const IndexPage = ({data}) => {
 
 export const query = graphql`
 query {
-   motto: file(relativePath: { eq: "motto.png" }) {
+   motto: file(relativePath: { eq: "motto-no-background.png" }) {
     childImageSharp {
       fluid(maxWidth: 1200) {
         ...GatsbyImageSharpFluid

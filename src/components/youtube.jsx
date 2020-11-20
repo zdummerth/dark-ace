@@ -6,6 +6,7 @@ const Container = styled.div`
   position: relative; 
   padding-bottom: 56.25%; 
   width: 90%;
+  background: transparent;
 
   iframe {
     position: absolute; 
@@ -13,6 +14,8 @@ const Container = styled.div`
     left: 0; 
     width: 100%; 
     height: 100%;
+  background: transparent;
+
   }
 `
 

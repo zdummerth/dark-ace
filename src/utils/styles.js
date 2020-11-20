@@ -15,6 +15,7 @@ export const colors = {
   brandLighter: '#fbfafc',
   lightest: '#ffffff',
   darkest: '#4d4058',
+  gradient: `linear-gradient(to bottom, #020202, #C00A0A 250%)`,
   text: '#333333',
   textMild: '#555555',
   textLight: '#7e718a',

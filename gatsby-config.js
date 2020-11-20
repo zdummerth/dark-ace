@@ -43,6 +43,18 @@ module.exports = {
             },
         },
         {
+            resolve: `gatsby-plugin-google-fonts`,
+            options: {
+              fonts: [
+                `electrolize`,
+                'satisfy',
+                'fondamento',
+                `source sans pro\:300,400,400i,700` // you can also specify font weights and styles
+              ],
+              display: 'swap'
+            }
+        },
+        {
             resolve: `gatsby-source-shopify`,
             options: {
               // The domain name of your Shopify shop.

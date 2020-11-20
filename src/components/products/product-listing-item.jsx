@@ -7,7 +7,7 @@ import { breakpoints, colors } from '../../utils/styles';
 
 
 const ProductContainer = styled.div`
-  margin: ${props => props.isFeature ? '0' : '0 1rem'};;
+  margin: ${props => props.isFeature ? '0' : '1rem'};;
   text-align: center; 
   display: flex;
   flex-direction: column;
