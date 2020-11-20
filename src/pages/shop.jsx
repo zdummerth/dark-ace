@@ -17,12 +17,12 @@ const StyledProductListing = styled(ProductListing)`
 const ProductsPage = () => {
   return (
     <>
-        <Title>Dark Ace Feature</Title>
-        <StyledProductListing collection='pre-order' isFeature={true} />
-        <Title>Dark Ace Specials</Title>
-        <StyledProductListing collection='frontpage' />
-        <Title>Dark Ace Standards</Title>
-        <StyledProductListing collection='standards' />
+      <Title>Dark Ace Feature</Title>
+      <StyledProductListing collection='pre-order' isFeature={true} />
+      <Title>Dark Ace Specials</Title>
+      <StyledProductListing collection='specials' />
+      <Title>Dark Ace Standards</Title>
+      <StyledProductListing collection='standards' />
     </>
   )
 }
