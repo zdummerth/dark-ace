@@ -21,7 +21,7 @@ const Container = styled.div`
   }
 `
 
-const ProductListing = ({ className, collection, isFeature }) => {
+const ProductListing = ({ className, collection, isFeature, showThumbs }) => {
   const data = useStaticQuery(graphql`
     query {
       allShopifyCollection {
@@ -82,6 +82,7 @@ const ProductListing = ({ className, collection, isFeature }) => {
           product={node} 
           isSingleItem={isSingleItem}
           isFeature={isFeature}
+          showThumbs={showThumbs}
            />)}
     </Container>
   )

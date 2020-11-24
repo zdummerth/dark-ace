@@ -26,6 +26,10 @@ const Container = styled.div`
   margin: 3rem auto;
   color: white;
   width: 90%;
+
+  .hidden {
+    display: none;
+  }
   @media (max-width: 1000px) {
     flex-direction: column;
     align-items: center;
@@ -48,17 +52,67 @@ const FormContainer = styled.div`
   }
   
 `
+const ThumbnailContainer = styled.div`  
+  margin-top: 5px;
+`
+const Thumbnail = styled.button`
+    margin-right: 8px;
+    width: 48px;
+    height: 60px;
+    border: 0;
+    outline: 0;
+    background: none;
+    :focus {outline:none;}
+    ::-moz-focus-inner {border:0;}
+`
 
 const ProductPage = ({ data }) => {
   const product = data.shopifyProduct
   const {
     variants: [initialVariant],
+    thumbs,
+    fulls,
+    productType
   } = product
 
   const [imageFluid, setImageFluid] = useState(initialVariant.image.localFile.childImageSharp.fluid)
+  const [index, setIndex] = useState(0);
 
-  console.log(product.tags)
-  const isPreOrder = product.tags.includes('pre-order')
+
+  const isPreOrder = product.tags.includes('pre-order');
+  const isPolo = productType === 'polo'
+
+  const imagesTags = fulls.map((variant, ind) => (
+    <div>
+        <Img 
+            fluid={variant.localFile.childImageSharp.fluid} 
+            alt={product.title}
+            className={index !== ind ? 'hidden': ''}
+        />
+    </div>
+))
+
+  const thumbnails = (
+    <ThumbnailContainer>
+      {thumbs.map((variant, ind) => (
+        <Thumbnail onClick={() => setIndex(ind)}>
+          <Img 
+              fixed={variant.localFile.childImageSharp.fixed} 
+              alt={product.title}
+          />
+        </Thumbnail>
+    ))}
+    </ThumbnailContainer>
+  ) 
+
+  const imageDisplay = isPolo ? imagesTags 
+    :
+    ( <Img
+        fluid={imageFluid}
+        key={product.thumbs[0].id}
+        alt={product.title}
+      />)
+
 
   return (
     <>
@@ -67,14 +121,14 @@ const ProductPage = ({ data }) => {
         {isPreOrder ? <Subtitle>This is a pre order item</Subtitle> : null}
         <Container>
           <ImgContainer>
-            <Img
-                fluid={imageFluid}
-                key={product.images[0].id}
-                alt={product.title}
-              />
+            {imageDisplay}
           </ImgContainer>
+          { isPolo ? thumbnails : null }
           <FormContainer>
-            <ProductForm product={product} setImageFluid={setImageFluid} />
+            <ProductForm 
+              product={product} 
+              setImageFluid={setImageFluid}
+            />
             <div dangerouslySetInnerHTML={{__html: product.descriptionHtml}}/>
           </FormContainer>
         </Container>
@@ -128,13 +182,20 @@ export const query = graphql`
           currencyCode
         }
       }
-      images {
-        originalSrc
-        id
+      thumbs: images {
         localFile {
           childImageSharp {
-            fluid(maxWidth: 910) {
-              ...GatsbyImageSharpFluid_withWebp_tracedSVG
+            fixed(height: 60, width: 48) {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
+      }
+      fulls: images {
+        localFile {
+          childImageSharp {
+            fluid(maxWidth: 500) {
+              ...GatsbyImageSharpFluid
             }
           }
         }

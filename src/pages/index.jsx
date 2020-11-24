@@ -54,11 +54,11 @@ const IndexPage = ({data}) => {
           <Img fluid={data.parked.childImageSharp.fluid} />
         </Banner>
         <Title>Dark Ace Feature</Title>
-        <StyledProductListing collection='pre-order' isFeature={true} />
+        <StyledProductListing collection='pre-order' isFeature={true} showThumbs={false} />
         <Title>Dark Ace Specials</Title>
-        <StyledProductListing collection='specials' />
+        <StyledProductListing collection='specials' showThumbs={false} />
         <Title>Dark Ace Standards</Title>
-        <StyledProductListing collection='standards' />
+        <StyledProductListing collection='standards' showThumbs={true} />
         <Title>2020 Ledgestone Commercial</Title>
         <Youtube style={{alignSelf: 'center'}} />
         <ImgWrapper>

@@ -205,7 +205,7 @@ const ProductForm = ({ product, setImageFluid }) => {
       isEqual(currentOptions, selectedOptions)
     )
 
-    setImageFluid(selectedVariant.image.localFile.childImageSharp.fluid)
+    setImageFluid(selectedVariant.image.localFile.childImageSharp.fluid);
     setVariant({ ...selectedVariant })
   }
 

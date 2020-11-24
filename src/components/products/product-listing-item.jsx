@@ -7,7 +7,7 @@ import { breakpoints, colors } from '../../utils/styles';
 
 
 const ProductContainer = styled.div`
-  margin: ${props => props.isFeature ? '0' : '0 1rem'};;
+  margin: ${props => props.isFeature ? '0' : '1rem'};;
   text-align: center; 
   display: flex;
   flex-direction: column;
@@ -44,7 +44,7 @@ const Thumbnail = styled.button`
 `
 
 const ImgLink = styled(Link)`
-  display: ${props => props.visible ? 'block' : 'none'};
+  display: ${props => props.hidden ? 'none' : 'block'};
   overflow: hidden;
   position: relative;
 
@@ -61,7 +61,7 @@ const ImgLink = styled(Link)`
   }
 `
 
-const ProductListingItem = ({ product, isSingleItem, className, isFeature }) => {
+const ProductListingItem = ({ product, isSingleItem, className, isFeature, showThumbs }) => {
   const [index, setIndex] = useState(0);
 
   const price = Intl.NumberFormat(undefined, {
@@ -73,7 +73,7 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature }) => 
   const images = product.images.map((variant, ind) => (
         <ImgLink
             to={`/shop/${product.handle}`}
-            visible={index === ind}
+            hidden={index !== ind}
         >
             <Img 
                 fluid={variant.localFile.childImageSharp.fluid} 
@@ -91,7 +91,7 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature }) => 
         <ImgContainer>
             {images}
         </ImgContainer>
-        {images.length > 1 ?
+        {showThumbs ?
           <ThumbnailContainer>
             {product.thumbs.map((variant, ind) => (
               <Thumbnail onClick={() => setIndex(ind)}>
