@@ -14,7 +14,7 @@ const Toggle = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  background-image: linear-gradient(to right, ${colors.background} 0%, ${colors.background} 20%, ${colors.brand} 50%, ${colors.brand} 50%, ${colors.background} 80%, ${colors.background} 100%);
+  // background-image: linear-gradient(to right, ${colors.background} 0%, ${colors.background} 20%, ${colors.brand} 50%, ${colors.brand} 50%, ${colors.background} 80%, ${colors.background} 100%);
   .widget {
     width: 100%;
     max-width: 500px;

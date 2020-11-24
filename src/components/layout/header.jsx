@@ -35,8 +35,9 @@ const Nav = styled.nav`
   width: 100%;
   display: flex;
   position: fixed;
-  background: ${colors.background};
-  border-bottom: 1px solid ${colors.brand};
+  // background: ${colors.background};
+  background-image: linear-gradient(to bottom right, ${colors.brand} 0%, ${colors.background} 20%, ${colors.background} 80%, ${colors.brand} 100%);
+  // border-bottom: 1px solid ${colors.brand};
   // box-shadow: 0 1px 5px ${colors.brand};
 
   top: 0;
@@ -68,14 +69,14 @@ const Navbox = styled.div`
     position: fixed;
     width: 100%;
     background-color: #020202;
-    border-top: 1px solid ${colors.brand};
+    // border-top: 1px solid ${colors.brand};
     transition: all 0.3s ease-in;
     top: ${dimensions.headerHeight};
     left: ${props => (props.closed ? "-100%" : "0")};
   }
 
   a[aria-current="page"] {
-    border-bottom: 1px solid ${colors.brand};
+    border-bottom: 1px solid ${colors.lightest};
   }
 `
 
@@ -92,7 +93,7 @@ const Hamburger = styled.div`
   ::after {
     width: 30px;
     height: 3px;
-    background-color: ${colors.brand};
+    background-color: ${colors.lightest};
     content: "";
     position: absolute;
     transition: all 0.3s linear;

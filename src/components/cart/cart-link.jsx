@@ -15,7 +15,7 @@ const StyledLink = styled(Link)`
   @media (max-width: ${breakpoints.desktop}) {
     display: flex;
     align-items: center;
-    color: #C00A0A;
+    // color: #C00A0A;
   }
 `
 

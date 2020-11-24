@@ -55,7 +55,7 @@ const IndexPage = ({data}) => {
         <Title>Dark Ace Feature</Title>
         <StyledProductListing collection='pre-order' isFeature={true} />
         <Title>Dark Ace Specials</Title>
-        <StyledProductListing collection='frontpage' />
+        <StyledProductListing collection='specials' />
         <Title>Dark Ace Standards</Title>
         <StyledProductListing collection='standards' />
         <Title>2020 Ledgestone Commercial</Title>
