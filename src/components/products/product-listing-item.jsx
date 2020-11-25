@@ -44,7 +44,7 @@ const Thumbnail = styled.button`
 `
 
 const ImgLink = styled(Link)`
-  display: ${props => props.visible ? 'block' : 'none'};
+  display: ${props => props.showing ? 'block' : 'none'};
   overflow: hidden;
   position: relative;
 
@@ -73,7 +73,8 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature }) => 
   const images = product.images.map((variant, ind) => (
         <ImgLink
             to={`/shop/${product.handle}`}
-            visible={index === ind}
+            showing={index === ind}
+            key={variant.id}
         >
             <Img 
                 fluid={variant.localFile.childImageSharp.fluid} 
@@ -94,7 +95,11 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature }) => 
         {images.length > 1 ?
           <ThumbnailContainer>
             {product.thumbs.map((variant, ind) => (
-              <Thumbnail onClick={() => setIndex(ind)}>
+              <Thumbnail 
+                onClick={() => setIndex(ind)}
+                key={variant.id}
+                
+                >
                 <Img 
                     fixed={variant.localFile.childImageSharp.fixed} 
                     alt={product.title}

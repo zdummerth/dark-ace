@@ -1,21 +1,19 @@
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
-import React, { useState, useContext } from 'react'
-
-
+import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { FaFacebookF, FaInstagram, FaEllipsisV } from 'react-icons/fa';
-import { FiMail } from 'react-icons/fi';
 
 import { StoreContext } from '../../context/StoreContextProvider'
-import { RiShoppingCartLine } from 'react-icons/ri';
-
 
 import { breakpoints, dimensions, colors } from '../../utils/styles';
 
-import Logo from "./logo"
+import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import { AiOutlineHome } from 'react-icons/ai';
+import { FiMail } from 'react-icons/fi';
+import { RiShoppingCartLine } from 'react-icons/ri';
 
-import BoneBasketSVG from '../shared/boneBasket'
+import Logo from "./logo"
+import BoneBasketSVG from '../shared/boneBasketSVG'
 
 
 
@@ -36,11 +34,6 @@ const Nav = styled.nav`
 
   background-image: linear-gradient(to bottom right, ${colors.brand} 0%, ${colors.background} 28%, ${colors.background} 60%, ${colors.brand} 100%);
 
-  button {
-    background: none;
-    outline: 0;
-    border: 0;
-  }
 `
 
 
@@ -52,27 +45,27 @@ const Navbox = styled.div`
   //same height as spotify
   height: 120px;
 
-  @media (max-width: ${breakpoints.desktop}) {
-    // flex-direction: column;
-    justify-content: space-around;
-    position: fixed;
-    z-index: 40;
-    background-image: linear-gradient(to bottom left, ${colors.brand} 0%, ${colors.background} 28%, ${colors.background} 60%, ${colors.brand} 100%);
-    transition: all .4s ease-in;
-    top: ${dimensions.headerHeight};
-    right: ${props => (props.closed ? "-100%" : "0")};
+  justify-content: space-around;
+  position: fixed;
+  z-index: 40;
+  background-image: linear-gradient(to bottom left, ${colors.brand} 0%, ${colors.background} 28%, ${colors.background} 60%, ${colors.brand} 100%);
+  transition: all .4s ease-in;
+  top: ${dimensions.headerHeight};
+  right: ${props => (props.closed ? "-100%" : "0")};
+
+  a :focus {
+    outline: 0 !important;
   }
 
-  a {
-    display: block;
-    margin-top; 5px;
+  p {
+    margin: 0;
+  }
+
+  @media (min-width: ${breakpoints.desktop}) {
+
   }
 `
 
-
-const SocialsWrapper = styled.div`
-  display: flex;
-`
 
 const IconWrapper = styled.div`
   display: flex;
@@ -92,6 +85,8 @@ const IconWrapper = styled.div`
 
 `
 
+const Toggle = styled.button``
+
 const StyledBoneBasketSVG = styled(BoneBasketSVG)`
   height: 85%;
   fill: white;
@@ -102,39 +97,14 @@ const StyledBoneBasketSVG = styled(BoneBasketSVG)`
 
 
 
-const Header = () => {
+const Header = ({ navbarClosed, setNavbarClosed }) => {
 
   const {
     store: { checkout: { lineItems } },
   } = useContext(StoreContext)
   
   const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
-
-
-  const [navbarClosed, setNavbarClosed] = useState(true);
   
-
-  const socials = 
-    <>
-      <SocialsWrapper>
-        <Link
-         as='a' 
-         href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' 
-         target='_blank' 
-         rel="noopener"
-        >
-          <FaFacebookF />
-        </Link>
-        <Link 
-          as='a' 
-          href='https://www.instagram.com/darkaceapparel/' 
-          target='_blank' 
-          rel="noopener"
-        >
-          <FaInstagram />
-      </Link>
-      </SocialsWrapper>
-    </>
 
   return (
       <>
@@ -153,33 +123,56 @@ const Header = () => {
           </Link>
         }
 
-        <button
+        <Toggle
           onClick={() => setNavbarClosed(!navbarClosed)}
         >
           <IconWrapper>
             <StyledBoneBasketSVG closed={navbarClosed}/>
           </IconWrapper>
-        </button>
+        </Toggle>
 
-      </Nav>
-      <Navbox closed={navbarClosed}>
-          <Link to='/cart'>
+        <Navbox closed={navbarClosed}>
+
+          <Link 
+            to='/'
+            onClick={() => setNavbarClosed(true)}  
+          >
             <IconWrapper>
-              <RiShoppingCartLine />
-                <span>{totalQuantity}</span>
+              <AiOutlineHome />
             </IconWrapper>
           </Link>
-          <Link to='/cart'>
-            <IconWrapper>
-              <RiShoppingCartLine />
-            </IconWrapper>
-          </Link>
-          <Link to='/cart'>
+
+          <Link 
+            to='/contact'
+            onClick={() => setNavbarClosed(true)}
+          >
             <IconWrapper>
               <FiMail />
             </IconWrapper>
           </Link>
+
+          <a 
+            href='https://www.instagram.com/darkaceapparel/' 
+            target='_blank' 
+            rel="noreferrer"
+          >
+            <IconWrapper>
+              <FaInstagram />
+            </IconWrapper>
+          </a>
+
+          <a
+            href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' 
+            target='_blank' 
+            rel="noreferrer"
+            >
+            <IconWrapper>
+              <FaFacebookF />
+            </IconWrapper>
+          </a>
+
         </Navbox>
+      </Nav>
       </>
   )
 }

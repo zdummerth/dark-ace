@@ -43,6 +43,7 @@ const ProductListing = ({ className, collection, isFeature }) => {
                 }
               }
               images {
+                id
                 localFile {
                   childImageSharp {
                     fluid(maxWidth: 900) {
@@ -52,6 +53,7 @@ const ProductListing = ({ className, collection, isFeature }) => {
                 }
               }
               thumbs: images {
+                id
                 localFile {
                   childImageSharp {
                     fixed(height: 60, width: 48) {
@@ -82,6 +84,7 @@ const ProductListing = ({ className, collection, isFeature }) => {
           product={node} 
           isSingleItem={isSingleItem}
           isFeature={isFeature}
+          key={node.shopifyId}
            />)}
     </Container>
   )

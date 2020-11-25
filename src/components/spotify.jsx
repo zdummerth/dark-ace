@@ -47,7 +47,7 @@ const Spotify = () => {
           width="100%"
           height={minimized ? '80' : '380'} 
           className='widget'
-          frameborder="0" 
+          frameBorder="0" 
           allowtransparency="true" 
           allow="encrypted-media"
           title='Dark Ace Spotify Playlist'>    

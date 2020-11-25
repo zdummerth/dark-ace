@@ -1,10 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import styled, { createGlobalStyle } from "styled-components"
 
 import Header from './header'
-import Footer from './footer'
+// import Footer from './footer'
 import Spotify from '../spotify'
 
 import { dimensions, colors } from '../../utils/styles';
@@ -23,6 +23,16 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
     color: inherit;
+
+    //removes blue background when clicking
+    -webkit-tap-highlight-color: transparent;
+
+
+  }
+  button {
+    background: none;
+    outline: 0;
+    border: 0;
   }
 `
 const Wrapper = styled.div`
@@ -31,8 +41,6 @@ const Wrapper = styled.div`
   align-items: center;
   min-height: 100vh;
   overflow: hidden;
-  // background-image: linear-gradient(to right, ${colors.background} 0%, ${colors.brand} 50%, ${colors.brand} 50%, ${colors.background} 100%);
-
 
 `
 
@@ -52,7 +60,7 @@ const HeaderMargin = styled.div`
 `
 
 
-const Layout = ({ children }) => {
+const Layout = ({ children, location }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -63,17 +71,26 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const [navbarClosed, setNavbarClosed] = useState(true);
+
+
   return (
     <>
       <GlobalStyle />
       <Wrapper>
-        <Header siteTitle={data.site.siteMetadata.title} />
+        <Header 
+          siteTitle={data.site.siteMetadata.title} 
+          navbarClosed={navbarClosed}
+          setNavbarClosed={setNavbarClosed}
+        />
         <HeaderMargin />
         <Spotify />
-        <ContentWrapper>
+        <ContentWrapper 
+          onClick={() => setNavbarClosed(true)}
+        >
           {children}
         </ContentWrapper>
-        <Footer />
+        {/* <Footer /> */}
       </Wrapper>
     </>
   )
