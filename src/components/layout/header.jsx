@@ -1,176 +1,106 @@
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React, { useState, useContext } from 'react'
-import styled, { createGlobalStyle } from 'styled-components'
-import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+
+
+import styled from 'styled-components'
+import { FaFacebookF, FaInstagram, FaEllipsisV } from 'react-icons/fa';
+import { FiMail } from 'react-icons/fi';
+
 import { StoreContext } from '../../context/StoreContextProvider'
+import { RiShoppingCartLine } from 'react-icons/ri';
+
 
 import { breakpoints, dimensions, colors } from '../../utils/styles';
 
 import Logo from "./logo"
 
-import CartLink from '../cart/cart-link'
+import BoneBasketSVG from '../shared/boneBasket'
 
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    overflow-y: ${props => (props.closed ? "" : "hidden")};
-    height: ${props => (props.closed ? "" : "100vh")};
-  }
-`
-
-const HeaderWrapper = styled.header`
-  margin-bottom: 2px;
-  width: 100%;
-  font-weight: bold;
 
 
-  @media (min-width: ${breakpoints.desktop}) {
-    font-size: 1rem;
-  }
-`
+
 
 const Nav = styled.nav`
   height: ${dimensions.headerHeight};
   width: 100%;
   display: flex;
-  position: fixed;
-  // background: ${colors.background};
-  background-image: linear-gradient(to bottom right, ${colors.brand} 0%, ${colors.background} 20%, ${colors.background} 80%, ${colors.brand} 100%);
-  // border-bottom: 1px solid ${colors.brand};
-  // box-shadow: 0 1px 5px ${colors.brand};
-
-  top: 0;
   justify-content: space-around;
-  text-transform: uppercase;
-  z-index: 50;
   align-items: center;
-`
+  overflow: hidden;
 
-const Toggle = styled.div`
-  display: none;
-  height: 100%;
-  cursor: pointer;
+  position: fixed;
+  top: 0;
+  z-index: 50;
 
-  @media (max-width: ${breakpoints.desktop}) {
-    display: flex;
+  background-image: linear-gradient(to bottom right, ${colors.brand} 0%, ${colors.background} 28%, ${colors.background} 60%, ${colors.brand} 100%);
+
+  button {
+    background: none;
+    outline: 0;
+    border: 0;
   }
 `
+
 
 const Navbox = styled.div`
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  height: 100%;
+  width: 100%;
+
+  //same height as spotify
+  height: 120px;
 
   @media (max-width: ${breakpoints.desktop}) {
-    flex-direction: column;
-    justify-content: flex-start;
+    // flex-direction: column;
+    justify-content: space-around;
     position: fixed;
-    width: 100%;
-    background-color: #020202;
-    // border-top: 1px solid ${colors.brand};
-    transition: all 0.3s ease-in;
+    z-index: 40;
+    background-image: linear-gradient(to bottom left, ${colors.brand} 0%, ${colors.background} 28%, ${colors.background} 60%, ${colors.brand} 100%);
+    transition: all .4s ease-in;
     top: ${dimensions.headerHeight};
-    left: ${props => (props.closed ? "-100%" : "0")};
+    right: ${props => (props.closed ? "-100%" : "0")};
   }
 
-  a[aria-current="page"] {
-    border-bottom: 1px solid ${colors.lightest};
-  }
-`
-
-const Hamburger = styled.div`
-  background-color: ${colors.brand};
-  width: 30px;
-  height: 3px;
-  transition: all .3s linear;
-  align-self: center;
-  position: relative;
-  transform: ${props => (props.closed ? "inherit" : "rotate(-45deg)")};
-
-  ::before,
-  ::after {
-    width: 30px;
-    height: 3px;
-    background-color: ${colors.lightest};
-    content: "";
-    position: absolute;
-    transition: all 0.3s linear;
-  }
-
-  ::before {
-    transform: ${props =>
-      props.closed ? "rotate(0deg)" : "rotate(-90deg) translate(-10px, 0px)"};
-    top: -10px;
-  }
-
-  ::after {
-    opacity: ${props => (props.closed ? "1" : "0")};
-    transform: ${props => (props.closed ? "rotate(0deg) " : "rotate(90deg)")};
-    top: 10px;
+  a {
+    display: block;
+    margin-top; 5px;
   }
 `
-const LogoLink = styled(Link)`
-  margin-left: 5%;
+
+
+const SocialsWrapper = styled.div`
+  display: flex;
 `
-const StyledLink = styled(Link)`
-  display: inline-block;
-  text-decoration: none;
-  white-space: nowrap;
-  color: white;
-  margin: 1rem;
-  outline: 0;
-  transition: all 200ms ease-in;
-  position: relative;
 
-  :after {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 0%;
-    content: ".";
-    color: transparent;
-    background: ${colors.brand};
-    height: 1px;
-    transition: all 0.4s ease-in;
-  }
-
-  :hover {
-    color: ${colors.brand};
-    ::after {
-      width: 100%;
-    }
-  }
-
-  @media (max-width: ${breakpoints.desktop}) {
-    padding: 20px 0;
-    font-size: 1.5rem;
-    z-index: 6;
-  }
-`
 const IconWrapper = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to bottom right, ${colors.brand}, ${colors.background} 50%);
+  box-shadow: 0px 0px 5px ${colors.lightest};
 
-  .icon {
+  width: 60px;
+  height: 60px;
 
+  border-radius: 50%;
+  font-size: 1.5rem;
+  span {
+    font-size: 1rem;
   }
-`
-const FbIcon = styled(FaFacebookF)`
-  font-size: 22px;
 
-  @media (max-width: 900px) {
-    font-size: 28px;
-  }
 `
-const IgIcon = styled(FaInstagram)`
-  font-size: 22px;
 
-  @media (max-width: 900px) {
-    font-size: 28px;
-  }
+const StyledBoneBasketSVG = styled(BoneBasketSVG)`
+  height: 85%;
+  fill: white;
+  transition: all .4s ease-in;
+
+  transform: ${props => (props.closed ? "" : "rotate(.25turn)")};
 `
+
+
 
 const Header = () => {
 
@@ -180,69 +110,77 @@ const Header = () => {
   
   const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
 
-  const MenuItems = [
-    {
-      path: '/',
-      title: 'Home'
-    },
-    {
-      path: '/contact',
-      title: 'Contact'
-    },
-    {
-      path: '/shop',
-      title: 'Shop'
-    },
-    // {
-    //   path: '/wholesale',
-    //   title: 'Wholesale'
-    // },
-    {
-      path: '/cart',
-      title: `Cart (${totalQuantity})`
-    }
-  ]
 
   const [navbarClosed, setNavbarClosed] = useState(true);
   
-  const links = MenuItems.map((menuItem, index) => (
-    <StyledLink
-      key={index} 
-      to={menuItem.path}
-      onClick={() => setNavbarClosed(true)}
-    >
-      {menuItem.title}
-    </StyledLink>
-  ))
 
-  const extLinks = 
+  const socials = 
     <>
-      <IconWrapper>
-        <StyledLink as='a' href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' target='_blank' rel="noopener"><FbIcon /></StyledLink>
-        <StyledLink as='a' href='https://www.instagram.com/darkaceapparel/' target='_blank' rel="noopener"><IgIcon /></StyledLink>
-      </IconWrapper>
+      <SocialsWrapper>
+        <Link
+         as='a' 
+         href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' 
+         target='_blank' 
+         rel="noopener"
+        >
+          <FaFacebookF />
+        </Link>
+        <Link 
+          as='a' 
+          href='https://www.instagram.com/darkaceapparel/' 
+          target='_blank' 
+          rel="noopener"
+        >
+          <FaInstagram />
+      </Link>
+      </SocialsWrapper>
     </>
 
   return (
-    <HeaderWrapper>
+      <>
       <Nav>
-        <Toggle
-            navbarClosed={navbarClosed}
-            onClick={() => setNavbarClosed(!navbarClosed)}
-          >
-          <Hamburger closed={navbarClosed} />
-        </Toggle>
-        <LogoLink to='/'>
+
+        <Link to='/'>
             <Logo />
-        </LogoLink>
-        <CartLink useIcon={true}/>
-        <Navbox closed={navbarClosed}>
-          <GlobalStyle closed={navbarClosed}/>
-          {links}
-          {extLinks}
-        </Navbox>
+        </Link>
+
+        {totalQuantity > 0 && 
+          <Link to='/cart'>
+            <IconWrapper>
+              <RiShoppingCartLine />
+                <span>{totalQuantity}</span>
+            </IconWrapper>
+          </Link>
+        }
+
+        <button
+          onClick={() => setNavbarClosed(!navbarClosed)}
+        >
+          <IconWrapper>
+            <StyledBoneBasketSVG closed={navbarClosed}/>
+          </IconWrapper>
+        </button>
+
       </Nav>
-    </HeaderWrapper>
+      <Navbox closed={navbarClosed}>
+          <Link to='/cart'>
+            <IconWrapper>
+              <RiShoppingCartLine />
+                <span>{totalQuantity}</span>
+            </IconWrapper>
+          </Link>
+          <Link to='/cart'>
+            <IconWrapper>
+              <RiShoppingCartLine />
+            </IconWrapper>
+          </Link>
+          <Link to='/cart'>
+            <IconWrapper>
+              <FiMail />
+            </IconWrapper>
+          </Link>
+        </Navbox>
+      </>
   )
 }
 
