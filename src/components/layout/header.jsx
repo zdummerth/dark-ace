@@ -49,7 +49,7 @@ const Navbox = styled.div`
   position: fixed;
   z-index: 40;
   background-image: linear-gradient(to bottom left, ${colors.brand} 0%, ${colors.background} 28%, ${colors.background} 60%, ${colors.brand} 100%);
-  transition: all .4s ease-in;
+  transition: all .25s ease-in;
   top: ${dimensions.headerHeight};
   right: ${props => (props.closed ? "-100%" : "0")};
 
@@ -90,7 +90,7 @@ const Toggle = styled.button``
 const StyledBoneBasketSVG = styled(BoneBasketSVG)`
   height: 85%;
   fill: white;
-  transition: all .4s ease-in;
+  transition: all .25s ease-in;
 
   transform: ${props => (props.closed ? "" : "rotate(.25turn)")};
 `
@@ -135,7 +135,7 @@ const Header = ({ navbarClosed, setNavbarClosed }) => {
 
           <Link 
             to='/'
-            onClick={() => setNavbarClosed(true)}  
+            // onClick={() => setNavbarClosed(true)}  
           >
             <IconWrapper>
               <AiOutlineHome />
