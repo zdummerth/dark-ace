@@ -49,20 +49,20 @@ const IndexPage = ({data}) => {
     <>
       <SEO title="Home" />
       <Container>
-        <Banner>
-          <Img fluid={data.parked.childImageSharp.fluid} />
-        </Banner>
-        <Title>Dark Ace Feature</Title>
-        <StyledProductListing collection='pre-order' isFeature={true} />
-        <Title>Dark Ace Specials</Title>
-        <StyledProductListing collection='specials' />
-        <Title>Dark Ace Standards</Title>
-        <StyledProductListing collection='standards' />
-        <Title>2020 Ledgestone Commercial</Title>
-        <Youtube style={{alignSelf: 'center'}} />
         <ImgWrapper>
           <Img fluid={data.motto.childImageSharp.fluid} />
         </ImgWrapper>
+        <Title>Feature</Title>
+        <StyledProductListing collection='pre-order' isFeature={true} />
+        <Title>Specials</Title>
+        <StyledProductListing collection='specials' />
+        <Title>Standards</Title>
+        <StyledProductListing collection='standards' />
+        <Title>2020 Ledgestone Commercial</Title>
+        <Youtube style={{alignSelf: 'center'}} />
+        <Banner>
+          <Img fluid={data.parked.childImageSharp.fluid} />
+        </Banner>
       </Container>
 
     </>
@@ -78,7 +78,7 @@ query {
       }
     }
   }
-  parked: file(relativePath: { eq: "parked.png" }) {
+  parked: file(relativePath: { eq: "mvp.png" }) {
     childImageSharp {
       fluid(maxWidth: 1200) {
         ...GatsbyImageSharpFluid

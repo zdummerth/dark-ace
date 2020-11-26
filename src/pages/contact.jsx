@@ -28,6 +28,12 @@ const Overlay = styled.div`
   text-align: center;
 `
 
+const Banner = styled.div`
+  width: 100%;
+  max-width: 1500px;
+  align-self: center;
+`
+
 const ContactPage = ({data}) => {
     return (
       <>
@@ -45,6 +51,9 @@ const ContactPage = ({data}) => {
               <BasicForm />
             </Overlay>
         </BgWrapper>
+        <Banner>
+          <Img fluid={data.parked.childImageSharp.fluid} />
+        </Banner>
       </>
     )
 }
@@ -52,6 +61,13 @@ const ContactPage = ({data}) => {
 export const query = graphql`
 query {
   boneBasket: file(relativePath: { eq: "bone-basket.jpg" }) {
+    childImageSharp {
+      fluid(maxWidth: 1000) {
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+  parked: file(relativePath: { eq: "parked.png" }) {
     childImageSharp {
       fluid(maxWidth: 1000) {
         ...GatsbyImageSharpFluid

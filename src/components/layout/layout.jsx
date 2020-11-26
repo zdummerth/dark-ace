@@ -84,7 +84,7 @@ const Layout = ({ children, location }) => {
           setNavbarClosed={setNavbarClosed}
         />
         <HeaderMargin />
-        <Spotify />
+        {/* <Spotify /> */}
         <ContentWrapper 
           onClick={() => setNavbarClosed(true)}
         >

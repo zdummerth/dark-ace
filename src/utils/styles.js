@@ -26,6 +26,7 @@ export const colors = {
   lemon: `#ffdf37`,
   grayBackground: '#262626',
   background: '#020202'
+
 };
 
 
