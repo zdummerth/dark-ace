@@ -53,12 +53,19 @@ const IndexPage = ({data}) => {
         <Banner>
           <Img fluid={data.parked.childImageSharp.fluid} />
         </Banner>
-        <Title>Dark Ace Feature</Title>
+        <Title>Feature</Title>
         <StyledProductListing collection='pre-order' isFeature={true} showThumbs={false} />
-        <Title>Dark Ace Specials</Title>
+        <Title>Specials</Title>
         <StyledProductListing collection='specials' showThumbs={false} />
-        <Title>Dark Ace Standards</Title>
+        <Title>Standards</Title>
         <StyledProductListing collection='standards' showThumbs={true} />
+        <Title>Gift Card</Title>
+        <StyledProductListing 
+          collection='gift-cards' 
+          showThumbs={false} 
+          isFeature={true} 
+          isGiftCard={true} 
+        />
         <Title>2020 Ledgestone Commercial</Title>
         <Youtube style={{alignSelf: 'center'}} />
         <ImgWrapper>

@@ -61,14 +61,24 @@ const ImgLink = styled(Link)`
   }
 `
 
-const ProductListingItem = ({ product, isSingleItem, className, isFeature, showThumbs }) => {
+const ProductListingItem = ({ product, isSingleItem, className, isFeature, showThumbs, isGiftCard }) => {
   const [index, setIndex] = useState(0);
 
-  const price = Intl.NumberFormat(undefined, {
+  const minPrice = Intl.NumberFormat(undefined, {
     currency: product.priceRange.minVariantPrice.currencyCode,
     minimumFractionDigits: 2,
     style: 'currency',
   }).format(product.priceRange.minVariantPrice.amount)
+
+  const maxPrice = Intl.NumberFormat(undefined, {
+    currency: product.priceRange.minVariantPrice.currencyCode,
+    minimumFractionDigits: 2,
+    style: 'currency',
+  }).format(product.priceRange.maxVariantPrice.amount);
+
+  const price = isGiftCard ? `${minPrice} - ${maxPrice}` : minPrice;
+
+  console.log({isGiftCard, minPrice, maxPrice, price})
 
   const images = product.images.map((variant, ind) => (
         <ImgLink
@@ -87,7 +97,8 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
         className={className} 
         key={product.shopifyId} 
         isSingleItem={isSingleItem}
-        isFeature={isFeature}>
+        isFeature={isFeature}
+      >
         <ImgContainer>
             {images}
         </ImgContainer>
