@@ -12,8 +12,8 @@ const StyledForm = styled(Form)`
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    height: 80%;
-    max-height: 500px;
+    // height: 80%;
+    // max-height: 500px;
     width: 90%;
     max-width: 600px;
     margin: 0 auto;

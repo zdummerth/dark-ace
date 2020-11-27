@@ -9,15 +9,17 @@ import Youtube from '../components/youtube'
 
 import SEO from "../components/seo"
 
-// import { colors } from '../utils/styles';
+import { colors } from '../utils/styles';
 
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-
+  background: linear-gradient(to bottom right, ${colors.background} 0%, ${colors.background} 60%, ${colors.brand} 100%);
+  padding-bottom: 2rem;
 `
+
 
 const Title = styled.h2`
   text-align: center;
@@ -29,13 +31,7 @@ const ImgWrapper = styled.div`
   width: 100%;
   align-self: center;
   max-width: 1200px;
-  padding: 3rem 0;
-`
-
-const Banner = styled.div`
-  width: 100%;
-  max-width: 1500px;
-  align-self: center;
+  // padding: 3rem 0;
 `
 
 const StyledProductListing = styled(ProductListing)`
@@ -50,7 +46,7 @@ const IndexPage = ({data}) => {
       <SEO title="Home" />
       <Container>
         <ImgWrapper>
-          <Img fluid={data.motto.childImageSharp.fluid} />
+          <Img fluid={data.parked.childImageSharp.fluid} />
         </ImgWrapper>
         <Title>Feature</Title>
         <StyledProductListing collection='pre-order' isFeature={true} />
@@ -60,9 +56,6 @@ const IndexPage = ({data}) => {
         <StyledProductListing collection='standards' />
         <Title>2020 Ledgestone Commercial</Title>
         <Youtube style={{alignSelf: 'center'}} />
-        <Banner>
-          <Img fluid={data.parked.childImageSharp.fluid} />
-        </Banner>
       </Container>
 
     </>
@@ -78,7 +71,7 @@ query {
       }
     }
   }
-  parked: file(relativePath: { eq: "mvp.png" }) {
+  parked: file(relativePath: { eq: "new-parked.jpg" }) {
     childImageSharp {
       fluid(maxWidth: 1200) {
         ...GatsbyImageSharpFluid

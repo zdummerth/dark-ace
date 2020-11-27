@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import styled, { createGlobalStyle } from "styled-components"
 
 import Header from './header'
-// import Footer from './footer'
+import Footer from './footer'
 import Spotify from '../spotify'
 
 import { dimensions, colors } from '../../utils/styles';
@@ -45,12 +45,13 @@ const Wrapper = styled.div`
 `
 
 const ContentWrapper = styled.main`
+  display: flex;
+  flex-direction: column;
   flex: 1;
   position: relative;
   width: 100%;
-  max-width: 1500px;
-  margin: 0 auto;
-  background-image: linear-gradient(to right, ${colors.background} 0%, ${colors.grayBackground} 50%, ${colors.grayBackground} 50%, ${colors.background} 100%);
+  // max-width: 1500px;
+  // margin-bottom: 2rem;
 `
 
 // When header is fixed, it's removed from doc flow
@@ -90,7 +91,7 @@ const Layout = ({ children, location }) => {
         >
           {children}
         </ContentWrapper>
-        {/* <Footer /> */}
+        <Footer />
       </Wrapper>
     </>
   )

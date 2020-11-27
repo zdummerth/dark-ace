@@ -5,7 +5,7 @@ import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 
 
 
-import { breakpoints, colors } from '../../utils/styles';
+import { breakpoints, colors, dimensions } from '../../utils/styles';
 
 
 const StyledFooter = styled('footer')`
@@ -14,9 +14,10 @@ const StyledFooter = styled('footer')`
   align-items: center;
   color: ${colors.brand};
   width: 100%;
-  padding: 0 2vh;
-  // margin-top: 3vh;
-  background-color: ${colors.background};
+  background-color: ${colors.grayBackground};
+  color: ${colors.lightest};
+  height: ${dimensions.headerHeight};
+
 
   @media (max-width: ${breakpoints.desktop}px) {
     flex-direction: column;
@@ -27,23 +28,28 @@ const StyledFooter = styled('footer')`
 `
 
 const IconWrapper = styled.div`
-  // display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // background-image: linear-gradient(to bottom right, ${colors.brand}, ${colors.background} 60%);
+  // box-shadow: 0px 0px 10px ${colors.lightest};
 
-  @media (max-width: 900px) {
-    // margin-top: 2rem;
+  width: 60px;
+  height: 60px;
+
+  position: relative;
+
+  // border-radius: 50%;
+  font-size: 1.5rem;
+  span {
+    font-size: 1rem;
   }
+
 `
 const FbIcon = styled(FaFacebookF)`
-  font-size: 22px;
-  @media (max-width: 900px) {
-    font-size: 28px;
-  }
+
 `
 const IgIcon = styled(FaInstagram)`
-  font-size: 22px;
-  @media (max-width: 900px) {
-    font-size: 28px;
-  }
 `
 
 
@@ -51,23 +57,27 @@ const Footer = () => {
   return (
     <StyledFooter>
         {/* <StyledLink as='a' href='mailto:darkaceapparel@gamil.com'>DARKACEAPPAREL@GMAIL.COM</StyledLink> */}
-        <IconWrapper>
         <a 
           href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' 
           target='_blank' 
           rel="noreferrer"
           
           >
-            <FbIcon />
+          <IconWrapper>
+              <FbIcon />
+          </IconWrapper>
+
         </a>
+        <p>Dark Ace Apparel</p>
         <a 
           href='https://www.instagram.com/darkaceapparel/' 
           target='_blank' 
           rel="noreferrer"
           >
+          <IconWrapper>
             <IgIcon />
+          </IconWrapper>
           </a>
-        </IconWrapper>
     </StyledFooter>
   )
 }

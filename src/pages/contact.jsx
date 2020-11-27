@@ -6,7 +6,16 @@ import styled from 'styled-components'
 import SEO from '../components/seo'
 import BasicForm from '../components/form'
 
+import BoneBasketSVG from '../components/shared/boneBasketSVG'
+import { colors } from '../utils/styles';
 
+
+const Container = styled.div`
+  flex: 1;
+  background: linear-gradient(to bottom right, ${colors.background} 0%, ${colors.background} 60%, ${colors.brand} 100%);
+  text-align: center;
+  width: 100%;
+`
 const BgWrapper = styled.div`
   position: relative;
   color: white;
@@ -24,7 +33,7 @@ const Overlay = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0,0,0,.7);
+  background: rgba(0,0,0,.6);
   text-align: center;
 `
 
@@ -36,9 +45,9 @@ const Banner = styled.div`
 
 const ContactPage = ({data}) => {
     return (
-      <>
+      <Container>
         <SEO title='Contact' />
-        <BgWrapper>
+        {/* <BgWrapper>
             <Img 
                 fluid={data.boneBasket.childImageSharp.fluid} 
                 alt={'bone basket background'}
@@ -50,11 +59,11 @@ const ContactPage = ({data}) => {
               <h1>Contact Us</h1>
               <BasicForm />
             </Overlay>
-        </BgWrapper>
-        <Banner>
-          <Img fluid={data.parked.childImageSharp.fluid} />
-        </Banner>
-      </>
+        </BgWrapper> */}
+
+        <h1>Contact Us</h1>
+        <BasicForm />
+      </Container>
     )
 }
 
