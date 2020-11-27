@@ -74,8 +74,8 @@ const IconWrapper = styled.div`
 `
 
 const Toggle = styled.div`
-  transform: ${props => (props.closed ? "" : "rotate(.25turn)")};
-  transition: all .3s ease-in;
+  // transform: ${props => (props.closed ? "" : "rotate(.25turn)")};
+  // transition: all .3s ease-in;
 
 `
 
@@ -146,6 +146,34 @@ const InternalLinks = styled.div`
 
 `
 
+const CartWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  position: relative;
+  font-size: 1.75rem;
+
+
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 10px;
+    left: 17px;
+
+    background-color: ${colors.brand};
+    border-radius: 50%;
+    font-size: 1rem;
+    width: 22px;
+    height: 22px;
+
+  }
+
+`
+
 const Header = ({ navbarClosed, setNavbarClosed }) => {
 
   const {
@@ -163,10 +191,10 @@ const Header = ({ navbarClosed, setNavbarClosed }) => {
           onClick={() => setNavbarClosed(!navbarClosed)}
           closed={navbarClosed}
         >
-          <IconWrapper shadow>
+          {/* <IconWrapper> */}
             <Hamburger closed={navbarClosed} />
             {/* <StyledBoneBasketSVG closed={navbarClosed}/> */}
-          </IconWrapper>
+          {/* </IconWrapper> */}
         </Toggle>
 
         <Link to='/'>
@@ -174,10 +202,11 @@ const Header = ({ navbarClosed, setNavbarClosed }) => {
         </Link>
 
         <Link to='/cart'>
-            <IconWrapper shadow={true}>
+            <CartWrapper>
+            <span>{totalQuantity}</span>
+
               <RiShoppingCartLine />
-                <span>{totalQuantity}</span>
-            </IconWrapper>
+            </CartWrapper>
           </Link>
 
         <Navbox closed={navbarClosed}>
