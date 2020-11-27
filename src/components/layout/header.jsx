@@ -40,7 +40,7 @@ const Nav = styled.nav`
 const Navbox = styled.div`
   position: fixed;
   top: ${dimensions.headerHeight};
-  right: ${props => (props.closed ? "-100%" : "0")};
+  left: ${props => (props.closed ? "-100%" : "0")};
   z-index: 40;
 
   width: 100%;
@@ -56,8 +56,9 @@ const IconWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-image: linear-gradient(to bottom right, ${colors.brand}, ${colors.background} 60%);
-  // background: ${colors.lightest};
-  box-shadow: 0px 0px 20px ${colors.lightest};
+  // box-shadow: 0px 0px 20px ${colors.lightest};
+  box-shadow: ${props => (props.shadow ? `0px 0px 20px ${colors.lightest}` : "none")};
+
 
   width: 60px;
   height: 60px;
@@ -73,7 +74,7 @@ const IconWrapper = styled.div`
 `
 
 const Toggle = styled.div`
-  transform: ${props => (props.closed ? "" : "rotate(.5turn)")};
+  transform: ${props => (props.closed ? "" : "rotate(.25turn)")};
   transition: all .3s ease-in;
 
 `
@@ -99,7 +100,7 @@ const Hamburger = styled.div`
   position: relative;
   transform: ${props => (props.closed ? "inherit" : "rotate(-45deg)")};
 
-  opacity: ${props => (props.closed ? "0" : "1")};
+  // opacity: ${props => (props.closed ? "0" : "1")};
 
 
   ::before,
@@ -158,28 +159,26 @@ const Header = ({ navbarClosed, setNavbarClosed }) => {
       <>
       <Nav>
 
-        <Link to='/'>
-            <Logo />
-        </Link>
-
-        {totalQuantity > 0 && 
-          <Link to='/cart'>
-            <IconWrapper>
-              <RiShoppingCartLine />
-                <span>{totalQuantity}</span>
-            </IconWrapper>
-          </Link>
-        }
-
         <Toggle
           onClick={() => setNavbarClosed(!navbarClosed)}
           closed={navbarClosed}
         >
-          <IconWrapper>
+          <IconWrapper shadow>
             <Hamburger closed={navbarClosed} />
-            <StyledBoneBasketSVG closed={navbarClosed}/>
+            {/* <StyledBoneBasketSVG closed={navbarClosed}/> */}
           </IconWrapper>
         </Toggle>
+
+        <Link to='/'>
+            <Logo />
+        </Link>
+
+        <Link to='/cart'>
+            <IconWrapper shadow={true}>
+              <RiShoppingCartLine />
+                <span>{totalQuantity}</span>
+            </IconWrapper>
+          </Link>
 
         <Navbox closed={navbarClosed}>
           <InternalLinks>
@@ -189,7 +188,7 @@ const Header = ({ navbarClosed, setNavbarClosed }) => {
           >
             <p>Home</p>
 
-            <IconWrapper>
+            <IconWrapper shadow>
               <AiOutlineHome />
             </IconWrapper>
           </Link>
@@ -199,7 +198,7 @@ const Header = ({ navbarClosed, setNavbarClosed }) => {
             onClick={() => setNavbarClosed(true)}
           >
             <p>Contact</p>
-            <IconWrapper>
+            <IconWrapper shadow>
               <FiMail />
             </IconWrapper>
           </Link>
