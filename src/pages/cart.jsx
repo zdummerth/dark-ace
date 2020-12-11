@@ -72,7 +72,7 @@ const Cart = () => {
         <div id='lineItems'>
           {lineItems}
         </div>
-        <StyledLink to='/shop'>Continue Shopping</StyledLink>
+        <StyledLink to='/'>Continue Shopping</StyledLink>
       </Container>
   )
 }
