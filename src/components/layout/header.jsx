@@ -186,13 +186,9 @@ const Header = () => {
       path: '/contact',
       title: 'Contact'
     },
-    {
-      path: '/shop',
-      title: 'Shop'
-    },
     // {
-    //   path: '/wholesale',
-    //   title: 'Wholesale'
+    //   path: '/shop',
+    //   title: 'Shop'
     // },
     {
       path: '/cart',

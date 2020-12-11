@@ -61,6 +61,36 @@ const ImgLink = styled(Link)`
   }
 `
 
+const CompareAtPriceWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+const CompareAtPrice = styled.div`
+  position: relative;
+  font-size: 1.75rem;
+  margin-right: 20px;
+
+  .line-through {
+    position: absolute;
+    border-top: 2px solid ${colors.brand};
+    width: 100%;
+    transform: rotate(-10deg);
+    top: 50%;
+  }
+`
+
+const NewPrice = styled.div`
+  -webkit-text-stroke: 1px ${colors.brand};
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: ${colors.lightest};
+  text-shadow:
+  -1px -1px 0 ${colors.brand},  
+  1px -1px 0 ${colors.brand},
+  -1px 1px 0 ${colors.brand},
+    1px 1px 6px ${colors.lightest};
+`
+
 const ProductListingItem = ({ product, isSingleItem, className, isFeature, showThumbs, isGiftCard }) => {
   const [index, setIndex] = useState(0);
 
@@ -78,7 +108,29 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
 
   const price = isGiftCard ? `${minPrice} - ${maxPrice}` : minPrice;
 
-  console.log({isGiftCard, minPrice, maxPrice, price})
+  const compareAtPrice = product.variants[0].compareAtPrice ? (
+    Intl.NumberFormat(undefined, {
+      currency: product.priceRange.minVariantPrice.currencyCode,
+      minimumFractionDigits: 2,
+      style: 'currency',
+    }).format(product.variants[0].compareAtPrice)
+  ) : (
+    null
+  )
+
+  const priceDisplay = compareAtPrice ? (
+    <>
+      <CompareAtPriceWrapper>
+        <CompareAtPrice>
+          <div>{compareAtPrice}</div>
+          <div className="line-through"></div>
+        </CompareAtPrice>
+        <NewPrice>{price}</NewPrice>
+      </CompareAtPriceWrapper>
+    </>
+  ) : (
+    <div className="price">{price}</div>
+  )
 
   const images = product.images.map((variant, ind) => (
         <ImgLink
@@ -115,7 +167,8 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
           </ThumbnailContainer>
         : null }
         <Link to={`/shop/${product.handle}`}>
-          <h3>{product.title}{" - "}{price}</h3>
+          <h3>{product.title}</h3>
+          <h3>{priceDisplay}</h3>
         </Link>
       </ProductContainer>
   )

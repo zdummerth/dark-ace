@@ -9,13 +9,25 @@ import Youtube from '../components/youtube'
 
 import SEO from "../components/seo"
 
-// import { colors } from '../utils/styles';
+import { colors } from '../utils/styles';
 
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  .special-text {
+    -webkit-text-stroke: 1px ${colors.brand};
+    font-weight: bold;
+    font-size: 2.5rem;
+    color: ${colors.lightest};
+    text-shadow:
+    -1px -1px 0 ${colors.brand},  
+    1px -1px 0 ${colors.brand},
+    -1px 1px 0 ${colors.brand},
+      1px 1px 6px ${colors.lightest};
+  }
 
    & > * {
      margin-top: 1.5rem;
@@ -55,6 +67,8 @@ const IndexPage = ({data}) => {
         </Banner>
         <Title>Feature</Title>
         <StyledProductListing collection='pre-order' isFeature={true} showThumbs={false} />
+        <Title className='special-text'>50% Off Sale!</Title>
+        <StyledProductListing collection='sale' showThumbs={true} />
         <Title>Specials</Title>
         <StyledProductListing collection='specials' showThumbs={false} />
         <Title>Standards</Title>
