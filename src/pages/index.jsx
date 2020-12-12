@@ -65,10 +65,10 @@ const IndexPage = ({data}) => {
         <Banner>
           <Img fluid={data.parked.childImageSharp.fluid} />
         </Banner>
-        <Title>Feature</Title>
-        <StyledProductListing collection='pre-order' isFeature={true} showThumbs={false} />
         <Title className='special-text'>50% Off Sale!</Title>
         <StyledProductListing collection='sale' showThumbs={true} />
+        <Title>Feature</Title>
+        <StyledProductListing collection='pre-order' isFeature={true} showThumbs={false} />
         <Title>Specials</Title>
         <StyledProductListing collection='specials' showThumbs={false} />
         <Title>Standards</Title>
