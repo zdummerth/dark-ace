@@ -363,7 +363,7 @@ const ProductForm = ({ product, setImageFluid }) => {
           .
         </p>
       }
-        <StyledLink to='/shop'>Continue Shopping</StyledLink>
+        <StyledLink to='/'>Continue Shopping</StyledLink>
     </Form>
   )
 }
