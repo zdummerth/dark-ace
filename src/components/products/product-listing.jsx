@@ -21,6 +21,7 @@ const Container = styled.div`
   }
 `
 
+
 const ProductListing = ({ className, collection, isFeature, showThumbs, isGiftCard }) => {
   const data = useStaticQuery(graphql`
     query {
@@ -76,20 +77,22 @@ const ProductListing = ({ className, collection, isFeature, showThumbs, isGiftCa
 
   const isSingleItem = products.length === 1
   return (
-    <Container 
-      className={className} 
-      isSingleItem={isSingleItem}
-    >
-        {products.map(node => 
-        <ProductListingItem 
-          product={node} 
-          isSingleItem={isSingleItem}
-          isFeature={isFeature}
-          showThumbs={showThumbs}
-          isGiftCard={isGiftCard} 
+    <>
+      <Container 
+        className={className} 
+        isSingleItem={isSingleItem}
+      >
+          {products.map(node => 
+          <ProductListingItem 
+            product={node} 
+            isSingleItem={isSingleItem}
+            isFeature={isFeature}
+            showThumbs={showThumbs}
+            isGiftCard={isGiftCard} 
 
-           />)}
-    </Container>
+            />)}
+      </Container>
+    </>
   )
 }
 

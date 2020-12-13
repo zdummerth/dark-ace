@@ -71,8 +71,8 @@ const IndexPage = ({data}) => {
         <StyledProductListing collection='pre-order' isFeature={true} showThumbs={false} />
         <Title>Specials</Title>
         <StyledProductListing collection='specials' showThumbs={false} />
-        <Title>Standards</Title>
-        <StyledProductListing collection='standards' showThumbs={true} />
+        {/* <Title>Standards</Title>
+        <StyledProductListing collection='standards' showThumbs={true} /> */}
         <Title>Gift Card</Title>
         <StyledProductListing 
           collection='gift-cards' 
