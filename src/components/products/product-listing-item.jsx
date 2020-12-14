@@ -136,6 +136,7 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
         <ImgLink
             to={`/shop/${product.handle}`}
             hidden={index !== ind}
+            key={variant.id}
         >
             <Img 
                 fluid={variant.localFile.childImageSharp.fluid} 
@@ -157,7 +158,7 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
         {showThumbs ?
           <ThumbnailContainer>
             {product.thumbs.map((variant, ind) => (
-              <Thumbnail onClick={() => setIndex(ind)}>
+              <Thumbnail key={variant.id} onClick={() => setIndex(ind)}>
                 <Img 
                     fixed={variant.localFile.childImageSharp.fixed} 
                     alt={product.title}

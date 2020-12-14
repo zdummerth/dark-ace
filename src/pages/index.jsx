@@ -46,8 +46,8 @@ const ImgWrapper = styled.div`
 `
 
 const Banner = styled.div`
-  width: 100vw;
-  max-width: 1500px;
+  width: 100%;
+  // max-width: 1500px;
   align-self: center;
 `
 
@@ -95,21 +95,14 @@ export const query = graphql`
 query {
    motto: file(relativePath: { eq: "motto.png" }) {
     childImageSharp {
-      fluid(maxWidth: 1200) {
+      fluid(maxWidth: 1280) {
         ...GatsbyImageSharpFluid
       }
     }
   }
   parked: file(relativePath: { eq: "parked.png" }) {
     childImageSharp {
-      fluid(maxWidth: 1200) {
-        ...GatsbyImageSharpFluid
-      }
-    }
-  }
-  bunkerBaby: file(relativePath: { eq: "bunker-baby.png" }) {
-    childImageSharp {
-      fluid(maxWidth: 1200) {
+      fluid(maxWidth: 1280) {
         ...GatsbyImageSharpFluid
       }
     }

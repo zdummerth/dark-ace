@@ -95,7 +95,7 @@ const ProductPage = ({ data }) => {
   const thumbnails = (
     <ThumbnailContainer>
       {thumbs.map((variant, ind) => (
-        <Thumbnail onClick={() => setIndex(ind)}>
+        <Thumbnail key={variant.id} onClick={() => setIndex(ind)}>
           <Img 
               fixed={variant.localFile.childImageSharp.fixed} 
               alt={product.title}
@@ -164,6 +164,7 @@ export const query = graphql`
           value
         }
         image {
+          id
           localFile {
             childImageSharp {
               fluid {
@@ -184,6 +185,7 @@ export const query = graphql`
         }
       }
       thumbs: images {
+        id
         localFile {
           childImageSharp {
             fixed(height: 60, width: 48) {
@@ -193,6 +195,7 @@ export const query = graphql`
         }
       }
       fulls: images {
+        id
         localFile {
           childImageSharp {
             fluid(maxWidth: 500) {

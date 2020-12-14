@@ -35,6 +35,7 @@ const ProductListing = ({ className, collection, isFeature, showThumbs, isGiftCa
               shopifyId
               variants {
                 compareAtPrice
+                id
               }
               priceRange {
                 minVariantPrice {
@@ -47,6 +48,7 @@ const ProductListing = ({ className, collection, isFeature, showThumbs, isGiftCa
                 }
               }
               images {
+                id
                 localFile {
                   childImageSharp {
                     fluid(maxWidth: 900) {
@@ -56,6 +58,7 @@ const ProductListing = ({ className, collection, isFeature, showThumbs, isGiftCa
                 }
               }
               thumbs: images {
+                id
                 localFile {
                   childImageSharp {
                     fixed(height: 60, width: 48) {
@@ -89,8 +92,8 @@ const ProductListing = ({ className, collection, isFeature, showThumbs, isGiftCa
             isFeature={isFeature}
             showThumbs={showThumbs}
             isGiftCard={isGiftCard} 
-
-            />)}
+            key={node.shopifyId}
+          />)}
       </Container>
     </>
   )

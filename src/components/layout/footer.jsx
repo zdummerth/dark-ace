@@ -12,7 +12,7 @@ const StyledFooter = styled('footer')`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  color: ${colors.brand};
+  color: ${colors.lightest};
   width: 100%;
   padding: 0 2vh;
   margin-top: 3vh;
@@ -46,11 +46,10 @@ const IgIcon = styled(FaInstagram)`
   }
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   display: inline-block;
   text-decoration: none;
   white-space: nowrap;
-  color: white;
   margin: 2vw;
   transition: all 200ms ease-in;
   position: relative;
@@ -86,10 +85,10 @@ const StyledLink = styled(Link)`
 const Footer = () => {
   return (
     <StyledFooter>
-        <StyledLink as='a' href='mailto:darkaceapparel@gamil.com'>DARKACEAPPAREL@GMAIL.COM</StyledLink>
+        <div>DARK ACE APPAREL</div>
         <IconWrapper>
-        <StyledLink as='a' href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' target='_blank' rel="noopener"><FbIcon /></StyledLink>
-        <StyledLink as='a' href='https://www.instagram.com/darkaceapparel/' target='_blank' rel="noopener"><IgIcon /></StyledLink>
+        <StyledLink href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' target='_blank' rel="noopener"><FbIcon /></StyledLink>
+        <StyledLink href='https://www.instagram.com/darkaceapparel/' target='_blank' rel="noopener"><IgIcon /></StyledLink>
         </IconWrapper>
     </StyledFooter>
   )

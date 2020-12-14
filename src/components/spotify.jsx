@@ -27,7 +27,7 @@ const Spotify = () => {
           src="https://open.spotify.com/embed/playlist/7zcIKw7G0LJixjMKnASf9s?si=B66XDLQ-Q-W3lsPX1_ZLig" 
           width="100%"
           height={minimized ? '80' : '380'} 
-          frameborder="0" 
+          frameBorder="0" 
           allowtransparency="true" 
           allow="encrypted-media"
           title='Dark Ace Spotify Playlist'>    
