@@ -186,10 +186,6 @@ const Header = () => {
       path: '/contact',
       title: 'Contact'
     },
-    // {
-    //   path: '/shop',
-    //   title: 'Shop'
-    // },
     {
       path: '/cart',
       title: `Cart (${totalQuantity})`
@@ -202,6 +198,7 @@ const Header = () => {
     <StyledLink
       key={index} 
       to={menuItem.path}
+      name={menuItem.title}
       onClick={() => setNavbarClosed(true)}
     >
       {menuItem.title}
@@ -211,8 +208,8 @@ const Header = () => {
   const extLinks = 
     <>
       <IconWrapper>
-        <StyledLink as='a' href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' target='_blank' rel="noopener"><FbIcon /></StyledLink>
-        <StyledLink as='a' href='https://www.instagram.com/darkaceapparel/' target='_blank' rel="noopener"><IgIcon /></StyledLink>
+        <StyledLink as='a' name='facebook' href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' target='_blank' rel="noopener"><FbIcon /></StyledLink>
+        <StyledLink as='a' name='instagram' href='https://www.instagram.com/darkaceapparel/' target='_blank' rel="noopener"><IgIcon /></StyledLink>
       </IconWrapper>
     </>
 
@@ -225,7 +222,7 @@ const Header = () => {
           >
           <Hamburger closed={navbarClosed} />
         </Toggle>
-        <LogoLink to='/'>
+        <LogoLink to='/' name='home'>
             <Logo />
         </LogoLink>
         <CartLink useIcon={true}/>
