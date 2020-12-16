@@ -39,6 +39,34 @@ const CartIcon = styled(RiShoppingCartLine)`
   margin-right: .3rem;
 `
 
+const CartWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  position: relative;
+  font-size: 1.75rem;
+
+
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 10px;
+    left: 17px;
+
+    background-color: ${colors.brand};
+    border-radius: 50%;
+    font-size: 1rem;
+    width: 22px;
+    height: 22px;
+
+  }
+
+`
+
 
 const CartLink = ({children, useIcon}) => {
   const {
