@@ -15,16 +15,10 @@ export const colors = {
   brandLighter: '#fbfafc',
   lightest: '#ffffff',
   darkest: '#4d4058',
-  text: '#333333',
-  textMild: '#555555',
-  textLight: '#7e718a',
-  textLighter: '#aaaaaa',
-  lilac: `#8c65b3`,
-  accent: `#ffb238`,
   error: `#ec1818`,
-  lemon: `#ffdf37`,
   grayBackground: '#262626',
-  background: '#020202'
+  background: '#020202',
+  gradient: `linear-gradient(to bottom right, #C00A0A 45%, #020202);`
 };
 
 

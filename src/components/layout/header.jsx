@@ -38,7 +38,7 @@ const Nav = styled.nav`
   background: ${colors.background};
   border-bottom: 1px solid ${colors.brand};
   top: 0;
-  justify-content: space-around;
+  justify-content: space-evenly;
   text-transform: uppercase;
   z-index: 50;
   align-items: center;
@@ -109,7 +109,7 @@ const Hamburger = styled.div`
   }
 `
 const LogoLink = styled(Link)`
-  margin-left: 5%;
+  // margin-left: 5%;
 `
 const StyledLink = styled(Link)`
   display: inline-block;

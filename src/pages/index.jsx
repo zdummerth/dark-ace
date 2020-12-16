@@ -79,7 +79,7 @@ const IndexPage = ({data}) => {
         <Title>Feature</Title>
         <StyledProductListing collection='pre-order' isFeature={true} showThumbs={false} />
         <Text>
-          For every Listen to Metal Hoodie purchased, 10 meals will 
+          For every Listen to Metal Hoodie purchased, 20 meals will 
           be donated to those in need through the St.Louis Food Bank, 
           Operation Food Search. Also, you will be entered 
           into a raffle to win a brand new Prodigy practice bag! 

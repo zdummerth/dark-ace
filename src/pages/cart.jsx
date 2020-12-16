@@ -7,6 +7,9 @@ import { StoreContext } from '../context/StoreContextProvider'
 
 import LineItem from '../components/cart/line-item'
 
+import { colors } from '../utils/styles';
+
+
 const Container = styled.div`
   color: white;
   width: 95%;
@@ -28,7 +31,9 @@ const Subtotal = styled.div`
 
 const CheckoutLink = styled.a`
   display: block;
-  background: #C00A0A;
+  // background: #C00A0A;
+  background: ${colors.gradient};
+  box-shadow: 0 0 5px ${colors.lightest};
   padding: .8rem 0;
   margin-bottom: 2rem;
   text-align: center;

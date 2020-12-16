@@ -61,8 +61,9 @@ const Form = styled.form`
     }
 `
 const Span = styled.span`
-    border: ${props => (props.selected ? `4px solid ${colors.brand}` : '1px solid rgba(232, 232, 232, .3)')};
-    background: ${props => (props.selected ? '#C00A0A' : 'black')};
+    border: ${props => (props.selected ? `none` : '1px solid rgba(232, 232, 232, .3)')};
+    background: ${props => (props.selected ? `${colors.gradient}` : 'black')};
+    box-shadow: ${props => (props.selected ? ` 0 0 5px ${colors.lightest}` : '')};
 
     padding: .65rem;
     border-radius: 5px;
@@ -73,7 +74,8 @@ const Span = styled.span`
     
 `
 const StyledButton = styled.button`
-    background: #C00A0A;
+    background: ${colors.gradient};
+    box-shadow: 0 0 5px ${colors.lightest};
     border: none;
     border-radius: 5px;
     padding: 10px 0;
@@ -90,11 +92,17 @@ const StyledLink = styled(Link)`
     border-radius: 5px;
     padding: 10px 0;
 `
-const OptionContainer = styled.div``
+const OptionContainer = styled.div`
+  // display: flex;
+  // flex-wrap: wrap;
+  align-items: center;
+
+`
 
 const Values = styled.div`
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
 
     & > * {
         margin: .5rem;
@@ -314,8 +322,9 @@ const ProductForm = ({ product, setImageFluid }) => {
       {options.map(({ id, name, values }) => name !== 'Title' ? (
         <React.Fragment key={id}>
           <OptionContainer>
-              <p>Select {name}:</p>
+              {/* <p>Select {name}:</p> */}
               <Values>
+                <p>Select {name}:</p>
                 {/* {values.map((value, index) => !checkDisabled(name, value) ? ( */}
                   {values.map((value, index) => true ? (
                     <Span
