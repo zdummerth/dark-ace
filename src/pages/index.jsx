@@ -16,6 +16,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  text-align: center;
 
   .special-text {
     -webkit-text-stroke: 1px ${colors.brand};
@@ -55,6 +56,14 @@ const StyledProductListing = styled(ProductListing)`
   margin-bottom: 30px;
 `
 
+const Text = styled.p`
+  width: 80%;
+  max-width: 400px;
+  align-self: center;
+
+  font-size: 1.25rem;
+`
+
 
 const IndexPage = ({data}) => {
 
@@ -69,6 +78,12 @@ const IndexPage = ({data}) => {
         <StyledProductListing collection='sale' showThumbs={true} />
         <Title>Feature</Title>
         <StyledProductListing collection='pre-order' isFeature={true} showThumbs={false} />
+        <Text>
+          For every Listen to Metal Hoodie purchased, 10 meals will 
+          be donated to those in need through the St.Louis Food Bank, 
+          Operation Food Search. Also, you will be entered 
+          into a raffle to win a brand new Prodigy practice bag! 
+        </Text>
         <Title>Specials</Title>
         <StyledProductListing collection='specials' showThumbs={false} />
         {/* <Title>Standards</Title>

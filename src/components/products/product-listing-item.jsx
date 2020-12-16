@@ -12,8 +12,8 @@ const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: ${props => props.isFeature ? '100%' : '60vw'};
-  max-width: ${props => props.isFeature ? '600px' : '300px'};
+  width: ${props => props.isFeature ? '80%' : '60vw'};
+  max-width: ${props => props.isFeature ? '400px' : '300px'};
   border-bottom: 1px solid ${colors.brand};
 
   @media (max-width: ${breakpoints.tablet}) {
