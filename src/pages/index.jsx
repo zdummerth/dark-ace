@@ -5,7 +5,7 @@ import styled from "styled-components"
 
 import ProductListing from '../components/products/product-listing'
 
-import Youtube from '../components/youtube'
+// import Youtube from '../components/youtube'
 
 import SEO from "../components/seo"
 
@@ -71,12 +71,12 @@ const IndexPage = ({data}) => {
     <>
       <SEO title="Home" />
       <Container>
-        <Banner>
+        {/* <Banner>
           <Img fluid={data.parked.childImageSharp.fluid} />
-        </Banner>
+        </Banner> */}
         <Title className='special-text'>50% Off Sale!</Title>
         <StyledProductListing collection='sale' showThumbs={true} />
-        <Title>Feature</Title>
+        {/* <Title>Feature</Title>
         <StyledProductListing collection='pre-order' isFeature={true} showThumbs={false} />
         <Text>
           For every Listen to Metal Hoodie purchased, 20 meals will 
@@ -85,21 +85,21 @@ const IndexPage = ({data}) => {
           into a raffle to win a brand new Prodigy practice bag! 
         </Text>
         <Title>Specials</Title>
-        <StyledProductListing collection='specials' showThumbs={false} />
+        <StyledProductListing collection='specials' showThumbs={false} /> */}
         {/* <Title>Standards</Title>
         <StyledProductListing collection='standards' showThumbs={true} /> */}
         <Title>Gift Card</Title>
-        <StyledProductListing 
+        {/* <StyledProductListing 
           collection='gift-cards' 
           showThumbs={false} 
           isFeature={true} 
           isGiftCard={true} 
-        />
+        /> */}
         <Title>2020 Ledgestone Commercial</Title>
-        <Youtube style={{alignSelf: 'center'}} />
-        <ImgWrapper>
+        {/* <Youtube style={{alignSelf: 'center'}} /> */}
+        {/* <ImgWrapper>
           <Img fluid={data.motto.childImageSharp.fluid} />
-        </ImgWrapper>
+        </ImgWrapper> */}
       </Container>
 
     </>
