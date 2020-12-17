@@ -1,4 +1,3 @@
-import { keyframes } from '@emotion/core';
 
 /*
  * NOTE: use a six-character hex code for all colors to allow alpha channel
@@ -93,22 +92,4 @@ export const scrollbarStyles = {
   '&::-webkit-scrollbar-thumb': { background: colors.brandBright },
   '&::-webkit-scrollbar-thumb:hover': { background: colors.lilac },
   '&::-webkit-scrollbar-track': { background: colors.brandLight }
-};
-
-const simpleEntry = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-`;
-
-const deadSimpleEntry = keyframes`
-  from {
-    opacity: .25;
-  }
-`;
-
-export const animations = {
-  simpleEntry: `${simpleEntry} .75s ease forwards`,
-  deadSimpleEntry: `${deadSimpleEntry} .5s ease forwards`
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 
 
@@ -7,7 +7,7 @@ import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { breakpoints, colors } from '../../utils/styles';
 
 
-const StyledFooter = styled('footer')`
+const StyledFooter = styled.footer`
   display: flex;
   justify-content: space-around;
   align-items: center;
