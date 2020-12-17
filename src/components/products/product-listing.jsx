@@ -51,7 +51,7 @@ const ProductListing = ({ className, collection, isFeature, showThumbs, isGiftCa
                 id
                 localFile {
                   childImageSharp {
-                    fluid(maxWidth: 600) {
+                    fluid(maxWidth: 300) {
                       ...GatsbyImageSharpFluid
                     }
                   }
