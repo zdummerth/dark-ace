@@ -34,7 +34,10 @@ const ProductListing = ({ className, collection, isFeature, showThumbs, isGiftCa
               title
               shopifyId
               variants {
-                compareAtPrice
+                compareAtPriceV2 {
+                  amount
+                  currencyCode
+                }
                 id
               }
               priceRange {

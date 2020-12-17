@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import Img from 'gatsby-image'
 
 import { breakpoints, colors } from '../../utils/styles';
+import { formatPrice } from '../../utils/helpers';
+
 
 
 const ProductContainer = styled.div`
@@ -94,29 +96,16 @@ const NewPrice = styled.div`
 const ProductListingItem = ({ product, isSingleItem, className, isFeature, showThumbs, isGiftCard }) => {
   const [index, setIndex] = useState(0);
 
-  const minPrice = Intl.NumberFormat(undefined, {
-    currency: product.priceRange.minVariantPrice.currencyCode,
-    minimumFractionDigits: 2,
-    style: 'currency',
-  }).format(product.priceRange.minVariantPrice.amount)
+  const minPrice = formatPrice(product.priceRange.minVariantPrice)
+  const maxPrice = formatPrice(product.priceRange.minVariantPrice)
 
-  const maxPrice = Intl.NumberFormat(undefined, {
-    currency: product.priceRange.minVariantPrice.currencyCode,
-    minimumFractionDigits: 2,
-    style: 'currency',
-  }).format(product.priceRange.maxVariantPrice.amount);
-
-  const price = isGiftCard ? `${minPrice} - ${maxPrice}` : minPrice;
-
-  const compareAtPrice = product.variants[0].compareAtPrice ? (
-    Intl.NumberFormat(undefined, {
-      currency: product.priceRange.minVariantPrice.currencyCode,
-      minimumFractionDigits: 2,
-      style: 'currency',
-    }).format(product.variants[0].compareAtPrice)
+  const compareAtPrice = product.variants[0].compareAtPriceV2 ? (
+    formatPrice(product.variants[0].compareAtPriceV2)
   ) : (
     null
   )
+
+  const price = isGiftCard ? `${minPrice} - ${maxPrice}` : minPrice;
 
   const priceDisplay = compareAtPrice ? (
     <>

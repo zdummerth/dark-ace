@@ -8,6 +8,8 @@ import { colors } from '../utils/styles';
 const Container = styled.div`
   width: 100%;
   max-width: 500px;
+  background-color: ${colors.background};
+
 `
 const Toggle = styled.div`
   width: 100%;

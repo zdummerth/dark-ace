@@ -14,15 +14,9 @@ import { usePrevious } from '../../hooks/use-previous'
 import { StoreContext } from '../../context/StoreContextProvider'
 
 import { colors } from '../../utils/styles';
+import { formatPrice } from '../../utils/helpers';
 
-const Plus = styled(AiOutlinePlusCircle)`
-    // color: white;
-    // font-size: 24px;
-`
-const Minus = styled(AiOutlineMinusCircle)`
-    // color: white;
-    // font-size: 24px;
-`
+
 const QuantityContainer = styled.div`
     display: flex;
     align-items: center;
@@ -144,7 +138,6 @@ const ProductForm = ({ product, setImageFluid }) => {
     options,
     variants,
     variants: [initialVariant],
-    priceRange: { minVariantPrice },
   } = product
 
   const [variant, setVariant] = useState({ ...initialVariant })
@@ -191,9 +184,13 @@ const ProductForm = ({ product, setImageFluid }) => {
   }, [prevAdding, adding, totalQuantity, prevTotalQuantity, cartIndicator])
 
 
-  const productVariant =
-    client.product.helpers.variantForOptions(product, variant) || variant
+  const productVariant = client.product.helpers.variantForOptions(product, variant) || variant
   const [available, setAvailable] = useState(productVariant.availableForSale)
+
+  console.log(' product variant', productVariant)
+  console.log(' variant', variant)
+
+
 
   const checkAvailability = useCallback(
     productId => {
@@ -203,6 +200,9 @@ const ProductForm = ({ product, setImageFluid }) => {
           variant => variant.id === productVariant.shopifyId
         )
         if (result.length > 0) {
+          console.log('result', result[0].id)
+          console.log('shopify Id', productVariant.shopifyId)
+
           setAvailable(result[0].available)
         }
       })
@@ -211,19 +211,17 @@ const ProductForm = ({ product, setImageFluid }) => {
   )
 
   useEffect(() => {
-      checkAvailability(product.shopifyId)
-    }, [productVariant, checkAvailability, product.shopifyId])
+    checkAvailability(product.shopifyId)
+  }, [productVariant, checkAvailability, product.shopifyId])
 
 
-  const handleQuantityIncrease = (e) => {
+  const handleQuantityIncrease = e => {
     e.preventDefault();
-
     setQuantity(quantity + 1)
   }
 
-  const handleQuantityDecrease = (e) => {
+  const handleQuantityDecrease = e => {
     e.preventDefault();
-
     if(quantity > 1) {
         setQuantity(quantity - 1)
     }
@@ -284,18 +282,10 @@ const ProductForm = ({ product, setImageFluid }) => {
     return false
   }
 
-  const price = Intl.NumberFormat(undefined, {
-    currency: minVariantPrice.currencyCode,
-    minimumFractionDigits: 2,
-    style: 'currency',
-  }).format(variant.price)
+  const price = formatPrice(variant.priceV2)
 
-  const compareAtPrice = variant.compareAtPrice ? (
-    Intl.NumberFormat(undefined, {
-      currency: minVariantPrice.currencyCode,
-      minimumFractionDigits: 2,
-      style: 'currency',
-    }).format(variant.compareAtPrice)
+  const compareAtPrice = variant.compareAtPriceV2 ? (
+    formatPrice(variant.compareAtPriceV2)
   ) : (
     null
   )
@@ -322,10 +312,8 @@ const ProductForm = ({ product, setImageFluid }) => {
       {options.map(({ id, name, values }) => name !== 'Title' ? (
         <React.Fragment key={id}>
           <OptionContainer>
-              {/* <p>Select {name}:</p> */}
               <Values>
                 <p>Select {name}:</p>
-                {/* {values.map((value, index) => !checkDisabled(name, value) ? ( */}
                   {values.map((value, index) => true ? (
                     <Span
                         value={value}
@@ -347,11 +335,11 @@ const ProductForm = ({ product, setImageFluid }) => {
         <QuantityContainer>
             <p>Quantity</p>
             <button onClick={handleQuantityDecrease}>
-                <Minus /> 
+                <AiOutlineMinusCircle /> 
             </button>
             <p>{quantity}</p> 
             <button onClick={handleQuantityIncrease}>
-                <Plus />
+                <AiOutlinePlusCircle />
             </button>
         </QuantityContainer>
       {priceDisplay}

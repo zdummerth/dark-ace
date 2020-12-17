@@ -11,7 +11,6 @@ module.exports = {
     },
     plugins: [
         `gatsby-plugin-react-helmet`,
-        `gatsby-plugin-sass`,
         `gatsby-plugin-styled-components`,
         `gatsby-transformer-remark`,
         {
@@ -19,13 +18,6 @@ module.exports = {
             options: {
                 name: `images`,
                 path: `${__dirname}/src/images`,
-            },
-        },
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `content`,
-                path: `${__dirname}/src/content`,
             },
         },
         `gatsby-transformer-sharp`,

@@ -5,7 +5,7 @@ import styled, { createGlobalStyle } from "styled-components"
 
 import Header from './header'
 import Footer from './footer'
-// import Spotify from '../spotify'
+import Spotify from '../spotify'
 
 import { dimensions } from '../../utils/styles';
 
@@ -69,7 +69,7 @@ const Layout = ({ children }) => {
       <Wrapper>
         <Header siteTitle={data.site.siteMetadata.title} />
         <HeaderMargin />
-        {/* <Spotify /> */}
+        <Spotify />
         <ContentWrapper>
           {children}
         </ContentWrapper>
