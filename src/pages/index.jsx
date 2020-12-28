@@ -18,18 +18,6 @@ const Container = styled.div`
   width: 100%;
   text-align: center;
 
-  .special-text {
-    -webkit-text-stroke: 1px ${colors.brand};
-    font-weight: bold;
-    font-size: 2.5rem;
-    color: ${colors.lightest};
-    text-shadow:
-    -1px -1px 0 ${colors.brand},  
-    1px -1px 0 ${colors.brand},
-    -1px 1px 0 ${colors.brand},
-      1px 1px 6px ${colors.lightest};
-  }
-
    & > * {
      margin-top: 1.5rem;
    }
@@ -55,14 +43,6 @@ const StyledProductListing = styled(ProductListing)`
   margin-bottom: 30px;
 `
 
-const Text = styled.p`
-  width: 80%;
-  max-width: 400px;
-  align-self: center;
-
-  font-size: 1.25rem;
-`
-
 
 const IndexPage = ({data}) => {
 
@@ -73,27 +53,7 @@ const IndexPage = ({data}) => {
         <Banner>
           <Img fluid={data.parked.childImageSharp.fluid} />
         </Banner>
-        <Title className='special-text'>50% Off Sale!</Title>
-        <StyledProductListing collection='sale' showThumbs={true} />
-        <Title>Feature</Title>
-        <StyledProductListing collection='pre-order' isFeature={true} showThumbs={false} />
-        <Text>
-          For every Listen to Metal Hoodie purchased, 20 meals will 
-          be donated to those in need through the St.Louis Food Bank, 
-          Operation Food Search. Also, you will be entered 
-          into a raffle to win a brand new Prodigy practice bag! 
-        </Text>
-        <Title>Specials</Title>
-        <StyledProductListing collection='specials' showThumbs={false} />
-        <Title>Standards</Title>
-        <StyledProductListing collection='standards' showThumbs={true} />
-        <Title>Gift Card</Title>
-        <StyledProductListing 
-          collection='gift-cards' 
-          showThumbs={false} 
-          isFeature={true} 
-          isGiftCard={true} 
-        />
+        <StyledProductListing />
         <Title>2020 Ledgestone Commercial</Title>
         <Youtube style={{alignSelf: 'center'}} />
         <ImgWrapper>

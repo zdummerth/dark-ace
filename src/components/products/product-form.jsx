@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { AiOutlineMinusCircle } from 'react-icons/ai';
@@ -68,6 +68,9 @@ const Span = styled.span`
     
 `
 const StyledButton = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: ${colors.gradient};
     box-shadow: 0 0 5px ${colors.lightest};
     border: none;
@@ -79,6 +82,26 @@ const StyledButton = styled.button`
       cursor: pointer;
       background: red;
     }
+`
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`
+
+const LoadingSpinner = styled.div`
+    background: ${colors.specialGradient};
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+
+    animation: ${rotate} 1s linear infinite;
+
 `
 const StyledLink = styled(Link)`
     text-align: center;
@@ -101,6 +124,10 @@ const Values = styled.div`
     & > * {
         margin: .5rem;
     }
+`
+
+const SoldOut = styled.div`
+  font-size: 1.5rem;
 `
 
 const CompareAtPriceWrapper = styled.div`
@@ -137,8 +164,14 @@ const ProductForm = ({ product, setImageFluid }) => {
   const {
     options,
     variants,
-    variants: [initialVariant],
+    // variants: [initialVariant],
   } = product
+
+  // console.log({product})
+  const isProductAvailable = product.availableForSale
+
+  // finds first available variant
+  const initialVariant = product.availableForSale ? variants.find(variant => variant.availableForSale) : variants[0]
 
   const [variant, setVariant] = useState({ ...initialVariant })
   const [quantity, setQuantity] = useState(1)
@@ -162,7 +195,12 @@ const ProductForm = ({ product, setImageFluid }) => {
         if (adding) {
           setCartIndicator({
             visible: true,
-            message: 'Updating Cart ...'
+            message: (
+              <>
+                <LoadingSpinner />
+                Updating Cart...
+              </>
+            )
           });
         } else {
           if (totalQuantity > prevTotalQuantity) {
@@ -187,10 +225,6 @@ const ProductForm = ({ product, setImageFluid }) => {
   const productVariant = client.product.helpers.variantForOptions(product, variant) || variant
   const [available, setAvailable] = useState(productVariant.availableForSale)
 
-  console.log(' product variant', productVariant)
-  console.log(' variant', variant)
-
-
 
   const checkAvailability = useCallback(
     productId => {
@@ -199,12 +233,13 @@ const ProductForm = ({ product, setImageFluid }) => {
         const result = fetchedProduct.variants.filter(
           variant => variant.id === productVariant.shopifyId
         )
+        console.log('result', result[0])
         if (result.length > 0) {
-          console.log('result', result[0].id)
-          console.log('shopify Id', productVariant.shopifyId)
-
           setAvailable(result[0].available)
         }
+      })
+      .catch(err => {
+        console.log({err});
       })
     },
     [client.product, productVariant.shopifyId]
@@ -213,6 +248,8 @@ const ProductForm = ({ product, setImageFluid }) => {
   useEffect(() => {
     checkAvailability(product.shopifyId)
   }, [productVariant, checkAvailability, product.shopifyId])
+
+
 
 
   const handleQuantityIncrease = e => {
@@ -256,8 +293,7 @@ const ProductForm = ({ product, setImageFluid }) => {
   happens when only one variant is available and it's not the
   first one in the dropdown list. I didn't feel like putting 
   in time to fix this since its an edge case and most people
-  wouldn't want to use dropdown styled selector anyways - 
-  at least if the have a sense for good design lol.
+  wouldn't want to use dropdown styled selector anyways
   */
   const checkDisabled = (name, value) => {
     const match = find(variants, {
@@ -268,6 +304,7 @@ const ProductForm = ({ product, setImageFluid }) => {
         },
       ],
     })
+    // console.log({match, name, value})
     if (match === undefined) return true
     if (match.availableForSale === true) return false
     return true
@@ -276,6 +313,7 @@ const ProductForm = ({ product, setImageFluid }) => {
   const checkSelected = (name, value) => {
     const currentOptions = [...variant.selectedOptions]
     const index = variant.selectedOptions.findIndex(opt => opt.name === name)
+    
     if(currentOptions[index].value === value) {
         return true
     }
@@ -284,11 +322,7 @@ const ProductForm = ({ product, setImageFluid }) => {
 
   const price = formatPrice(variant.priceV2)
 
-  const compareAtPrice = variant.compareAtPriceV2 ? (
-    formatPrice(variant.compareAtPriceV2)
-  ) : (
-    null
-  )
+  const compareAtPrice = variant.compareAtPriceV2 ? formatPrice(variant.compareAtPriceV2) : null
 
   const priceDisplay = compareAtPrice ? (
     <>
@@ -305,62 +339,75 @@ const ProductForm = ({ product, setImageFluid }) => {
     <div className="price">{price}</div>
   )
 
+  const baseOption = options.length > 0 ? options[0] : {}
+  console.log({baseOption})
+
+  const optionDisplay = ({name, values}) => (
+    <Values>
+      <p>Select {name}:</p>
+        {values.map((value, index) => {
+          return (
+            <Span
+                value={value}
+                key={`${name}-${value}`}
+                disabled={checkDisabled(name, value)}
+                selected={checkSelected(name, value)}
+                onClick={() => handleOptionClick(name, value, index)}
+            >
+                {value.toUpperCase()}
+            </Span>
+          )})}
+    </Values>
+  )
+
 
   return (
     <Form onSubmit={handleAddToCart}>
       {/* {Product with no variants produces option with name === 'Title', So check for that to prevent unwanted select menu} */}
-      {options.map(({ id, name, values }) => name !== 'Title' ? (
-        <React.Fragment key={id}>
-          <OptionContainer>
-              <Values>
-                <p>Select {name}:</p>
-                  {values.map((value, index) => true ? (
-                    <Span
-                        value={value}
-                        key={`${name}-${value}`}
-                        disabled={checkDisabled(name, value)}
-                        selected={checkSelected(name, value)}
-                        onClick={() => handleOptionClick(name, value, index)}
-                    >
-                        {value.toUpperCase()}
-                    </Span>
-                    )
-                    :
-                    null
-                    )}
-              </Values>
-          </OptionContainer>
-        </React.Fragment>
-      ) : null)}
-        <QuantityContainer>
-            <p>Quantity</p>
-            <button onClick={handleQuantityDecrease}>
-                <AiOutlineMinusCircle /> 
-            </button>
-            <p>{quantity}</p> 
-            <button onClick={handleQuantityIncrease}>
-                <AiOutlinePlusCircle />
-            </button>
-        </QuantityContainer>
-      {priceDisplay}
+      {options.map(({ id, name, values }) => name !== 'Title' && (
+        <OptionContainer key={id}>
+            {optionDisplay({name, values})}
+        </OptionContainer>
+      ))}
+
       {available ? 
-        <StyledButton 
-            type="submit"
-            disabled={!available || adding}
-            >
-            {cartIndicator.visible ? cartIndicator.message : 'Add to Cart'}
-        </StyledButton>
+        (
+        <>
+          <QuantityContainer>
+              <p>Quantity</p>
+              <button onClick={handleQuantityDecrease}>
+                  <AiOutlineMinusCircle /> 
+              </button>
+              <p>{quantity}</p> 
+              <button onClick={handleQuantityIncrease}>
+                  <AiOutlinePlusCircle />
+              </button>
+          </QuantityContainer>
+        </>
+        )
         :
-        <p className='out-of-stock'>
-          {`This Product is out of Stock! Please select another `}
+        <SoldOut>
+          {`Out of Stock! Please select another `}
           {variant.selectedOptions.length === 1 ? 
             variant.selectedOptions[0].name 
             : 
             `${variant.selectedOptions[0].name} or ${variant.selectedOptions[1].name}`}
           .
-        </p>
+        </SoldOut>
       }
-        <StyledLink to='/'>Continue Shopping</StyledLink>
+
+      {priceDisplay}
+
+      { available && (
+        <StyledButton 
+          type="submit"
+          disabled={!available || adding}
+          >
+          {cartIndicator.visible ? cartIndicator.message : 'Add to Cart'}
+        </StyledButton>
+      )}
+
+      <StyledLink to='/'>Continue Shopping</StyledLink>
     </Form>
   )
 }

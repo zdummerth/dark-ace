@@ -142,6 +142,7 @@ export const query = graphql`
       id
       title
       handle
+      availableForSale
       productType
       description
       descriptionHtml

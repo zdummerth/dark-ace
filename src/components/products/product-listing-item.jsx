@@ -95,6 +95,8 @@ const NewPrice = styled.div`
 
 const ProductListingItem = ({ product, isSingleItem, className, isFeature, showThumbs, isGiftCard }) => {
   const [index, setIndex] = useState(0);
+  const [variant, setVariant] = useState(product.variants[0]);
+
 
   const minPrice = formatPrice(product.priceRange.minVariantPrice)
   const maxPrice = formatPrice(product.priceRange.minVariantPrice)
@@ -121,14 +123,14 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
     <div className="price">{price}</div>
   )
 
-  const images = product.images.map((variant, ind) => (
+  const images = product.images.map((image, ind) => (
         <ImgLink
             to={`/shop/${product.handle}`}
             hidden={index !== ind}
-            key={variant.id}
+            key={image.id}
         >
             <Img 
-                fluid={variant.localFile.childImageSharp.fluid} 
+                fluid={image.localFile.childImageSharp.fluid} 
                 alt={product.title}
             />
         </ImgLink>
@@ -144,16 +146,20 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
         <ImgContainer>
             {images}
         </ImgContainer>
+
+        {/* <Img 
+        
+        /> */}
         {showThumbs ?
           <ThumbnailContainer>
-            {product.thumbs.map((variant, ind) => (
-              <Thumbnail key={variant.id} onClick={() => setIndex(ind)}>
+            {product.thumbs.map((thumb, ind) => (
+              <Thumbnail key={thumb.id} onClick={() => setIndex(ind)}>
                 <Img 
-                    fixed={variant.localFile.childImageSharp.fixed} 
+                    fixed={thumb.localFile.childImageSharp.fixed} 
                     alt={product.title}
                 />
               </Thumbnail>
-          ))}
+            ))}
           </ThumbnailContainer>
         : null }
         <Link to={`/shop/${product.handle}`}>
