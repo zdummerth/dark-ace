@@ -9,7 +9,7 @@ import Youtube from '../components/youtube'
 
 import SEO from "../components/seo"
 
-import { colors } from '../utils/styles';
+// import { colors } from '../utils/styles';
 
 
 const Container = styled.div`

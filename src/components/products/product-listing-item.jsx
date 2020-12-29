@@ -95,7 +95,8 @@ const NewPrice = styled.div`
 
 const ProductListingItem = ({ product, isSingleItem, className, isFeature, showThumbs, isGiftCard }) => {
   const [index, setIndex] = useState(0);
-  const [variant, setVariant] = useState(product.variants[0]);
+
+  // const [variant, setVariant] = useState(product.variants[0]);
 
 
   const minPrice = formatPrice(product.priceRange.minVariantPrice)

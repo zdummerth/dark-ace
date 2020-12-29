@@ -167,11 +167,9 @@ const ProductForm = ({ product, setImageFluid }) => {
     // variants: [initialVariant],
   } = product
 
-  // console.log({product})
-  const isProductAvailable = product.availableForSale
-
   // finds first available variant
-  const initialVariant = product.availableForSale ? variants.find(variant => variant.availableForSale) : variants[0]
+  // Still need to set sold out when all variants are sold out...the false condition
+  const initialVariant = product.availableForSale ? variants.find(variant => variant.availableForSale) : variants[0];
 
   const [variant, setVariant] = useState({ ...initialVariant })
   const [quantity, setQuantity] = useState(1)
