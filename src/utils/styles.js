@@ -17,7 +17,9 @@ export const colors = {
   error: `#ec1818`,
   grayBackground: '#262626',
   background: '#020202',
-  gradient: `linear-gradient(to bottom right, #C00A0A 45%, #020202);`
+  gradient: `linear-gradient(to bottom right, #C00A0A 45%, #020202)`,
+  specialGradient: `linear-gradient(to right, #C00A0A, #020202)`,
+
 };
 
 

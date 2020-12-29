@@ -142,6 +142,7 @@ export const query = graphql`
       id
       title
       handle
+      availableForSale
       productType
       description
       descriptionHtml
@@ -156,7 +157,15 @@ export const query = graphql`
         id
         title
         price
+        priceV2 {
+          amount
+          currencyCode
+        }
         compareAtPrice
+        compareAtPriceV2 {
+          amount
+          currencyCode
+        }
         availableForSale
         shopifyId
         selectedOptions {

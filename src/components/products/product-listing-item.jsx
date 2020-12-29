@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import Img from 'gatsby-image'
 
 import { breakpoints, colors } from '../../utils/styles';
+import { formatPrice } from '../../utils/helpers';
+
 
 
 const ProductContainer = styled.div`
@@ -13,7 +15,7 @@ const ProductContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: ${props => props.isFeature ? '80%' : '60vw'};
-  max-width: ${props => props.isFeature ? '400px' : '300px'};
+  max-width: ${props => props.isFeature ? '300px' : '300px'};
   border-bottom: 1px solid ${colors.brand};
 
   @media (max-width: ${breakpoints.tablet}) {
@@ -94,29 +96,19 @@ const NewPrice = styled.div`
 const ProductListingItem = ({ product, isSingleItem, className, isFeature, showThumbs, isGiftCard }) => {
   const [index, setIndex] = useState(0);
 
-  const minPrice = Intl.NumberFormat(undefined, {
-    currency: product.priceRange.minVariantPrice.currencyCode,
-    minimumFractionDigits: 2,
-    style: 'currency',
-  }).format(product.priceRange.minVariantPrice.amount)
+  // const [variant, setVariant] = useState(product.variants[0]);
 
-  const maxPrice = Intl.NumberFormat(undefined, {
-    currency: product.priceRange.minVariantPrice.currencyCode,
-    minimumFractionDigits: 2,
-    style: 'currency',
-  }).format(product.priceRange.maxVariantPrice.amount);
 
-  const price = isGiftCard ? `${minPrice} - ${maxPrice}` : minPrice;
+  const minPrice = formatPrice(product.priceRange.minVariantPrice)
+  const maxPrice = formatPrice(product.priceRange.minVariantPrice)
 
-  const compareAtPrice = product.variants[0].compareAtPrice ? (
-    Intl.NumberFormat(undefined, {
-      currency: product.priceRange.minVariantPrice.currencyCode,
-      minimumFractionDigits: 2,
-      style: 'currency',
-    }).format(product.variants[0].compareAtPrice)
+  const compareAtPrice = product.variants[0].compareAtPriceV2 ? (
+    formatPrice(product.variants[0].compareAtPriceV2)
   ) : (
     null
   )
+
+  const price = isGiftCard ? `${minPrice} - ${maxPrice}` : minPrice;
 
   const priceDisplay = compareAtPrice ? (
     <>
@@ -132,14 +124,14 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
     <div className="price">{price}</div>
   )
 
-  const images = product.images.map((variant, ind) => (
+  const images = product.images.map((image, ind) => (
         <ImgLink
             to={`/shop/${product.handle}`}
             hidden={index !== ind}
-            key={variant.id}
+            key={image.id}
         >
             <Img 
-                fluid={variant.localFile.childImageSharp.fluid} 
+                fluid={image.localFile.childImageSharp.fluid} 
                 alt={product.title}
             />
         </ImgLink>
@@ -155,16 +147,20 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
         <ImgContainer>
             {images}
         </ImgContainer>
+
+        {/* <Img 
+        
+        /> */}
         {showThumbs ?
           <ThumbnailContainer>
-            {product.thumbs.map((variant, ind) => (
-              <Thumbnail key={variant.id} onClick={() => setIndex(ind)}>
+            {product.thumbs.map((thumb, ind) => (
+              <Thumbnail key={thumb.id} onClick={() => setIndex(ind)}>
                 <Img 
-                    fixed={variant.localFile.childImageSharp.fixed} 
+                    fixed={thumb.localFile.childImageSharp.fixed} 
                     alt={product.title}
                 />
               </Thumbnail>
-          ))}
+            ))}
           </ThumbnailContainer>
         : null }
         <Link to={`/shop/${product.handle}`}>
