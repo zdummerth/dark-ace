@@ -100,7 +100,7 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
 
 
   const minPrice = formatPrice(product.priceRange.minVariantPrice)
-  const maxPrice = formatPrice(product.priceRange.minVariantPrice)
+  const maxPrice = formatPrice(product.priceRange.maxVariantPrice)
 
   const compareAtPrice = product.variants[0].compareAtPriceV2 ? (
     formatPrice(product.variants[0].compareAtPriceV2)

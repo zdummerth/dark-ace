@@ -116,6 +116,7 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
   const sale = filterdProducts('sale');
   const preOrder = filterdProducts('pre-order');
   const specials = filterdProducts('specials');
+  const giftCard = filterdProducts('gift-cards');
 
 
   return (
@@ -172,6 +173,22 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
             isFeature={isFeature}
             showThumbs={false}
             isGiftCard={isGiftCard} 
+            key={node.shopifyId}
+          />)
+        }
+      </Container>
+      <Title>Gift Card</Title>
+      <Container 
+        className={className} 
+        isSingleItem={true}
+      >
+        {giftCard.map(node => 
+          <ProductListingItem 
+            product={node} 
+            isSingleItem={true}
+            isFeature={false}
+            showThumbs={false}
+            isGiftCard={true} 
             key={node.shopifyId}
           />)
         }
