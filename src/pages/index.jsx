@@ -19,7 +19,7 @@ const Container = styled.div`
   text-align: center;
 
    & > * {
-     margin-top: 1.5rem;
+    //  margin-top: 1.5rem;
    }
 `
 

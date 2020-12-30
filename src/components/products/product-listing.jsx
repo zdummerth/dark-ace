@@ -43,6 +43,8 @@ const Text = styled.p`
   width: 80%;
   max-width: 400px;
   align-self: center;
+  margin-top: 0;
+
 
   font-size: 1.25rem;
 `
@@ -161,7 +163,7 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
       <Title>Specials</Title>
       <Container 
         className={className} 
-        isSingleItem={preOrder.length === 1}
+        isSingleItem={specials.length === 1}
       >
         {specials.map(node => 
           <ProductListingItem 
