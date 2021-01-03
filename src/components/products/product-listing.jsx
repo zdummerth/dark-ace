@@ -65,10 +65,6 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
                 image { 
                   id
                 }
-                compareAtPriceV2 {
-                  amount
-                  currencyCode
-                }
                 id
               }
               priceRange {
@@ -113,7 +109,7 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
         .find(({node}) =>  node.handle === collection).node.products
   )
   
-  const sale = filterdProducts('sale');
+  const standards = filterdProducts('standards');
   const preOrder = filterdProducts('pre-order');
   const specials = filterdProducts('specials');
   const giftCard = filterdProducts('gift-cards');
@@ -121,22 +117,6 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
 
   return (
     <>
-      <Title className='sale-text'>50% Off Sale!</Title>
-      <Container 
-        className={className} 
-        isSingleItem={sale.length === 1}
-      >
-        {sale.map(node => 
-          <ProductListingItem 
-            product={node} 
-            isSingleItem={sale.length === 1}
-            isFeature={isFeature}
-            showThumbs={true}
-            isGiftCard={isGiftCard} 
-            key={node.shopifyId}
-          />)
-        }
-      </Container>
 
       <Title>Feature</Title>
       <Container 
@@ -173,6 +153,22 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
             isFeature={isFeature}
             showThumbs={false}
             isGiftCard={isGiftCard} 
+            key={node.shopifyId}
+          />)
+        }
+      </Container>
+      <Title>Standards</Title>
+      <Container 
+        className={className} 
+        isSingleItem={standards.length === 1}
+      >
+        {standards.map(node => 
+          <ProductListingItem 
+            product={node} 
+            isSingleItem={standards.length === 1}
+            isFeature={false}
+            showThumbs={true}
+            isGiftCard={false} 
             key={node.shopifyId}
           />)
         }

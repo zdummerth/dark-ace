@@ -161,11 +161,6 @@ export const query = graphql`
           amount
           currencyCode
         }
-        compareAtPrice
-        compareAtPriceV2 {
-          amount
-          currencyCode
-        }
         availableForSale
         shopifyId
         selectedOptions {

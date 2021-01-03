@@ -130,35 +130,35 @@ const SoldOut = styled.div`
   font-size: 1.5rem;
 `
 
-const CompareAtPriceWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`
-const CompareAtPrice = styled.div`
-  position: relative;
-  font-size: 1.75rem;
-  margin-right: 20px;
+// const CompareAtPriceWrapper = styled.div`
+//   display: flex;
+//   align-items: center;
+// `
+// const CompareAtPrice = styled.div`
+//   position: relative;
+//   font-size: 1.75rem;
+//   margin-right: 20px;
 
-  .line-through {
-    position: absolute;
-    border-top: 2px solid ${colors.brand};
-    width: 100%;
-    transform: rotate(-10deg);
-    top: 50%;
-  }
-`
+//   .line-through {
+//     position: absolute;
+//     border-top: 2px solid ${colors.brand};
+//     width: 100%;
+//     transform: rotate(-10deg);
+//     top: 50%;
+//   }
+// `
 
-const NewPrice = styled.div`
-  -webkit-text-stroke: 1px ${colors.brand};
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: ${colors.lightest};
-  text-shadow:
-  -1px -1px 0 ${colors.brand},  
-  1px -1px 0 ${colors.brand},
-  -1px 1px 0 ${colors.brand},
-    1px 1px 6px ${colors.lightest};
-`
+// const NewPrice = styled.div`
+//   -webkit-text-stroke: 1px ${colors.brand};
+//   font-size: 2.5rem;
+//   font-weight: bold;
+//   color: ${colors.lightest};
+//   text-shadow:
+//   -1px -1px 0 ${colors.brand},  
+//   1px -1px 0 ${colors.brand},
+//   -1px 1px 0 ${colors.brand},
+//     1px 1px 6px ${colors.lightest};
+// `
 
 const ProductForm = ({ product, setImageFluid }) => {
   const {
@@ -320,22 +320,25 @@ const ProductForm = ({ product, setImageFluid }) => {
 
   const price = formatPrice(variant.priceV2)
 
-  const compareAtPrice = variant.compareAtPriceV2 ? formatPrice(variant.compareAtPriceV2) : null
+  // const compareAtPrice = variant.compareAtPriceV2 ? formatPrice(variant.compareAtPriceV2) : null
 
-  const priceDisplay = compareAtPrice ? (
-    <>
-      <NewPrice> 50% Off!</NewPrice>
-      <CompareAtPriceWrapper>
-        <CompareAtPrice>
-          <div>{compareAtPrice}</div>
-          <div className="line-through"></div>
-        </CompareAtPrice>
-        <NewPrice>{price}</NewPrice>
-      </CompareAtPriceWrapper>
-    </>
-  ) : (
-    <div className="price">{price}</div>
-  )
+  // const priceDisplay = compareAtPrice ? (
+  //   <>
+  //     <NewPrice> 50% Off!</NewPrice>
+  //     <CompareAtPriceWrapper>
+  //       <CompareAtPrice>
+  //         <div>{compareAtPrice}</div>
+  //         <div className="line-through"></div>
+  //       </CompareAtPrice>
+  //       <NewPrice>{price}</NewPrice>
+  //     </CompareAtPriceWrapper>
+  //   </>
+  // ) : (
+  //   <div className="price">{price}</div>
+  // )
+
+  const priceDisplay = <div className="price">{price}</div>
+   
 
   const baseOption = options.length > 0 ? options[0] : {}
   console.log({baseOption})
