@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import styled, { createGlobalStyle } from "styled-components"
@@ -6,6 +6,11 @@ import styled, { createGlobalStyle } from "styled-components"
 import Header from './header'
 import Footer from './footer'
 import Spotify from '../spotify'
+import { AddingToCart } from './addingToCart'
+
+
+import { StoreContext } from '../../context/StoreContextProvider'
+
 
 import { dimensions } from '../../utils/styles';
 
@@ -49,6 +54,13 @@ const HeaderMargin = styled.div`
   margin-top: ${dimensions.headerHeight};
 `
 
+const StyledAddingToCart = styled(AddingToCart)`
+  position: fixed;
+  top: ${dimensions.headerHeight};
+  // right: 0;
+  z-index: 50;
+`
+
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -61,10 +73,20 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const {
+    store: { adding, checkout: { lineItems } },
+  } = useContext(StoreContext)
+  
+  const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
+
   return (
     <>
       <GlobalStyle />
       <Wrapper>
+        <StyledAddingToCart
+          adding={adding}
+          lineItems={lineItems}
+        />
         <Header siteTitle={data.site.siteMetadata.title} />
         <HeaderMargin />
         <Spotify />

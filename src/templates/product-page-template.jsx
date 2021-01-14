@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
+import GiftCard from '../components/products/giftCard'
+
 
 
 import ProductForm from '../components/products/product-form'
@@ -131,6 +133,7 @@ const ProductPage = ({ data }) => {
             />
             <div dangerouslySetInnerHTML={{__html: product.descriptionHtml}}/>
           </FormContainer>
+          <GiftCard/>
         </Container>
     </>
   )

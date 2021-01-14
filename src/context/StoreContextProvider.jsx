@@ -86,7 +86,6 @@ const StoreContextProvider = ({ children }) => {
           .addLineItems(checkoutId, lineItemsToUpdate)
           .then(checkout => {
             updateStore(prevState => {
-              // console.log('Current Items', checkout.lineItems[0].quantity)
               return { ...prevState, checkout, adding: false }
             })
           })

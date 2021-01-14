@@ -173,22 +173,6 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
           />)
         }
       </Container>
-      <Title>Gift Card</Title>
-      <Container 
-        className={className} 
-        isSingleItem={true}
-      >
-        {giftCard.map(node => 
-          <ProductListingItem 
-            product={node} 
-            isSingleItem={true}
-            isFeature={false}
-            showThumbs={false}
-            isGiftCard={true} 
-            key={node.shopifyId}
-          />)
-        }
-      </Container>
     </>
   )
 }

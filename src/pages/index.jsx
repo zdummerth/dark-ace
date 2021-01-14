@@ -4,6 +4,8 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 
 import ProductListing from '../components/products/product-listing'
+import GiftCard from '../components/products/giftCard'
+
 
 import Youtube from '../components/youtube'
 
@@ -15,6 +17,7 @@ import SEO from "../components/seo"
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+
   width: 100%;
   text-align: center;
 
@@ -53,7 +56,9 @@ const IndexPage = ({data}) => {
         <Banner>
           <Img fluid={data.parked.childImageSharp.fluid} />
         </Banner>
+        <GiftCard/>
         <StyledProductListing />
+
         <Title>2020 Ledgestone Commercial</Title>
         <Youtube style={{alignSelf: 'center'}} />
         <ImgWrapper>

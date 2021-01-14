@@ -53,7 +53,7 @@ const LineItem = props => {
   return (
     <Container>
       {console.log(item)}
-      <Link style={{marginRight: '1rem'}} to={`/product/${item.variant.product.handle}/`}>
+      <Link style={{marginRight: '1rem'}} to={`/shop/${item.variant.product.handle}/`}>
         {variantImage}
       </Link>
       <div id='product-info'>

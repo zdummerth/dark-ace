@@ -4,6 +4,7 @@ import React, { useState, useContext } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { StoreContext } from '../../context/StoreContextProvider'
+import { AddingToCart } from './addingToCart'
 
 import { breakpoints, dimensions, colors } from '../../utils/styles';
 
@@ -172,7 +173,7 @@ const IgIcon = styled(FaInstagram)`
 const Header = () => {
 
   const {
-    store: { checkout: { lineItems } },
+    store: { adding, checkout: { lineItems } },
   } = useContext(StoreContext)
   
   const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
