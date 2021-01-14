@@ -143,7 +143,7 @@ const ProductForm = ({ product, setImageFluid }) => {
   const {
     addVariantToCart,
     store: { client, adding },
-  } = useContext(StoreContext)
+  } = useContext(StoreContext);
 
 
   const productVariant = client.product.helpers.variantForOptions(product, variant) || variant
@@ -157,7 +157,7 @@ const ProductForm = ({ product, setImageFluid }) => {
         const result = fetchedProduct.variants.filter(
           variant => variant.id === productVariant.shopifyId
         )
-        console.log('result', result[0])
+        // console.log('result', result[0])
         if (result.length > 0) {
           setAvailable(result[0].available)
         }

@@ -70,7 +70,7 @@ export const AddingToCart = ({ className, adding, lineItems }) => {
                     ? `${num} NEW ITEMS ADDED`
                     : `${num} NEW ITEM ADDED`;
 
-                setCartIndicator({ ...cartIndicator, message });
+                setCartIndicator(prev => ({ ...prev, message }));
 
                 setTimeout(
                 () => setCartIndicator({ visible: false, message: '' }),
@@ -78,7 +78,7 @@ export const AddingToCart = ({ className, adding, lineItems }) => {
                 );
             }
         }
-    }, [adding, totalQuantity, prevTotalQuantity, cartIndicator])
+    }, [adding, totalQuantity, prevTotalQuantity ])
 
   
     return (

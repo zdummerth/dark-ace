@@ -112,6 +112,24 @@ const StoreContextProvider = ({ children }) => {
             })
           })
       },
+      checkAvailability: (productId, variantId) => {
+        return  client.product.fetch(productId).then(fetchedProduct => {
+          // this checks the currently selected variant for availability
+          const result = fetchedProduct.variants.filter(
+            v => v.id === variantId
+          )
+          // console.log('result', result[0])
+          if (result.length > 0) {
+            return { data: result[0].available }
+          } else {
+            return { data: false }
+          }
+        })
+        .catch(err => {
+          return { err }
+        })
+      },
+      
     }}
     >
         {children}

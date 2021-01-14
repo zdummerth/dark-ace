@@ -119,7 +119,7 @@ const ProductPage = ({ data }) => {
     <>
       <SEO title={product.title} description={product.description} />
         <Title>{product.title}</Title>
-        {isPreOrder ? <Subtitle>This is a pre order item</Subtitle> : null}
+        {isPreOrder ? <Subtitle>This Is A Pre-Order Item</Subtitle> : null}
         <Container>
           <ImgContainer>
             {imageDisplay}

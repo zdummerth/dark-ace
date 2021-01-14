@@ -30,6 +30,10 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     color: inherit;
   }
+
+  p {
+    margin: 0;
+  }
 `
 const Wrapper = styled.div`
   display: flex;

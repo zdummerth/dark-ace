@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { useStaticQuery, graphql } from "gatsby"
 
 import ProductListingItem from './product-listing-item'
+import Accessory from './accessory'
+
 
 import { breakpoints, colors } from '../../utils/styles';
 
@@ -22,7 +24,7 @@ const Container = styled.div`
 `
 
 const Title = styled.h2`
-  text-align: center;
+  // text-align: center;
   font-size: 2rem;
   margin-bottom: 0;
 
@@ -37,16 +39,53 @@ const Title = styled.h2`
     -1px 1px 0 ${colors.brand},
       1px 1px 6px ${colors.lightest};
   }
+
+  &.hide-lt-tablet {
+    @media (max-width: ${breakpoints.tablet}) {
+      display: none;
+    }
+  }
+
+  &.hide-gt-tablet {
+    @media (min-width: ${breakpoints.tablet}) {
+      display: none;
+    }
+  }
 `
 
-const Text = styled.p`
+const Text = styled.div`
   width: 80%;
   max-width: 400px;
-  align-self: center;
+  // align-self: center;
+  text-align: center;
   margin-top: 0;
+  margin-left: 15px;
 
 
   font-size: 1.25rem;
+
+  @media (min-width: ${breakpoints.tablet}) {
+    h2 {
+      margin-top: 0;
+    }
+  }
+`
+
+const FeatureContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 15px;
+
+
+
+  @media (min-width: ${breakpoints.tablet}) {
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: 35px;
+  }
 `
 
 
@@ -65,7 +104,12 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
                 image { 
                   id
                 }
+                priceV2 {
+                  amount
+                  currencyCode
+                }
                 id
+                shopifyId
               }
               priceRange {
                 minVariantPrice {
@@ -113,56 +157,69 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
   const preOrder = filterdProducts('pre-order');
   const specials = filterdProducts('specials');
 
+  const shirts = filterdProducts('shirts');
+
+  const hoodies = filterdProducts('hoodies');
+  const accessories = filterdProducts('accessories');
+
+  const shirtsAndHoodies = [...hoodies, ...shirts]
+
 
   return (
     <>
 
-      <Title>Feature</Title>
-      <Container 
-        className={className} 
-        isSingleItem={preOrder.length === 1}
-      >
-        {preOrder.map(node => 
-          <ProductListingItem 
-            product={node} 
-            isSingleItem={preOrder.length === 1}
-            isFeature={isFeature}
-            showThumbs={false}
-            isGiftCard={isGiftCard} 
-            key={node.shopifyId}
-          />)
-        }
-      </Container>
-      <Text>
-          For every Listen to Metal Hoodie purchased, 20 meals will 
-          be donated to those in need through the St.Louis Food Bank, 
-          Operation Food Search. Also, you will be entered 
-          into a raffle to win a brand new Prodigy practice bag! 
-        </Text>
+      <Title className='hide-gt-tablet'>Featured Hoodie</Title>
+      <FeatureContainer>
 
-      <Title>Specials</Title>
+        <Container 
+          className={className} 
+          isSingleItem={preOrder.length === 1}
+        >
+          {preOrder.map(node => 
+            <ProductListingItem 
+              product={node} 
+              isSingleItem={preOrder.length === 1}
+              isFeature={true}
+              showThumbs={true}
+              isGiftCard={isGiftCard} 
+              key={node.shopifyId}
+            />)
+          }
+        </Container>
+        <Text>
+          <Title className='hide-lt-tablet'>Featured Hoodie</Title>
+          <p>
+            For every Listen to Metal Hoodie purchased, 20 meals will 
+            be donated to those in need through the St.Louis Food Bank, 
+            Operation Food Search. Also, you will be entered 
+            into a raffle to win a brand new Prodigy practice bag! 
+          </p>
+        </Text>
+      </FeatureContainer>
+      <Title>All Shirts And Hoodies</Title>
       <Container 
         className={className} 
         isSingleItem={specials.length === 1}
       >
-        {specials.map(node => 
+
+        {shirtsAndHoodies.map(node => 
           <ProductListingItem 
             product={node} 
             isSingleItem={specials.length === 1}
             isFeature={isFeature}
-            showThumbs={false}
+            showThumbs={true}
             isGiftCard={isGiftCard} 
             key={node.shopifyId}
           />)
         }
       </Container>
-      <Title>Standards</Title>
+      <Title>Accessories</Title>
       <Container 
         className={className} 
         isSingleItem={standards.length === 1}
       >
-        {standards.map(node => 
-          <ProductListingItem 
+        {accessories.map(node => 
+          <Accessory
             product={node} 
             isSingleItem={standards.length === 1}
             isFeature={false}

@@ -20,7 +20,7 @@ const Container = styled.div`
 `
 
 const Title = styled.h2`
-  text-align: center;
+  // text-align: center;
   font-size: 2rem;
   margin-bottom: 0;
 `

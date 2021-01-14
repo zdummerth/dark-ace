@@ -1,7 +1,9 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { Link } from "gatsby"
 import styled from 'styled-components'
 import Img from 'gatsby-image'
+import { StoreContext } from '../../context/StoreContextProvider'
+
 
 import { breakpoints, colors } from '../../utils/styles';
 import { formatPrice } from '../../utils/helpers';
@@ -24,9 +26,9 @@ const ProductContainer = styled.div`
 `
 
 const ImgContainer = styled.div`
-  width: 60vw;
-  max-width: 300px;
-  height: 300px;
+  width: ${({ isFeature }) => isFeature ? '70vw' : '60vw'};
+  max-width: ${({ isFeature }) => isFeature ? '400px' : '300px'};
+  height: ${({ isFeature }) => isFeature ? '400px' : '300px'};
   position: relative;
   overflow: hidden;
   @media (max-width: ${breakpoints.tablet}) {
@@ -159,7 +161,7 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
         isSingleItem={isSingleItem}
         isFeature={isFeature}
       >
-        <ImgContainer>
+        <ImgContainer isFeature={isFeature}>
             {images}
         </ImgContainer>
 
