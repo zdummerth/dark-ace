@@ -77,7 +77,7 @@ const Layout = ({ children }) => {
     store: { adding, checkout: { lineItems } },
   } = useContext(StoreContext)
   
-  const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
+  const cartCount = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
 
   return (
     <>
@@ -87,7 +87,10 @@ const Layout = ({ children }) => {
           adding={adding}
           lineItems={lineItems}
         />
-        <Header siteTitle={data.site.siteMetadata.title} />
+        <Header 
+          siteTitle={data.site.siteMetadata.title}
+          cartCount={cartCount}
+          />
         <HeaderMargin />
         <Spotify />
         <ContentWrapper>

@@ -3,8 +3,6 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { StoreContext } from '../context/StoreContextProvider'
 
-
-
 import LineItem from '../components/cart/line-item'
 
 import { colors } from '../utils/styles';

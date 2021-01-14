@@ -1,17 +1,15 @@
-import React, { useContext, useState, useEffect } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components'
-// import { Link } from 'gatsby';
 import { usePrevious } from '../../hooks/use-previous'
 
 
-import { colors, dimensions } from '../../utils/styles';
+import { colors } from '../../utils/styles';
 
 const Container = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${colors.gradient};
+  background: ${colors.brand};
   box-shadow: 0 0 5px ${colors.lightest};
   border: none;
   border-radius: 5px;
@@ -52,39 +50,35 @@ export const AddingToCart = ({ className, adding, lineItems }) => {
   
     const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
     const prevTotalQuantity = usePrevious(totalQuantity);
-    const prevAdding = usePrevious(adding)
   
     useEffect(() => {
-      if (prevAdding !== adding) {
-          if (adding) {
+        if (adding) {
             setCartIndicator({
-              visible: true,
-              message: (
+                visible: true,
+                message: (
                 <>
-                  <LoadingSpinner />
-                  <div>Adding</div>
+                    <LoadingSpinner />
+                    <div>Adding</div>
                 </>
-              )
+                )
             });
-          } else {
+        } else {
             if (totalQuantity > prevTotalQuantity) {
-              const num = totalQuantity - prevTotalQuantity;
-              const message =
+                const num = totalQuantity - prevTotalQuantity;
+                const message =
                 num > 1
-                  ? `${num} NEW ITEMS ADDED`
-                  : `${num} NEW ITEM ADDED`;
-    
-              setCartIndicator({ ...cartIndicator, message });
-    
-              setTimeout(
+                    ? `${num} NEW ITEMS ADDED`
+                    : `${num} NEW ITEM ADDED`;
+
+                setCartIndicator({ ...cartIndicator, message });
+
+                setTimeout(
                 () => setCartIndicator({ visible: false, message: '' }),
                 2000
-              );
+                );
             }
-          }
         }
-  
-    }, [prevAdding, adding, totalQuantity, prevTotalQuantity, cartIndicator])
+    }, [adding, totalQuantity, prevTotalQuantity, cartIndicator])
 
   
     return (

@@ -28,7 +28,7 @@ const ImgContainer = styled.div`
   max-width: 300px;
   height: 300px;
   position: relative;
-  // overflow: hidden;
+  overflow: hidden;
   @media (max-width: ${breakpoints.tablet}) {
 
   }

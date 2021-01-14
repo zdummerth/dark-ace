@@ -112,7 +112,6 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
   const standards = filterdProducts('standards');
   const preOrder = filterdProducts('pre-order');
   const specials = filterdProducts('specials');
-  const giftCard = filterdProducts('gift-cards');
 
 
   return (

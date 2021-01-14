@@ -45,41 +45,42 @@ const ButtonContainer = styled.div`
 `
 
 
-const ListContainer = styled.div`
+const ListControls = styled.div`
   display: flex;
-  flex-direction: column;
-  position: relative;
+  align-items: center;
+  
+  div {
+    margin-right: 7px;
+  }
 `
 
 const CurrentPrice = styled(StyledButton)``
 
 
 const List = styled.div`
+  position: absolute;
+  top: 0;
 
-position: absolute;
-top: 0;
-opacity: ${({open}) => open ? '1' : '0'};
+  display: ${({open}) => open ? 'flex' : 'none'};
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100%;
 
-transition: all .3s ease-in;
 
-display: flex;
-flex-direction: column;
-flex-wrap: wrap;
-height: 100%;
+  .list-child {
+    background-color: ${colors.background};
+    border: 1px solid ${colors.lightest};
+    color: ${colors.lightest};
 
-.list-child {
-  background-color: ${colors.background};
-  border: 1px solid ${colors.lightest};
-  border-radius: 5px;
-  padding: 10px;
-  flex: 1;
+    border-radius: 5px;
+    padding: 10px;
+    flex: 1;
 
-  &:hover {
-    background-color: red
+    &:hover {
+      background-color: red
+    }
   }
 }
-
-  }
 `
 
 
@@ -142,7 +143,7 @@ const GiftCard = () => {
   
   return (
       <ProductContainer>
-        <ImgContainer onClick={toggleListOpen}>
+        <ImgContainer onClick={() => setListOpen(false)}>
           <Img 
             fluid={images[0].localFile.childImageSharp.fluid} 
             alt={'Gift Card'}
@@ -151,19 +152,22 @@ const GiftCard = () => {
             { variants.map(v => {
               const price = formatPrice(v.priceV2)
               return (
-                <div 
+                <button 
                   className='list-child' 
                   key={v.shopifyId}
                   onClick={() => setVariant(v)}
                 >
                   {price}
-                </div>
+                </button>
               )
             })}
           </List>
         </ImgContainer>
         <ButtonContainer>
-          <CurrentPrice onClick={toggleListOpen}>{formatPrice(variant.priceV2)}</CurrentPrice>
+          <ListControls>
+            <div>Amount:</div>
+            <CurrentPrice onClick={toggleListOpen}>{formatPrice(variant.priceV2)}</CurrentPrice>
+          </ListControls>
           <StyledButton onClick={handleAddToCart}>Add To Cart</StyledButton>
         </ButtonContainer>
       </ProductContainer>
