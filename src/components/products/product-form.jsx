@@ -3,13 +3,14 @@ import { Link } from 'gatsby'
 import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
+import { StyledButton } from '../shared/buttons'
+
 
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { AiOutlineMinusCircle } from 'react-icons/ai';
 
 
-import { usePrevious } from '../../hooks/use-previous'
 
 import { StoreContext } from '../../context/StoreContextProvider'
 
@@ -55,54 +56,19 @@ const Form = styled.form`
     }
 `
 const Span = styled.span`
-    border: ${props => (props.selected ? `none` : '1px solid rgba(232, 232, 232, .3)')};
-    background: ${props => (props.selected ? `${colors.gradient}` : 'black')};
-    box-shadow: ${props => (props.selected ? ` 0 0 5px ${colors.lightest}` : '')};
+  border: ${props => (props.selected ? `none` : '1px solid rgba(232, 232, 232, .3)')};
+  background: ${props => (props.selected ? `${colors.gradient}` : 'black')};
+  box-shadow: ${props => (props.selected ? ` 0 0 5px ${colors.lightest}` : '')};
 
-    padding: .65rem;
-    border-radius: 5px;
-    // font-weight: bold;
-    :hover {
-        cursor: pointer;
-      }
+  padding: .65rem;
+  border-radius: 5px;
+  // font-weight: bold;
+  :hover {
+      cursor: pointer;
+    }
     
 `
-const StyledButton = styled.button`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: ${colors.gradient};
-    box-shadow: 0 0 5px ${colors.lightest};
-    border: none;
-    border-radius: 5px;
-    padding: 10px 0;
-    color: white;
 
-    :hover {
-      cursor: pointer;
-      background: red;
-    }
-`
-
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-`
-
-const LoadingSpinner = styled.div`
-    background: ${colors.specialGradient};
-    border-radius: 50%;
-    height: 20px;
-    width: 20px;
-
-    animation: ${rotate} 1s linear infinite;
-
-`
 const StyledLink = styled(Link)`
     text-align: center;
     border: 1px solid white;
@@ -176,48 +142,8 @@ const ProductForm = ({ product, setImageFluid }) => {
 
   const {
     addVariantToCart,
-    store: { client, adding, checkout: { lineItems} },
+    store: { client, adding },
   } = useContext(StoreContext)
-
-  const [cartIndicator, setCartIndicator] = useState({
-    visible: false,
-    message: ''
-})
-
-  const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
-  const prevTotalQuantity = usePrevious(totalQuantity);
-  const prevAdding = usePrevious(adding)
-
-  useEffect(() => {
-    if (prevAdding !== adding) {
-        if (adding) {
-          setCartIndicator({
-            visible: true,
-            message: (
-              <>
-                <LoadingSpinner />
-                Updating Cart...
-              </>
-            )
-          });
-        } else {
-          if (totalQuantity > prevTotalQuantity) {
-            const num = totalQuantity - prevTotalQuantity;
-            const message =
-              num > 1
-                ? `${num} NEW ITEMS ADDED`
-                : `${num} NEW ITEM ADDED`;
-  
-            setCartIndicator({ ...cartIndicator, message });
-  
-            setTimeout(
-              () => setCartIndicator({ visible: false, message: '' }),
-              2000
-            );
-          }
-        }
-      }
-  }, [prevAdding, adding, totalQuantity, prevTotalQuantity, cartIndicator])
 
 
   const productVariant = client.product.helpers.variantForOptions(product, variant) || variant
@@ -320,23 +246,6 @@ const ProductForm = ({ product, setImageFluid }) => {
 
   const price = formatPrice(variant.priceV2)
 
-  // const compareAtPrice = variant.compareAtPriceV2 ? formatPrice(variant.compareAtPriceV2) : null
-
-  // const priceDisplay = compareAtPrice ? (
-  //   <>
-  //     <NewPrice> 50% Off!</NewPrice>
-  //     <CompareAtPriceWrapper>
-  //       <CompareAtPrice>
-  //         <div>{compareAtPrice}</div>
-  //         <div className="line-through"></div>
-  //       </CompareAtPrice>
-  //       <NewPrice>{price}</NewPrice>
-  //     </CompareAtPriceWrapper>
-  //   </>
-  // ) : (
-  //   <div className="price">{price}</div>
-  // )
-
   const priceDisplay = <div className="price">{price}</div>
    
 
@@ -404,7 +313,7 @@ const ProductForm = ({ product, setImageFluid }) => {
           type="submit"
           disabled={!available || adding}
           >
-          {cartIndicator.visible ? cartIndicator.message : 'Add to Cart'}
+          Add To Cart
         </StyledButton>
       )}
 

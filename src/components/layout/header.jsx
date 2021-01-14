@@ -1,9 +1,8 @@
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
-import { StoreContext } from '../../context/StoreContextProvider'
 
 import { breakpoints, dimensions, colors } from '../../utils/styles';
 
@@ -169,14 +168,8 @@ const IgIcon = styled(FaInstagram)`
   }
 `
 
-const Header = () => {
-
-  const {
-    store: { checkout: { lineItems } },
-  } = useContext(StoreContext)
+const Header = ({ cartCount }) => {
   
-  const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
-
   const MenuItems = [
     {
       path: '/',
@@ -188,7 +181,7 @@ const Header = () => {
     },
     {
       path: '/cart',
-      title: `Cart (${totalQuantity})`
+      title: `Cart (${cartCount})`
     }
   ]
 

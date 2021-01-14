@@ -14,8 +14,6 @@ const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: ${props => props.isFeature ? '80%' : '60vw'};
-  max-width: ${props => props.isFeature ? '300px' : '300px'};
   border-bottom: 1px solid ${colors.brand};
 
   @media (max-width: ${breakpoints.tablet}) {
@@ -26,8 +24,14 @@ const ProductContainer = styled.div`
 `
 
 const ImgContainer = styled.div`
-  width: inherit;
-  max-width: inherit;
+  width: 60vw;
+  max-width: 300px;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  @media (max-width: ${breakpoints.tablet}) {
+
+  }
 `
 
 const ThumbnailContainer = styled.div`  
@@ -46,10 +50,6 @@ const Thumbnail = styled.button`
 `
 
 const ImgLink = styled(Link)`
-  display: ${props => props.hidden ? 'none' : 'block'};
-  overflow: hidden;
-  position: relative;
-
   .gatsby-image-wrapper {
     transition: all 250ms;
   }
@@ -136,6 +136,18 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
             <Img 
                 fluid={image.localFile.childImageSharp.fluid} 
                 alt={product.title}
+                style={{
+                  position: 'absolute',
+                  top: '0',
+                  bottom: '0',
+                  left: '0',
+                  right: '0',
+                  opacity: `${index === ind ? '1' : '0'}`,
+                  transition: 'opacity .8s ease-in', 
+                }}
+                imgStyle={{ 
+                  objectFit: 'contain', 
+                }}
             />
         </ImgLink>
   ))
@@ -151,9 +163,6 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
             {images}
         </ImgContainer>
 
-        {/* <Img 
-        
-        /> */}
         {showThumbs ?
           <ThumbnailContainer>
             {product.thumbs.map((thumb, ind) => (
