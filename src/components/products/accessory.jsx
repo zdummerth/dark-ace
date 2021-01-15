@@ -18,9 +18,9 @@ import { StyledButton } from '../shared/buttons'
 const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
-  // align-items: center;
+  align-items: center;
   align-self: center;
-  margin: 20px;
+  margin: 10px;
   text-align: left;
 
   border-bottom: 1px solid ${colors.brand};
@@ -49,39 +49,25 @@ overflow: hidden;
   // .gatsby-image-wrapper {}
 `
 
-const ButtonContainer = styled.div`
-  // display: flex;
-  
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-
-
-
-`
-
 const QuantityContainer = styled.div`
     display: flex;
     align-items: center;
-    // justify-content: space-between;
-    margin-bottom: 10px;
+    justify-content: space-between;
+    margin: 0 10px 10px;
+    align-self: stretch;
 
     & button {
         border: none;
         background: none;
+        border-radius: 50%;
         color: white;
+        font-size: 24px;
+        // width: 100%;
+        padding: 0;
     }
 
-    & > * {
-        // font-size: 24px;
-        // font-weight: bold;
-        padding-right: 8px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    h3 {
-      margin: 0;
+    p {
+        font-size: 20px;
     }
 
 
@@ -116,7 +102,7 @@ const Accessory = ({ product }) => {
         <h3>{title}</h3>
         <h3>{formatPrice(variant.priceV2)}</h3>
         {available ? 
-          (<ButtonContainer>
+          (<>
             <QuantityContainer>
                 <h3>Quantity:</h3>
                 <button onClick={decreaseQuantity}>
@@ -128,8 +114,9 @@ const Accessory = ({ product }) => {
                 </button>
             </QuantityContainer>
             <StyledButton onClick={addToCart}>Add To Cart</StyledButton>
-          </ButtonContainer>) : (
-            <div>Sold Out</div>
+          </>
+          ) : (
+            <div>Sold Out!!</div>
           )
         }
       </ProductContainer>

@@ -11,24 +11,27 @@ import { formatPrice } from '../../utils/helpers';
 
 
 const ProductContainer = styled.div`
-  margin: ${props => props.isFeature ? '0' : '1rem'};;
+  margin: ${props => props.isFeature ? '0' : '15px'};
   text-align: center; 
   display: flex;
   flex-direction: column;
   align-items: center;
   border-bottom: 1px solid ${colors.brand};
 
+
   @media (max-width: ${breakpoints.tablet}) {
     &:last-child {
-        padding-right: ${props => props.isSingleItem ? '0' : '2rem'};
+        // padding-right: ${props => props.isSingleItem ? '0' : '15px'};
       }
   }
 `
 
 const ImgContainer = styled.div`
   width: ${({ isFeature }) => isFeature ? '70vw' : '60vw'};
-  max-width: ${({ isFeature }) => isFeature ? '400px' : '300px'};
-  height: ${({ isFeature }) => isFeature ? '400px' : '300px'};
+  max-width: ${({ isFeature }) => isFeature ? '400px' : '350px'};
+  height: ${({ isFeature }) => isFeature ? '400px' : '35vh'};
+  max-height: ${({ isFeature }) => isFeature ? '400px' : '400px'};
+
   position: relative;
   overflow: hidden;
   @media (max-width: ${breakpoints.tablet}) {
@@ -38,6 +41,7 @@ const ImgContainer = styled.div`
 
 const ThumbnailContainer = styled.div`  
   margin-top: 5px;
+
 `
 
 const Thumbnail = styled.button`
@@ -62,6 +66,16 @@ const ImgLink = styled(Link)`
         transform: scale(1.1);
       }
     }
+  }
+`
+
+const TextWrapper = styled.div`
+  // margin-top: 20px;
+  // margin-bottom: 20px;
+
+  & > * {
+    margin-top: 10px;
+    margin-bottom: 5px;
   }
 `
 
@@ -178,8 +192,10 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
           </ThumbnailContainer>
         : null }
         <Link to={`/shop/${product.handle}`}>
-          <h3>{product.title}</h3>
-          <h3>{priceDisplay}</h3>
+          <TextWrapper>
+            <h3>{product.title}</h3>
+            <h3>{priceDisplay}</h3>
+          </TextWrapper>
         </Link>
       </ProductContainer>
   )

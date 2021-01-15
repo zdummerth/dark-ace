@@ -3,6 +3,8 @@ import { Link } from 'gatsby'
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
+import { StyledButton } from './shared/buttons'
+
 
 import { colors } from '../utils/styles';
 
@@ -231,7 +233,7 @@ const BasicForm = () => {
                           rows='5'
                           cols='50'
                         />
-                        <button type='submit' id='submit-button'>Submit</button>
+                        <StyledButton type='submit' id='submit-button'>Submit</StyledButton>
                     </>
                 }
             </StyledForm>

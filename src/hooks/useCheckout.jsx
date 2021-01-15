@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useCallback } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { StoreContext } from '../context/StoreContextProvider'
 
 
@@ -9,7 +9,7 @@ export const useCheckout = product => {
   const {
     addVariantToCart,
     checkAvailability,
-    store: { client, adding },
+    store: { adding },
   } = useContext(StoreContext);
 
   const [variant, setVariant] = useState(variants[0]);
@@ -48,7 +48,7 @@ export const useCheckout = product => {
           setAvailable(data)
         }
       })
-  }, [shopifyId, variant.shopifyId]);
+  }, [shopifyId, variant.shopifyId, checkAvailability]);
 
   return {
     variant,
@@ -59,6 +59,7 @@ export const useCheckout = product => {
     increaseQuantity,
     decreaseQuantity,
     addToCart,
-    setVariant
+    setVariant, 
+    resetError
   };
 }

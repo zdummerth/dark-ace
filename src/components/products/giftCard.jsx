@@ -130,8 +130,6 @@ const GiftCard = () => {
   const [variant, setVariant] = useState(variants[0]);
   const [listOpen, setListOpen] = useState(false);
 
-
-
   const handleAddToCart = () => {
     addVariantToCart(variant.shopifyId, 1)
   }
@@ -139,11 +137,10 @@ const GiftCard = () => {
   const toggleListOpen = () => {
     setListOpen(!listOpen)
   }
-
-  
+ 
   return (
       <ProductContainer>
-        <ImgContainer onClick={() => setListOpen(false)}>
+        <ImgContainer onClick={toggleListOpen}>
           <Img 
             fluid={images[0].localFile.childImageSharp.fluid} 
             alt={'Gift Card'}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from "styled-components"
-import { FiArrowDown, FiArrowUp } from 'react-icons/fi';
+// import { FiArrowDown, FiArrowUp } from 'react-icons/fi';
 
 import { colors } from '../utils/styles';
 
@@ -15,8 +15,12 @@ const Toggle = styled.div`
   width: 100%;
   text-align: center;
   background-color: ${colors.grayBackground};
-  font-size: 2rem;
-  margin: 0;
+  // font-size: 2rem;
+  // margin: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+
 `
 
 const Spotify = () => {
@@ -34,7 +38,7 @@ const Spotify = () => {
           allow="encrypted-media"
           title='Dark Ace Spotify Playlist'>    
       </iframe>
-      <Toggle onClick={() => setMinimized(!minimized)}>{minimized ? <FiArrowDown/> : <FiArrowUp/>}</Toggle>
+      <Toggle onClick={() => setMinimized(!minimized)}>{minimized ? 'Show Playlist' : 'Hide Playlist'}</Toggle>
     </Container>
   )
 }

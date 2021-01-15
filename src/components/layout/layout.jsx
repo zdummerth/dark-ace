@@ -31,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
   }
 
-  p {
+  p, h3 {
     margin: 0;
   }
 `

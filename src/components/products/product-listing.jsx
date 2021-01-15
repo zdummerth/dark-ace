@@ -12,8 +12,8 @@ import { breakpoints, colors } from '../../utils/styles';
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 0;
+  justify-content: space-evenly;
+  margin-right: 10px;
 
 
   @media (max-width: ${breakpoints.tablet}) {
@@ -60,6 +60,8 @@ const Text = styled.div`
   text-align: center;
   margin-top: 0;
   margin-left: 15px;
+  margin-right: 15px;
+
 
 
   font-size: 1.25rem;
@@ -84,6 +86,7 @@ const FeatureContainer = styled.div`
   @media (min-width: ${breakpoints.tablet}) {
     flex-direction: row;
     align-items: flex-start;
+    justify-content: center;
     margin-top: 35px;
   }
 `
@@ -201,17 +204,16 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
         className={className} 
         isSingleItem={specials.length === 1}
       >
-
-        {shirtsAndHoodies.map(node => 
-          <ProductListingItem 
-            product={node} 
-            isSingleItem={specials.length === 1}
-            isFeature={isFeature}
-            showThumbs={true}
-            isGiftCard={isGiftCard} 
-            key={node.shopifyId}
-          />)
-        }
+          {shirtsAndHoodies.map(node => 
+            <ProductListingItem 
+              product={node} 
+              isSingleItem={specials.length === 1}
+              isFeature={isFeature}
+              showThumbs={true}
+              isGiftCard={isGiftCard} 
+              key={node.shopifyId}
+            />)
+          }
       </Container>
       <Title>Accessories</Title>
       <Container 
