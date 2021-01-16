@@ -1,8 +1,7 @@
-import React, { useState, useContext } from "react"
+import React, { useState } from "react"
 import { Link } from "gatsby"
 import styled from 'styled-components'
 import Img from 'gatsby-image'
-import { StoreContext } from '../../context/StoreContextProvider'
 
 
 import { breakpoints, colors } from '../../utils/styles';

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import styled from "styled-components"
 // import { FiArrowDown, FiArrowUp } from 'react-icons/fi';
+import { BsCaretDown, BsCaretUp } from 'react-icons/bs';
+
 
 import { colors } from '../utils/styles';
 
@@ -25,7 +27,11 @@ const Toggle = styled.div`
 
 const Spotify = () => {
 
-  const [minimized, setMinimized] = useState(true)
+  const [minimized, setMinimized] = useState(true);
+  const icon = minimized ? <BsCaretDown/> : <BsCaretUp/>;
+  const title = minimized ? 'Show Playlist' : 'Hide Playlist'
+
+
 
   return (
     <Container>
@@ -38,7 +44,10 @@ const Spotify = () => {
           allow="encrypted-media"
           title='Dark Ace Spotify Playlist'>    
       </iframe>
-      <Toggle onClick={() => setMinimized(!minimized)}>{minimized ? 'Show Playlist' : 'Hide Playlist'}</Toggle>
+      <Toggle onClick={() => setMinimized(!minimized)}>
+        <div>{title}</div>
+        <div>{icon}</div>
+      </Toggle>
     </Container>
   )
 }

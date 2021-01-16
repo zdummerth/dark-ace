@@ -12,12 +12,19 @@ const StoreContextProvider = ({ children }) => {
   let initialStoreState = {
     client,
     adding: false,
+    status: 'idle',
     checkout: { lineItems: [] },
     products: [],
     shop: {},
   }
 
-  const [store, updateStore] = useState(initialStoreState)
+  const [store, updateStore] = useState(initialStoreState);
+
+  const handleError = error => {
+    updateStore(prevState => {
+      return { ...prevState, error, status: 'idle' }
+    })
+  }
 
   useEffect(() => {
     const initializeCheckout = async () => {
@@ -65,6 +72,7 @@ const StoreContextProvider = ({ children }) => {
     <StoreContext.Provider 
     value={{
       store,
+
       addVariantToCart: (variantId, quantity) => {
         if (variantId === '' || !quantity) {
           console.error('Both a size and quantity are required.')
@@ -72,7 +80,7 @@ const StoreContextProvider = ({ children }) => {
         }
 
         updateStore(prevState => {
-          return { ...prevState, adding: true }
+          return { ...prevState, status: 'Adding' }
         })
 
         const { checkout, client } = store
@@ -86,49 +94,73 @@ const StoreContextProvider = ({ children }) => {
           .addLineItems(checkoutId, lineItemsToUpdate)
           .then(checkout => {
             updateStore(prevState => {
-              return { ...prevState, checkout, adding: false }
+              return { ...prevState, checkout, status: 'Added' }
             })
-          })
+          }, (error) => handleError(error))
       },
+
       removeLineItem: (client, checkoutID, lineItemID) => {
+        updateStore(prevState => {
+          return { ...prevState, status: 'Removing' }
+        })
+
         return client.checkout
           .removeLineItems(checkoutID, [lineItemID])
-          .then(res => {
+          .then(checkout => {
             updateStore(prevState => {
-              return { ...prevState, checkout: res }
+              return { ...prevState, checkout, status: 'Removed' }
             })
-          })
+          }, (error) => handleError(error))
       },
+
       updateLineItem: (client, checkoutID, lineItemID, quantity) => {
         const lineItemsToUpdate = [
           { id: lineItemID, quantity: parseInt(quantity, 10) },
         ]
 
+        updateStore(prevState => {
+          return { ...prevState, status: 'Updating' }
+        })
+
         return client.checkout
           .updateLineItems(checkoutID, lineItemsToUpdate)
-          .then(res => {
+          .then(checkout => {
             updateStore(prevState => {
-              return { ...prevState, checkout: res }
+              return { ...prevState, checkout, status: 'Updated' }
             })
+          }, (error) => handleError(error))
+      },
+
+      checkAvailability: (productId, variantId) => {
+        return  client.product
+          .fetch(productId)
+          .then(fetchedProduct => {
+            // this checks the currently selected variant for availability
+            const result = fetchedProduct.variants.filter(
+              v => v.id === variantId
+            )
+            if (result.length > 0) {
+              return { data: result[0].available }
+            } else {
+              return { data: false }
+            }
+          },
+          (error) => {
+              return { data: false }
           })
       },
-      checkAvailability: (productId, variantId) => {
-        return  client.product.fetch(productId).then(fetchedProduct => {
-          // this checks the currently selected variant for availability
-          const result = fetchedProduct.variants.filter(
-            v => v.id === variantId
-          )
-          // console.log('result', result[0])
-          if (result.length > 0) {
-            return { data: result[0].available }
-          } else {
-            return { data: false }
-          }
-        })
-        .catch(err => {
-          return { err }
+
+      resetError: () => {
+        updateStore(prevState => {
+          return { ...prevState, error: false }
         })
       },
+
+      setStatus: (status) => {
+        updateStore(prevState => {
+          return { ...prevState, status }
+        })
+      }
       
     }}
     >

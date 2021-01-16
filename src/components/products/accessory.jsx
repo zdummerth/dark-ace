@@ -1,76 +1,48 @@
-import React, { useState, useContext } from 'react'
-import { StoreContext } from '../../context/StoreContextProvider'
+import React from 'react'
 import { useCheckout } from '../../hooks/useCheckout'
-
-
 import styled from 'styled-components'
 import Img from 'gatsby-image'
-
-import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { AiOutlineMinusCircle } from 'react-icons/ai';
-
-import { breakpoints, colors } from '../../utils/styles';
 import { formatPrice } from '../../utils/helpers';
-import { StyledButton } from '../shared/buttons'
+import { colors, BrandButton } from '../../utils/styles';
+
+import Quantity from './quantity'
 
 
 
-const ProductContainer = styled.div`
+const ProductWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  align-self: center;
-  margin: 10px;
-  text-align: left;
 
+  margin: 15px;
   border-bottom: 1px solid ${colors.brand};
-
 
   width: 70vw;
   max-width: 300px;
 
+`
+
+const ImgWrapper = styled.div`
+  width: 70vw;
+  max-width: 300px;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+`
+
+const TextWrapper = styled.div`
+  padding-right: 15px;
+  padding-left: 15px;
+
   & > * {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 `
 
-const ImgContainer = styled.div`
-width: 70vw;
-max-width: 300px;
-height: 250px;
-position: relative;
-overflow: hidden;
-
-
-
-  @media (max-width: ${breakpoints.tablet}) {}
-
-  // .gatsby-image-wrapper {}
-`
-
-const QuantityContainer = styled.div`
+const PriceAndCartWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0 10px 10px;
-    align-self: stretch;
-
-    & button {
-        border: none;
-        background: none;
-        border-radius: 50%;
-        color: white;
-        font-size: 24px;
-        // width: 100%;
-        padding: 0;
-    }
-
-    p {
-        font-size: 20px;
-    }
-
-
 `
 
 
@@ -80,46 +52,43 @@ const Accessory = ({ product }) => {
   const {
     variant,
     quantity,
-    adding,
     available,
     increaseQuantity,
     decreaseQuantity,
     addToCart,
-    setVariant,
   } = useCheckout(product)
 
   const { images, title } = product;
 
   
   return (
-      <ProductContainer>
-        <ImgContainer>
+      <ProductWrapper>
+        <ImgWrapper>
           <Img 
             fluid={images[0].localFile.childImageSharp.fluid} 
             alt={'Gift Card'}
           />
-        </ImgContainer>
-        <h3>{title}</h3>
-        <h3>{formatPrice(variant.priceV2)}</h3>
-        {available ? 
-          (<>
-            <QuantityContainer>
-                <h3>Quantity:</h3>
-                <button onClick={decreaseQuantity}>
-                    <AiOutlineMinusCircle /> 
-                </button>
-                <p>{quantity}</p> 
-                <button onClick={increaseQuantity}>
-                    <AiOutlinePlusCircle />
-                </button>
-            </QuantityContainer>
-            <StyledButton onClick={addToCart}>Add To Cart</StyledButton>
-          </>
-          ) : (
-            <div>Sold Out!!</div>
-          )
-        }
-      </ProductContainer>
+        </ImgWrapper>
+        <TextWrapper>
+          <h3>{title}</h3>
+          {available ? 
+            (<>
+              <Quantity
+                quantity={quantity}
+                increase={increaseQuantity}
+                decrease={decreaseQuantity}
+              />
+              <PriceAndCartWrapper>
+                <BrandButton onClick={addToCart}>Add To Cart</BrandButton>
+                <h3>{formatPrice(variant.priceV2)}</h3>
+              </PriceAndCartWrapper>
+            </>
+            ) : (
+              <div>Sold Out!!</div>
+            )
+          }
+        </TextWrapper>
+      </ProductWrapper>
   )
 }
 

@@ -6,54 +6,36 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { StyledButton } from '../shared/buttons'
 
-
-import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { AiOutlineMinusCircle } from 'react-icons/ai';
-
-
+import Quantity from './quantity'
 
 import { StoreContext } from '../../context/StoreContextProvider'
 
 import { colors } from '../../utils/styles';
 import { formatPrice } from '../../utils/helpers';
 
-
-const QuantityContainer = styled.div`
-    display: flex;
-    align-items: center;
-    // justify-content: space-between;
-
-    & button {
-        border: none;
-        background: none;
-        color: white;
-    }
-
-    & > * {
-        font-size: 24px;
-        font-weight: bold;
-        padding-right: 8px;
-    }
+const StyledQuantity = styled(Quantity)`
+  justify-content: flex-start;
 `
 
+
 const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    width: 90%;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
 
-    & .out-of-stock {
-      font-size: 1.5rem;
-    }
+  & .out-of-stock {
+    font-size: 1.5rem;
+  }
 
-    & .price {
-      font-size: 1.75rem;
-      font-weight: bold;
-      margin-top: 0;
-    }
+  & .price {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-top: 0;
+  }
 
-    & > * {
-        margin-bottom: 1.3rem;
-    }
+  & > * {
+      margin-bottom: 1.3rem;
+  }
 `
 const Span = styled.span`
   border: ${props => (props.selected ? `none` : '1px solid rgba(232, 232, 232, .3)')};
@@ -62,7 +44,6 @@ const Span = styled.span`
 
   padding: .65rem;
   border-radius: 5px;
-  // font-weight: bold;
   :hover {
       cursor: pointer;
     }
@@ -71,7 +52,8 @@ const Span = styled.span`
 
 const StyledLink = styled(Link)`
     text-align: center;
-    border: 1px solid white;
+    background: ${colors.darkGradient};
+    box-shadow: 0 0 5px ${colors.lightest};
     border-radius: 5px;
     padding: 10px 0;
 `
@@ -283,16 +265,11 @@ const ProductForm = ({ product, setImageFluid }) => {
       {available ? 
         (
         <>
-          <QuantityContainer>
-              <p>Quantity</p>
-              <button onClick={handleQuantityDecrease}>
-                  <AiOutlineMinusCircle /> 
-              </button>
-              <p>{quantity}</p> 
-              <button onClick={handleQuantityIncrease}>
-                  <AiOutlinePlusCircle />
-              </button>
-          </QuantityContainer>
+          <StyledQuantity
+            quantity={quantity}
+            increase={handleQuantityIncrease}
+            decrease={handleQuantityDecrease}
+          />
         </>
         )
         :
@@ -311,7 +288,7 @@ const ProductForm = ({ product, setImageFluid }) => {
       { available && (
         <StyledButton 
           type="submit"
-          disabled={!available || adding}
+          disabled={adding}
           >
           Add To Cart
         </StyledButton>

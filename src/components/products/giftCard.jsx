@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { StoreContext } from '../../context/StoreContextProvider'
+import { BsCaretDown, BsCaretUp } from 'react-icons/bs';
 
 import { useStaticQuery, graphql } from "gatsby"
 import styled from 'styled-components'
@@ -68,13 +69,13 @@ const List = styled.div`
 
 
   .list-child {
-    background-color: ${colors.background};
+    flex: 1;
+    background: ${colors.darkGradient};
+
     border: 1px solid ${colors.lightest};
     color: ${colors.lightest};
 
-    border-radius: 5px;
     padding: 10px;
-    flex: 1;
 
     &:hover {
       background-color: red
@@ -137,6 +138,10 @@ const GiftCard = () => {
   const toggleListOpen = () => {
     setListOpen(!listOpen)
   }
+
+  const price = <div>{formatPrice(variant.priceV2)}</div>;
+  const icon = listOpen ? <BsCaretDown/> : <BsCaretUp/>;
+
  
   return (
       <ProductContainer>
@@ -162,8 +167,8 @@ const GiftCard = () => {
         </ImgContainer>
         <ButtonContainer>
           <ListControls>
-            <div>Amount:</div>
-            <CurrentPrice onClick={toggleListOpen}>{formatPrice(variant.priceV2)}</CurrentPrice>
+            {/* <div>Amount:</div> */}
+            <CurrentPrice onClick={toggleListOpen}>{price}{icon}</CurrentPrice>
           </ListControls>
           <StyledButton onClick={handleAddToCart}>Add To Cart</StyledButton>
         </ButtonContainer>

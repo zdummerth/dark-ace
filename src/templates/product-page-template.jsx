@@ -48,6 +48,7 @@ const ImgContainer = styled.div`
 const FormContainer = styled.div`
   // height: 100%;
   width: 100%;
+  // max-width: 400px;
   & > * {
     margin: .75rem;
   }

@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
+import { BasicButton } from '../shared/buttons'
+
 
 import { StoreContext } from '../../context/StoreContextProvider'
 
@@ -31,8 +33,6 @@ const LineItem = props => {
     // updateLineItem,
     store: { client, checkout },
   } = useContext(StoreContext)
-
-  console.log("image", item.variant)
 
   const variantImage = item.variant.image ? (
     <img
@@ -65,15 +65,14 @@ const LineItem = props => {
         <div>
           {item.variant.price}
         </div>
-        {/* {selectedValues} */}
         <div>
           Quantity: {item.quantity}
         </div>
-        <button 
-            // style={{width: '50px'}}     
-            onClick={handleRemove}>
-                Delete
-        </button>
+        <BasicButton 
+          onClick={handleRemove}
+        >
+          Remove
+        </BasicButton>
       </div>
     </Container>
   )

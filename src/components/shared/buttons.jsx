@@ -5,11 +5,11 @@ import styled from 'styled-components'
 
 import { colors } from '../../utils/styles';
 
-const Button = styled.button`
+const PlainButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${colors.gradient};
+  background: ${colors.darkGradient};
   box-shadow: 0 0 5px ${colors.lightest};
   border: none;
   border-radius: 5px;
@@ -21,12 +21,27 @@ const Button = styled.button`
     background: red;
   }
 `
+const CoolButton = styled(PlainButton)`
+  background: ${colors.gradient};
+  box-shadow: 0 0 5px ${colors.lightest};
 
+  :hover {
+    background: red;
+  }
+`
 
-export const StyledButton = ({ className, children, onClick }) => {
+export const StyledButton = ({ className, children, onClick, as }) => {
   return (
-    <Button className={className} onClick={onClick}>
+    <CoolButton as={as} className={className} onClick={onClick}>
       {children}
-    </Button>
+    </CoolButton>
+  )
+}
+
+export const BasicButton = ({ className, children, onClick, as }) => {
+  return (
+    <PlainButton as={as} className={className} onClick={onClick}>
+      {children}
+    </PlainButton>
   )
 }

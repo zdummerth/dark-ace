@@ -1,3 +1,5 @@
+import styled from 'styled-components'
+
 
 /*
  * NOTE: use a six-character hex code for all colors to allow alpha channel
@@ -18,9 +20,34 @@ export const colors = {
   grayBackground: '#262626',
   background: '#020202',
   gradient: `linear-gradient(to bottom right, #C00A0A 45%, #020202)`,
+  darkGradient: `linear-gradient(to bottom right, #020202 45%, #C00A0A)`,
+  lightGradient: `linear-gradient(to bottom right, #fff 45%, #C00A0A)`,
+
   specialGradient: `linear-gradient(to right, #C00A0A, #fff)`,
 
 };
+
+export const BrandButton = styled.button`
+  background: ${colors.gradient};
+  box-shadow: 0 0 5px ${colors.lightest};
+  border: none;
+  border-radius: 5px;
+  padding: 7px;
+  color: white;
+
+  :hover {
+    cursor: pointer;
+    background: ${colors.brand};
+  }
+`
+
+export const DarkBrandButton = styled(BrandButton)`
+  background: ${colors.gradient};
+
+  :hover {
+    background: ${colors.background};
+  }
+`
 
 
 export const spacing = {

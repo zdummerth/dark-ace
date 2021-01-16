@@ -113,6 +113,7 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
                 }
                 id
                 shopifyId
+                availableForSale
               }
               priceRange {
                 minVariantPrice {

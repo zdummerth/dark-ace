@@ -6,7 +6,7 @@ import styled, { createGlobalStyle } from "styled-components"
 import Header from './header'
 import Footer from './footer'
 import Spotify from '../spotify'
-import { AddingToCart } from './addingToCart'
+import { CartStatus } from './cartStatus'
 
 
 import { StoreContext } from '../../context/StoreContextProvider'
@@ -58,11 +58,12 @@ const HeaderMargin = styled.div`
   margin-top: ${dimensions.headerHeight};
 `
 
-const StyledAddingToCart = styled(AddingToCart)`
+const StyledAddingToCart = styled(CartStatus)`
   position: fixed;
   top: ${dimensions.headerHeight};
-  // right: 0;
   z-index: 50;
+  width: ${({ error }) => error ? '100%' : 'auto'}
+
 `
 
 
@@ -78,9 +79,12 @@ const Layout = ({ children }) => {
   `)
 
   const {
-    store: { adding, checkout: { lineItems } },
+    resetError,
+    setStatus,
+    store: { status, error, checkout: { lineItems } },
   } = useContext(StoreContext)
-  
+
+
   const cartCount = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
 
   return (
@@ -88,8 +92,10 @@ const Layout = ({ children }) => {
       <GlobalStyle />
       <Wrapper>
         <StyledAddingToCart
-          adding={adding}
-          lineItems={lineItems}
+          status={status}
+          setStatus={setStatus}
+          error={error}
+          resetError={resetError}
         />
         <Header 
           siteTitle={data.site.siteMetadata.title}
