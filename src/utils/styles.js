@@ -29,7 +29,7 @@ export const colors = {
 
 export const BrandButton = styled.button`
   background: ${colors.gradient};
-  box-shadow: 0 0 5px ${colors.lightest};
+  box-shadow: 0 0 5px ${colors.brand};
   border: none;
   border-radius: 5px;
   padding: 7px;
@@ -38,11 +38,12 @@ export const BrandButton = styled.button`
   :hover {
     cursor: pointer;
     background: ${colors.brand};
+    box-shadow: 0 0 5px ${colors.lightest};
   }
 `
 
 export const DarkBrandButton = styled(BrandButton)`
-  background: ${colors.gradient};
+  background: ${colors.darkGradient};
 
   :hover {
     background: ${colors.background};

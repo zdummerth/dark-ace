@@ -30,7 +30,7 @@ const Subtotal = styled.div`
 const CheckoutLink = styled.a`
   display: block;
   background: ${colors.gradient};
-  box-shadow: 0 0 5px ${colors.lightest};
+  box-shadow: 0 0 5px ${colors.brand};
   padding: .8rem 0;
   margin-bottom: 2rem;
   text-align: center;
@@ -42,7 +42,7 @@ const StyledLink = styled(Link)`
     display: block;
     text-align: center;
     background: ${colors.darkGradient};
-    box-shadow: 0 0 5px ${colors.lightest};
+    box-shadow: 0 0 5px ${colors.brand};
     border-radius: 5px;
     padding: 10px 0;
     margin: 2rem 0;

@@ -6,9 +6,8 @@ import { useStaticQuery, graphql } from "gatsby"
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
-import { breakpoints, colors } from '../../utils/styles';
+import { breakpoints, colors, BrandButton } from '../../utils/styles';
 import { formatPrice } from '../../utils/helpers';
-import { StyledButton } from '../shared/buttons'
 
 
 
@@ -55,7 +54,9 @@ const ListControls = styled.div`
   }
 `
 
-const CurrentPrice = styled(StyledButton)``
+const CurrentPrice = styled(BrandButton)`
+  display: flex;
+`
 
 
 const List = styled.div`
@@ -170,7 +171,7 @@ const GiftCard = () => {
             {/* <div>Amount:</div> */}
             <CurrentPrice onClick={toggleListOpen}>{price}{icon}</CurrentPrice>
           </ListControls>
-          <StyledButton onClick={handleAddToCart}>Add To Cart</StyledButton>
+          <BrandButton onClick={handleAddToCart}>Add To Cart</BrandButton>
         </ButtonContainer>
       </ProductContainer>
   )

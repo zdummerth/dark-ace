@@ -32,7 +32,7 @@ const CartWrapper = styled.div`
 
     background-image: ${colors.gradient};
     border-radius: 50%;
-    box-shadow: 0 0 5px  ${colors.lightest};
+    box-shadow: 0 0 5px  ${colors.brand};
     font-size: 1.1rem;
     width: 22px;
     height: 22px;

@@ -24,7 +24,7 @@ const ProductWrapper = styled.div`
 const ImgWrapper = styled.div`
   width: 70vw;
   max-width: 300px;
-  height: 250px;
+  height: 300px;
   position: relative;
   overflow: hidden;
 `
@@ -66,7 +66,11 @@ const Accessory = ({ product }) => {
         <ImgWrapper>
           <Img 
             fluid={images[0].localFile.childImageSharp.fluid} 
-            alt={'Gift Card'}
+            alt={title}
+            imgStyle={{
+              objectFit: 'contain',
+              // position: 'relative'
+            }}
           />
         </ImgWrapper>
         <TextWrapper>

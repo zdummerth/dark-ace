@@ -21,7 +21,7 @@ const ControllWrapper = styled.div`
     align-items: center;
     border: none;
     background: ${colors.darkGradient};
-    box-shadow: 0 0 8px ${colors.lightest};
+    box-shadow: 0 0 8px ${colors.brand};
     border-radius: 50%;
     color: ${colors.lightest};
     font-size: 22px;
@@ -37,19 +37,19 @@ const ControllWrapper = styled.div`
   }
 `
 
-const Quantity = ({ quantity, increase, decrease, className }) => {
+const Quantity = ({ quantity, increase, decrease, className, showButtons }) => {
 
   return (
     <QuantityWrapper className={className}>
         <h3>Quantity:</h3>
         <ControllWrapper>
-          <button onClick={decrease}>
+        { showButtons &&<button onClick={decrease}>
               <AiOutlineMinus /> 
-          </button>
+          </button>}
           <p>{quantity}</p> 
-          <button onClick={increase}>
+          { showButtons && <button onClick={increase}>
               <AiOutlinePlus />
-          </button>
+          </button>}
         </ControllWrapper>
     </QuantityWrapper>
   )

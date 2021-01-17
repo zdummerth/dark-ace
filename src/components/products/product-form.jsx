@@ -4,13 +4,13 @@ import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { StyledButton } from '../shared/buttons'
+// import { BrandButton } from '../shared/buttons'
 
 import Quantity from './quantity'
 
 import { StoreContext } from '../../context/StoreContextProvider'
 
-import { colors } from '../../utils/styles';
+import { colors, BrandButton } from '../../utils/styles';
 import { formatPrice } from '../../utils/helpers';
 
 const StyledQuantity = styled(Quantity)`
@@ -40,7 +40,7 @@ const Form = styled.form`
 const Span = styled.span`
   border: ${props => (props.selected ? `none` : '1px solid rgba(232, 232, 232, .3)')};
   background: ${props => (props.selected ? `${colors.gradient}` : 'black')};
-  box-shadow: ${props => (props.selected ? ` 0 0 5px ${colors.lightest}` : '')};
+  box-shadow: ${props => (props.selected ? ` 0 0 5px ${colors.brand}` : '')};
 
   padding: .65rem;
   border-radius: 5px;
@@ -53,7 +53,7 @@ const Span = styled.span`
 const StyledLink = styled(Link)`
     text-align: center;
     background: ${colors.darkGradient};
-    box-shadow: 0 0 5px ${colors.lightest};
+    box-shadow: 0 0 5px ${colors.brand};
     border-radius: 5px;
     padding: 10px 0;
 `
@@ -286,12 +286,12 @@ const ProductForm = ({ product, setImageFluid }) => {
       {priceDisplay}
 
       { available && (
-        <StyledButton 
+        <BrandButton 
           type="submit"
           disabled={adding}
           >
           Add To Cart
-        </StyledButton>
+        </BrandButton>
       )}
 
       <StyledLink to='/'>Continue Shopping</StyledLink>

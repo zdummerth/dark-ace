@@ -1,7 +1,10 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
-import { BasicButton } from '../shared/buttons'
+import { DarkBrandButton } from '../../utils/styles';
+import Quantity from '../products/quantity'
+
+
 
 
 import { StoreContext } from '../../context/StoreContextProvider'
@@ -65,14 +68,14 @@ const LineItem = props => {
         <div>
           {item.variant.price}
         </div>
-        <div>
-          Quantity: {item.quantity}
-        </div>
-        <BasicButton 
+        <Quantity 
+          quantity={item.quantity}
+        />
+        <DarkBrandButton 
           onClick={handleRemove}
         >
           Remove
-        </BasicButton>
+        </DarkBrandButton>
       </div>
     </Container>
   )
