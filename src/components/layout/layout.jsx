@@ -16,7 +16,7 @@ import { dimensions } from '../../utils/styles';
 
 
 
-import 'normalize.css';
+// import 'normalize.css';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -24,8 +24,17 @@ const GlobalStyle = createGlobalStyle`
     color: white;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
 
   }
+
+  html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
   a {
     text-decoration: none;
     color: inherit;
@@ -33,6 +42,40 @@ const GlobalStyle = createGlobalStyle`
 
   p, h3 {
     margin: 0;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .flex-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .center-center {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .align-center {
+    align-items: center;
+  }
+
+  .align-end {
+    align-items: flex-end;
+  }
+
+  .justify-end {
+    justify-content: flex-end;
+  }
+
+  .justify-around {
+    justify-content: space-around;
+  }
+
+  .justify-between {
+    justify-content: space-between;
   }
 `
 const Wrapper = styled.div`
@@ -49,6 +92,7 @@ const ContentWrapper = styled.main`
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
+  padding: 0 5px;
 
 `
 

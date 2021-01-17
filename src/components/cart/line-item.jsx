@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
-import { DarkBrandButton } from '../../utils/styles';
-import Quantity from '../products/quantity'
+import { DarkBrandButton, colors } from '../../utils/styles';
+import { formatPrice } from '../../utils/helpers';
 
 
 
@@ -11,21 +11,31 @@ import { StoreContext } from '../../context/StoreContextProvider'
 
 const Container = styled.div`
     display: flex;
-    align-items: flex-start;
-    padding: .5rem 0;
-    border-bottom: 1px solid #C00A0A;
+    box-shadow: 0 0 10px ${colors.brand};
+    margin: 15px 0;
+    width: 100%;
+    max-width: 600px;
+
+
     height: 150px;
+    overflow: hidden;
+
+
+    img {
+      object-fit: contain;
+      width: 45vw;
+      max-width: 300px;
+      height: 150px;
+      padding: 5px 0;
+      overflow: hidden;
+    }
 
     #product-info {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: space-between;
-      height: 100%;
-
-      p {
-        padding-top: 0;
-      }
+      padding: .5rem;
     }
 `
 
@@ -41,9 +51,12 @@ const LineItem = props => {
     <img
       src={item.variant.image.src}
       alt={`${item.title} product shot`}
-      height="150px"
     />
   ) : null
+
+  console.log({item})
+
+  const price = formatPrice(item.variant.priceV2)
 
   // const selectedValues = item.variant.selectedOptions
   //   ? item.variant.selectedOptions.map(option => `${option.value} / `)
@@ -55,8 +68,7 @@ const LineItem = props => {
 
   return (
     <Container>
-      {console.log(item)}
-      <Link style={{marginRight: '1rem'}} to={`/shop/${item.variant.product.handle}/`}>
+      <Link to={`/shop/${item.variant.product.handle}/`}>
         {variantImage}
       </Link>
       <div id='product-info'>
@@ -66,11 +78,12 @@ const LineItem = props => {
             {item.variant.title !== 'Default Title' ? item.variant.title : ''}
         </div>
         <div>
-          {item.variant.price}
+          {price}
         </div>
-        <Quantity 
-          quantity={item.quantity}
-        />
+        <div>
+          Qty:
+          {item.quantity}
+        </div>
         <DarkBrandButton 
           onClick={handleRemove}
         >

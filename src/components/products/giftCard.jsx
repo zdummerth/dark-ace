@@ -6,7 +6,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
-import { breakpoints, colors, BrandButton } from '../../utils/styles';
+import { breakpoints, colors, BrandButton, DarkBrandButton } from '../../utils/styles';
 import { formatPrice } from '../../utils/helpers';
 
 
@@ -64,19 +64,21 @@ const List = styled.div`
   top: 0;
 
   display: ${({open}) => open ? 'flex' : 'none'};
-  flex-direction: column;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   height: 100%;
+  width: 100%;
 
 
   .list-child {
-    flex: 1;
     background: ${colors.darkGradient};
 
     border: 1px solid ${colors.lightest};
     color: ${colors.lightest};
 
     padding: 10px;
+    margin: 5px;
 
     &:hover {
       background-color: red
@@ -155,13 +157,13 @@ const GiftCard = () => {
             { variants.map(v => {
               const price = formatPrice(v.priceV2)
               return (
-                <button 
+                <DarkBrandButton 
                   className='list-child' 
                   key={v.shopifyId}
                   onClick={() => setVariant(v)}
                 >
                   {price}
-                </button>
+                </DarkBrandButton>
               )
             })}
           </List>

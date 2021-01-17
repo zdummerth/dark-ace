@@ -9,12 +9,12 @@ import { colors } from '../utils/styles';
 
 
 const Container = styled.div`
-  color: white;
-  width: 95%;
-  margin: 0 auto;
+  // color: white;
+  // width: 95%;
+  // margin: 0 auto;
 
   #lineItems {
-    border-top: 1px solid #C00A0A;
+    // border-top: 1px solid #C00A0A;
   }
 `
 

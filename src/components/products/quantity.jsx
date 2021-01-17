@@ -37,19 +37,19 @@ const ControllWrapper = styled.div`
   }
 `
 
-const Quantity = ({ quantity, increase, decrease, className, showButtons }) => {
+const Quantity = ({ quantity, increase, decrease, className }) => {
 
   return (
     <QuantityWrapper className={className}>
         <h3>Quantity:</h3>
         <ControllWrapper>
-        { showButtons &&<button onClick={decrease}>
+          <button onClick={decrease}>
               <AiOutlineMinus /> 
-          </button>}
+          </button>
           <p>{quantity}</p> 
-          { showButtons && <button onClick={increase}>
+          <button onClick={increase}>
               <AiOutlinePlus />
-          </button>}
+          </button>
         </ControllWrapper>
     </QuantityWrapper>
   )

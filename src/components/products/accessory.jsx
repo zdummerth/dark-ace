@@ -19,19 +19,19 @@ const ProductWrapper = styled.div`
   width: 70vw;
   max-width: 300px;
 
+  .gatsby-image-wrapper {
+    height: 300px;
+    width: 100%;
+  }
+
 `
 
-const ImgWrapper = styled.div`
-  width: 70vw;
-  max-width: 300px;
-  height: 300px;
-  position: relative;
-  overflow: hidden;
-`
 
 const TextWrapper = styled.div`
   padding-right: 15px;
   padding-left: 15px;
+  width: 70vw;
+
 
   & > * {
     margin-top: 20px;
@@ -63,16 +63,13 @@ const Accessory = ({ product }) => {
   
   return (
       <ProductWrapper>
-        <ImgWrapper>
-          <Img 
-            fluid={images[0].localFile.childImageSharp.fluid} 
-            alt={title}
-            imgStyle={{
-              objectFit: 'contain',
-              // position: 'relative'
-            }}
-          />
-        </ImgWrapper>
+        <Img 
+          fluid={images[0].localFile.childImageSharp.fluid} 
+          alt={title}
+          imgStyle={{
+            objectFit: 'contain',
+          }}
+        />
         <TextWrapper>
           <h3>{title}</h3>
           {available ? 
