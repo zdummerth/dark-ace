@@ -13,6 +13,7 @@ const ProductWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
+
   margin: 15px;
   border-bottom: 1px solid ${colors.brand};
 
@@ -21,7 +22,8 @@ const ProductWrapper = styled.div`
 
   .gatsby-image-wrapper {
     height: 300px;
-    width: 100%;
+    width: inherit;
+    max-width: inherit;
   }
 
 `
@@ -30,7 +32,7 @@ const ProductWrapper = styled.div`
 const TextWrapper = styled.div`
   padding-right: 15px;
   padding-left: 15px;
-  width: 70vw;
+
 
 
   & > * {
@@ -67,7 +69,7 @@ const Accessory = ({ product }) => {
           fluid={images[0].localFile.childImageSharp.fluid} 
           alt={title}
           imgStyle={{
-            objectFit: 'contain',
+            // objectFit: 'contain',
           }}
         />
         <TextWrapper>

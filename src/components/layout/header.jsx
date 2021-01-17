@@ -36,6 +36,8 @@ const Nav = styled.nav`
   position: fixed;
   background: ${colors.background};
   border-bottom: 1px solid ${colors.brand};
+  // box-shadow: 0 0 1px 1px ${colors.brand};
+
   top: 0;
   justify-content: space-evenly;
   text-transform: uppercase;

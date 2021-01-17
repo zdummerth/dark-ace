@@ -6,7 +6,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
-import { breakpoints, colors, BrandButton, DarkBrandButton } from '../../utils/styles';
+import { colors, BrandButton, DarkBrandButton } from '../../utils/styles';
 import { formatPrice } from '../../utils/helpers';
 
 
@@ -17,8 +17,8 @@ const ProductContainer = styled.div`
   align-items: center;
   align-self: center;
 
-  width: 70vw;
-  max-width: 300px;
+  width: 80vw;
+  max-width: 350px;
 `
 
 const ImgContainer = styled.div`
@@ -26,12 +26,17 @@ const ImgContainer = styled.div`
   box-shadow: 0 0 8px ${colors.brand};
 
   position: relative;
+`
 
+const OverLay = styled.div`
+  display: ${({open}) => open ? 'block' : 'none'};
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 
-
-  @media (max-width: ${breakpoints.tablet}) {}
-
-  // .gatsby-image-wrapper {}
+  background: ${colors.brandTransparent};
 `
 
 const ButtonContainer = styled.div`
@@ -73,6 +78,7 @@ const List = styled.div`
 
   .list-child {
     background: ${colors.darkGradient};
+    flex: 1 1 25%;
 
     border: 1px solid ${colors.lightest};
     color: ${colors.lightest};
@@ -153,6 +159,7 @@ const GiftCard = () => {
             fluid={images[0].localFile.childImageSharp.fluid} 
             alt={'Gift Card'}
           />
+          <OverLay open={listOpen}/>
           <List open={listOpen}>
             { variants.map(v => {
               const price = formatPrice(v.priceV2)

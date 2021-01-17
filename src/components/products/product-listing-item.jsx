@@ -10,7 +10,7 @@ import { formatPrice } from '../../utils/helpers';
 
 
 const ProductContainer = styled.div`
-  margin: ${props => props.isFeature ? '0' : '15px'};
+  margin: ${props => props.isFeature ? '0' : '10px 5px'};
   text-align: center; 
   display: flex;
   flex-direction: column;
@@ -19,9 +19,7 @@ const ProductContainer = styled.div`
 
 
   @media (max-width: ${breakpoints.tablet}) {
-    &:last-child {
-        // padding-right: ${props => props.isSingleItem ? '0' : '15px'};
-      }
+    margin: ${props => props.isFeature ? '0' : '10px'};
   }
 `
 

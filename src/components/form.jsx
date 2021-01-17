@@ -3,10 +3,9 @@ import { Link } from 'gatsby'
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
-import { StyledButton } from './shared/buttons'
 
 
-import { colors } from '../utils/styles';
+import { colors, BrandButton } from '../utils/styles';
 
 
 const StyledForm = styled(Form)`
@@ -14,7 +13,7 @@ const StyledForm = styled(Form)`
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    height: 80%;
+    height: 100%;
     max-height: 500px;
     width: 90%;
     max-width: 600px;
@@ -26,17 +25,17 @@ const StyledForm = styled(Form)`
     }
 
     .form-child {
-      width: 90%;
-      background: rgba(0,0,0, 1);
-      border: 1px solid white;
-      color: white;
-      padding: 8px;
-      font-weight: bold;
+      width: 100%;
+      // height: 30px;
+      background: ${colors.background};
+      border: none;
+      color: ${colors.lightest};
+      box-shadow: 0 0 2px 2px ${colors.lightest};
     }
 
-    label {
-        width: 100%;
-        margin-bottom: 5px;
+    input {
+      height: 25px;
+      margin-top: 10px;
     }
 
     .error {
@@ -50,13 +49,8 @@ const StyledForm = styled(Form)`
     }
 
     #submit-button {
-        font-family: inherit;
-        border: 0;
-        background: ${colors.brand};
-        color: ${colors.lightest};
-        padding-top: 10px;
-        padding-bottom: 10px;
-        width: 90px;
+      font-size: 16px;
+      margin-top: 20px;
     }
 
 `
@@ -66,7 +60,7 @@ const StyledErrorMessage = styled.div`
   font-size: 12px;
   font-weight: bold;
   color: red;
-  width: 400px;
+  // width: 400px;
   margin-top: 0.25rem;
   &:before {
     content: "❌ ";
@@ -75,20 +69,24 @@ const StyledErrorMessage = styled.div`
 
 `;
 
+const InputWrapper = styled.div`
+  width: 100%;
+`
+
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and alse replace ErrorMessage entirely.
   const [field, meta] = useField(props);
   return (
-    <>
+    <InputWrapper>
       <label htmlFor={props.id || props.name}>{label}
       <input {...field} {...props} />
       </label>
       {meta.touched && meta.error ? (
         <StyledErrorMessage>{meta.error}</StyledErrorMessage>
       ) : null}
-    </>
+    </InputWrapper>
   );
 };
 
@@ -97,14 +95,14 @@ const MyTextArea = ({ label, ...props }) => {
     // which we can spread on <input> and alse replace ErrorMessage entirely.
     const [field, meta] = useField(props);
     return (
-      <>
+      <InputWrapper>
         <label htmlFor={props.id || props.name}>{label}
         <textarea {...field} {...props} />
         </label>
         {meta.touched && meta.error ? (
             <StyledErrorMessage>{meta.error}</StyledErrorMessage>
         ) : null}
-      </>
+      </InputWrapper>
     );
   };
 
@@ -233,7 +231,7 @@ const BasicForm = () => {
                           rows='5'
                           cols='50'
                         />
-                        <StyledButton type='submit' id='submit-button'>Submit</StyledButton>
+                        <BrandButton type='submit' id='submit-button'>Submit</BrandButton>
                     </>
                 }
             </StyledForm>

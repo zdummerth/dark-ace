@@ -13,12 +13,15 @@ const Title = styled.h1`
   margin: 1rem auto;
   color: white;
   width: 90%;
+  text-align: center;
 `
 
 const Subtitle = styled.h2`
   margin: 1rem auto;
   color: white;
   width: 90%;
+  text-align: center;
+
 `
 
 const Container = styled.div`

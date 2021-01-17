@@ -8,7 +8,7 @@ const QuantityWrapper = styled.div`
     justify-content: space-between;
 
     h3 {
-      margin-right: 40px;
+      margin-right: 20px;
     }
 `
 
@@ -20,7 +20,7 @@ const ControllWrapper = styled.div`
     justify-content: center;
     align-items: center;
     border: none;
-    background: ${colors.darkGradient};
+    background: ${colors.gradient};
     box-shadow: 0 0 8px ${colors.brand};
     border-radius: 50%;
     color: ${colors.lightest};
@@ -32,8 +32,8 @@ const ControllWrapper = styled.div`
 
   p {
       font-size: 22px;
-      margin-right: 20px;
-      margin-left: 20px;
+      margin-right: 15px;
+      margin-left: 15px;
   }
 `
 
@@ -41,7 +41,7 @@ const Quantity = ({ quantity, increase, decrease, className }) => {
 
   return (
     <QuantityWrapper className={className}>
-        <h3>Quantity:</h3>
+        <h3>Qty:</h3>
         <ControllWrapper>
           <button onClick={decrease}>
               <AiOutlineMinus /> 

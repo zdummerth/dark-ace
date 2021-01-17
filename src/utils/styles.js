@@ -11,6 +11,7 @@ import styled from 'styled-components'
  */
 export const colors = {
   brand: '#C00A0A',
+  brandTransparent: '#02020299',
   brandBright: '#e0d6eb',
   brandLight: '#f5f3f7',
   brandLighter: '#fbfafc',

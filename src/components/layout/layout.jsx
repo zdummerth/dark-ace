@@ -92,7 +92,7 @@ const ContentWrapper = styled.main`
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0 5px;
+  padding: 0 10px;
 
 `
 

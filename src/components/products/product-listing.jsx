@@ -13,7 +13,7 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  margin-right: 10px;
+  // margin-right: 10px;
 
 
   @media (max-width: ${breakpoints.tablet}) {
@@ -41,6 +41,7 @@ const Title = styled.h2`
   }
 
   &.hide-lt-tablet {
+    margin-bottom: 25px;
     @media (max-width: ${breakpoints.tablet}) {
       display: none;
     }
