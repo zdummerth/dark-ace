@@ -1,14 +1,13 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react'
+import React from 'react'
+import { useCheckout } from '../../hooks/useCheckout'
+
 import { Link } from 'gatsby'
 import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-// import { BrandButton } from '../shared/buttons'
 
 import Quantity from './quantity'
-
-import { StoreContext } from '../../context/StoreContextProvider'
 
 import { colors, BrandButton } from '../../utils/styles';
 import { formatPrice } from '../../utils/helpers';
@@ -37,18 +36,7 @@ const Form = styled.form`
       margin-bottom: 1.3rem;
   }
 `
-const Span = styled.span`
-  border: ${props => (props.selected ? `none` : '1px solid rgba(232, 232, 232, .3)')};
-  background: ${props => (props.selected ? `${colors.gradient}` : 'black')};
-  box-shadow: ${props => (props.selected ? ` 0 0 5px ${colors.brand}` : '')};
 
-  padding: .65rem;
-  border-radius: 5px;
-  :hover {
-      cursor: pointer;
-    }
-    
-`
 
 const StyledLink = styled(Link)`
     text-align: center;
@@ -60,7 +48,7 @@ const StyledLink = styled(Link)`
 const OptionContainer = styled.div`
   // display: flex;
   // flex-wrap: wrap;
-  align-items: center;
+  // align-items: center;
 
 `
 
@@ -72,6 +60,18 @@ const Values = styled.div`
     & > * {
         margin: .5rem;
     }
+`
+const Span = styled.span`
+  border: ${props => (props.selected ? `none` : '1px solid rgba(232, 232, 232, .3)')};
+  background: ${props => (props.selected ? `${colors.gradient}` : 'black')};
+  box-shadow: ${props => (props.selected ? ` 0 0 5px ${colors.brand}` : '')};
+
+  padding: 10px;
+  border-radius: 5px;
+  :hover {
+      cursor: pointer;
+    }
+    
 `
 
 const SoldOut = styled.div`
@@ -112,63 +112,19 @@ const ProductForm = ({ product, setImageFluid }) => {
   const {
     options,
     variants,
-    // variants: [initialVariant],
   } = product
 
-  // finds first available variant
-  // Still need to set sold out when all variants are sold out...the false condition
-  const initialVariant = product.availableForSale ? variants.find(variant => variant.availableForSale) : variants[0];
-
-  const [variant, setVariant] = useState({ ...initialVariant })
-  const [quantity, setQuantity] = useState(1)
-
   const {
-    addVariantToCart,
-    store: { client, adding },
-  } = useContext(StoreContext);
+    variant,
+    quantity,
+    available,
+    status,
+    increaseQuantity,
+    decreaseQuantity,
+    addToCart,
+    setVariant
+  } = useCheckout(product)
 
-
-  const productVariant = client.product.helpers.variantForOptions(product, variant) || variant
-  const [available, setAvailable] = useState(productVariant.availableForSale)
-
-
-  const checkAvailability = useCallback(
-    productId => {
-      client.product.fetch(productId).then(fetchedProduct => {
-        // this checks the currently selected variant for availability
-        const result = fetchedProduct.variants.filter(
-          variant => variant.id === productVariant.shopifyId
-        )
-        // console.log('result', result[0])
-        if (result.length > 0) {
-          setAvailable(result[0].available)
-        }
-      })
-      .catch(err => {
-        console.log({err});
-      })
-    },
-    [client.product, productVariant.shopifyId]
-  )
-
-  useEffect(() => {
-    checkAvailability(product.shopifyId)
-  }, [productVariant, checkAvailability, product.shopifyId])
-
-
-
-
-  const handleQuantityIncrease = e => {
-    e.preventDefault();
-    setQuantity(quantity + 1)
-  }
-
-  const handleQuantityDecrease = e => {
-    e.preventDefault();
-    if(quantity > 1) {
-        setQuantity(quantity - 1)
-    }
-  }
 
   const handleOptionClick = (name, value) => {
     const currentOptions = [...variant.selectedOptions]
@@ -190,31 +146,10 @@ const ProductForm = ({ product, setImageFluid }) => {
 
   const handleAddToCart = e => {
     e.preventDefault();
-    addVariantToCart(productVariant.shopifyId, quantity)
+    addToCart();
   }
 
-  /* 
-  Using this in conjunction with a select input for variants 
-  can cause a bug where the buy button is disabled, this 
-  happens when only one variant is available and it's not the
-  first one in the dropdown list. I didn't feel like putting 
-  in time to fix this since its an edge case and most people
-  wouldn't want to use dropdown styled selector anyways
-  */
-  const checkDisabled = (name, value) => {
-    const match = find(variants, {
-      selectedOptions: [
-        {
-          name: name,
-          value: value,
-        },
-      ],
-    })
-    // console.log({match, name, value})
-    if (match === undefined) return true
-    if (match.availableForSale === true) return false
-    return true
-  }
+
 
   const checkSelected = (name, value) => {
     const currentOptions = [...variant.selectedOptions]
@@ -228,12 +163,7 @@ const ProductForm = ({ product, setImageFluid }) => {
 
   const price = formatPrice(variant.priceV2)
 
-  const priceDisplay = <div className="price">{price}</div>
    
-
-  const baseOption = options.length > 0 ? options[0] : {}
-  console.log({baseOption})
-
   const optionDisplay = ({name, values}) => (
     <Values>
       <p>Select {name}:</p>
@@ -242,7 +172,6 @@ const ProductForm = ({ product, setImageFluid }) => {
             <Span
                 value={value}
                 key={`${name}-${value}`}
-                disabled={checkDisabled(name, value)}
                 selected={checkSelected(name, value)}
                 onClick={() => handleOptionClick(name, value, index)}
             >
@@ -267,8 +196,8 @@ const ProductForm = ({ product, setImageFluid }) => {
         <>
           <StyledQuantity
             quantity={quantity}
-            increase={handleQuantityIncrease}
-            decrease={handleQuantityDecrease}
+            increase={increaseQuantity}
+            decrease={decreaseQuantity}
           />
         </>
         )
@@ -283,12 +212,12 @@ const ProductForm = ({ product, setImageFluid }) => {
         </SoldOut>
       }
 
-      {priceDisplay}
+      <div className="price">{price}</div>
 
       { available && (
         <BrandButton 
           type="submit"
-          disabled={adding}
+          disabled={status === 'Adding'}
           >
           Add To Cart
         </BrandButton>

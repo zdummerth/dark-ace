@@ -6,7 +6,7 @@ import { StyledButton } from '../shared/buttons'
 
 import { colors } from '../../utils/styles';
 
-const Container = styled.button`
+const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

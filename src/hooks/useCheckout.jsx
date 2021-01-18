@@ -1,16 +1,36 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useCallback } from 'react'
 import { StoreContext } from '../context/StoreContextProvider'
 
 
 export const useCheckout = product => {
 
-  const { variants, shopifyId } = product;
+  const {
+    // options,
+    variants,
+    shopifyId
+  } = product
 
-  const { addVariantToCart, checkAvailability } = useContext(StoreContext);
+  // finds first available variant
+  // Still need to set sold out when all variants are sold out...the false condition
+  const initialVariant = product.availableForSale ? 
+    variants.find(variant => variant.availableForSale) 
+    : 
+    variants[0];
 
-  const [variant, setVariant] = useState(variants[0]);
+  const { 
+    addVariantToCart, 
+    checkAvailability,
+    store: { status } 
+  } = useContext(StoreContext);
+
+  const [variant, setVariant] = useState(initialVariant);
+
   const [quantity, setQuantity] = useState(1);
   const [available, setAvailable] = useState(variant.availableForSale);
+
+
+  // const [availabilityCache, setAvailabilityCache] = useState({})
+
 
   const increaseQuantity = e => {
     e.preventDefault();
@@ -28,18 +48,26 @@ export const useCheckout = product => {
     addVariantToCart(variant.shopifyId, quantity)
   }
 
-  useEffect(() => {
-    console.log('checking availability')
-    checkAvailability(shopifyId, variant.shopifyId)
+  const availability = useCallback(
+    () => {
+      // console.log('checking availability')
+      checkAvailability(shopifyId, variant.shopifyId)
       .then(({ data }) => {
         setAvailable(data)
       })
-  }, [shopifyId, variant.shopifyId, checkAvailability]);
+    },
+    [variant.shopifyId, checkAvailability, shopifyId]
+  )
+
+  useEffect(() => {
+    availability(shopifyId)
+  }, [shopifyId, availability]);
 
   return {
     variant,
     quantity,
     available,
+    status,
     increaseQuantity,
     decreaseQuantity,
     addToCart,
