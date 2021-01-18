@@ -130,7 +130,7 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
                 id
                 localFile {
                   childImageSharp {
-                    fluid(maxWidth: 300) {
+                    fluid(maxWidth: 350) {
                       ...GatsbyImageSharpFluid
                     }
                   }
