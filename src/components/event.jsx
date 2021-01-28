@@ -30,10 +30,12 @@ const Wrapper = styled.div`
 const Toggle = styled.div`
   width: 100%;
   text-align: center;
-  background-color: ${colors.grayBackground};
+  background: ${colors.darkGradient};
   padding-top: 5px;
   padding-bottom: 5px;
-  border-bottom: 1px solid ${colors.lightest};
+  // border-bottom: 1px solid ${colors.lightest};
+  border-top: 1px solid ${colors.lightest};
+
 
 `
 
