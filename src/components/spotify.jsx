@@ -11,39 +11,42 @@ const Container = styled.div`
   width: 100%;
   max-width: 500px;
   background-color: ${colors.background};
-
+`
+const IframeWrapper = styled.div`
+  max-height: ${({ minimized }) => minimized ? '80px' : '380px'};
+  transition: all 0.3s linear;
+  overflow: hidden;
 `
 const Toggle = styled.div`
   width: 100%;
   text-align: center;
   background-color: ${colors.grayBackground};
-  // font-size: 2rem;
-  // margin: 0;
   padding-top: 5px;
   padding-bottom: 5px;
-
-
+  border-bottom: 1px solid ${colors.lightest};
 `
 
 const Spotify = () => {
 
   const [minimized, setMinimized] = useState(true);
-  const icon = minimized ? <BsCaretDown/> : <BsCaretUp/>;
+  const icon = minimized ? <BsCaretDown /> : <BsCaretUp />;
   const title = minimized ? 'Show Playlist' : 'Hide Playlist'
 
 
 
   return (
     <Container>
-      <iframe 
-          src="https://open.spotify.com/embed/playlist/7zcIKw7G0LJixjMKnASf9s?si=B66XDLQ-Q-W3lsPX1_ZLig" 
+      <IframeWrapper minimized={minimized}>
+        <iframe
+          src="https://open.spotify.com/embed/playlist/7zcIKw7G0LJixjMKnASf9s?si=B66XDLQ-Q-W3lsPX1_ZLig"
           width="100%"
-          height={minimized ? '80' : '380'} 
-          frameBorder="0" 
-          allowtransparency="true" 
+          height="380"
+          frameBorder="0"
+          allowtransparency="true"
           allow="encrypted-media"
-          title='Dark Ace Spotify Playlist'>    
-      </iframe>
+          title='Dark Ace Spotify Playlist'>
+        </iframe>
+      </IframeWrapper>
       <Toggle onClick={() => setMinimized(!minimized)}>
         <div>{title}</div>
         <div>{icon}</div>

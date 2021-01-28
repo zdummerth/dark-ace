@@ -7,6 +7,8 @@ import Header from './header'
 import Footer from './footer'
 import Spotify from '../spotify'
 import { CartStatus } from './cartStatus'
+import Event from '../event'
+
 
 
 import { StoreContext } from '../../context/StoreContextProvider'
@@ -119,6 +121,13 @@ const Layout = ({ children }) => {
           title
         }
       }
+      winterWizards: file(relativePath: { eq: "winter-wizards.jpg" }) {
+        childImageSharp {
+          fluid(maxWidth: 1280) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `)
 
@@ -127,6 +136,22 @@ const Layout = ({ children }) => {
     setStatus,
     store: { status, error, checkout: { lineItems } },
   } = useContext(StoreContext)
+
+  const jbRegLink = 'https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.discgolfscene.com%2Ftournaments%2FDark_Ace_Presents_Winter_Wizards_at_Jefferson_Barracks_powered_by_4Hands_Brewery_2021%3Ffbclid%3DIwAR2A61x1OJt-QwLzKVa9Nq53T8LXcPr_Ngqgq10pE2eB914f7hg9i9WL4pY&h=AT1RStQ7tmvf35WTQD-WC7LYazxJxKFivb7psXf9HrtdB2k55jSZh0dFjUeouD5jYbKW1oRMAMQVps_xe358pMFvR1hH8-aNzqJbXR8r-dpA39VtRw3NdGCGbg&__tn__=-UK*F&c[0]=AT3TPyu-r_kp7MuqQVf6txbhoqrX3_oyVsc12UPxyaGyqWcqCf3NVlN1nSOnDnANescRC-zuM3m4iNrqW37v3RW6Cj3rHkq8YWzav5r0FyJTyBT_jG1i1lOmqJK_1snruYfkBCmd22ZC5LUufw9YwbBxmm0oRYNvjc8r3de1GqJKW_MgxDAmUwOljDuTzPeYDR0i8tudsLcUbNVJoRywVQ7G4TAH89nF1zT-N9Y2vw'
+  const endiRegLink = 'https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.discgolfscene.com%2Ftournaments%2FDark_Ace_Presents_Winter_Wizards_at_Endicott_Park_powered_by_4Hands_Brewery_2021%3Ffbclid%3DIwAR2A61x1OJt-QwLzKVa9Nq53T8LXcPr_Ngqgq10pE2eB914f7hg9i9WL4pY&h=AT1i0XbriN5FQaW7CNsXCyIxK85qVUU54Q0Cc2dsZGPDKYSyVgcsVtpPAeuDeC6d8qPKaKwDX3bY2QxLTabhoTJx2XSiA0T6eTXp0ir_Fs8kiEOVCJ-2Vs0XDQ&__tn__=-UK*F&c[0]=AT3TPyu-r_kp7MuqQVf6txbhoqrX3_oyVsc12UPxyaGyqWcqCf3NVlN1nSOnDnANescRC-zuM3m4iNrqW37v3RW6Cj3rHkq8YWzav5r0FyJTyBT_jG1i1lOmqJK_1snruYfkBCmd22ZC5LUufw9YwbBxmm0oRYNvjc8r3de1GqJKW_MgxDAmUwOljDuTzPeYDR0i8tudsLcUbNVJoRywVQ7G4TAH89nF1zT-N9Y2vw'
+  
+  const winterWizards = [
+    {
+      date: 'February 27th',
+      location: 'Jefferson Barracks',
+      link: jbRegLink
+    },
+    {
+      date: 'March 6th',
+      location: 'Endicott',
+      link: endiRegLink
+    }
+  ]
 
 
   const cartCount = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
@@ -147,6 +172,10 @@ const Layout = ({ children }) => {
           />
         <HeaderMargin />
         <Spotify />
+        <Event
+          imageFluid={data.winterWizards.childImageSharp.fluid}
+          events={winterWizards}
+        />
         <ContentWrapper>
           {children}
         </ContentWrapper>

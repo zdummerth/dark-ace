@@ -5,22 +5,19 @@ import styled from "styled-components"
 
 import ProductListing from '../components/products/product-listing'
 import GiftCard from '../components/products/giftCard'
-
-
 import Youtube from '../components/youtube'
-
 import SEO from "../components/seo"
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  //Having align-items set to center prevents side scrolling for products
 
   width: 100%;
   text-align: center;
 `
 
 const Title = styled.h2`
-  // text-align: center;
   font-size: 2rem;
   margin-bottom: 0;
 `
@@ -72,6 +69,13 @@ query {
     }
   }
   parked: file(relativePath: { eq: "parked.png" }) {
+    childImageSharp {
+      fluid(maxWidth: 1280) {
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+  winterWizards: file(relativePath: { eq: "winter-wizards.jpg" }) {
     childImageSharp {
       fluid(maxWidth: 1280) {
         ...GatsbyImageSharpFluid
