@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from "styled-components"
 // import { FiArrowDown, FiArrowUp } from 'react-icons/fi';
 import { BsCaretDown, BsCaretUp } from 'react-icons/bs';
@@ -27,9 +27,8 @@ const Toggle = styled.div`
   // border-bottom: 1px solid ${colors.lightest};
 `
 
-const Spotify = () => {
+const Spotify = ({ minimized, setMinimized }) => {
 
-  const [minimized, setMinimized] = useState(true);
   const icon = minimized ? <BsCaretDown /> : <BsCaretUp />;
   const title = minimized ? 'Show Playlist' : 'Hide Playlist'
 

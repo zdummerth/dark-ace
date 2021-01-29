@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 import { BsCaretDown, BsCaretUp } from 'react-icons/bs';
@@ -17,12 +17,12 @@ const Wrapper = styled.div`
    }
 
    .content {
-    max-height: ${({ minimized }) => minimized ? '0' : '741px'};
+    max-height: ${({ minimized }) => minimized ? '0' : '626px'};
     transition: all 0.5s linear;
     overflow: hidden;
 
-    @media(min-width: 411) {
-      max-height: ${({ minimized }) => minimized ? '0' : '626px'};
+    @media(min-width: 411px) {
+      max-height: ${({ minimized }) => minimized ? '0' : '741px'};
     }
    }
 `
@@ -33,10 +33,7 @@ const Toggle = styled.div`
   background: ${colors.darkGradient};
   padding-top: 5px;
   padding-bottom: 5px;
-  // border-bottom: 1px solid ${colors.lightest};
   border-top: 1px solid ${colors.lightest};
-
-
 `
 
 const StyledButton = styled(BrandButton)`
@@ -48,9 +45,8 @@ const StyledButton = styled(BrandButton)`
 
 
 
-const Event = ({ imageFluid, events }) => {
+const Event = ({ imageFluid, events, minimized, setMinimized }) => {
 
-  const [minimized, setMinimized] = useState(true);
   const icon = minimized ? <BsCaretDown /> : <BsCaretUp />;
   const title = minimized ? 'Show Upcoming Events' : 'Hide Upcoming Events'
 
