@@ -28,12 +28,18 @@ exports.handler = async event => {
         body: formData
     })
 
-    console.log('response', response.status)
-  
-    //still need to do error handling
-    return {
-      statusCode: response.status,
-      body: 'success',
+    console.log('response', response)
+
+    if(response.ok) {
+      return {
+        statusCode: response.status,
+        body: 'success',
+      }
+    } else {
+      return {
+        statusCode: 400,
+        body: 'error',
+      }
     }
   
   }

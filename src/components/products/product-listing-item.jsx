@@ -15,7 +15,7 @@ const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-bottom: 1px solid ${colors.brand};
+  border-bottom: 1px solid ${colors.gray};
 
 
   @media (max-width: ${breakpoints.tablet}) {
@@ -75,7 +75,6 @@ const TextWrapper = styled.div`
     margin-bottom: 5px;
   }
 `
-
 // const CompareAtPriceWrapper = styled.div`
 //   display: flex;
 //   align-items: center;

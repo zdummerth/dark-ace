@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'gatsby'
+// import { Link } from 'gatsby'
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
@@ -138,7 +138,7 @@ const SuccessMessage = () => {
         <div className='submit-message'>
             <p>Thank you for your message.</p>
             <p>We will get back to you as soon as possible.</p>
-            <Link to='/shop' className='success-link'>Click here to see the shop</Link>
+            {/* <Link to='/' className='success-link'>Click here to see the shop</Link> */}
         </div>
     )
 }

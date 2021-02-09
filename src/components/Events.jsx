@@ -82,7 +82,6 @@ const Event = ({ event }) => {
 
   return (
     <EventWrapper
-      key={event.link}
       ai='center'
       jc='space-between'
     >
@@ -121,7 +120,7 @@ const Events = ({ events, minimized, setMinimized }) => {
   return (
     <Wrapper minimized={minimized}>
       <div className='content'>
-        {events.map((event, ind) => <Event event={event} />)}
+        {events.map(event => <Event event={event} key={event.link} />)}
       </div>
       <Toggle onClick={() => setMinimized(!minimized)}>
         <div>{title}</div>

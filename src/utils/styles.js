@@ -23,9 +23,8 @@ export const colors = {
   gradient: `linear-gradient(to bottom right, #C00A0A 45%, #020202)`,
   darkGradient: `linear-gradient(to bottom right, #020202 45%, #C00A0A)`,
   lightGradient: `linear-gradient(to bottom right, #fff 45%, #C00A0A)`,
-
+  gray: '#454545',
   specialGradient: `linear-gradient(to right, #C00A0A, #fff)`,
-
 };
 
 export const BrandButton = styled.button`

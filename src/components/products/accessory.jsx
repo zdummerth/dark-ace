@@ -15,7 +15,7 @@ const ProductWrapper = styled.div`
 
 
   margin: 15px;
-  border-bottom: 1px solid ${colors.brand};
+  border-bottom: 1px solid ${colors.gray};
 
   width: 70vw;
   max-width: 300px;

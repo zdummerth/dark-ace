@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { StoreContext } from '../../context/StoreContextProvider'
 import styled, { createGlobalStyle } from "styled-components"
-import { dimensions } from '../../utils/styles';
+import { dimensions, colors } from '../../utils/styles';
 
 import Header from './header'
 import Footer from './footer'
@@ -17,7 +17,7 @@ import Events from '../Events'
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background: #020202;
+    background: ${colors.background};
     color: white;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -192,6 +192,8 @@ const Layout = ({ children, location, history }) => {
         <Header
           siteTitle={data.site.siteMetadata.title}
           cartCount={cartCount}
+          // setSpotifyMinimized={setSpotifyMinimized}
+          // setEventsMinimized={setEventsMinimized}
         />
         <HeaderMargin />
         <Spotify

@@ -35,7 +35,7 @@ const Nav = styled.nav`
   display: flex;
   position: fixed;
   background: ${colors.background};
-  border-bottom: 1px solid ${colors.grayBackground};
+  border-bottom: 1px solid ${colors.gray};
   // box-shadow: 0 0 1px 1px ${colors.brand};
 
   top: 0;
@@ -98,7 +98,7 @@ const Hamburger = styled.div`
 
   ::before {
     transform: ${props =>
-      props.closed ? "rotate(0deg)" : "rotate(-90deg) translate(-10px, 0px)"};
+    props.closed ? "rotate(0deg)" : "rotate(-90deg) translate(-10px, 0px)"};
     top: -10px;
   }
 
@@ -170,7 +170,7 @@ const IgIcon = styled(FaInstagram)`
 `
 
 const Header = ({ cartCount }) => {
-  
+
   const MenuItems = [
     {
       path: '/',
@@ -187,10 +187,10 @@ const Header = ({ cartCount }) => {
   ]
 
   const [navbarClosed, setNavbarClosed] = useState(true);
-  
+
   const links = MenuItems.map((menuItem, index) => (
     <StyledLink
-      key={index} 
+      key={index}
       to={menuItem.path}
       name={menuItem.title}
       onClick={() => setNavbarClosed(true)}
@@ -199,7 +199,7 @@ const Header = ({ cartCount }) => {
     </StyledLink>
   ))
 
-  const extLinks = 
+  const extLinks =
     <>
       <IconWrapper>
         <StyledLink as='a' name='facebook' href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' target='_blank' rel="noopener"><FbIcon /></StyledLink>
@@ -211,17 +211,17 @@ const Header = ({ cartCount }) => {
     <HeaderWrapper>
       <Nav>
         <Toggle
-            navbarClosed={navbarClosed}
-            onClick={() => setNavbarClosed(!navbarClosed)}
-          >
+          navbarClosed={navbarClosed}
+          onClick={() => setNavbarClosed(!navbarClosed)}
+        >
           <Hamburger closed={navbarClosed} />
         </Toggle>
         <LogoLink to='/' name='home'>
-            <Logo />
+          <Logo />
         </LogoLink>
-        <CartLink useIcon={true}/>
+        <CartLink useIcon={true} />
         <Navbox closed={navbarClosed}>
-          <GlobalStyle closed={navbarClosed}/>
+          <GlobalStyle closed={navbarClosed} />
           {links}
           {extLinks}
         </Navbox>
