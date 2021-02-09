@@ -33,7 +33,7 @@ exports.handler = async event => {
     //still need to do error handling
     return {
       statusCode: response.status,
-      body: 'FUck YEak',
+      body: 'success',
     }
   
   }
