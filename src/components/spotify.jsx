@@ -13,7 +13,8 @@ const Container = styled.div`
   background-color: ${colors.background};
 `
 const IframeWrapper = styled.div`
-  max-height: ${({ minimized }) => minimized ? '80px' : '380px'};
+  // max-height: ${({ minimized }) => minimized ? '80px' : '380px'};
+  max-height: ${({ minimized }) => minimized ? '0px' : '380px'};
   transition: all 0.3s linear;
   overflow: hidden;
 `
@@ -23,8 +24,7 @@ const Toggle = styled.div`
   background: ${colors.darkGradient};
   padding-top: 5px;
   padding-bottom: 5px;
-  border-top: 1px solid ${colors.lightest};
-  // border-bottom: 1px solid ${colors.lightest};
+  // border-top: 1px solid ${colors.grayBackground};
 `
 
 const Spotify = ({ minimized, setMinimized }) => {

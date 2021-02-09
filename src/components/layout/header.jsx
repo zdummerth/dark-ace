@@ -35,7 +35,7 @@ const Nav = styled.nav`
   display: flex;
   position: fixed;
   background: ${colors.background};
-  border-bottom: 1px solid ${colors.brand};
+  border-bottom: 1px solid ${colors.grayBackground};
   // box-shadow: 0 0 1px 1px ${colors.brand};
 
   top: 0;
@@ -67,7 +67,6 @@ const Navbox = styled.div`
     position: fixed;
     width: 100%;
     background-color: #020202;
-    border-top: 1px solid ${colors.brand};
     transition: all 0.3s ease-in;
     top: ${dimensions.headerHeight};
     left: ${props => (props.closed ? "-100%" : "0")};

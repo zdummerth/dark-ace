@@ -9,7 +9,7 @@ import Header from './header'
 import Footer from './footer'
 import Spotify from '../spotify'
 import { CartStatus } from './cartStatus'
-import Event from '../event'
+import Events from '../Events'
 
 
 
@@ -118,8 +118,15 @@ const Layout = ({ children, location, history }) => {
       }
       winterWizards: file(relativePath: { eq: "winter-wizards.jpg" }) {
         childImageSharp {
-          fluid(maxWidth: 1280) {
-            ...GatsbyImageSharpFluid
+          fixed(width: 80, height: 80) {
+            ...GatsbyImageSharpFixed
+          }
+        }
+      }
+      doubles: file(relativePath: { eq: "da-doubles.jpg" }) {
+        childImageSharp {
+          fixed(width: 80, height: 80) {
+            ...GatsbyImageSharpFixed
           }
         }
       }
@@ -137,27 +144,38 @@ const Layout = ({ children, location, history }) => {
   const [eventsMinimized, setEventsMinimized] = useState(true);
 
   useEffect(() => {
-    //This makes sure the menus close when the clicks on a page link
+    //This makes sure the menus close when the user clicks on a page link
     setSpotifyMinimized(true)
     setEventsMinimized(true)
   }, [location])
 
-  const jbRegLink = 'https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.discgolfscene.com%2Ftournaments%2FDark_Ace_Presents_Winter_Wizards_at_Jefferson_Barracks_powered_by_4Hands_Brewery_2021%3Ffbclid%3DIwAR2A61x1OJt-QwLzKVa9Nq53T8LXcPr_Ngqgq10pE2eB914f7hg9i9WL4pY&h=AT1RStQ7tmvf35WTQD-WC7LYazxJxKFivb7psXf9HrtdB2k55jSZh0dFjUeouD5jYbKW1oRMAMQVps_xe358pMFvR1hH8-aNzqJbXR8r-dpA39VtRw3NdGCGbg&__tn__=-UK*F&c[0]=AT3TPyu-r_kp7MuqQVf6txbhoqrX3_oyVsc12UPxyaGyqWcqCf3NVlN1nSOnDnANescRC-zuM3m4iNrqW37v3RW6Cj3rHkq8YWzav5r0FyJTyBT_jG1i1lOmqJK_1snruYfkBCmd22ZC5LUufw9YwbBxmm0oRYNvjc8r3de1GqJKW_MgxDAmUwOljDuTzPeYDR0i8tudsLcUbNVJoRywVQ7G4TAH89nF1zT-N9Y2vw'
-  const endiRegLink = 'https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.discgolfscene.com%2Ftournaments%2FDark_Ace_Presents_Winter_Wizards_at_Endicott_Park_powered_by_4Hands_Brewery_2021%3Ffbclid%3DIwAR2A61x1OJt-QwLzKVa9Nq53T8LXcPr_Ngqgq10pE2eB914f7hg9i9WL4pY&h=AT1i0XbriN5FQaW7CNsXCyIxK85qVUU54Q0Cc2dsZGPDKYSyVgcsVtpPAeuDeC6d8qPKaKwDX3bY2QxLTabhoTJx2XSiA0T6eTXp0ir_Fs8kiEOVCJ-2Vs0XDQ&__tn__=-UK*F&c[0]=AT3TPyu-r_kp7MuqQVf6txbhoqrX3_oyVsc12UPxyaGyqWcqCf3NVlN1nSOnDnANescRC-zuM3m4iNrqW37v3RW6Cj3rHkq8YWzav5r0FyJTyBT_jG1i1lOmqJK_1snruYfkBCmd22ZC5LUufw9YwbBxmm0oRYNvjc8r3de1GqJKW_MgxDAmUwOljDuTzPeYDR0i8tudsLcUbNVJoRywVQ7G4TAH89nF1zT-N9Y2vw'
+  const jbRegLink = 'https://www.discgolfscene.com/tournaments/Dark_Ace_Presents_Winter_Wizards_at_Jefferson_Barracks_powered_by_4Hands_Brewery_2021'
+  const endiRegLink = 'https://www.discgolfscene.com/tournaments/Dark_Ace_Presents_Winter_Wizards_at_Endicott_Park_powered_by_4Hands_Brewery_2021'
+  const doublesLink = 'https://www.discgolfscene.com/tournaments/Dark_Ace_Doubles_2021'
 
-  const winterWizards = [
+  const eventData = [
     {
-      date: 'February 27th',
+      date: new Date(2021, 1, 27),
       location: 'Jefferson Barracks',
-      link: jbRegLink
+      title: 'Winter Wizards',
+      link: jbRegLink,
+      image: data.winterWizards.childImageSharp.fixed
     },
     {
-      date: 'March 6th',
+      date: new Date(2021, 2, 6),
       location: 'Endicott',
-      link: endiRegLink
+      title: 'Winter Wizards',
+      link: endiRegLink,
+      image: data.winterWizards.childImageSharp.fixed
+    },
+    {
+      date: new Date(2021, 2, 20),
+      title: 'Dark Ace Doubles',
+      location: 'Willmore/Graveyard',
+      link: doublesLink,
+      image: data.doubles.childImageSharp.fixed
     }
   ]
-
 
   const cartCount = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
 
@@ -180,11 +198,10 @@ const Layout = ({ children, location, history }) => {
           minimized={spotifyMinimized}
           setMinimized={setSpotifyMinimized}
         />
-        <Event
+        <Events
           minimized={eventsMinimized}
           setMinimized={setEventsMinimized}
-          imageFluid={data.winterWizards.childImageSharp.fluid}
-          events={winterWizards}
+          events={eventData}
         />
         <ContentWrapper>
           {children}

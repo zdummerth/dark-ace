@@ -45,7 +45,11 @@ const StyledButton = styled(BrandButton)`
 
 
 
-const Event = ({ imageFluid, events, minimized, setMinimized }) => {
+const Event = ({ 
+  events,
+  minimized, 
+  setMinimized 
+}) => {
 
   const icon = minimized ? <BsCaretDown /> : <BsCaretUp />;
   const title = minimized ? 'Show Upcoming Events' : 'Hide Upcoming Events'
@@ -55,7 +59,7 @@ const Event = ({ imageFluid, events, minimized, setMinimized }) => {
     <Wrapper minimized={minimized}>
       <div className='content'>
         <Img
-          fluid={imageFluid}
+          fixed={image}
         />
         <div className='button-wrapper'>
           {events.map(event => {
