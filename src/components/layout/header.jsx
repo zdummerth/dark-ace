@@ -206,6 +206,7 @@ const Header = ({ cartCount }) => {
         <StyledLink as='a' name='instagram' href='https://www.instagram.com/darkaceapparel/' target='_blank' rel="noopener"><IgIcon /></StyledLink>
       </IconWrapper>
     </>
+    
 
   return (
     <HeaderWrapper>
