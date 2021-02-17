@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
+// import { colors } from '../utils/styles';
 
 
 import ProductForm from '../components/products/product-form'
@@ -70,6 +71,7 @@ const Thumbnail = styled.button`
     :focus {outline:none;}
     ::-moz-focus-inner {border:0;}
 `
+
 
 const ProductPage = ({ data }) => {
   const product = data.shopifyProduct
@@ -163,6 +165,10 @@ export const query = graphql`
         title
         price
         priceV2 {
+          amount
+          currencyCode
+        }
+        compareAtPriceV2 {
           amount
           currencyCode
         }

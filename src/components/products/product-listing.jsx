@@ -112,6 +112,10 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
                   amount
                   currencyCode
                 }
+                compareAtPriceV2 {
+                  amount
+                  currencyCode
+                }
                 id
                 shopifyId
                 availableForSale
@@ -167,7 +171,7 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
   const hoodies = filterdProducts('hoodies');
   const accessories = filterdProducts('accessories');
 
-  const shirtsAndHoodies = [...hoodies, ...shirts]
+  const shirtsAndHoodies = [...shirts, ...hoodies]
 
 
   return (
@@ -220,7 +224,7 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
       <Title>Accessories</Title>
       <Container 
         className={className} 
-        isSingleItem={standards.length === 1}
+        isSingleItem={accessories.length === 1}
       >
         {accessories.map(node => 
           <Accessory

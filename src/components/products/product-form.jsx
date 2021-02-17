@@ -78,35 +78,35 @@ const SoldOut = styled.div`
   font-size: 1.5rem;
 `
 
-// const CompareAtPriceWrapper = styled.div`
-//   display: flex;
-//   align-items: center;
-// `
-// const CompareAtPrice = styled.div`
-//   position: relative;
-//   font-size: 1.75rem;
-//   margin-right: 20px;
+const CompareAtPriceWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+const CompareAtPrice = styled.div`
+  position: relative;
+  font-size: 1.75rem;
+  margin-right: 20px;
 
-//   .line-through {
-//     position: absolute;
-//     border-top: 2px solid ${colors.brand};
-//     width: 100%;
-//     transform: rotate(-10deg);
-//     top: 50%;
-//   }
-// `
+  .line-through {
+    position: absolute;
+    border-top: 3.5px solid ${colors.brand};
+    width: 100%;
+    transform: rotate(-10deg);
+    top: 50%;
+  }
+`
 
-// const NewPrice = styled.div`
-//   -webkit-text-stroke: 1px ${colors.brand};
-//   font-size: 2.5rem;
-//   font-weight: bold;
-//   color: ${colors.lightest};
-//   text-shadow:
-//   -1px -1px 0 ${colors.brand},  
-//   1px -1px 0 ${colors.brand},
-//   -1px 1px 0 ${colors.brand},
-//     1px 1px 6px ${colors.lightest};
-// `
+const NewPrice = styled.div`
+  -webkit-text-stroke: 1px ${colors.brand};
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: ${colors.lightest};
+  text-shadow:
+  -1px -1px 0 ${colors.brand},  
+  1px -1px 0 ${colors.brand},
+  -1px 1px 0 ${colors.brand},
+    1px 1px 6px ${colors.lightest};
+`
 
 const ProductForm = ({ product, setImageFluid }) => {
   const {
@@ -128,9 +128,9 @@ const ProductForm = ({ product, setImageFluid }) => {
 
   const handleOptionClick = (name, value) => {
     const currentOptions = [...variant.selectedOptions]
-    
+
     const index = currentOptions.findIndex(opt => opt.name === name)
-    
+
     currentOptions[index] = {
       ...currentOptions[index],
       value,
@@ -154,30 +154,53 @@ const ProductForm = ({ product, setImageFluid }) => {
   const checkSelected = (name, value) => {
     const currentOptions = [...variant.selectedOptions]
     const index = variant.selectedOptions.findIndex(opt => opt.name === name)
-    
-    if(currentOptions[index].value === value) {
-        return true
+
+    if (currentOptions[index].value === value) {
+      return true
     }
     return false
   }
 
   const price = formatPrice(variant.priceV2)
 
-   
-  const optionDisplay = ({name, values}) => (
+
+  const compareAtPrice = variant.compareAtPriceV2?.amount ? (
+    formatPrice(variant.compareAtPriceV2)
+  ) : (
+    null
+    )
+
+  const priceDisplay = compareAtPrice ? (
+    <>
+      <CompareAtPriceWrapper>
+        <CompareAtPrice>
+          <div>{compareAtPrice}</div>
+          <div className="line-through"></div>
+        </CompareAtPrice>
+        <NewPrice>{price}</NewPrice>
+      </CompareAtPriceWrapper>
+    </>
+  ) : (
+      <div className="price">{price}</div>
+    )
+  // const price = formatPrice(variant.priceV2)
+
+
+  const optionDisplay = ({ name, values }) => (
     <Values>
       <p>Select {name}:</p>
-        {values.map((value, index) => {
-          return (
-            <Span
-                value={value}
-                key={`${name}-${value}`}
-                selected={checkSelected(name, value)}
-                onClick={() => handleOptionClick(name, value, index)}
-            >
-                {value.toUpperCase()}
-            </Span>
-          )})}
+      {values.map((value, index) => {
+        return (
+          <Span
+            value={value}
+            key={`${name}-${value}`}
+            selected={checkSelected(name, value)}
+            onClick={() => handleOptionClick(name, value, index)}
+          >
+            {value.toUpperCase()}
+          </Span>
+        )
+      })}
     </Values>
   )
 
@@ -187,38 +210,39 @@ const ProductForm = ({ product, setImageFluid }) => {
       {/* {Product with no variants produces option with name === 'Title', So check for that to prevent unwanted select menu} */}
       {options.map(({ id, name, values }) => name !== 'Title' && (
         <OptionContainer key={id}>
-            {optionDisplay({name, values})}
+          {optionDisplay({ name, values })}
         </OptionContainer>
       ))}
 
-      {available ? 
+      {available ?
         (
-        <>
-          <StyledQuantity
-            quantity={quantity}
-            increase={increaseQuantity}
-            decrease={decreaseQuantity}
-          />
-        </>
+          <>
+            <StyledQuantity
+              quantity={quantity}
+              increase={increaseQuantity}
+              decrease={decreaseQuantity}
+            />
+          </>
         )
         :
         <SoldOut>
           {`Out of Stock! Please select another `}
-          {variant.selectedOptions.length === 1 ? 
-            variant.selectedOptions[0].name 
-            : 
+          {variant.selectedOptions.length === 1 ?
+            variant.selectedOptions[0].name
+            :
             `${variant.selectedOptions[0].name} or ${variant.selectedOptions[1].name}`}
           .
         </SoldOut>
       }
 
-      <div className="price">{price}</div>
+      {/* <div className="price">{price}</div> */}
+      { priceDisplay }
 
       { available && (
-        <BrandButton 
+        <BrandButton
           type="submit"
           disabled={status === 'Adding'}
-          >
+        >
           Add To Cart
         </BrandButton>
       )}
