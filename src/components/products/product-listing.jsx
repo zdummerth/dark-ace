@@ -1,6 +1,8 @@
-import React from "react"
+import React from 'react'
 import styled from 'styled-components'
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql } from 'gatsby'
+import { useCollections } from '../../hooks/useCollections'
+
 
 import ProductListingItem from './product-listing-item'
 import Accessory from './accessory'
@@ -13,8 +15,6 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  // margin-right: 10px;
-
 
   @media (max-width: ${breakpoints.tablet}) {
     flex-wrap: nowrap;
@@ -156,6 +156,10 @@ const ProductListing = ({ className, isFeature, isGiftCard }) => {
       }
     }
   `)
+
+  const collections = useCollections()
+
+  console.log({collections})
 
   const filterdProducts = collection => (
     data.allShopifyCollection.edges

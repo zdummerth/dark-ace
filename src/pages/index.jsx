@@ -38,7 +38,6 @@ const StyledProductListing = styled(ProductListing)`
 
 
 const IndexPage = ({data}) => {
-
   return (
     <>
       <SEO title="Home" />
