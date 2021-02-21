@@ -109,7 +109,7 @@ export const useShopify = () => {
   const feature = preOrders.products[0]
 
   const collections = allCollections.filter(
-    c => c.handle !== c.handle !== 'pre-order'
+    c => c.handle !== 'pre-order'
   )
 
 
