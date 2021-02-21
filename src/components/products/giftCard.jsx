@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react'
-import { StoreContext } from '../../context/StoreContextProvider'
+import React, { useState } from 'react'
 import { BsCaretDown, BsCaretUp } from 'react-icons/bs';
 
-import { useStaticQuery, graphql } from "gatsby"
 import styled from 'styled-components'
 import Img from 'gatsby-image'
+import { useShopify } from '../../hooks/useShopify'
+import { useCheckout } from '../../hooks/useCheckout'
+
 
 import { colors, BrandButton, DarkBrandButton } from '../../utils/styles';
 import { formatPrice } from '../../utils/helpers';
@@ -96,59 +97,28 @@ const List = styled.div`
 
 
 const GiftCard = () => {
-  const data = useStaticQuery(graphql`
-  query GetGiftCard {
-    shopifyProduct(handle: {eq: "dark-ace-gift-card"}) {
-      handle
-      images {
-        id
-      }
-      priceRange {
-        maxVariantPrice {
-          amount
-          currencyCode
-        }
-        minVariantPrice {
-          amount
-          currencyCode
-        }
-      }
-      images {
-        localFile {
-          childImageSharp {
-            fluid(maxWidth: 300) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-      }
-      variants {
-        shopifyId
-        priceV2 {
-          amount
-          currencyCode
-        }
-      }
-    }
-  }
-`)
 
-  const { images, variants } = data.shopifyProduct;
+  const { giftCard } = useShopify()
+  const { images, variants } = giftCard
 
-  const { addVariantToCart } = useContext(StoreContext)
+  const {
+    variant,
+    status,
+    addToCart,
+    setVariant
+  } = useCheckout(giftCard)
 
-  const [variant, setVariant] = useState(variants[0]);
   const [listOpen, setListOpen] = useState(false);
 
   const handleAddToCart = () => {
-    addVariantToCart(variant.shopifyId, 1)
+    if (status !== 'Adding') {
+      addToCart(variant.shopifyId, 1)
+    }
   }
 
-  const toggleListOpen = () => {
-    setListOpen(!listOpen)
-  }
+  const toggleListOpen = () => setListOpen(!listOpen)
 
-  const price = <div>{formatPrice(variant.priceV2)}</div>;
+  const price = <div>{formatPrice(variant.priceV2)}</div>
   const icon = listOpen ? <BsCaretDown/> : <BsCaretUp/>;
 
  
@@ -177,8 +147,9 @@ const GiftCard = () => {
         </ImgContainer>
         <ButtonContainer>
           <ListControls>
-            {/* <div>Amount:</div> */}
-            <CurrentPrice onClick={toggleListOpen}>{price}{icon}</CurrentPrice>
+            <CurrentPrice onClick={toggleListOpen}>
+              {price}{icon}
+            </CurrentPrice>
           </ListControls>
           <BrandButton onClick={handleAddToCart}>Add To Cart</BrandButton>
         </ButtonContainer>

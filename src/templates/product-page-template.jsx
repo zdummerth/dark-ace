@@ -1,19 +1,13 @@
 import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
+// import { colors } from '../utils/styles'
 import styled from 'styled-components'
 
-// import { colors } from '../utils/styles';
-
-
 import ProductForm from '../components/products/product-form'
-
 import SEO from '../components/seo'
 
 const Title = styled.h1`
-  margin: 1rem auto;
-  color: white;
-  width: 90%;
   text-align: center;
 `
 
@@ -50,9 +44,8 @@ const ImgContainer = styled.div`
 `
 
 const FormContainer = styled.div`
-  // height: 100%;
   width: 100%;
-  // max-width: 400px;
+  margin-bottom: 30px;
   & > * {
     margin: .75rem;
   }

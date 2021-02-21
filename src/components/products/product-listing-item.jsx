@@ -3,26 +3,22 @@ import { Link } from "gatsby"
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
-
 import { breakpoints, colors } from '../../utils/styles';
 import { formatPrice } from '../../utils/helpers';
 
 
-
 const ProductContainer = styled.div`
-  margin: ${props => props.isFeature ? '0' : '10px 5px'};
+  margin: ${({ isFeature }) => isFeature ? '0' : '10px 5px'};
   text-align: center; 
   display: flex;
   flex-direction: column;
   align-items: center;
   border-bottom: 1px solid ${colors.gray};
 
-
   @media (max-width: ${breakpoints.tablet}) {
     margin: ${props => props.isFeature ? '0' : '10px'};
   }
 `
-
 const ImgContainer = styled.div`
   width: ${({ isFeature }) => isFeature ? '70vw' : '60vw'};
   max-width: ${({ isFeature }) => isFeature ? '400px' : '350px'};
@@ -31,16 +27,10 @@ const ImgContainer = styled.div`
 
   position: relative;
   overflow: hidden;
-  @media (max-width: ${breakpoints.tablet}) {
-
-  }
 `
-
 const ThumbnailContainer = styled.div`  
   margin-top: 5px;
-
 `
-
 const Thumbnail = styled.button`
     margin-right: 8px;
     width: 48px;
@@ -51,7 +41,6 @@ const Thumbnail = styled.button`
     :focus {outline:none;}
     ::-moz-focus-inner {border:0;}
 `
-
 const ImgLink = styled(Link)`
   .gatsby-image-wrapper {
     transition: all 250ms;
@@ -65,11 +54,7 @@ const ImgLink = styled(Link)`
     }
   }
 `
-
 const TextWrapper = styled.div`
-  // margin-top: 20px;
-  // margin-bottom: 20px;
-
   & > * {
     margin-top: 10px;
     margin-bottom: 5px;
@@ -105,14 +90,11 @@ const NewPrice = styled.div`
     1px 1px 6px ${colors.lightest};
 `
 
-const ProductListingItem = ({ product, isSingleItem, className, isFeature, showThumbs, isGiftCard }) => {
+const ProductListingItem = ({ product, className, isFeature, showThumbs }) => {
   const [index, setIndex] = useState(0);
 
-  // const [variant, setVariant] = useState(product.variants[0]);
-
-
   const minPrice = formatPrice(product.priceRange.minVariantPrice)
-  const maxPrice = formatPrice(product.priceRange.maxVariantPrice)
+  // const maxPrice = formatPrice(product.priceRange.maxVariantPrice)
 
   const compareAtPrice = product.variants[0].compareAtPriceV2?.amount ? (
     formatPrice(product.variants[0].compareAtPriceV2)
@@ -120,7 +102,8 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
       null
     )
 
-  const price = isGiftCard ? `${minPrice} - ${maxPrice}` : minPrice;
+  // const price = isGiftCard ? `${minPrice} - ${maxPrice}` : minPrice;
+  const price = minPrice
 
   const priceDisplay = compareAtPrice ? (
     <>
@@ -135,9 +118,6 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
   ) : (
       <div className="price">{price}</div>
     )
-
-  // const priceDisplay = <div className="price">{price}</div>
-
 
   const images = product.images.map((image, ind) => (
     <ImgLink
@@ -168,7 +148,6 @@ const ProductListingItem = ({ product, isSingleItem, className, isFeature, showT
     <ProductContainer
       className={className}
       key={product.shopifyId}
-      isSingleItem={isSingleItem}
       isFeature={isFeature}
     >
       <ImgContainer isFeature={isFeature}>

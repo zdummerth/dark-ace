@@ -1,7 +1,7 @@
 import { useStaticQuery, graphql } from 'gatsby'
 
-export const useCollections = () => {
-    const collections = useStaticQuery(graphql`
+export const useShopify = () => {
+  const data = useStaticQuery(graphql`
     query {
       allShopifyCollection {
         edges {
@@ -13,6 +13,9 @@ export const useCollections = () => {
               title
               shopifyId
               variants {
+                id
+                shopifyId
+                availableForSale
                 image { 
                   id
                 }
@@ -24,9 +27,6 @@ export const useCollections = () => {
                   amount
                   currencyCode
                 }
-                id
-                shopifyId
-                availableForSale
               }
               priceRange {
                 minVariantPrice {
@@ -62,9 +62,60 @@ export const useCollections = () => {
           }
         }
       }
+
+      giftCard: shopifyProduct(handle: { eq: "dark-ace-gift-card" }) {
+        handle
+        images {
+          id
+        }
+        priceRange {
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+        images {
+          localFile {
+            childImageSharp {
+              fluid(maxWidth: 300) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+        variants {
+          shopifyId
+          priceV2 {
+            amount
+            currencyCode
+          }
+        }
+      }
     }
   `)
 
-  return collections.allShopifyCollection.edges.map(({ node }) => node)
+  // console.log(data)
+
+  const allCollections = data.allShopifyCollection.edges.map(({ node }) => node)
+
+  const accessoriesCollection = allCollections.find(c => c.handle === 'accessories')
+  const accessories = accessoriesCollection.products
+  const preOrders = allCollections.find(c => c.handle === 'pre-order')
+
+  const feature = preOrders.products[0]
+
+  const collections = allCollections.filter(
+    c => c.handle !== c.handle !== 'pre-order'
+  )
+
+
+
+  const { giftCard } = data
+
+  return { collections, accessories, giftCard, feature }
 
 }

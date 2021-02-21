@@ -37,7 +37,7 @@ const StyledProductListing = styled(ProductListing)`
 `
 
 
-const IndexPage = ({data}) => {
+const IndexPage = ({ data }) => {
   return (
     <>
       <SEO title="Home" />

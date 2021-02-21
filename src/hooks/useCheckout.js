@@ -15,22 +15,18 @@ export const useCheckout = product => {
   const initialVariant = product.availableForSale ? 
     variants.find(variant => variant.availableForSale) 
     : 
-    variants[0];
+    variants[0]
 
   const { 
     addVariantToCart, 
     checkAvailability,
     store: { status } 
-  } = useContext(StoreContext);
+  } = useContext(StoreContext)
 
-  const [variant, setVariant] = useState(initialVariant);
+  const [variant, setVariant] = useState(initialVariant)
 
-  const [quantity, setQuantity] = useState(1);
-  const [available, setAvailable] = useState(variant.availableForSale);
-
-
-  // const [availabilityCache, setAvailabilityCache] = useState({})
-
+  const [quantity, setQuantity] = useState(1)
+  const [available, setAvailable] = useState(variant.availableForSale)
 
   const increaseQuantity = e => {
     e.preventDefault();
