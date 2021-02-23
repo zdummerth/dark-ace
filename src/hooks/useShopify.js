@@ -12,6 +12,7 @@ export const useShopify = () => {
               handle
               title
               shopifyId
+              description
               variants {
                 id
                 shopifyId

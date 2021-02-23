@@ -6,6 +6,7 @@ import styled from 'styled-components'
 
 import ProductForm from '../components/products/product-form'
 import SEO from '../components/seo'
+import Slideshow from '../components/Slideshow'
 
 const Title = styled.h1`
   text-align: center;
@@ -51,87 +52,132 @@ const FormContainer = styled.div`
   }
   
 `
-const ThumbnailContainer = styled.div`  
-  margin-top: 5px;
-`
-const Thumbnail = styled.button`
-    margin-right: 8px;
-    width: 48px;
-    height: 60px;
-    border: 0;
-    outline: 0;
-    background: none;
-    :focus {outline:none;}
-    ::-moz-focus-inner {border:0;}
-`
+// const ThumbnailContainer = styled.div`  
+//   margin-top: 5px;
+// `
+// const Thumbnail = styled.button`
+//     margin-right: 8px;
+//     width: 48px;
+//     height: 60px;
+//     border: 0;
+//     outline: 0;
+//     background: none;
+//     :focus {outline:none;}
+//     ::-moz-focus-inner {border:0;}
+// `
+
+// const Thumbnails = ({ thumbs, handleThumbClick }) => {
+
+//   return (
+//     <ThumbnailContainer>
+//       {thumbs.map(t => (
+//         <Thumbnail key={t.id} onClick={() => handleThumbClick(t.id)}>
+//           <Img
+//             fixed={t.localFile.childImageSharp.fixed}
+//             alt={'Thumbnail for Product'}
+//           />
+//         </Thumbnail>
+//       ))}
+//     </ThumbnailContainer>
+//   )
+// }
 
 
 const ProductPage = ({ data }) => {
   const product = data.shopifyProduct
   const {
     variants: [initialVariant],
+    // variants,
     thumbs,
     fulls,
-    productType
   } = product
 
+  // const thumbnails = <Thumbnails thumbs={thumbs} handleThumbClick={handleThumbClick} />
+
+
   const [imageFluid, setImageFluid] = useState(initialVariant.image.localFile.childImageSharp.fluid)
-  const [index, setIndex] = useState(0);
+
+  const [slideShowState, setSlideShowState] = useState({
+    open: false,
+    index: 0
+  })
+
+
+  // const handleThumbClick = imageId => {
+
+    // const variantsWithImage = variants.filter(v => v.image.id === imageId)
+    // console.log({ variantsWithImage })
+
+    // const getOptionName = (variants) => {
+    //   const firstOptions = variants[0].selectedOptions
+    //   const secondOptions = variants[1].selectedOptions
+
+    //   const match = firstOptions.find(opt =>
+    //     opt.value === secondOptions[0].value
+    //   )
+
+    //   return match
+    // }
+
+    // const optionName = getOptionName(variantsWithImage)
+
+    // const currentOptions = [...variant.selectedOptions]
+
+    // const index = currentOptions.findIndex(opt => opt.name === optionName)
+
+    // currentOptions[index] = {
+    //   ...currentOptions[index],
+    //   value,
+    // }
+
+    // setSlideShowState({
+    //   open: true,
+    //   index
+    // })
+  // }
+
+  
+  const closeSlideshow = () => {
+    setSlideShowState({
+      open: false,
+      index: 0
+    })
+  }
 
 
   const isPreOrder = product.tags.includes('pre-order');
-  const isPolo = productType === 'polo'
-
-  const imagesTags = fulls.map((variant, ind) => (
-    <div>
-        <Img 
-            fluid={variant.localFile.childImageSharp.fluid} 
-            alt={product.title}
-            className={index !== ind ? 'hidden': ''}
-        />
-    </div>
-))
-
-  const thumbnails = (
-    <ThumbnailContainer>
-      {thumbs.map((variant, ind) => (
-        <Thumbnail key={variant.id} onClick={() => setIndex(ind)}>
-          <Img 
-              fixed={variant.localFile.childImageSharp.fixed} 
-              alt={product.title}
-          />
-        </Thumbnail>
-    ))}
-    </ThumbnailContainer>
-  ) 
-
-  const imageDisplay = isPolo ? imagesTags 
-    :
-    ( <Img
-        fluid={imageFluid}
-        key={product.thumbs[0].id}
-        alt={product.title}
-      />)
 
 
   return (
     <>
       <SEO title={product.title} description={product.description} />
-        <Title>{product.title}</Title>
-        {isPreOrder ? <Subtitle>This Is A Pre-Order Item</Subtitle> : null}
-        <Container>
-          <ImgContainer>
-            {imageDisplay}
-          </ImgContainer>
-          { isPolo ? thumbnails : null }
-          <FormContainer>
-            <ProductForm 
-              product={product} 
-              setImageFluid={setImageFluid}
-            />
-            <div dangerouslySetInnerHTML={{__html: product.descriptionHtml}}/>
-          </FormContainer>
-        </Container>
+      <Title>{product.title}</Title>
+      {isPreOrder ? <Subtitle>This Is A Pre-Order Item</Subtitle> : null}
+      <Container>
+        <ImgContainer>
+          <Img
+            fluid={imageFluid}
+            alt={product.title}
+          />
+        </ImgContainer>
+        {/* <Thumbnails thumbs={thumbs} handleThumbClick={handleThumbClick} /> */}
+        <FormContainer>
+          <ProductForm
+            product={product}
+            setImageFluid={setImageFluid}
+
+          />
+          <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+        </FormContainer>
+      </Container>
+      { slideShowState.open && (
+        <Slideshow
+          startingIndex={slideShowState.index}
+          fulls={fulls}
+          thumbs={thumbs}
+          close={closeSlideshow}
+        />
+      )}
     </>
   )
 }

@@ -46,7 +46,7 @@ const IndexPage = ({ data }) => {
           <Img fluid={data.parked.childImageSharp.fluid} />
         </Banner>
         <StyledProductListing />
-        <GiftCard/>
+        <GiftCard style={{marginTop: '30px'}}/>
         <Title>2020 Ledgestone Commercial</Title>
         <Youtube style={{alignSelf: 'center'}} />
         <ImgWrapper>

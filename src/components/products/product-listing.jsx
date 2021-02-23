@@ -117,10 +117,7 @@ const Feature = ({ product }) => {
         <Text>
           <Title className='hide-lt-tablet'>Featured Hoodie</Title>
           <p>
-            For every Listen to Metal Hoodie purchased, 20 meals will
-            be donated to those in need through the St.Louis Food Bank,
-            Operation Food Search. Also, you will be entered
-            into a raffle to win a brand new Prodigy practice bag!
+            {product.description}
           </p>
         </Text>
       </FeatureContainer>
@@ -135,7 +132,7 @@ const ProductListing = () => {
   return (
     <>
       <Feature product={feature} />
-      { collections.map(c => <CollectionListing key={c.handle} collection={c} />)}
+      { collections.reverse().map(c => <CollectionListing key={c.handle} collection={c} />)}
     </>
   )
 }
