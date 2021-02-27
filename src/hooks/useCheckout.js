@@ -24,6 +24,8 @@ export const useCheckout = product => {
   } = useContext(StoreContext)
 
   const [variant, setVariant] = useState(initialVariant)
+  // console.log('variant', variant)
+
 
   const [quantity, setQuantity] = useState(1)
   const [available, setAvailable] = useState(variant.availableForSale)

@@ -17,6 +17,7 @@ const QuantityWrapper = styled.div`
 
 const ControllWrapper = styled.div`
   display: flex;
+  margin-left: 15px;
 
   & button {
     display: flex;
@@ -44,7 +45,7 @@ const Quantity = ({ quantity, increase, decrease, className }) => {
 
   return (
     <QuantityWrapper className={className}>
-        <h3>Qty:</h3>
+        <div>Qty:</div>
         <ControllWrapper>
           <button onClick={decrease}>
               <AiOutlineMinus /> 

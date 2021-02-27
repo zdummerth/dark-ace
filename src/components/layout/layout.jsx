@@ -196,14 +196,14 @@ const Layout = ({ children, location, history }) => {
           // setEventsMinimized={setEventsMinimized}
         />
         <HeaderMargin />
-        <Spotify
-          minimized={spotifyMinimized}
-          setMinimized={setSpotifyMinimized}
-        />
         <Events
           minimized={eventsMinimized}
           setMinimized={setEventsMinimized}
           events={eventData}
+        />
+        <Spotify
+          minimized={spotifyMinimized}
+          setMinimized={setSpotifyMinimized}
         />
         <ContentWrapper>
           {children}

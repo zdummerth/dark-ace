@@ -1,149 +1,140 @@
 import React, { useState } from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
 // import { colors } from '../utils/styles'
 import styled from 'styled-components'
+import { colors, breakpoints } from '../utils/styles'
+
+import { useCheckout } from '../hooks/useCheckout'
 
 import ProductForm from '../components/products/product-form'
+import Price from '../components/products/Price'
 import SEO from '../components/seo'
-import Slideshow from '../components/Slideshow'
+
 
 const Title = styled.h1`
   text-align: center;
 `
-
 const Subtitle = styled.h2`
   margin: 1rem auto;
   color: white;
   width: 90%;
   text-align: center;
-
 `
-
 const Container = styled.div`
   display: flex;
-  // align-items: center;
+  flex-direction: column;
+  align-items: center;
   margin: 3rem auto;
-  color: white;
   width: 90%;
 
   .hidden {
     display: none;
   }
-  @media (max-width: 1000px) {
-    flex-direction: column;
-    align-items: center;
+  @media (min-width: ${breakpoints.desktop}) {
+    flex-direction: row;
+    align-items: flex-start;
   }
-
-
 `
 const ImgContainer = styled.div`
-  // flex: 0 1 80%;
+  width: 100%;
+`
+const ImagesWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   max-width: 600px;
-  min-width: 300px;
 `
+const InfoWrapper = styled.div`
+  max-width: 400px;
 
+  @media (min-width: ${breakpoints.desktop}) {
+    margin-left: 15px;
+  }
+`
+const StyledPrice = styled(Price)`
+  margin-top: 10px;
+  margin-bottom: 10px;
+`
 const FormContainer = styled.div`
   width: 100%;
   margin-bottom: 30px;
   & > * {
     margin: .75rem;
   }
+
+  border: 2px solid ${colors.gray};
+  background: ${colors.grayGradient};
   
 `
-// const ThumbnailContainer = styled.div`  
-//   margin-top: 5px;
-// `
-// const Thumbnail = styled.button`
-//     margin-right: 8px;
-//     width: 48px;
-//     height: 60px;
-//     border: 0;
-//     outline: 0;
-//     background: none;
-//     :focus {outline:none;}
-//     ::-moz-focus-inner {border:0;}
-// `
+const ThumbnailContainer = styled.div`  
+  margin-top: 5px;
+`
+const Thumbnail = styled.button`
+    margin-right: 8px;
+    width: 48px;
+    height: 60px;
+    border: 0;
+    outline: 0;
+    background: none;
+    :focus {outline:none;}
+    ::-moz-focus-inner {border:0;}
+`
+const StyledLink = styled(Link)`
+    text-align: center;
+    background: ${colors.darkGradient};
+    box-shadow: 0 0 5px ${colors.brand};
+    border-radius: 5px;
+    padding: 10px;
+`
 
-// const Thumbnails = ({ thumbs, handleThumbClick }) => {
-
-//   return (
-//     <ThumbnailContainer>
-//       {thumbs.map(t => (
-//         <Thumbnail key={t.id} onClick={() => handleThumbClick(t.id)}>
-//           <Img
-//             fixed={t.localFile.childImageSharp.fixed}
-//             alt={'Thumbnail for Product'}
-//           />
-//         </Thumbnail>
-//       ))}
-//     </ThumbnailContainer>
-//   )
-// }
-
+const Thumbnails = ({ thumbs, handleClick }) => {
+  return (
+    <ThumbnailContainer>
+      {thumbs.map(t => (
+        <Thumbnail
+          key={t.id}
+          onClick={() => handleClick(t)}
+          //Default button type is submit, so this prevents click from submitting form
+          type='button'
+        >
+          <Img
+            fixed={t.localFile.childImageSharp.fixed}
+            alt={'Thumbnail for Product'}
+          />
+        </Thumbnail>
+      ))}
+    </ThumbnailContainer>
+  )
+}
 
 const ProductPage = ({ data }) => {
   const product = data.shopifyProduct
   const {
-    variants: [initialVariant],
-    // variants,
     thumbs,
     fulls,
   } = product
 
-  // const thumbnails = <Thumbnails thumbs={thumbs} handleThumbClick={handleThumbClick} />
+  const {
+    variant,
+    quantity,
+    available,
+    status,
+    increaseQuantity,
+    decreaseQuantity,
+    addToCart,
+    setVariant
+  } = useCheckout(product)
 
 
-  const [imageFluid, setImageFluid] = useState(initialVariant.image.localFile.childImageSharp.fluid)
-
-  const [slideShowState, setSlideShowState] = useState({
-    open: false,
-    index: 0
-  })
+  const [imageFluid, setImageFluid] = useState(variant.image.localFile.childImageSharp.fluid)
 
 
-  // const handleThumbClick = imageId => {
-
-    // const variantsWithImage = variants.filter(v => v.image.id === imageId)
-    // console.log({ variantsWithImage })
-
-    // const getOptionName = (variants) => {
-    //   const firstOptions = variants[0].selectedOptions
-    //   const secondOptions = variants[1].selectedOptions
-
-    //   const match = firstOptions.find(opt =>
-    //     opt.value === secondOptions[0].value
-    //   )
-
-    //   return match
-    // }
-
-    // const optionName = getOptionName(variantsWithImage)
-
-    // const currentOptions = [...variant.selectedOptions]
-
-    // const index = currentOptions.findIndex(opt => opt.name === optionName)
-
-    // currentOptions[index] = {
-    //   ...currentOptions[index],
-    //   value,
-    // }
-
-    // setSlideShowState({
-    //   open: true,
-    //   index
-    // })
-  // }
-
-  
-  const closeSlideshow = () => {
-    setSlideShowState({
-      open: false,
-      index: 0
-    })
+  const handleThumbClick = img => {
+    const fullImage = fulls.find(full => full.id === img.id)
+    setImageFluid(fullImage.localFile.childImageSharp.fluid)
   }
-
 
   const isPreOrder = product.tags.includes('pre-order');
 
@@ -151,33 +142,47 @@ const ProductPage = ({ data }) => {
   return (
     <>
       <SEO title={product.title} description={product.description} />
-      <Title>{product.title}</Title>
-      {isPreOrder ? <Subtitle>This Is A Pre-Order Item</Subtitle> : null}
       <Container>
-        <ImgContainer>
-          <Img
-            fluid={imageFluid}
-            alt={product.title}
-          />
-        </ImgContainer>
-        {/* <Thumbnails thumbs={thumbs} handleThumbClick={handleThumbClick} /> */}
-        <FormContainer>
-          <ProductForm
-            product={product}
-            setImageFluid={setImageFluid}
-
-          />
+        <ImagesWrapper>
+          <ImgContainer>
+            <Img
+              fluid={imageFluid}
+              alt={product.title}
+              imgStyle={{
+                objectFit: 'contain',
+              }}
+            />
+          </ImgContainer>
+          <Thumbnails thumbs={thumbs} handleClick={handleThumbClick} />
+        </ImagesWrapper>
+        <InfoWrapper>
+          <Title>{product.title}</Title>
+          {isPreOrder ? <Subtitle>This Is A Pre-Order Item</Subtitle> : null}
           <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
-        </FormContainer>
+          <FormContainer>
+            <StyledPrice
+              price={variant.priceV2}
+              compareAtPrice={variant.compareAtPriceV2}
+            />
+            <ProductForm
+              product={product}
+              variant={variant}
+              quantity={quantity}
+              increaseQuantity={increaseQuantity}
+              decreaseQuantity={decreaseQuantity}
+              available={available}
+              status={status}
+              addToCart={addToCart}
+              setImageFluid={setImageFluid}
+              setVariant={setVariant}
+              thumbs={thumbs}
+              fulls={fulls}
+              Thumbnails={Thumbnails}
+            />
+          </FormContainer>
+          <StyledLink to='/'>Continue Shopping</StyledLink>
+        </InfoWrapper>
       </Container>
-      { slideShowState.open && (
-        <Slideshow
-          startingIndex={slideShowState.index}
-          fulls={fulls}
-          thumbs={thumbs}
-          close={closeSlideshow}
-        />
-      )}
     </>
   )
 }

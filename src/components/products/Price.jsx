@@ -27,7 +27,7 @@ const CompareAtPrice = styled.div`
 `
 const NewPrice = styled.div`
   -webkit-text-stroke: 1px ${colors.brand};
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
   color: ${colors.lightest};
   text-shadow:
@@ -37,12 +37,12 @@ const NewPrice = styled.div`
     1px 1px 6px ${colors.lightest};
 `
 
-const Price = ({ price, compareAtPrice }) => {
+const Price = ({ price, compareAtPrice, className }) => {
 
 
   return compareAtPrice ? (
     <>
-      <CompareAtPriceWrapper>
+      <CompareAtPriceWrapper className={className}>
         <CompareAtPrice>
           <div>{formatPrice(compareAtPrice)}</div>
           <div className="line-through"></div>
@@ -51,7 +51,7 @@ const Price = ({ price, compareAtPrice }) => {
       </CompareAtPriceWrapper>
     </>
   ) : (
-      <BasicPrice>{formatPrice(price)}</BasicPrice>
+      <BasicPrice className={className}>{formatPrice(price)}</BasicPrice>
     )
 }
 

@@ -20,10 +20,11 @@ const ProductContainer = styled.div`
   }
 `
 const ImgContainer = styled.div`
-  width: ${({ isFeature }) => isFeature ? '70vw' : '60vw'};
+  width: ${({ isFeature }) => isFeature ? '80vw' : '60vw'};
   max-width: ${({ isFeature }) => isFeature ? '400px' : '350px'};
-  height: ${({ isFeature }) => isFeature ? '400px' : '35vh'};
+  height: ${({ isFeature }) => isFeature ? '45vh' : '35vh'};
   max-height: ${({ isFeature }) => isFeature ? '400px' : '400px'};
+
 
   position: relative;
   overflow: hidden;

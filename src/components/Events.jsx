@@ -114,7 +114,8 @@ const Events = ({ events, minimized, setMinimized }) => {
   // console.log(events[0].date.getDate())
 
   const icon = minimized ? <BsCaretDown /> : <BsCaretUp />;
-  const title = minimized ? 'Show Upcoming Events' : 'Hide Upcoming Events'
+  const title = 'Play Disc Golf'
+  // const title = minimized ? 'Show Upcoming Events' : 'Hide Upcoming Events'
 
 
   return (

@@ -132,7 +132,7 @@ const ProductListing = () => {
   return (
     <>
       <Feature product={feature} />
-      { collections.reverse().map(c => <CollectionListing key={c.handle} collection={c} />)}
+      { collections.map(c => <CollectionListing key={c.handle} collection={c} />)}
     </>
   )
 }

@@ -5,7 +5,7 @@ import { StoreContext } from '../context/StoreContextProvider'
 
 import LineItem from '../components/cart/line-item'
 
-import { colors } from '../utils/styles';
+import { colors } from '../utils/styles'
 
 
 const Container = styled.div`

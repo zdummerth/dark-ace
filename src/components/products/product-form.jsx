@@ -1,7 +1,6 @@
 import React from 'react'
-import { useCheckout } from '../../hooks/useCheckout'
+import Img from 'gatsby-image'
 
-import { Link } from 'gatsby'
 import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
@@ -9,14 +8,11 @@ import styled from 'styled-components'
 
 import Quantity from './quantity'
 
-import { colors, BrandButton } from '../../utils/styles';
-import { formatPrice } from '../../utils/helpers';
+import { colors, BrandButton } from '../../utils/styles'
 
 const StyledQuantity = styled(Quantity)`
   justify-content: flex-start;
 `
-
-
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -26,107 +22,113 @@ const Form = styled.form`
     font-size: 1.5rem;
   }
 
-  & .price {
-    font-size: 1.75rem;
-    font-weight: bold;
-    margin-top: 0;
-  }
-
   & > * {
       margin-bottom: 1.3rem;
   }
 `
 
-
-const StyledLink = styled(Link)`
-    text-align: center;
-    background: ${colors.darkGradient};
-    box-shadow: 0 0 5px ${colors.brand};
-    border-radius: 5px;
-    padding: 10px 0;
-`
 const OptionContainer = styled.div`
   // display: flex;
   // flex-wrap: wrap;
   // align-items: center;
 
 `
-
 const Values = styled.div`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 
     & > * {
-        margin: .5rem;
+        margin-right: 5px;
+        margin-top: 5px;
     }
 `
 const Span = styled.span`
   border: ${props => (props.selected ? `none` : '1px solid rgba(232, 232, 232, .3)')};
   background: ${props => (props.selected ? `${colors.gradient}` : 'black')};
-  box-shadow: ${props => (props.selected ? ` 0 0 5px ${colors.brand}` : '')};
+  box-shadow: ${props => (props.selected ? ` 0 0 3px ${colors.lightest}` : '')};
 
-  padding: 10px;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+
+  // padding: 10px;
+
+  height: 50px;
+  width: 50px;
   border-radius: 5px;
   :hover {
       cursor: pointer;
     }
     
 `
-
 const SoldOut = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 `
 
-const CompareAtPriceWrapper = styled.div`
-  display: flex;
+const Thumbs = styled.div`
+  display: flex; 
+  // justify-content: center;
+`
+const ThumbButton = styled.button`
+  margin-right: 8px;
+  width: 48px;
+  height: 60px;
+  border: 0;
+  outline: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+  :focus {outline:none;}
+  ::-moz-focus-inner {border:0;}
+
+`
+
+const ThumbContainer = styled.div`
+  border: ${({ selected }) => selected ? `4px solid ${colors.brand}` : `4px solid ${colors.background}`};
+  box-shadow: ${({ selected }) => selected ? `0 0 8px ${colors.lightest}` : `none`};
+  margin-right: 10px;
+  display: flex; 
   align-items: center;
-`
-const CompareAtPrice = styled.div`
+  justify-content: center;
+
   position: relative;
-  font-size: 1.75rem;
-  margin-right: 20px;
+`
 
-  .line-through {
+const Overlay = styled.div`
     position: absolute;
-    border-top: 3.5px solid ${colors.brand};
+    top: 0;
     width: 100%;
-    transform: rotate(-10deg);
-    top: 50%;
-  }
+    height: 100%;
+
+    background: rgba(0,0,0, .35);
 `
 
-const NewPrice = styled.div`
-  -webkit-text-stroke: 1px ${colors.brand};
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: ${colors.lightest};
-  text-shadow:
-  -1px -1px 0 ${colors.brand},  
-  1px -1px 0 ${colors.brand},
-  -1px 1px 0 ${colors.brand},
-    1px 1px 6px ${colors.lightest};
+const CurrentOption = styled.div`
+  margin-bottom: 5px;
 `
 
-const ProductForm = ({ product, setImageFluid }) => {
+const ProductForm = ({
+  product,
+  setImageFluid,
+  setVariant,
+  variant,
+  quantity,
+  available,
+  status,
+  increaseQuantity,
+  decreaseQuantity,
+  addToCart,
+}) => {
+
   const {
     options,
     variants,
+    thumbs,
   } = product
 
-  const {
-    variant,
-    quantity,
-    available,
-    status,
-    increaseQuantity,
-    decreaseQuantity,
-    addToCart,
-    setVariant
-  } = useCheckout(product)
 
-
-  const handleOptionClick = (name, value) => {
+  const handleOptionClick = (name, value, isImage) => {
     const currentOptions = [...variant.selectedOptions]
 
     const index = currentOptions.findIndex(opt => opt.name === name)
@@ -140,20 +142,26 @@ const ProductForm = ({ product, setImageFluid }) => {
       isEqual(currentOptions, selectedOptions)
     )
 
-    setImageFluid(selectedVariant.image.localFile.childImageSharp.fluid);
-    setVariant({ ...selectedVariant })
+    setVariant(selectedVariant)
+
+    if (isImage) {
+      setImageFluid(selectedVariant.image.localFile.childImageSharp.fluid)
+    }
+
+
   }
 
   const handleAddToCart = e => {
     e.preventDefault();
-    addToCart();
+    addToCart(variant.shopifyId)
   }
-
 
 
   const checkSelected = (name, value) => {
     const currentOptions = [...variant.selectedOptions]
+    // console.log('Curr Opt', currentOptions)
     const index = variant.selectedOptions.findIndex(opt => opt.name === name)
+    // console.log('Selected', currentOptions[index].value === value)
 
     if (currentOptions[index].value === value) {
       return true
@@ -161,94 +169,157 @@ const ProductForm = ({ product, setImageFluid }) => {
     return false
   }
 
-  const price = formatPrice(variant.priceV2)
+  const checkImageSelected = (imageId) => {
+    if (imageId === variant.image.id) {
+      return true
+    }
+    return false
+  }
 
 
-  const compareAtPrice = variant.compareAtPriceV2?.amount ? (
-    formatPrice(variant.compareAtPriceV2)
-  ) : (
-    null
+  const attachImagesToOptions = () => {
+    const newOptions = []
+    variants.forEach(v => {
+
+      const colorOption = v.selectedOptions.find(opt => opt.name === 'Color')
+
+      if (!colorOption) return
+
+
+      const found = newOptions.find(opt => opt.imageId === v.image.id)
+      // console.log({found})
+
+      if (!found) {
+
+        const newThumb = thumbs.find(t => t.id === v.image.id)
+        const optionWithImage = {
+          ...colorOption,
+          imageId: v.image.id,
+          thumb: newThumb.localFile.childImageSharp.fixed
+        }
+        newOptions.push(optionWithImage)
+      }
+
+    })
+
+    return newOptions
+  }
+
+  const optWithImg = attachImagesToOptions()
+
+  const getCurrentValue = optionName => {
+    return variant.selectedOptions.find(opt => opt.name === optionName)?.value
+  }
+
+  const currentColor = getCurrentValue('Color')
+
+  const optionDisplay = ({ name, values }) => {
+    const currentValue = getCurrentValue(name)
+    return (
+      <>
+        <CurrentOption  style={{marginBottom: '0'}}>{`${name}: ${currentValue.toUpperCase()}`}</CurrentOption>
+        <Values>
+          {values.map((value) => {
+            return (
+              <Span
+                value={value}
+                key={`${name}-${value}`}
+                selected={checkSelected(name, value)}
+                onClick={() => handleOptionClick(name, value)}
+              >
+                {value.toUpperCase()}
+              </Span>
+            )
+          })}
+        </Values>
+      </>
     )
-
-  const priceDisplay = compareAtPrice ? (
-    <>
-      <CompareAtPriceWrapper>
-        <CompareAtPrice>
-          <div>{compareAtPrice}</div>
-          <div className="line-through"></div>
-        </CompareAtPrice>
-        <NewPrice>{price}</NewPrice>
-      </CompareAtPriceWrapper>
-    </>
-  ) : (
-      <div className="price">{price}</div>
-    )
-  // const price = formatPrice(variant.priceV2)
-
-
-  const optionDisplay = ({ name, values }) => (
-    <Values>
-      <p>Select {name}:</p>
-      {values.map((value, index) => {
-        return (
-          <Span
-            value={value}
-            key={`${name}-${value}`}
-            selected={checkSelected(name, value)}
-            onClick={() => handleOptionClick(name, value, index)}
-          >
-            {value.toUpperCase()}
-          </Span>
-        )
-      })}
-    </Values>
-  )
+  }
 
 
   return (
-    <Form onSubmit={handleAddToCart}>
-      {/* {Product with no variants produces option with name === 'Title', So check for that to prevent unwanted select menu} */}
-      {options.map(({ id, name, values }) => name !== 'Title' && (
-        <OptionContainer key={id}>
-          {optionDisplay({ name, values })}
-        </OptionContainer>
-      ))}
+    <>
 
-      {available ?
-        (
-          <>
-            <StyledQuantity
-              quantity={quantity}
-              increase={increaseQuantity}
-              decrease={decreaseQuantity}
-            />
-          </>
-        )
-        :
-        <SoldOut>
-          {`Out of Stock! Please select another `}
-          {variant.selectedOptions.length === 1 ?
-            variant.selectedOptions[0].name
-            :
-            `${variant.selectedOptions[0].name} or ${variant.selectedOptions[1].name}`}
-          .
-        </SoldOut>
-      }
+      <Form onSubmit={handleAddToCart}>
+        {currentColor && <CurrentOption>{`Color: ${currentColor.toUpperCase()}`}</CurrentOption>}
 
-      {/* <div className="price">{price}</div> */}
-      { priceDisplay }
+        <Thumbs>
+          {optWithImg.map(({ imageId, thumb, name, value }) => {
+            // const currentValue = getCurrentValue(name)
+            const selected = checkImageSelected(imageId)
+            return (
+              <>
+                <ThumbContainer
+                  selected={selected}
+                  key={imageId}
+                >
+                  <ThumbButton
+                    type='button'
+                    onClick={() => handleOptionClick(name, value, true)}
+                  >
+                    <Img
+                      fixed={thumb}
+                    />
+                    {selected || <Overlay />}
+                  </ThumbButton>
+                </ThumbContainer>
+              </>
+            )
+          })}
+        </Thumbs>
 
-      { available && (
-        <BrandButton
-          type="submit"
-          disabled={status === 'Adding'}
-        >
-          Add To Cart
-        </BrandButton>
-      )}
+        {/* {Product with no variants produces option with name === 'Title', So check for that to prevent unwanted select menu} */}
+        {options.map(({ id, name, values }) => name !== 'Title' && name !== 'Color' && (
+          <OptionContainer key={id}>
+            {optionDisplay({ name, values })}
+          </OptionContainer>
+        ))}
 
-      <StyledLink to='/'>Continue Shopping</StyledLink>
-    </Form>
+        {available ?
+          (
+            <>
+              <StyledQuantity
+                quantity={quantity}
+                increase={increaseQuantity}
+                decrease={decreaseQuantity}
+              />
+              <BrandButton
+                type="submit"
+                disabled={status === 'Adding'}
+                style={{
+                  alignSelf: 'flex-start',
+                  marginBottom: '0'
+                }}
+              >
+                Add To Cart
+          </BrandButton>
+            </>
+          )
+          :
+          <SoldOut>
+            {`Out of Stock! Please select another `}
+            {variant.selectedOptions.length === 1 ?
+              variant.selectedOptions[0].name
+              :
+              `${variant.selectedOptions[0].name} or ${variant.selectedOptions[1].name}.`}
+          </SoldOut>
+        }
+
+        {/* {available && (
+          <BrandButton
+            type="submit"
+            disabled={status === 'Adding'}
+            style={{
+              alignSelf: 'flex-start',
+              marginBottom: '0'
+            }}
+          >
+            Add To Cart
+          </BrandButton>
+        )} */}
+
+      </Form>
+    </>
   )
 }
 
