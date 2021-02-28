@@ -33,7 +33,8 @@ export const BrandButton = styled.button`
   box-shadow: 0 0 5px ${colors.brand};
   border: none;
   border-radius: 5px;
-  padding: 7px;
+  padding: 10px;
+  width: 150px;
   color: white;
 
   :hover {
@@ -56,7 +57,7 @@ export const spacing = {
   '3xs': 2,
   '2xs': 4,
   xs: 8,
-  sm: 12,
+  sm: '12px',
   md: 16,
   lg: 24,
   xl: 32,

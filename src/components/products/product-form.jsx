@@ -85,8 +85,8 @@ const ThumbButton = styled.button`
 `
 
 const ThumbContainer = styled.div`
-  border: ${({ selected }) => selected ? `4px solid ${colors.brand}` : `4px solid ${colors.background}`};
-  box-shadow: ${({ selected }) => selected ? `0 0 8px ${colors.lightest}` : `none`};
+  border: ${({ selected }) => selected ? `4px solid ${colors.brand}` : `4px solid ${colors.gray}`};
+  box-shadow: ${({ selected }) => selected ? `0 0 3px ${colors.lightest}` : `none`};
   margin-right: 10px;
   display: flex; 
   align-items: center;
@@ -119,12 +119,12 @@ const ProductForm = ({
   increaseQuantity,
   decreaseQuantity,
   addToCart,
+  imgWithOption,
 }) => {
 
   const {
     options,
     variants,
-    thumbs,
   } = product
 
 
@@ -147,8 +147,6 @@ const ProductForm = ({
     if (isImage) {
       setImageFluid(selectedVariant.image.localFile.childImageSharp.fluid)
     }
-
-
   }
 
   const handleAddToCart = e => {
@@ -160,6 +158,7 @@ const ProductForm = ({
   const checkSelected = (name, value) => {
     const currentOptions = [...variant.selectedOptions]
     // console.log('Curr Opt', currentOptions)
+
     const index = variant.selectedOptions.findIndex(opt => opt.name === name)
     // console.log('Selected', currentOptions[index].value === value)
 
@@ -176,36 +175,6 @@ const ProductForm = ({
     return false
   }
 
-
-  const attachImagesToOptions = () => {
-    const newOptions = []
-    variants.forEach(v => {
-
-      const colorOption = v.selectedOptions.find(opt => opt.name === 'Color')
-
-      if (!colorOption) return
-
-
-      const found = newOptions.find(opt => opt.imageId === v.image.id)
-      // console.log({found})
-
-      if (!found) {
-
-        const newThumb = thumbs.find(t => t.id === v.image.id)
-        const optionWithImage = {
-          ...colorOption,
-          imageId: v.image.id,
-          thumb: newThumb.localFile.childImageSharp.fixed
-        }
-        newOptions.push(optionWithImage)
-      }
-
-    })
-
-    return newOptions
-  }
-
-  const optWithImg = attachImagesToOptions()
 
   const getCurrentValue = optionName => {
     return variant.selectedOptions.find(opt => opt.name === optionName)?.value
@@ -244,11 +213,10 @@ const ProductForm = ({
         {currentColor && <CurrentOption>{`Color: ${currentColor.toUpperCase()}`}</CurrentOption>}
 
         <Thumbs>
-          {optWithImg.map(({ imageId, thumb, name, value }) => {
+          {imgWithOption.map(({ imageId, thumb, name, value }) => {
             // const currentValue = getCurrentValue(name)
             const selected = checkImageSelected(imageId)
             return (
-              <>
                 <ThumbContainer
                   selected={selected}
                   key={imageId}
@@ -263,10 +231,10 @@ const ProductForm = ({
                     {selected || <Overlay />}
                   </ThumbButton>
                 </ThumbContainer>
-              </>
             )
           })}
         </Thumbs>
+
 
         {/* {Product with no variants produces option with name === 'Title', So check for that to prevent unwanted select menu} */}
         {options.map(({ id, name, values }) => name !== 'Title' && name !== 'Color' && (
@@ -288,10 +256,10 @@ const ProductForm = ({
                 disabled={status === 'Adding'}
                 style={{
                   alignSelf: 'flex-start',
-                  marginBottom: '0'
+                  marginBottom: '0',
                 }}
               >
-                Add To Cart
+                {`ADD TO CART`}
           </BrandButton>
             </>
           )
@@ -304,19 +272,6 @@ const ProductForm = ({
               `${variant.selectedOptions[0].name} or ${variant.selectedOptions[1].name}.`}
           </SoldOut>
         }
-
-        {/* {available && (
-          <BrandButton
-            type="submit"
-            disabled={status === 'Adding'}
-            style={{
-              alignSelf: 'flex-start',
-              marginBottom: '0'
-            }}
-          >
-            Add To Cart
-          </BrandButton>
-        )} */}
 
       </Form>
     </>

@@ -4,7 +4,7 @@ import { breakpoints } from '../../utils/styles'
 import { useShopify } from '../../hooks/useShopify'
 
 import ProductListingItem from './product-listing-item'
-import Accessory from './accessory'
+import Accessory from './Accessory'
 
 
 
@@ -127,12 +127,13 @@ const Feature = ({ product }) => {
 
 const ProductListing = () => {
 
-  const { collections, feature } = useShopify()
+  const { collections, accessories, feature } = useShopify()
 
   return (
     <>
       <Feature product={feature} />
-      { collections.map(c => <CollectionListing key={c.handle} collection={c} />).sort()}
+      { collections.map(c => <CollectionListing key={c.handle} collection={c} />)}
+      { <CollectionListing collection={accessories} />}
     </>
   )
 }

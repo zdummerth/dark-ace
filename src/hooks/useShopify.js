@@ -103,15 +103,12 @@ export const useShopify = () => {
 
   const allCollections = data.allShopifyCollection.edges.map(({ node }) => node)
 
-  const accessoriesCollection = allCollections.find(c => c.handle === 'accessories')
-  const accessories = accessoriesCollection.products
+  const accessories = allCollections.find(c => c.handle === 'accessories')
   const preOrders = allCollections.find(c => c.handle === 'pre-order')
 
   const feature = preOrders.products[0]
 
-  const collections = allCollections.filter(
-    c => c.handle !== 'pre-order'
-  )
+  const collections = allCollections.filter(c => (c.handle !== 'pre-order' && c.handle !== 'accessories'))
 
 
 

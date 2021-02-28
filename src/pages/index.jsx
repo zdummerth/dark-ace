@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 
 import ProductListing from '../components/products/product-listing'
-import GiftCard from '../components/products/giftCard'
+import GiftCard from '../components/products/GiftCard'
 import Youtube from '../components/youtube'
 import SEO from "../components/seo"
 

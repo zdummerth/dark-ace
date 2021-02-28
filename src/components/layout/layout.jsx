@@ -12,9 +12,6 @@ import { CartStatus } from './cartStatus'
 import Events from '../Events'
 
 
-
-// import 'normalize.css';
-
 const GlobalStyle = createGlobalStyle`
   body {
     background: ${colors.background};
@@ -85,6 +82,9 @@ const Wrapper = styled.div`
 
 const ContentWrapper = styled.main`
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
   width: 100%;
   max-width: 1300px;

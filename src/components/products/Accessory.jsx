@@ -3,7 +3,7 @@ import { useCheckout } from '../../hooks/useCheckout'
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 import { formatPrice } from '../../utils/helpers';
-import { colors, BrandButton } from '../../utils/styles';
+import { colors, spacing, BrandButton } from '../../utils/styles';
 
 import Quantity from './quantity'
 
@@ -13,28 +13,21 @@ const ProductWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-
+  width: 300px;
   margin: 15px;
-  border-bottom: 1px solid ${colors.gray};
-
-  width: 70vw;
-  max-width: 300px;
+  border: 1px solid ${colors.gray};
 
   .gatsby-image-wrapper {
-    height: 300px;
-    width: inherit;
-    max-width: inherit;
+    height: 400px;
   }
 
 `
-
-
 const TextWrapper = styled.div`
-  padding-right: 15px;
-  padding-left: 15px;
 
+  background: ${colors.grayGradient};
 
-
+  padding-right: ${spacing.sm};
+  padding-left: ${spacing.sm};
   & > * {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -49,7 +42,7 @@ const PriceAndCartWrapper = styled.div`
 
 
 
-const Accessory = ({ product }) => {
+const Accessory = ({ product, style }) => {
 
   const {
     variant,
@@ -64,12 +57,12 @@ const Accessory = ({ product }) => {
 
   
   return (
-      <ProductWrapper>
+      <ProductWrapper style={style}>
         <Img 
           fluid={images[0].localFile.childImageSharp.fluid} 
           alt={title}
           imgStyle={{
-            // objectFit: 'contain',
+            objectFit: 'contain',
           }}
         />
         <TextWrapper>
@@ -94,7 +87,6 @@ const Accessory = ({ product }) => {
       </ProductWrapper>
   )
 }
-
 
 export default Accessory
 

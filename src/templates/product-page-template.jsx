@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
 import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
+import find from 'lodash/find'
+import isEqual from 'lodash/isEqual'
 // import { colors } from '../utils/styles'
 import styled from 'styled-components'
-import { colors, breakpoints } from '../utils/styles'
+import { colors, breakpoints, spacing, DarkBrandButton } from '../utils/styles'
 
+import { useShopify } from '../hooks/useShopify'
 import { useCheckout } from '../hooks/useCheckout'
 
 import ProductForm from '../components/products/product-form'
+import Accessory from '../components/products/Accessory'
+import GiftCard from '../components/products/GiftCard'
+
 import Price from '../components/products/Price'
 import SEO from '../components/seo'
 
@@ -59,9 +65,12 @@ const StyledPrice = styled(Price)`
 `
 const FormContainer = styled.div`
   width: 100%;
+  padding: ${spacing.sm};
   margin-bottom: 30px;
+  margin-top: 30px;
+
   & > * {
-    margin: .75rem;
+    // margin: .75rem;
   }
 
   border: 2px solid ${colors.gray};
@@ -81,26 +90,24 @@ const Thumbnail = styled.button`
     :focus {outline:none;}
     ::-moz-focus-inner {border:0;}
 `
-const StyledLink = styled(Link)`
-    text-align: center;
-    background: ${colors.darkGradient};
-    box-shadow: 0 0 5px ${colors.brand};
-    border-radius: 5px;
-    padding: 10px;
+const MoreItems = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
-const Thumbnails = ({ thumbs, handleClick }) => {
+const Thumbnails = ({ imgWithOption, handleClick }) => {
   return (
     <ThumbnailContainer>
-      {thumbs.map(t => (
+      {imgWithOption.map(opt => (
         <Thumbnail
-          key={t.id}
-          onClick={() => handleClick(t)}
+          key={opt.imageId}
+          onClick={() => handleClick(opt)}
           //Default button type is submit, so this prevents click from submitting form
           type='button'
         >
           <Img
-            fixed={t.localFile.childImageSharp.fixed}
+            fixed={opt.thumb}
             alt={'Thumbnail for Product'}
           />
         </Thumbnail>
@@ -114,6 +121,7 @@ const ProductPage = ({ data }) => {
   const {
     thumbs,
     fulls,
+    variants
   } = product
 
   const {
@@ -127,13 +135,81 @@ const ProductPage = ({ data }) => {
     setVariant
   } = useCheckout(product)
 
+  const { accessories } = useShopify()
+  console.log({ accessories })
 
   const [imageFluid, setImageFluid] = useState(variant.image.localFile.childImageSharp.fluid)
 
 
-  const handleThumbClick = img => {
-    const fullImage = fulls.find(full => full.id === img.id)
-    setImageFluid(fullImage.localFile.childImageSharp.fluid)
+  const handleOptionClick = (name, value, isImage) => {
+    const currentOptions = [...variant.selectedOptions]
+
+    const index = currentOptions.findIndex(opt => opt.name === name)
+
+    currentOptions[index] = {
+      ...currentOptions[index],
+      value,
+    }
+
+    const selectedVariant = find(variants, ({ selectedOptions }) =>
+      isEqual(currentOptions, selectedOptions)
+    )
+
+    setVariant(selectedVariant)
+
+    if (isImage) {
+      setImageFluid(selectedVariant.image.localFile.childImageSharp.fluid)
+    }
+  }
+
+
+  const attachOptionsToImages = () => {
+    const imgWithOption = []
+    fulls.forEach(fullImg => {
+      const variantForImg = variants.find(v => v.image.id === fullImg.id)
+
+      if (variantForImg) {
+        const colorOption = variantForImg.selectedOptions.find(opt => opt.name === 'Color')
+
+        if (!colorOption) {
+          const newThumb = thumbs.find(t => t.id === fullImg.id)
+          const newOption = {
+            imageId: fullImg.id,
+            thumb: newThumb.localFile.childImageSharp.fixed
+          }
+          imgWithOption.push(newOption)
+        } else {
+          const newThumb = thumbs.find(t => t.id === fullImg.id)
+          const optionWithImage = {
+            ...colorOption,
+            imageId: fullImg.id,
+            thumb: newThumb.localFile.childImageSharp.fixed
+          }
+          imgWithOption.push(optionWithImage)
+        }
+      } else {
+        const newThumb = thumbs.find(t => t.id === fullImg.id)
+        const newOption = {
+          imageId: fullImg.id,
+          thumb: newThumb.localFile.childImageSharp.fixed
+        }
+        imgWithOption.push(newOption)
+      }
+    })
+
+    return imgWithOption
+  }
+
+  const imgWithOption = attachOptionsToImages()
+  const variantImgWithOption = imgWithOption.filter(opt => opt.name && opt.value)
+
+  const handleThumbClick = ({ imageId, name, value }) => {
+    if (name && value) {
+      handleOptionClick(name, value, true)
+    } else {
+      const fullImg = fulls.find(f => f.id === imageId)
+      setImageFluid(fullImg.localFile.childImageSharp.fluid)
+    }
   }
 
   const isPreOrder = product.tags.includes('pre-order');
@@ -153,7 +229,7 @@ const ProductPage = ({ data }) => {
               }}
             />
           </ImgContainer>
-          <Thumbnails thumbs={thumbs} handleClick={handleThumbClick} />
+          <Thumbnails imgWithOption={imgWithOption} handleClick={handleThumbClick} />
         </ImagesWrapper>
         <InfoWrapper>
           <Title>{product.title}</Title>
@@ -178,11 +254,33 @@ const ProductPage = ({ data }) => {
               thumbs={thumbs}
               fulls={fulls}
               Thumbnails={Thumbnails}
+              handleThumbClick={handleThumbClick}
+              imgWithOption={variantImgWithOption}
             />
           </FormContainer>
-          <StyledLink to='/'>Continue Shopping</StyledLink>
+
+          <Link to='/'>
+            <DarkBrandButton>
+              Continue Shopping
+            </DarkBrandButton>
+          </Link>
         </InfoWrapper>
       </Container>
+      <div
+        style={{
+          // marginBottom: '80px'
+        }}
+      >More Items</div>
+      <MoreItems>
+        <Accessory
+          product={accessories.products[0]}
+          style={{
+            marginBottom: '40px'
+          }}
+        />
+        <GiftCard />
+      </MoreItems>
+
     </>
   )
 }

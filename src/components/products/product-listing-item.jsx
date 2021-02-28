@@ -14,16 +14,18 @@ const ProductContainer = styled.div`
   flex-direction: column;
   align-items: center;
   border-bottom: 1px solid ${colors.gray};
+  width: 100%;
 
   @media (max-width: ${breakpoints.tablet}) {
     margin: ${props => props.isFeature ? '0' : '10px'};
   }
 `
 const ImgContainer = styled.div`
-  width: ${({ isFeature }) => isFeature ? '80vw' : '60vw'};
+  width: ${({ isFeature }) => isFeature ? '100%' : '60vw'};
   max-width: ${({ isFeature }) => isFeature ? '400px' : '350px'};
-  height: ${({ isFeature }) => isFeature ? '45vh' : '35vh'};
-  max-height: ${({ isFeature }) => isFeature ? '400px' : '400px'};
+  height: ${({ isFeature }) => isFeature ? '55vh' : '35vh'};
+  // max-height: ${({ isFeature }) => isFeature ? '400px' : '400px'};
+  border: 1px solid ${colors.gray};
 
 
   position: relative;

@@ -17,7 +17,7 @@ const Container = styled.div`
     max-width: 600px;
 
 
-    height: 150px;
+    height: 175px;
     overflow: hidden;
 
 
@@ -25,7 +25,7 @@ const Container = styled.div`
       object-fit: contain;
       width: 45vw;
       max-width: 300px;
-      height: 150px;
+      height: 175px;
       padding: 5px 0;
       overflow: hidden;
     }
@@ -36,11 +36,14 @@ const Container = styled.div`
       align-items: flex-start;
       justify-content: space-between;
       padding: .5rem;
+      width: 100%;
     }
 `
 
 const LineItem = props => {
   const { item } = props
+
+  console.log('variant', item.variant.selectedOptions)
   const {
     removeLineItem,
     // updateLineItem,
@@ -54,9 +57,11 @@ const LineItem = props => {
     />
   ) : null
 
-  console.log({item})
+  console.log({ item })
 
   const price = formatPrice(item.variant.priceV2)
+
+  const options = item.variant.selectedOptions
 
   // const selectedValues = item.variant.selectedOptions
   //   ? item.variant.selectedOptions.map(option => `${option.value} / `)
@@ -73,22 +78,38 @@ const LineItem = props => {
       </Link>
       <div id='product-info'>
         <div>
-            {item.title}
-            {`  `}
-            {item.variant.title !== 'Default Title' ? item.variant.title : ''}
+          {item.title}
         </div>
-        <div>
-          {price}
-        </div>
-        <div>
+        {options.map(opt => {
+          if (opt.name === 'Title' || opt.name === 'Denominations') {
+            return null
+          }
+          return (
+            <div>
+              {`${opt.name}: ${opt.value.toUpperCase()}`}
+            </div>
+          )
+        })}
+        <span>
+          {`Price: ${price}`}
+        </span>
+        <span style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '100%'
+        }}>
           Qty:
           {item.quantity}
-        </div>
-        <DarkBrandButton 
-          onClick={handleRemove}
-        >
-          Remove
+          <DarkBrandButton
+            onClick={handleRemove}
+            style={{
+              // marginLeft: '20px'
+            }}
+          >
+            Remove
         </DarkBrandButton>
+        </span>
       </div>
     </Container>
   )
