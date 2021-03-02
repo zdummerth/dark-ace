@@ -4,7 +4,7 @@ import { formatPrice } from '../../utils/helpers'
 import { colors } from '../../utils/styles';
 
 const BasicPrice = styled.div`
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   font-weight: bold;
   margin-top: 0;
 `
@@ -14,7 +14,7 @@ const CompareAtPriceWrapper = styled.div`
 `
 const CompareAtPrice = styled.div`
   position: relative;
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   margin-right: 20px;
 
   .line-through {

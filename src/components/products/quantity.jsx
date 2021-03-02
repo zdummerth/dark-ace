@@ -8,7 +8,7 @@ import { colors } from '../../utils/styles';
 
 const QuantityWrapper = styled.div`
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
 
     h3 {
       margin-right: 20px;

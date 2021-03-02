@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { StoreContext } from '../../context/StoreContextProvider'
 import styled, { createGlobalStyle } from "styled-components"
-import { dimensions, colors } from '../../utils/styles';
+import { dimensions, colors, breakpoints } from '../../utils/styles';
 
 import Header from './header'
 import Footer from './footer'
@@ -22,12 +22,12 @@ const GlobalStyle = createGlobalStyle`
 
   }
 
-  html {
-    box-sizing: border-box;
-  }
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
+  // html {
+  //   box-sizing: border-box;
+  // }
+  // *, *:before, *:after {
+  //   box-sizing: inherit;
+  // }
 
   a {
     text-decoration: none;
@@ -71,6 +71,18 @@ const GlobalStyle = createGlobalStyle`
   .justify-between {
     justify-content: space-between;
   }
+
+  &.hide-lt-tablet {
+    margin-bottom: 25px;
+    @media (max-width: ${breakpoints.tablet}) {
+      display: none;
+    }
+  }
+  &.hide-gt-tablet {
+    @media (min-width: ${breakpoints.tablet}) {
+      display: none;
+    }
+  }
 `
 const Wrapper = styled.div`
   display: flex;
@@ -84,12 +96,12 @@ const ContentWrapper = styled.main`
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   position: relative;
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0 10px;
+  // padding: 0 10px;
 
 `
 

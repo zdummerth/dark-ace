@@ -12,25 +12,16 @@ import Quantity from './quantity'
 const ProductWrapper = styled.div`
   display: flex;
   flex-direction: column;
-
-  width: 300px;
-  margin: 15px;
   border: 1px solid ${colors.gray};
-
-  .gatsby-image-wrapper {
-    height: 400px;
-  }
-
 `
 const TextWrapper = styled.div`
-
   background: ${colors.grayGradient};
-
   padding-right: ${spacing.sm};
   padding-left: ${spacing.sm};
+  padding-top: ${spacing.lg};
+
   & > * {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: ${spacing.lg};
   }
 `
 
@@ -55,36 +46,33 @@ const Accessory = ({ product, style }) => {
 
   const { images, title } = product;
 
-  
+
   return (
-      <ProductWrapper style={style}>
-        <Img 
-          fluid={images[0].localFile.childImageSharp.fluid} 
-          alt={title}
-          imgStyle={{
-            objectFit: 'contain',
-          }}
-        />
-        <TextWrapper>
-          <h3>{title}</h3>
-          {available ? 
-            (<>
+    <ProductWrapper style={style}>
+      <Img
+        fluid={images[0].localFile.childImageSharp.fluid}
+        alt={title}
+      />
+      <TextWrapper>
+        {available ?
+          (<>
+            <PriceAndCartWrapper>
               <Quantity
                 quantity={quantity}
                 increase={increaseQuantity}
                 decrease={decreaseQuantity}
               />
-              <PriceAndCartWrapper>
-                <BrandButton onClick={addToCart}>Add To Cart</BrandButton>
-                <h3>{formatPrice(variant.priceV2)}</h3>
-              </PriceAndCartWrapper>
-            </>
-            ) : (
-              <div>Sold Out!!</div>
-            )
-          }
-        </TextWrapper>
-      </ProductWrapper>
+              <h3>{formatPrice(variant.priceV2)}</h3>
+            </PriceAndCartWrapper>
+            <BrandButton onClick={addToCart}>Add To Cart</BrandButton>
+
+          </>
+          ) : (
+            <div>Sold Out!!</div>
+          )
+        }
+      </TextWrapper>
+    </ProductWrapper>
   )
 }
 

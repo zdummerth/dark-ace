@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
 // import { colors } from '../utils/styles'
 import styled from 'styled-components'
-import { colors, breakpoints, spacing, DarkBrandButton } from '../utils/styles'
+import { colors, breakpoints, spacing, Subtitle } from '../utils/styles'
 
 import { useShopify } from '../hooks/useShopify'
 import { useCheckout } from '../hooks/useCheckout'
@@ -18,15 +18,6 @@ import Price from '../components/products/Price'
 import SEO from '../components/seo'
 
 
-const Title = styled.h1`
-  text-align: center;
-`
-const Subtitle = styled.h2`
-  margin: 1rem auto;
-  color: white;
-  width: 90%;
-  text-align: center;
-`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -64,7 +55,7 @@ const StyledPrice = styled(Price)`
   margin-bottom: 10px;
 `
 const FormContainer = styled.div`
-  width: 100%;
+  // width: 100%;
   padding: ${spacing.sm};
   margin-bottom: 30px;
   margin-top: 30px;
@@ -89,11 +80,6 @@ const Thumbnail = styled.button`
     background: none;
     :focus {outline:none;}
     ::-moz-focus-inner {border:0;}
-`
-const MoreItems = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `
 
 const Thumbnails = ({ imgWithOption, handleClick }) => {
@@ -136,7 +122,6 @@ const ProductPage = ({ data }) => {
   } = useCheckout(product)
 
   const { accessories } = useShopify()
-  console.log({ accessories })
 
   const [imageFluid, setImageFluid] = useState(variant.image.localFile.childImageSharp.fluid)
 
@@ -232,8 +217,8 @@ const ProductPage = ({ data }) => {
           <Thumbnails imgWithOption={imgWithOption} handleClick={handleThumbClick} />
         </ImagesWrapper>
         <InfoWrapper>
-          <Title>{product.title}</Title>
-          {isPreOrder ? <Subtitle>This Is A Pre-Order Item</Subtitle> : null}
+          <Subtitle>{product.title}</Subtitle>
+          {isPreOrder ? <h2>This Is A Pre-Order Item</h2> : null}
           <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
           <FormContainer>
             <StyledPrice
@@ -257,30 +242,21 @@ const ProductPage = ({ data }) => {
               handleThumbClick={handleThumbClick}
               imgWithOption={variantImgWithOption}
             />
-          </FormContainer>
 
-          <Link to='/'>
-            <DarkBrandButton>
-              Continue Shopping
-            </DarkBrandButton>
-          </Link>
+          </FormContainer>
+          <Subtitle style={{ marginTop: '80px' }}>Add Reaper Stickers</Subtitle>
+          <Accessory
+            product={accessories.products[0]}
+            // showThumbs={true}
+            style={{
+              marginBottom: '40px',
+              // alignSelf: 'center'
+            }}
+          />
+          <GiftCard />
+
         </InfoWrapper>
       </Container>
-      <div
-        style={{
-          // marginBottom: '80px'
-        }}
-      >More Items</div>
-      <MoreItems>
-        <Accessory
-          product={accessories.products[0]}
-          style={{
-            marginBottom: '40px'
-          }}
-        />
-        <GiftCard />
-      </MoreItems>
-
     </>
   )
 }

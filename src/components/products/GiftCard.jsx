@@ -7,7 +7,7 @@ import { useShopify } from '../../hooks/useShopify'
 import { useCheckout } from '../../hooks/useCheckout'
 
 
-import { colors, BrandButton, DarkBrandButton } from '../../utils/styles';
+import { colors, spacing, BrandButton, DarkBrandButton } from '../../utils/styles';
 import { formatPrice } from '../../utils/helpers';
 
 
@@ -15,22 +15,21 @@ import { formatPrice } from '../../utils/helpers';
 const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   align-self: center;
+  border: 1px solid ${colors.gray};
 
-  width: 80vw;
-  max-width: 350px;
+  margin-top: ${spacing.lg};
+
 `
 
 const ImgContainer = styled.div`
   width: 100%;
-  box-shadow: 0 0 8px ${colors.brand};
-
   position: relative;
 `
 
 const OverLay = styled.div`
-  display: ${({open}) => open ? 'block' : 'none'};
+  display: ${({ open }) => open ? 'block' : 'none'};
   position: absolute;
   top: 0;
   bottom: 0;
@@ -42,12 +41,10 @@ const OverLay = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  
-  align-items: center;
   justify-content: space-between;
-  width: 100%;
-  margin-top: 8px;
 
+  background: ${colors.grayGradient};
+  padding: ${spacing.sm};
 `
 
 
@@ -62,6 +59,7 @@ const ListControls = styled.div`
 
 const CurrentPrice = styled(BrandButton)`
   display: flex;
+  width: 80px;
 `
 
 
@@ -69,7 +67,7 @@ const List = styled.div`
   position: absolute;
   top: 0;
 
-  display: ${({open}) => open ? 'flex' : 'none'};
+  display: ${({ open }) => open ? 'flex' : 'none'};
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
@@ -119,41 +117,41 @@ const GiftCard = () => {
   const toggleListOpen = () => setListOpen(!listOpen)
 
   const price = <div>{formatPrice(variant.priceV2)}</div>
-  const icon = listOpen ? <BsCaretDown/> : <BsCaretUp/>;
+  const icon = listOpen ? <BsCaretDown /> : <BsCaretUp />;
 
- 
+
   return (
-      <ProductContainer>
-        <ImgContainer onClick={toggleListOpen}>
-          <Img 
-            fluid={images[0].localFile.childImageSharp.fluid} 
-            alt={'Gift Card'}
-          />
-          <OverLay open={listOpen}/>
-          <List open={listOpen}>
-            { variants.map(v => {
-              const price = formatPrice(v.priceV2)
-              return (
-                <DarkBrandButton 
-                  className='list-child' 
-                  key={v.shopifyId}
-                  onClick={() => setVariant(v)}
-                >
-                  {price}
-                </DarkBrandButton>
-              )
-            })}
-          </List>
-        </ImgContainer>
-        <ButtonContainer>
-          <ListControls>
-            <CurrentPrice onClick={toggleListOpen}>
-              {price}{icon}
-            </CurrentPrice>
-          </ListControls>
-          <BrandButton onClick={handleAddToCart}>Add To Cart</BrandButton>
-        </ButtonContainer>
-      </ProductContainer>
+    <ProductContainer>
+      <ImgContainer onClick={toggleListOpen}>
+        <Img
+          fluid={images[0].localFile.childImageSharp.fluid}
+          alt={'Gift Card'}
+        />
+        <OverLay open={listOpen} />
+        <List open={listOpen}>
+          {variants.map(v => {
+            const price = formatPrice(v.priceV2)
+            return (
+              <DarkBrandButton
+                className='list-child'
+                key={v.shopifyId}
+                onClick={() => setVariant(v)}
+              >
+                {price}
+              </DarkBrandButton>
+            )
+          })}
+        </List>
+      </ImgContainer>
+      <ButtonContainer>
+        <BrandButton onClick={handleAddToCart}>Add To Cart</BrandButton>
+        <ListControls>
+          <CurrentPrice onClick={toggleListOpen}>
+            {price}{icon}
+          </CurrentPrice>
+        </ListControls>
+      </ButtonContainer>
+    </ProductContainer>
   )
 }
 

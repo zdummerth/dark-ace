@@ -61,22 +61,27 @@ const Cart = () => {
   ))
 
   return (
-      <Container>
-        <Subtotal>
-          <p>{`Subtotal (${totalQuantity} ${totalQuantity > 1 ? 'items' : 'item'}): `}</p>
-          <h4>$ {checkout.subtotalPrice}</h4>
-        </Subtotal>
-        {checkout.lineItems.length === 0 
-          ? 
-          'Your Cart is empty' 
-          : 
-          <CheckoutLink href={checkout.webUrl}>Proceed to checkout</CheckoutLink>
-          }
-        <div id='lineItems'>
-          {lineItems}
-        </div>
-        <StyledLink to='/'>Continue Shopping</StyledLink>
-      </Container>
+    <Container>
+      <Subtotal>
+        <p>{`Subtotal (${totalQuantity} ${totalQuantity > 1 ? 'items' : 'item'}): `}</p>
+        <h4>$ {checkout.subtotalPrice}</h4>
+      </Subtotal>
+      {checkout.lineItems.length === 0
+        ?
+        <>
+          <p>
+            Your Cart Is Empty
+          </p>
+          <StyledLink to='/'>Continue Shopping</StyledLink>
+
+        </>
+        :
+        <CheckoutLink href={checkout.webUrl}>Proceed to checkout</CheckoutLink>
+      }
+      <div id='lineItems'>
+        {lineItems}
+      </div>
+    </Container>
   )
 }
 

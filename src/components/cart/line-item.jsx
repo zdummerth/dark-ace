@@ -11,7 +11,9 @@ import { StoreContext } from '../../context/StoreContextProvider'
 
 const Container = styled.div`
     display: flex;
-    box-shadow: 0 0 10px ${colors.brand};
+    border: 1px solid ${colors.gray};
+    background: ${colors.grayGradient};
+    // box-shadow: 0 0 10px ${colors.brand};
     margin: 15px 0;
     width: 100%;
     max-width: 600px;
@@ -104,10 +106,10 @@ const LineItem = props => {
           <DarkBrandButton
             onClick={handleRemove}
             style={{
-              // marginLeft: '20px'
+              width: '80px'
             }}
           >
-            Remove
+            Delete
         </DarkBrandButton>
         </span>
       </div>

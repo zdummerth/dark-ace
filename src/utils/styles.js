@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from 'styled-components'
 
 
@@ -28,6 +29,8 @@ export const colors = {
   specialGradient: `linear-gradient(to right, #C00A0A, #fff)`,
 };
 
+
+
 export const BrandButton = styled.button`
   background: ${colors.gradient};
   box-shadow: 0 0 5px ${colors.brand};
@@ -54,15 +57,15 @@ export const DarkBrandButton = styled(BrandButton)`
 
 
 export const spacing = {
-  '3xs': 2,
-  '2xs': 4,
-  xs: 8,
+  '3xs': '2px',
+  '2xs': '4px',
+  xs: '8px',
   sm: '12px',
-  md: 16,
-  lg: 24,
-  xl: 32,
-  '2xl': 40,
-  '3xl': 48
+  md: '16px',
+  lg: '24px',
+  xl: `32px`,
+  '2xl': '40px',
+  '3xl': '48px'
 };
 
 export const breakpoints = {
@@ -125,3 +128,47 @@ export const scrollbarStyles = {
   '&::-webkit-scrollbar-thumb:hover': { background: colors.lilac },
   '&::-webkit-scrollbar-track': { background: colors.brandLight }
 };
+
+const StyledListing = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: ${({ isSingleItem }) => isSingleItem ? 'center' : 'flex-start'};
+  overflow-x: auto;
+  margin: 0 ${spacing.xs};
+
+  & > * {
+    margin-right: ${({ isSingleItem }) => isSingleItem ? '0' : `${spacing.md}`};
+    margin-top: ${spacing.md};
+  }
+
+
+
+  @media (min-width: ${breakpoints.tablet}) {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    // justify-content: ${({ isSingleItem }) => isSingleItem ? 'flex-start' : 'space-evenly'};
+
+    margin-right: 0;
+  }
+`
+
+export const Listing = ({ children, style }) => {
+  console.log({ children })
+  const isSingleItem = !children.length
+  return (
+    <StyledListing
+     style={style} 
+     isSingleItem={isSingleItem}
+     >
+      {children}
+    </StyledListing>
+  )
+}
+
+
+export const Subtitle = styled.h2`
+  font-size: 2rem;
+  margin-bottom: 0;
+  margin-top: ${spacing.lg};
+  text-align: center;
+`

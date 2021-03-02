@@ -43,7 +43,7 @@ export const useShopify = () => {
                 id
                 localFile {
                   childImageSharp {
-                    fluid(maxWidth: 350) {
+                    fluid(maxWidth: 600) {
                       ...GatsbyImageSharpFluid
                     }
                   }
@@ -53,7 +53,7 @@ export const useShopify = () => {
                 id
                 localFile {
                   childImageSharp {
-                    fixed(height: 60, width: 48) {
+                    fixed(height: 60, width: 45) {
                       ...GatsbyImageSharpFixed
                     }
                   }
@@ -82,7 +82,7 @@ export const useShopify = () => {
         images {
           localFile {
             childImageSharp {
-              fluid(maxWidth: 300) {
+              fluid(maxWidth: 400) {
                 ...GatsbyImageSharpFluid
               }
             }
