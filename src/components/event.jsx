@@ -37,7 +37,7 @@ const Toggle = styled.div`
 `
 
 const StyledButton = styled(BrandButton)`
-  width: 250px;
+  width: 100px;
   display: block;
   margin-bottom: 10px;
   text-align: center;

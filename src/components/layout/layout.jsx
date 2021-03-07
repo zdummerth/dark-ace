@@ -161,25 +161,11 @@ const Layout = ({ children, location, history }) => {
     setEventsMinimized(true)
   }, [location])
 
-  const jbRegLink = 'https://www.discgolfscene.com/tournaments/Dark_Ace_Presents_Winter_Wizards_at_Jefferson_Barracks_powered_by_4Hands_Brewery_2021'
-  const endiRegLink = 'https://www.discgolfscene.com/tournaments/Dark_Ace_Presents_Winter_Wizards_at_Endicott_Park_powered_by_4Hands_Brewery_2021'
+  // const jbRegLink = 'https://www.discgolfscene.com/tournaments/Dark_Ace_Presents_Winter_Wizards_at_Jefferson_Barracks_powered_by_4Hands_Brewery_2021'
+  // const endiRegLink = 'https://www.discgolfscene.com/tournaments/Dark_Ace_Presents_Winter_Wizards_at_Endicott_Park_powered_by_4Hands_Brewery_2021'
   const doublesLink = 'https://www.discgolfscene.com/tournaments/Dark_Ace_Doubles_2021'
 
   const eventData = [
-    {
-      date: new Date(2021, 1, 27),
-      location: 'Jefferson Barracks',
-      title: 'Winter Wizards',
-      link: jbRegLink,
-      image: data.winterWizards.childImageSharp.fixed
-    },
-    {
-      date: new Date(2021, 2, 6),
-      location: 'Endicott',
-      title: 'Winter Wizards',
-      link: endiRegLink,
-      image: data.winterWizards.childImageSharp.fixed
-    },
     {
       date: new Date(2021, 2, 20),
       title: 'Dark Ace Doubles',
