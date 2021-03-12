@@ -1,12 +1,16 @@
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
+import { useAuth0 } from '@auth0/auth0-react'
+
 import styled, { createGlobalStyle } from 'styled-components'
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 
 import { breakpoints, dimensions, colors } from '../../utils/styles';
 
 import Logo from "./logo"
+import LoginButton from "../members/LoginButton"
+import LogoutButton from "../members/LogoutButton"
 
 import CartLink from '../cart/cart-link'
 
@@ -171,6 +175,9 @@ const IgIcon = styled(FaInstagram)`
 
 const Header = ({ cartCount }) => {
 
+  const { isAuthenticated } = useAuth0();
+
+
   const MenuItems = [
     {
       path: '/',
@@ -185,6 +192,13 @@ const Header = ({ cartCount }) => {
       title: `Cart (${cartCount})`
     }
   ]
+
+  if(isAuthenticated) {
+    MenuItems.push({
+      path: '/early-access',
+      title: 'Early Access'
+    })
+  }
 
   const [navbarClosed, setNavbarClosed] = useState(true);
 
@@ -223,8 +237,9 @@ const Header = ({ cartCount }) => {
         <CartLink useIcon={true} />
         <Navbox closed={navbarClosed}>
           <GlobalStyle closed={navbarClosed} />
+          { isAuthenticated ? <LogoutButton /> : <LoginButton />}
           {links}
-          {extLinks}
+          {/* {extLinks} */}
         </Navbox>
       </Nav>
     </HeaderWrapper>

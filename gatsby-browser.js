@@ -1,9 +1,19 @@
-import React from "react"
-import StoreContextProvider from "./src/context/StoreContextProvider"
+import React from 'react'
+import StoreContextProvider from './src/context/StoreContextProvider'
+import { Auth0Provider } from '@auth0/auth0-react'
+
 import Layout from './src/components/layout/layout'
 
 export const wrapRootElement = ({ element }) => {
-  return <StoreContextProvider>{element}</StoreContextProvider>
+  return (
+    <Auth0Provider
+      domain={process.env.GATSBY_AUTH0_DOMAIN}
+      clientId={process.env.GATSBY_AUTH0_CLIENTID}
+      redirectUri={process.env.GATSBY_AUTH0_CALLBACK}
+    >
+      <StoreContextProvider>{element}</StoreContextProvider>
+    </Auth0Provider>
+  )
 }
 
 
