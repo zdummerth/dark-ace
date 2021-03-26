@@ -128,13 +128,6 @@ const Layout = ({ children, location, history }) => {
           title
         }
       }
-      winterWizards: file(relativePath: { eq: "winter-wizards.jpg" }) {
-        childImageSharp {
-          fixed(width: 80, height: 80) {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
       doubles: file(relativePath: { eq: "usdgc.jpg" }) {
         childImageSharp {
           fixed(width: 80, height: 80) {
@@ -189,20 +182,23 @@ const Layout = ({ children, location, history }) => {
         <Header
           siteTitle={data.site.siteMetadata.title}
           cartCount={cartCount}
-          // setSpotifyMinimized={setSpotifyMinimized}
+          setSpotifyMinimized={setSpotifyMinimized}
+          spotifyMinimized={spotifyMinimized}
           // setEventsMinimized={setEventsMinimized}
         />
         <HeaderMargin />
-        <Events
+        {/* <Events
           minimized={eventsMinimized}
           setMinimized={setEventsMinimized}
           events={eventData}
-        />
+        /> */}
         <Spotify
           minimized={spotifyMinimized}
           setMinimized={setSpotifyMinimized}
         />
-        <ContentWrapper>
+        <ContentWrapper
+          onClick={() => setSpotifyMinimized(true)}
+        >
           {children}
         </ContentWrapper>
         <Footer />

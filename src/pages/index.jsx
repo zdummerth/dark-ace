@@ -1,12 +1,13 @@
 import React from 'react'
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
-import styled from "styled-components"
+import styled from 'styled-components'
 import { useShopify } from '../hooks/useShopify'
 
 import ProductListingItem, { Feature } from '../components/products/ProducListingItem'
 import Accessory from '../components/products/Accessory'
 import GiftCard from '../components/products/GiftCard'
+import SlideShow from '../components/slideshow'
 import Youtube from '../components/youtube'
 import SEO from "../components/seo"
 
@@ -42,16 +43,16 @@ const IndexPage = ({ data }) => {
       <SEO title="Home" />
       <Container>
         <Banner>
-          <Img fluid={data.parked.childImageSharp.fluid} />
+          <SlideShow />
         </Banner>
-        <Feature
+        {/* <Feature
           product={feature}
           showThumbs={true}
           style={{
             width: '80vw',
             maxWidth: '400px',
           }}
-        />
+        /> */}
         <Subtitle>{collections[0].title}</Subtitle>
         <Listing>
           {collections[0].products.map(product => (

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import { GiMusicSpell } from 'react-icons/gi';
 
 import { breakpoints, dimensions, colors } from '../../utils/styles';
 
@@ -22,6 +23,13 @@ const HeaderWrapper = styled.header`
   margin-bottom: 2px;
   width: 100%;
   font-weight: bold;
+  position: fixed;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 0 1px 1px ${colors.brand};
+
+
+
 
 
   @media (min-width: ${breakpoints.desktop}) {
@@ -32,16 +40,20 @@ const HeaderWrapper = styled.header`
 const Nav = styled.nav`
   height: ${dimensions.headerHeight};
   width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+
   display: flex;
-  position: fixed;
+  // position: fixed;
   background: ${colors.background};
-  border-bottom: 1px solid ${colors.gray};
+  // border-bottom: 1px solid ${colors.gray};
   // box-shadow: 0 0 1px 1px ${colors.brand};
 
-  top: 0;
-  justify-content: space-evenly;
+
+  // top: 0;
+  justify-content: space-between;
   text-transform: uppercase;
-  z-index: 50;
+  // z-index: 50;
   align-items: center;
 `
 
@@ -52,6 +64,8 @@ const Toggle = styled.div`
 
   @media (max-width: ${breakpoints.desktop}) {
     display: flex;
+    margin-right: 10px;
+    margin-left: 25px;
   }
 `
 
@@ -69,7 +83,7 @@ const Navbox = styled.div`
     background-color: #020202;
     transition: all 0.3s ease-in;
     top: ${dimensions.headerHeight};
-    left: ${props => (props.closed ? "-100%" : "0")};
+    right: ${props => (props.closed ? "-100%" : "0")};
   }
 
   a[aria-current="page"] {
@@ -109,7 +123,13 @@ const Hamburger = styled.div`
   }
 `
 const LogoLink = styled(Link)`
-  // height: 60px;
+  height: 60px;
+  margin-left: 10px;
+
+  @media (min-width: ${breakpoints.desktop}) {
+    margin-left: 0;
+    height: 70px;
+  }
 `
 const StyledLink = styled(Link)`
   display: inline-block;
@@ -169,7 +189,24 @@ const IgIcon = styled(FaInstagram)`
   }
 `
 
-const Header = ({ cartCount }) => {
+const ListenToMetalText = styled.div`
+  display: none;
+
+  @media (min-width: ${breakpoints.desktop}) {
+    display: block;
+    margin: 1rem;
+  }
+`
+
+const ListenToMetalLogo = styled.div`
+  // display: none;
+
+  @media (min-width: ${breakpoints.desktop}) {
+    display: none;
+  }
+`
+
+const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
 
   const MenuItems = [
     {
@@ -206,23 +243,51 @@ const Header = ({ cartCount }) => {
         <StyledLink as='a' name='instagram' href='https://www.instagram.com/darkaceapparel/' target='_blank' rel="noopener"><IgIcon /></StyledLink>
       </IconWrapper>
     </>
-    
+
 
   return (
     <HeaderWrapper>
       <Nav>
-        <Toggle
-          navbarClosed={navbarClosed}
-          onClick={() => setNavbarClosed(!navbarClosed)}
-        >
-          <Hamburger closed={navbarClosed} />
-        </Toggle>
+
         <LogoLink to='/' name='home'>
           <Logo />
         </LogoLink>
-        <CartLink useIcon={true} />
+        <div
+          style={{ display: 'flex', alignItems: 'center' }}
+        >
+          <ListenToMetalLogo>
+            <GiMusicSpell
+              style={{
+                fontSize: '1.75rem',
+                color: colors.brand,
+                marginRight: '20px'
+              }}
+              onClick={() => setSpotifyMinimized(prev => !prev)}
+            />
+          </ListenToMetalLogo>
+          <CartLink useIcon={true} />
+
+          <Toggle
+            navbarClosed={navbarClosed}
+            onClick={() => setNavbarClosed(!navbarClosed)}
+          >
+            <Hamburger closed={navbarClosed} />
+          </Toggle>
+        </div>
         <Navbox closed={navbarClosed}>
           <GlobalStyle closed={navbarClosed} />
+          <StyledLink
+            to='/tournaments'
+            name='Play Disc Golf'
+            onClick={() => setNavbarClosed(true)}
+          >
+            Play Disc Golf
+          </StyledLink>
+          <ListenToMetalText
+            onClick={() => setSpotifyMinimized(prev => !prev)}
+          >
+            Listen To Metal
+          </ListenToMetalText>
           {links}
           {extLinks}
         </Navbox>

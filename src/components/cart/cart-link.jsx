@@ -14,6 +14,10 @@ const CartWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px 0;
+
+  //This margin offsets the quantity which is shifted 17px
+  // margin-right: 17px;
+
   position: relative;
   font-size: 1.75rem;
   color: ${colors.brand};

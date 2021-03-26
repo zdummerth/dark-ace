@@ -18,17 +18,18 @@ const Wrapper = styled.div`
    }
 
    .content {
-    max-height: ${({ minimized }) => minimized ? '0' : '312px'};
-    transition: all 0.3s linear;
-    overflow: hidden;
+    // max-height: ${({ minimized }) => minimized ? '0' : '312px'};
+    // transition: all 0.3s linear;
+    // overflow: hidden;
    }
 `
 
-const EventWrapper = styled(FlexBox)`
+const EventWrapper = styled.div`
    padding-top: 10px;
    padding-bottom: 10px;
-   padding-right: 5px;
-   border-bottom: 1px solid ${colors.grayBackground};
+  //  padding-right: 5px;
+  //  border-bottom: 1px solid ${colors.grayBackground};
+  margin-bottom: 25px;
 
 
    #no-btm-border {
@@ -47,21 +48,19 @@ const InfoWrapper = styled(FlexBox)`
   align-self: stretch;
 `
 
-const Toggle = styled.div`
-  width: 100%;
-  text-align: center;
-  background: ${colors.darkGradient};
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-top: 5px;
-  border-bottom: 1px solid ${colors.grayBackground};
-`
 
 const StyledButton = styled(BrandButton)`
   display: block;
   width: 75px;
   margin-bottom: 10px;
   text-align: center;
+`
+
+const Details = styled.div`
+padding: 10px;
+   p {
+     margin-bottom: 10px;
+   }
 `
 
 const Event = ({ event }) => {
@@ -82,37 +81,78 @@ const Event = ({ event }) => {
 
 
   return (
-    <EventWrapper
-      ai='center'
-      jc='space-between'
-    >
-      <Img
-        fixed={event.image}
-      />
-      <InfoWrapper
-        dir='column'
+    <>
+      <EventWrapper
         ai='center'
+        jc='center'
       >
-        <DateWrapper>{`${month} ${day}`}</DateWrapper>
-        <div>{event.title}</div>
-        <div>at</div>
-        <div>{event.location}</div>
-      </InfoWrapper>
-      <StyledButton
-        as='a'
-        href={event.link}
-        id='no-btm-border'
-      >
-        Register
+        <Img
+          fluid={event.image}
+        />
+        {/* <InfoWrapper
+          dir='column'
+          ai='center'
+        >
+          <DateWrapper>{`${month} ${day}`}</DateWrapper>
+          <div>{event.title}</div>
+          <div>at</div>
+          <div>{event.location}</div>
+        </InfoWrapper> */}
+      </EventWrapper>
+      <Details>
+        <p>
+          Dark Ace and The St.Louis Disc Golf Club Present: 2021 USDGC Amateur Doubles Qualifer
+        </p>
+        <p>
+          ***This is a Amateur only tournament. Make sure your PDGA certification states AM and not PRO. If it has Pro, contact the PDGA to inquire how to get it changed to Amateur.***
+        </p>
+        <p>
+          FORMAT:
+        </p>
+        <p>
+          BYOP doubles (Bring Your Own Partner)
+        </p>
+        <p>
+          Captain's Choice (Best Shot)
+        </p>
+        <p>
+          $50 a team
+        </p>
+        <p>
+          Each player get a premium INNOVA disc with the US Doubles hotstamp, a mini, and a Dark Ace hat.
+        </p>
+        <p>
+          The winning team/s qualify to play in the US Doubles Championships in Rock Hill at Winthrop Gold the weekend before USDGC. October 1st-3rd
+        </p>
+        <p>
+          0-14 Teams = 1 Team qualifies
+        </p>
+        <p>
+          15-24 Teams = 2 Teams qualifies
+        </p>
+        <p>
+          25+ Teams = 3 Teams qualifies
+        </p>
+        <p>
+          This will be 2 rounds, 1 round at Endicott and 1 round at Carrollton.
+        </p>
+        <StyledButton
+          as='a'
+          href={event.link}
+          id='no-btm-border'
+        >
+          Register
       </StyledButton>
-    </EventWrapper>
+      </Details>
+
+    </>
   )
 }
 
 
 
 const Events = ({ events, minimized, setMinimized }) => {
-  
+
   // console.log(events[0].date.getDate())
 
   const icon = minimized ? <BsCaretDown /> : <BsCaretUp />;
@@ -121,14 +161,16 @@ const Events = ({ events, minimized, setMinimized }) => {
 
 
   return (
-    <Wrapper minimized={minimized}>
+    <Wrapper
+    // minimized={minimized}
+    >
       <div className='content'>
         {events.map(event => <Event event={event} key={event.link} />)}
       </div>
-      <Toggle onClick={() => setMinimized(!minimized)}>
+      {/* <Toggle onClick={() => setMinimized(!minimized)}>
         <div>{title}</div>
         <div>{icon}</div>
-      </Toggle>
+      </Toggle> */}
     </Wrapper>
   )
 }
