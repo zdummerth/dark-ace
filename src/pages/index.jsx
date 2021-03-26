@@ -20,11 +20,6 @@ const Container = styled.div`
   width: 100%;
 `
 
-const ImgWrapper = styled.div`
-  width: 100%;
-  align-self: center;
-`
-
 const Banner = styled.div`
   width: 100%;
   align-self: center;
@@ -83,9 +78,9 @@ const IndexPage = ({ data }) => {
         </AltProductContainer>
         <Subtitle>2020 Ledgestone Commercial</Subtitle>
         <Youtube style={{ alignSelf: 'center' }} />
-        <ImgWrapper>
+        <Banner>
           <Img fluid={data.motto.childImageSharp.fluid} />
-        </ImgWrapper>
+        </Banner>
       </Container>
 
     </>
@@ -109,6 +104,13 @@ query {
     }
   }
   winterWizards: file(relativePath: { eq: "winter-wizards.jpg" }) {
+    childImageSharp {
+      fluid(maxWidth: 1280) {
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+  anarchy: file(relativePath: { eq: "anarchy.png" }) {
     childImageSharp {
       fluid(maxWidth: 1280) {
         ...GatsbyImageSharpFluid

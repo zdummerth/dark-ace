@@ -109,7 +109,7 @@ const Hamburger = styled.div`
   }
 `
 const LogoLink = styled(Link)`
-  // margin-left: 5%;
+  // height: 60px;
 `
 const StyledLink = styled(Link)`
   display: inline-block;

@@ -135,7 +135,7 @@ const Layout = ({ children, location, history }) => {
           }
         }
       }
-      doubles: file(relativePath: { eq: "da-doubles.jpg" }) {
+      doubles: file(relativePath: { eq: "usdgc.jpg" }) {
         childImageSharp {
           fixed(width: 80, height: 80) {
             ...GatsbyImageSharpFixed
@@ -161,15 +161,14 @@ const Layout = ({ children, location, history }) => {
     setEventsMinimized(true)
   }, [location])
 
-  // const jbRegLink = 'https://www.discgolfscene.com/tournaments/Dark_Ace_Presents_Winter_Wizards_at_Jefferson_Barracks_powered_by_4Hands_Brewery_2021'
-  // const endiRegLink = 'https://www.discgolfscene.com/tournaments/Dark_Ace_Presents_Winter_Wizards_at_Endicott_Park_powered_by_4Hands_Brewery_2021'
-  const doublesLink = 'https://www.discgolfscene.com/tournaments/Dark_Ace_Doubles_2021'
+
+  const doublesLink = 'https://events.discgolfunited.com/disc-golf-tournaments/event-detail.cfm/tourn_id/10567'
 
   const eventData = [
     {
       date: new Date(2021, 2, 20),
-      title: 'Dark Ace Doubles',
-      location: 'Willmore/Graveyard',
+      title: 'USDGC Doubles Qualifier',
+      location: 'Endicott/Carrolton',
       link: doublesLink,
       image: data.doubles.childImageSharp.fixed
     }

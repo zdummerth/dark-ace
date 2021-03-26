@@ -112,6 +112,7 @@ const Event = ({ event }) => {
 
 
 const Events = ({ events, minimized, setMinimized }) => {
+  
   // console.log(events[0].date.getDate())
 
   const icon = minimized ? <BsCaretDown /> : <BsCaretUp />;

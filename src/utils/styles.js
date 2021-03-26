@@ -153,7 +153,6 @@ const StyledListing = styled.div`
 `
 
 export const Listing = ({ children, style }) => {
-  console.log({ children })
   const isSingleItem = !children.length
   return (
     <StyledListing
