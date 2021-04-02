@@ -94,21 +94,14 @@ const SlideShow = ({ setIsSlideshowOpen, startingIndex }) => {
 
   const data = useStaticQuery(graphql`
   query {
+    giveBack: file(relativePath: { eq: "da-giveback-banner.png" }) {
+      childImageSharp {
+        fluid(maxWidth: 1280) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
     motto: file(relativePath: { eq: "motto.png" }) {
-      childImageSharp {
-        fluid(maxWidth: 1280) {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    parked: file(relativePath: { eq: "parked.png" }) {
-      childImageSharp {
-        fluid(maxWidth: 1280) {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    anarchy: file(relativePath: { eq: "anarchy.png" }) {
       childImageSharp {
         fluid(maxWidth: 1280) {
           ...GatsbyImageSharpFluid
@@ -119,7 +112,7 @@ const SlideShow = ({ setIsSlideshowOpen, startingIndex }) => {
   `)
 
 
-  const images = [data.motto, data.anarchy, data.parked]
+  const images = [data.giveBack, data.motto]
   const [index, setIndex] = useState(0);
 
 
@@ -153,7 +146,7 @@ const SlideShow = ({ setIsSlideshowOpen, startingIndex }) => {
 
     useEffect(
       () => {
-        const interval = setInterval(handleNext, 3000);
+        const interval = setInterval(handleNext, 3500);
   
         return () => {
           clearInterval(interval);

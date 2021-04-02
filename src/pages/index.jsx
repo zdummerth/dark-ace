@@ -97,7 +97,7 @@ query {
       }
     }
   }
-  parked: file(relativePath: { eq: "parked.png" }) {
+  giveBack: file(relativePath: { eq: "da-giveback-banner.png" }) {
     childImageSharp {
       fluid(maxWidth: 1280) {
         ...GatsbyImageSharpFluid
