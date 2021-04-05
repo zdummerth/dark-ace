@@ -8,7 +8,6 @@ import ProductListingItem, { Feature } from '../components/products/ProducListin
 import Accessory from '../components/products/Accessory'
 import GiftCard from '../components/products/GiftCard'
 import SlideShow from '../components/slideshow'
-import Youtube from '../components/youtube'
 import SEO from "../components/seo"
 
 import { Listing, Subtitle } from '../utils/styles'
@@ -77,11 +76,6 @@ const IndexPage = ({ data }) => {
           />
           <GiftCard style={{ marginTop: '30px' }} />
         </AltProductContainer>
-        <Subtitle>2020 Ledgestone Commercial</Subtitle>
-        <Youtube style={{ alignSelf: 'center' }} />
-        <Banner>
-          <Img fluid={data.motto.childImageSharp.fluid} />
-        </Banner>
       </Container>
 
     </>
