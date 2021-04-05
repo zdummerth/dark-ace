@@ -146,7 +146,7 @@ const SlideShow = ({ setIsSlideshowOpen, startingIndex }) => {
 
     useEffect(
       () => {
-        const interval = setInterval(handleNext, 3500);
+        const interval = setInterval(handleNext, 4000);
   
         return () => {
           clearInterval(interval);
