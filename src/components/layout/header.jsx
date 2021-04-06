@@ -26,11 +26,7 @@ const HeaderWrapper = styled.header`
   position: fixed;
   top: 0;
   z-index: 50;
-  box-shadow: 0 0 1px 1px ${colors.brand};
-
-
-
-
+  box-shadow: 0 0 .25px .25px ${colors.brand};
 
   @media (min-width: ${breakpoints.desktop}) {
     font-size: 1rem;
@@ -80,14 +76,14 @@ const Navbox = styled.div`
     justify-content: flex-start;
     position: fixed;
     width: 100%;
-    background-color: #020202;
+    background: ${colors.darkGradient};
     transition: all 0.3s ease-in;
     top: ${dimensions.headerHeight};
     right: ${props => (props.closed ? "-100%" : "0")};
   }
 
   a[aria-current="page"] {
-    border-bottom: 1px solid ${colors.brand};
+    // border-bottom: 1px solid ${colors.brand};
   }
 `
 
@@ -135,7 +131,6 @@ const StyledLink = styled(Link)`
   display: inline-block;
   text-decoration: none;
   white-space: nowrap;
-  color: white;
   margin: 1rem;
   outline: 0;
   transition: all 200ms ease-in;
@@ -162,13 +157,18 @@ const StyledLink = styled(Link)`
   }
 
   @media (max-width: ${breakpoints.desktop}) {
-    padding: 20px 0;
+    // padding: 20px 0;
     font-size: 1.5rem;
-    z-index: 6;
+    // z-index: 6;
   }
 `
 const IconWrapper = styled.div`
   display: flex;
+  margin-top: 20px;
+
+  @media (min-width: ${breakpoints.desktop}) {
+    
+  }
 
   .icon {
 
@@ -191,6 +191,13 @@ const IgIcon = styled(FaInstagram)`
 
 const ListenToMetalText = styled.div`
   display: none;
+
+
+
+  :hover {
+    color: ${colors.brand};
+    cursor: pointer;
+  }
 
   @media (min-width: ${breakpoints.desktop}) {
     display: block;
@@ -241,12 +248,10 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
   ))
 
   const extLinks =
-    <>
-      <IconWrapper>
-        <StyledLink as='a' name='facebook' href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' target='_blank' rel="noopener"><FbIcon /></StyledLink>
-        <StyledLink as='a' name='instagram' href='https://www.instagram.com/darkaceapparel/' target='_blank' rel="noopener"><IgIcon /></StyledLink>
-      </IconWrapper>
-    </>
+    <IconWrapper>
+      <StyledLink as='a' name='facebook' href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' target='_blank' rel="noopener"><FbIcon /></StyledLink>
+      <StyledLink as='a' name='instagram' href='https://www.instagram.com/darkaceapparel/' target='_blank' rel="noopener"><IgIcon /></StyledLink>
+    </IconWrapper>
 
 
   return (
@@ -293,7 +298,7 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
             Listen To Metal
           </ListenToMetalText>
           {links}
-          {extLinks}
+          {/* {extLinks} */}
         </Navbox>
       </Nav>
     </HeaderWrapper>

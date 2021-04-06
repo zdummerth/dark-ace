@@ -58,7 +58,7 @@ const IndexPage = ({ data }) => {
             <ProductListingItem
               product={product}
               key={product.shopifyId}
-              showThumbs={true}
+              // showThumbs={true}
               style={{
                 width: '60vw',
                 maxWidth: '300px',
@@ -66,7 +66,7 @@ const IndexPage = ({ data }) => {
             />
           ))}
         </Listing>
-        <Subtitle>{accessories.products[0].title}</Subtitle>
+        {/* <Subtitle>{accessories.products[0].title}</Subtitle>
         <AltProductContainer>
           <Accessory
             product={accessories.products[0]}
@@ -75,7 +75,7 @@ const IndexPage = ({ data }) => {
             }}
           />
           <GiftCard style={{ marginTop: '30px' }} />
-        </AltProductContainer>
+        </AltProductContainer> */}
       </Container>
 
     </>
