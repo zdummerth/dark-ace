@@ -66,6 +66,7 @@ const Cart = () => {
         <p>{`Subtotal (${totalQuantity} ${totalQuantity > 1 ? 'items' : 'item'}): `}</p>
         <h4>$ {checkout.subtotalPrice}</h4>
       </Subtotal>
+
       {checkout.lineItems.length === 0
         ?
         <>

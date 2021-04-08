@@ -1,16 +1,14 @@
 import React from 'react'
-import { graphql } from "gatsby"
-import Img from "gatsby-image"
+import { graphql, Link } from "gatsby"
+// import Img from "gatsby-image"
 import styled from 'styled-components'
 import { useShopify } from '../hooks/useShopify'
 
-import ProductListingItem, { Feature } from '../components/products/ProducListingItem'
-import Accessory from '../components/products/Accessory'
-import GiftCard from '../components/products/GiftCard'
+import ProductListingItem from '../components/products/ProducListingItem'
 import SlideShow from '../components/slideshow'
 import SEO from "../components/seo"
 
-import { Listing, Subtitle } from '../utils/styles'
+import { DarkBrandButton, Listing, Spacer } from '../utils/styles'
 
 const Container = styled.div`
   display: flex;
@@ -25,17 +23,16 @@ const Banner = styled.div`
   align-self: center;
 `
 
-const AltProductContainer = styled.div`
-  width: 80%;
-  align-self: center;
 
-  max-width: 400px;
+const StyledLink = styled(Link)`
+  align-self: center;
+  margin-top: 30px;
 `
 
 
 const IndexPage = ({ data }) => {
 
-  const { collections, accessories, feature } = useShopify()
+  const { newLine, headware } = useShopify()
 
   return (
     <>
@@ -44,6 +41,7 @@ const IndexPage = ({ data }) => {
         <Banner>
           <SlideShow />
         </Banner>
+        <Spacer />
         {/* <Feature
           product={feature}
           showThumbs={true}
@@ -52,19 +50,35 @@ const IndexPage = ({ data }) => {
             maxWidth: '400px',
           }}
         /> */}
-        <Subtitle>{collections[0].title}</Subtitle>
+        {/* <Subtitle>{newLine.title}</Subtitle> */}
         <Listing>
-          {collections[0].products.map(product => (
+          {newLine.products.map(product => (
             <ProductListingItem
               product={product}
               key={product.shopifyId}
-              // showThumbs={true}
+              showThumbs={true}
               style={{
                 width: '60vw',
                 maxWidth: '300px',
               }}
             />
           ))}
+        </Listing>
+        <Spacer />
+        {/* <Subtitle>{headware.title}</Subtitle> */}
+        <Listing>
+          {headware.products.map(product => (
+            <ProductListingItem
+              product={product}
+              key={product.shopifyId}
+              showThumbs={true}
+              style={{
+                width: '60vw',
+                maxWidth: '300px',
+              }}
+            />
+          ))}
+
         </Listing>
         {/* <Subtitle>{accessories.products[0].title}</Subtitle>
         <AltProductContainer>
@@ -76,6 +90,11 @@ const IndexPage = ({ data }) => {
           />
           <GiftCard style={{ marginTop: '30px' }} />
         </AltProductContainer> */}
+        <StyledLink to='/shop'>
+          <DarkBrandButton>
+            View All Products
+          </DarkBrandButton>
+        </StyledLink>
       </Container>
 
     </>

@@ -26,6 +26,7 @@ export const colors = {
   grayGradient: `linear-gradient(to bottom right, #020202 45%, #454545)`,
   lightGradient: `linear-gradient(to bottom right, #fff 45%, #C00A0A)`,
   gray: '#454545',
+  spacer: 'linear-gradient(to right, #020202, #C00A0A, #020202)',
   specialGradient: `linear-gradient(to right, #C00A0A, #fff)`,
 };
 
@@ -45,6 +46,14 @@ export const BrandButton = styled.button`
     background: ${colors.brand};
     box-shadow: 0 0 5px ${colors.lightest};
   }
+`
+
+export const Spacer = styled.div`
+  height: 10px;
+  width: 100%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  background: ${colors.spacer};
 `
 
 export const DarkBrandButton = styled(BrandButton)`
@@ -138,7 +147,7 @@ const StyledListing = styled.div`
 
   & > * {
     margin-right: ${({ isSingleItem }) => isSingleItem ? '0' : `${spacing.md}`};
-    margin-top: ${spacing.md};
+    // margin-top: ${spacing.md};
   }
 
 
@@ -147,6 +156,10 @@ const StyledListing = styled.div`
     flex-wrap: wrap;
     justify-content: space-evenly;
     // justify-content: ${({ isSingleItem }) => isSingleItem ? 'flex-start' : 'space-evenly'};
+    margin-top: ${spacing.md};
+    & > * {
+      margin-top: ${spacing.md};
+    }
 
     margin-right: 0;
   }
@@ -166,8 +179,8 @@ export const Listing = ({ children, style }) => {
 
 
 export const Subtitle = styled.h2`
-  font-size: 2rem;
+  // font-size: rem;
   margin-bottom: 0;
-  margin-top: ${spacing.lg};
+  margin-top: 0;
   text-align: center;
 `

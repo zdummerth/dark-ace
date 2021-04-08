@@ -38,8 +38,6 @@ const Spotify = ({ minimized, setMinimized }) => {
 
   const icon = minimized ? <BsCaretDown /> : <BsCaretUp />;
   // const title = minimized ? 'Show Playlist' : 'Hide Playlist'
-  const title = 'Listen To Metal'
-
 
 
   return (

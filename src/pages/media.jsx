@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Subtitle } from '../utils/styles'
-
 import Youtube from '../components/Youtube'
 
 
@@ -19,7 +17,6 @@ const Media = ({ data }) => {
       <SEO title="Media" />
       <Container>
         {/* <h2>Media</h2> */}
-        <Subtitle>2020 Ledgestone Commercial</Subtitle>
         <Youtube />
       </Container>
     </>

@@ -9,7 +9,6 @@ import Header from './header'
 import Footer from './footer'
 import Spotify from '../spotify'
 import { CartStatus } from './cartStatus'
-import Events from '../Events'
 
 
 const GlobalStyle = createGlobalStyle`
@@ -146,26 +145,12 @@ const Layout = ({ children, location, history }) => {
   } = useContext(StoreContext)
 
   const [spotifyMinimized, setSpotifyMinimized] = useState(true);
-  const [eventsMinimized, setEventsMinimized] = useState(true);
 
   useEffect(() => {
     //This makes sure the menus close when the user clicks on a page link
     setSpotifyMinimized(true)
-    setEventsMinimized(true)
   }, [location])
 
-
-  const doublesLink = 'https://events.discgolfunited.com/disc-golf-tournaments/event-detail.cfm/tourn_id/10567'
-
-  const eventData = [
-    {
-      date: new Date(2021, 2, 20),
-      title: 'USDGC Doubles Qualifier',
-      location: 'Endicott/Carrolton',
-      link: doublesLink,
-      image: data.doubles.childImageSharp.fixed
-    }
-  ]
 
   const cartCount = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
 

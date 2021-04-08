@@ -1,17 +1,14 @@
 import React, { useState } from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
 import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
-// import { colors } from '../utils/styles'
 import styled from 'styled-components'
-import { colors, breakpoints, spacing, Subtitle } from '../utils/styles'
+import { colors, breakpoints, spacing, Subtitle, DarkBrandButton } from '../utils/styles'
 
-import { useShopify } from '../hooks/useShopify'
 import { useCheckout } from '../hooks/useCheckout'
 
 import ProductForm from '../components/products/product-form'
-import Accessory from '../components/products/Accessory'
 import GiftCard from '../components/products/GiftCard'
 
 import Price from '../components/products/Price'
@@ -45,6 +42,9 @@ const ImagesWrapper = styled.div`
 `
 const InfoWrapper = styled.div`
   max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
 
   @media (min-width: ${breakpoints.desktop}) {
     margin-left: 15px;
@@ -59,10 +59,6 @@ const FormContainer = styled.div`
   padding: ${spacing.sm};
   margin-bottom: 30px;
   margin-top: 30px;
-
-  & > * {
-    // margin: .75rem;
-  }
 
   border: 2px solid ${colors.gray};
   background: ${colors.grayGradient};
@@ -81,7 +77,10 @@ const Thumbnail = styled.button`
     :focus {outline:none;}
     ::-moz-focus-inner {border:0;}
 `
-
+const StyledLink = styled(Link)`
+  align-self: center;
+  margin-top: 30px;
+`
 const Thumbnails = ({ imgWithOption, handleClick }) => {
   return (
     <ThumbnailContainer>
@@ -120,8 +119,6 @@ const ProductPage = ({ data }) => {
     addToCart,
     setVariant
   } = useCheckout(product)
-
-  const { accessories } = useShopify()
 
   const [imageFluid, setImageFluid] = useState(variant.image.localFile.childImageSharp.fluid)
 
@@ -214,11 +211,17 @@ const ProductPage = ({ data }) => {
               }}
             />
           </ImgContainer>
-          <Thumbnails imgWithOption={imgWithOption} handleClick={handleThumbClick} />
+          {thumbs.length > 1 &&
+            <Thumbnails imgWithOption={imgWithOption} handleClick={handleThumbClick} />
+          }
         </ImagesWrapper>
         <InfoWrapper>
+          <div style={{ height: '10px' }} />
+
           <Subtitle>{product.title}</Subtitle>
+
           {isPreOrder ? <h2>This Is A Pre-Order Item</h2> : null}
+          <div style={{ height: '10px' }} />
           <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
           <FormContainer>
             <StyledPrice
@@ -244,16 +247,12 @@ const ProductPage = ({ data }) => {
             />
 
           </FormContainer>
-          <Subtitle style={{ marginTop: '80px' }}>Add Reaper Stickers</Subtitle>
-          <Accessory
-            product={accessories.products[0]}
-            // showThumbs={true}
-            style={{
-              marginBottom: '40px',
-              // alignSelf: 'center'
-            }}
-          />
           <GiftCard />
+          <StyledLink to='/shop'>
+            <DarkBrandButton>
+              View All Products
+            </DarkBrandButton>
+          </StyledLink>
 
         </InfoWrapper>
       </Container>

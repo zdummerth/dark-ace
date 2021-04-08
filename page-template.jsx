@@ -17,7 +17,6 @@ const Page = ({ data }) => {
       <SEO title="Page" />
       <Container>
         <h2>Page</h2>
-        <Youtube />
       </Container>
     </>
   )

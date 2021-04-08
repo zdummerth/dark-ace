@@ -221,6 +221,10 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
       title: 'Home'
     },
     {
+      path: '/shop',
+      title: 'Shop'
+    },
+    {
       path: '/media',
       title: 'Media'
     },

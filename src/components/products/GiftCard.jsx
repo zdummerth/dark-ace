@@ -15,6 +15,7 @@ import { formatPrice } from '../../utils/helpers';
 const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   // align-items: center;
   align-self: center;
   border: 1px solid ${colors.gray};

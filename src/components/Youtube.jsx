@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from "styled-components"
+import { Subtitle, Spacer } from '../utils/styles'
+
 
 const Container = styled.div`
   align-self: center;
@@ -21,15 +23,41 @@ const Container = styled.div`
 const Youtube = () => {
 
   return (
-    <Container>
-      <iframe 
-          src="https://www.youtube.com/embed/SixIQVA4qDg" 
-          frameBorder="0" 
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+    <>
+      <Spacer />
+      <Subtitle>Frolfcenter Interview</Subtitle>
+      <Container>
+        <iframe
+          src="https://www.youtube.com/embed/9LCm3OVtfRo"
+          frameBorder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen={true}
+          title='frolfcenter'
+        ></iframe>
+      </Container>
+      <Spacer />
+      <Subtitle>Zen Disc Golf Interview</Subtitle>
+      <Container>
+        <iframe
+          src="https://www.youtube.com/embed/of3Yqi3SfcM"
+          frameBorder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen={true}
           title='2020 ledgestone commercial'
-      ></iframe>
-    </Container>
+        ></iframe>
+      </Container>
+      <Spacer />
+      <Subtitle>Ledgestone Commercial</Subtitle>
+      <Container>
+        <iframe
+          src="https://www.youtube.com/embed/SixIQVA4qDg"
+          frameBorder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen={true}
+          title='2020 ledgestone commercial'
+        ></iframe>
+      </Container>
+    </>
   )
 }
 

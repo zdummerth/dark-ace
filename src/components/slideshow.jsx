@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Img from 'gatsby-image'
 import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
-import { RiArrowRightLine, RiArrowLeftLine } from 'react-icons/ri'
-import { colors, breakpoints } from '../utils/styles'
+// import { RiArrowRightLine, RiArrowLeftLine } from 'react-icons/ri'
+import { breakpoints } from '../utils/styles'
 
 
 const SlideshowContainer = styled.div`
@@ -41,38 +41,38 @@ const SlideshowControls = styled.div`
   margin: 1px auto;
   max-width: 60%;
 `
-const SlideshowButton = styled.button`
-  display: flex;
-  align-items: center;
-  background: none;
-  border: none;
-  outline: none;
-  font-size: 40px;
-  color: ${colors.lightest};
-  :hover {
-      cursor: pointer;
-  }
-`
+// const SlideshowButton = styled.button`
+//   display: flex;
+//   align-items: center;
+//   background: none;
+//   border: none;
+//   outline: none;
+//   font-size: 40px;
+//   color: ${colors.lightest};
+//   :hover {
+//       cursor: pointer;
+//   }
+// `
 
-const DotContainer = styled.div`
-  display: flex;
-`
-const Dot = styled.div`
-  border: 2px solid ${colors.lightest};
-  border-radius: 50%;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background: ${props => (props.active ? colors.lightest : '')};
-  :hover {
-    cursor: pointer;
-  }
+// const DotContainer = styled.div`
+//   display: flex;
+// `
+// const Dot = styled.div`
+//   border: 2px solid ${colors.lightest};
+//   border-radius: 50%;
+//   height: 15px;
+//   width: 15px;
+//   margin: 0 2px;
+//   background: ${props => (props.active ? colors.lightest : '')};
+//   :hover {
+//     cursor: pointer;
+//   }
 
-  @media (max-width: 500px) {
-    height: 10px;
-    width: 10px;
-  }
-  `
+//   @media (max-width: 500px) {
+//     height: 10px;
+//     width: 10px;
+//   }
+//   `
 
 const Slide = styled.div`
     position: absolute;
@@ -115,9 +115,6 @@ const SlideShow = ({ setIsSlideshowOpen, startingIndex }) => {
   const images = [data.giveBack, data.motto]
   const [index, setIndex] = useState(0);
 
-
-  console.log(images)
-
   const slides = images.map((img, ind) => {
     return (
       <Slide active={ind === index}>
@@ -135,7 +132,7 @@ const SlideShow = ({ setIsSlideshowOpen, startingIndex }) => {
     )
   })
 
-  const dots = images.map((el, ind) => <Dot active={index === ind} onClick={() => setIndex(ind)} />)
+  // const dots = images.map((el, ind) => <Dot active={index === ind} onClick={() => setIndex(ind)} />)
 
   const handleNext = () =>
     index === images.length - 1 ? setIndex(0) : setIndex(index + 1)
