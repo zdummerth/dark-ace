@@ -13,6 +13,7 @@ export const useShopify = () => {
               title
               shopifyId
               description
+              availableForSale
               variants {
                 id
                 shopifyId

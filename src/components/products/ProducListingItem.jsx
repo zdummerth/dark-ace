@@ -105,6 +105,7 @@ const FeatureContainer = styled.div`
 
 const ProductListingItem = ({ product, className, showThumbs, style }) => {
   const [index, setIndex] = useState(0);
+  console.log(product.availableForSale)
 
   return (
     <ProductContainer
@@ -136,10 +137,19 @@ const ProductListingItem = ({ product, className, showThumbs, style }) => {
           to={`/shop/${product.handle}`}
         >
           <h3>{product.title}</h3>
-          <Price
+          {product.availableForSale ? (
+            <Price
+              price={product.variants[0].priceV2}
+              compareAtPrice={product.variants[0].compareAtPriceV2}
+            />
+          )
+            :
+            <p>Sold Out!</p>
+          }
+          {/* <Price
             price={product.variants[0].priceV2}
             compareAtPrice={product.variants[0].compareAtPriceV2}
-          />
+          /> */}
         </TextWrapper>
       </InfoContainer>
     </ProductContainer >
