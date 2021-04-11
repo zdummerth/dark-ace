@@ -20,16 +20,16 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const HeaderWrapper = styled.header`
-  margin-bottom: 2px;
   width: 100%;
   font-weight: bold;
   position: fixed;
-  top: 0;
+  bottom: 0;
   z-index: 50;
   // box-shadow: 0 0 .25px .25px ${colors.brand};
 
   @media (min-width: ${breakpoints.desktop}) {
     font-size: 1rem;
+    top: 0;
   }
 `
 
@@ -69,16 +69,17 @@ const Navbox = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 100%;
+  // height: 100%;
 
   @media (max-width: ${breakpoints.desktop}) {
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     position: fixed;
     width: 100%;
     background: ${colors.darkGradient};
     transition: all 0.3s ease-in;
-    top: ${dimensions.headerHeight};
+    bottom: ${dimensions.headerHeight};
+    top: 0;
     right: ${props => (props.closed ? "-100%" : "0")};
   }
 
@@ -210,7 +211,7 @@ const ListenToMetalLogo = styled.div`
 `
 
 const JoinMailingList = styled.div`
-  background: ${colors.grayGradient};
+  background: ${colors.darkGradient};
   height: 45px;
   font-size: 14px;
   text-align: center;

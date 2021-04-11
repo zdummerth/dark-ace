@@ -87,7 +87,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  // min-height: 100vh;
   overflow: hidden;
 `
 
@@ -95,6 +95,8 @@ const ContentWrapper = styled.main`
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-height: ${({ joinMinimized }) => joinMinimized ? 'calc(100vh - 55px)' : 'calc(100vh - 100px)'};
+
   // align-items: center;
   position: relative;
   width: 100%;
@@ -107,12 +109,24 @@ const ContentWrapper = styled.main`
 // This offsets that
 
 const HeaderMargin = styled.div`
+  display: none;
   height: ${({ joinMinimized }) => joinMinimized ? '55px' : '100px'};
+
+  @media (min-width: ${breakpoints.desktop}) {
+    display: block
+  }
+`
+const BottomHeaderMargin = styled.div`
+  height: ${({ joinMinimized }) => joinMinimized ? '55px' : '100px'};
+
+  @media (min-width: ${breakpoints.desktop}) {
+    display: none;
+  }
 `
 
 const StyledAddingToCart = styled(CartStatus)`
   position: fixed;
-  top: ${dimensions.headerHeight};
+  top: 0;
   z-index: 50;
   width: ${({ error }) => error ? '100%' : 'auto'}
 `
@@ -181,11 +195,14 @@ const Layout = ({ children, location, history }) => {
         />
         <ContentWrapper
           onClick={() => setSpotifyMinimized(true)}
+          joinMinimized={joinMinimized}
         >
           {children}
         </ContentWrapper>
         <Footer />
-        
+        <BottomHeaderMargin
+          joinMinimized={joinMinimized}
+        />
       </Wrapper>
     </>
   )
