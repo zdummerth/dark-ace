@@ -1,6 +1,6 @@
 require("dotenv").config({
     path: `.env.${process.env.NODE_ENV}`,
-  })
+})
 
 module.exports = {
     siteMetadata: {
@@ -13,6 +13,14 @@ module.exports = {
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-styled-components`,
         `gatsby-transformer-remark`,
+        {
+            resolve: "gatsby-plugin-react-svg",
+            options: {
+                rule: {
+                    include: /images/ // See below to configure properly
+                }
+            }
+        },
         {
             resolve: `gatsby-source-filesystem`,
             options: {
@@ -37,12 +45,12 @@ module.exports = {
         {
             resolve: `gatsby-source-shopify`,
             options: {
-              // The domain name of your Shopify shop.
-              shopName: process.env.GATSBY_SHOP_NAME,
-              // The storefront access token
-              accessToken: process.env.GATSBY_ACCESS_TOKEN,
+                // The domain name of your Shopify shop.
+                shopName: process.env.GATSBY_SHOP_NAME,
+                // The storefront access token
+                accessToken: process.env.GATSBY_ACCESS_TOKEN,
             },
-          },
+        },
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.dev/offline
         // `gatsby-plugin-offline`,

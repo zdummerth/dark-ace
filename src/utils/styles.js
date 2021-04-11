@@ -48,8 +48,18 @@ export const BrandButton = styled.button`
   }
 `
 
+export const StrippedButton = styled.button`
+  background: none;
+  border: none;
+  color: white;
+
+  :hover {
+    cursor: pointer;
+  }
+`
+
 export const Spacer = styled.div`
-  height: 10px;
+  height: 5px;
   width: 100%;
   margin-top: 25px;
   margin-bottom: 25px;
@@ -121,7 +131,7 @@ export const fonts = {
 };
 
 export const dimensions = {
-  headerHeight: '70px',
+  headerHeight: '55px',
   cartWidthDesktop: '400px',
 
   pictureBrowserAction: {
@@ -179,7 +189,6 @@ export const Listing = ({ children, style }) => {
 
 
 export const Subtitle = styled.h2`
-  // font-size: rem;
   margin-bottom: 0;
   margin-top: 0;
   text-align: center;

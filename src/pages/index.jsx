@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, Link } from "gatsby"
-// import Img from "gatsby-image"
+import Img from "gatsby-image"
 import styled from 'styled-components'
 import { useShopify } from '../hooks/useShopify'
 
@@ -8,7 +8,7 @@ import ProductListingItem from '../components/products/ProducListingItem'
 import SlideShow from '../components/slideshow'
 import SEO from "../components/seo"
 
-import { DarkBrandButton, Listing, Spacer } from '../utils/styles'
+import { BrandButton, dimensions, Listing, Spacer, breakpoints, colors } from '../utils/styles'
 
 const Container = styled.div`
   display: flex;
@@ -18,16 +18,35 @@ const Container = styled.div`
   width: 100%;
 `
 
-const Banner = styled.div`
-  width: 100%;
-  align-self: center;
-`
-
 
 const StyledLink = styled(Link)`
   align-self: center;
   margin-top: 30px;
 `
+
+const Landing = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - ${dimensions.headerHeight} - 40px);
+`
+
+const Banner = styled.div`
+  width: 100%;
+  align-self: center;
+  height: 20%;
+`
+
+const LandingImgWrapper = styled.div`
+  // height: calc(100% - 150px);
+  height: 75%;
+
+  @media (min-width: ${breakpoints.tablet}) {
+    height: calc(100% - 250px);
+  }
+
+`
+
+
 
 
 const IndexPage = ({ data }) => {
@@ -38,19 +57,25 @@ const IndexPage = ({ data }) => {
     <>
       <SEO title="Home" />
       <Container>
-        <Banner>
-          <SlideShow />
-        </Banner>
-        <Spacer />
-        {/* <Feature
-          product={feature}
-          showThumbs={true}
-          style={{
-            width: '80vw',
-            maxWidth: '400px',
-          }}
-        /> */}
+        <Landing>
+          <Banner>
+            <SlideShow />
+          </Banner>
+          <LandingImgWrapper>
+            <Img
+              fluid={data.boneBasket.childImageSharp.fluid}
+              alt={'bone basket background'}
+              style={{
+                height: '100%',
+              }}
+              imgStyle={{
+                objectFit: 'contain'
+              }}
+            />
+          </LandingImgWrapper>
+        </Landing>
         {/* <Subtitle>{newLine.title}</Subtitle> */}
+        <Spacer />
         <Listing>
           {newLine.products.map(product => (
             <ProductListingItem
@@ -91,9 +116,9 @@ const IndexPage = ({ data }) => {
           <GiftCard style={{ marginTop: '30px' }} />
         </AltProductContainer> */}
         <StyledLink to='/shop'>
-          <DarkBrandButton>
+          <BrandButton>
             View All Products
-          </DarkBrandButton>
+          </BrandButton>
         </StyledLink>
       </Container>
 
@@ -117,7 +142,7 @@ query {
       }
     }
   }
-  winterWizards: file(relativePath: { eq: "winter-wizards.jpg" }) {
+  boneBasket: file(relativePath: { eq: "bone-basket.jpg" }) {
     childImageSharp {
       fluid(maxWidth: 1280) {
         ...GatsbyImageSharpFluid

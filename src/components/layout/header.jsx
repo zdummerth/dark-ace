@@ -5,7 +5,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { GiMusicSpell } from 'react-icons/gi';
 
-import { breakpoints, dimensions, colors } from '../../utils/styles';
+import { breakpoints, dimensions, colors, StrippedButton, DarkBrandButton } from '../../utils/styles';
 
 import Logo from "./logo"
 
@@ -26,7 +26,7 @@ const HeaderWrapper = styled.header`
   position: fixed;
   top: 0;
   z-index: 50;
-  box-shadow: 0 0 .25px .25px ${colors.brand};
+  // box-shadow: 0 0 .25px .25px ${colors.brand};
 
   @media (min-width: ${breakpoints.desktop}) {
     font-size: 1rem;
@@ -41,7 +41,7 @@ const Nav = styled.nav`
 
   display: flex;
   // position: fixed;
-  background: ${colors.background};
+  background: ${colors.grayGradient};
   // border-bottom: 1px solid ${colors.gray};
   // box-shadow: 0 0 1px 1px ${colors.brand};
 
@@ -119,12 +119,12 @@ const Hamburger = styled.div`
   }
 `
 const LogoLink = styled(Link)`
-  height: 60px;
+  height: 45px;
   margin-left: 10px;
 
   @media (min-width: ${breakpoints.desktop}) {
     margin-left: 0;
-    height: 70px;
+    height: 55px;
   }
 `
 const StyledLink = styled(Link)`
@@ -192,8 +192,6 @@ const IgIcon = styled(FaInstagram)`
 const ListenToMetalText = styled.div`
   display: none;
 
-
-
   :hover {
     color: ${colors.brand};
     cursor: pointer;
@@ -206,14 +204,24 @@ const ListenToMetalText = styled.div`
 `
 
 const ListenToMetalLogo = styled.div`
-  // display: none;
-
   @media (min-width: ${breakpoints.desktop}) {
     display: none;
   }
 `
 
-const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
+const JoinMailingList = styled.div`
+  background: ${colors.grayGradient};
+  height: 45px;
+  font-size: 14px;
+  text-align: center;
+  padding-top: 5px;
+
+  button {
+    padding-top: 5px;
+  }
+`
+
+const Header = ({ cartCount, setSpotifyMinimized, setJoinMinimized, joinMinimized }) => {
 
   const MenuItems = [
     {
@@ -260,8 +268,20 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
 
   return (
     <HeaderWrapper>
+      {!joinMinimized && (
+        <JoinMailingList>
+          <p>Join mailing list to get free shipping on next order</p>
+          <StrippedButton>
+            Join
+        </StrippedButton>
+          <StrippedButton
+            onClick={() => setJoinMinimized(true)}
+          >
+            Close
+        </StrippedButton>
+        </JoinMailingList>
+      )}
       <Nav>
-
         <LogoLink to='/' name='home'>
           <Logo />
         </LogoLink>

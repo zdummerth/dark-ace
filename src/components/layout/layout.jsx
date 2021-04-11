@@ -99,15 +99,15 @@ const ContentWrapper = styled.main`
   position: relative;
   width: 100%;
   max-width: 1300px;
-  margin: 0 auto;
-  // padding: 0 10px;
-
+  margin-right: auto;
+  margin-left: auto;
 `
 
 // When header is fixed, it's removed from doc flow
 // This offsets that
+
 const HeaderMargin = styled.div`
-  margin-top: ${dimensions.headerHeight};
+  height: ${({ joinMinimized }) => joinMinimized ? '55px' : '100px'};
 `
 
 const StyledAddingToCart = styled(CartStatus)`
@@ -115,7 +115,6 @@ const StyledAddingToCart = styled(CartStatus)`
   top: ${dimensions.headerHeight};
   z-index: 50;
   width: ${({ error }) => error ? '100%' : 'auto'}
-
 `
 
 
@@ -145,6 +144,7 @@ const Layout = ({ children, location, history }) => {
   } = useContext(StoreContext)
 
   const [spotifyMinimized, setSpotifyMinimized] = useState(true);
+  const [joinMinimized, setJoinMinimized] = useState(false);
 
   useEffect(() => {
     //This makes sure the menus close when the user clicks on a page link
@@ -169,14 +169,12 @@ const Layout = ({ children, location, history }) => {
           cartCount={cartCount}
           setSpotifyMinimized={setSpotifyMinimized}
           spotifyMinimized={spotifyMinimized}
-          // setEventsMinimized={setEventsMinimized}
+          joinMinimized={joinMinimized}
+          setJoinMinimized={setJoinMinimized}
         />
-        <HeaderMargin />
-        {/* <Events
-          minimized={eventsMinimized}
-          setMinimized={setEventsMinimized}
-          events={eventData}
-        /> */}
+        <HeaderMargin
+          joinMinimized={joinMinimized}
+        />
         <Spotify
           minimized={spotifyMinimized}
           setMinimized={setSpotifyMinimized}
@@ -187,6 +185,7 @@ const Layout = ({ children, location, history }) => {
           {children}
         </ContentWrapper>
         <Footer />
+        
       </Wrapper>
     </>
   )

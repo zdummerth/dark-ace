@@ -8,23 +8,23 @@ import { breakpoints } from '../utils/styles'
 
 const SlideshowContainer = styled.div`
   width: 100%;
-  height: 150px;
+  // height: 150px;
+  height: 100%;
 
   @media (min-width: ${breakpoints.tablet}) {
-    height: 250px;
+    // height: 250px;
   }
 
   @media (min-width: ${breakpoints.desktop}) {
-    height: 350px;
+    // height: 350px;
   }
 
   @media (min-width: ${breakpoints.hd}) {
-    height: 427px;
+    // height: 427px;
   }
 
   // background: gray;
   // border: 1px solid red;
-
 `
 const ImagesContainer = styled.div`
   position: relative;

@@ -35,14 +35,14 @@ const Logo = () => {
   query {
     mobile: file(relativePath: { eq: "da-logo-square.png" }) {
       childImageSharp {
-        fixed(width: 60, height: 60) {
+        fixed(width: 45, height: 45) {
           ...GatsbyImageSharpFixed
         }
       }
     }
     desktop: file(relativePath: { eq: "logo.png" }) {
       childImageSharp {
-        fixed(width: 200, height: 70) {
+        fixed(width: 200, height: 55) {
           ...GatsbyImageSharpFixed
         }
       }
