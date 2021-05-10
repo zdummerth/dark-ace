@@ -18,9 +18,26 @@ const Container = styled.div`
   width: 100%;
 `
 
+const Landing = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - ${dimensions.headerHeight} - 45px);
+`
+
 const Banner = styled.div`
   width: 100%;
   align-self: center;
+  height: 20%;
+`
+
+const LandingImgWrapper = styled.div`
+  // height: calc(100% - 150px);
+  height: 75%;
+
+  @media (min-width: ${breakpoints.tablet}) {
+    height: calc(100% - 250px);
+  }
+
 `
 
 
@@ -38,9 +55,12 @@ const IndexPage = ({ data }) => {
     <>
       <SEO title="Home" />
       <Container>
-        <Banner>
-          <SlideShow />
-        </Banner>
+        <Landing>
+          <Banner>
+            <SlideShow />
+          </Banner>
+        </Landing>
+
         <Spacer />
         {/* <Feature
           product={feature}
