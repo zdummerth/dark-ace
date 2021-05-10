@@ -13,7 +13,7 @@ const Container = styled.div`
   // align-items: center;
 `
 const Shop = () => {
-  const { newLine, discs, headware, closeOut } = useShopify()
+  const { newLine, headware, closeOut } = useShopify()
 
 
   return (
@@ -43,21 +43,6 @@ const Shop = () => {
               product={product}
               key={product.shopifyId}
               showThumbs={true}
-              style={{
-                width: '60vw',
-                maxWidth: '300px',
-              }}
-            />
-          ))}
-        </Listing>
-        <Spacer />
-        <Subtitle>{discs.title}</Subtitle>
-        <Listing>
-          {discs.products.map(product => (
-            <ProductListingItem
-              product={product}
-              key={product.shopifyId}
-              // showThumbs={true}
               style={{
                 width: '60vw',
                 maxWidth: '300px',

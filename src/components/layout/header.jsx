@@ -2,7 +2,6 @@ import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
-import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { GiMusicSpell } from 'react-icons/gi';
 
 import { breakpoints, dimensions, colors } from '../../utils/styles';
@@ -162,32 +161,7 @@ const StyledLink = styled(Link)`
     // z-index: 6;
   }
 `
-const IconWrapper = styled.div`
-  display: flex;
-  margin-top: 20px;
 
-  @media (min-width: ${breakpoints.desktop}) {
-    
-  }
-
-  .icon {
-
-  }
-`
-const FbIcon = styled(FaFacebookF)`
-  font-size: 22px;
-
-  @media (max-width: 900px) {
-    font-size: 28px;
-  }
-`
-const IgIcon = styled(FaInstagram)`
-  font-size: 22px;
-
-  @media (max-width: 900px) {
-    font-size: 28px;
-  }
-`
 
 const ListenToMetalText = styled.div`
   display: none;
@@ -251,12 +225,6 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
     </StyledLink>
   ))
 
-  const extLinks =
-    <IconWrapper>
-      <StyledLink as='a' name='facebook' href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' target='_blank' rel="noopener"><FbIcon /></StyledLink>
-      <StyledLink as='a' name='instagram' href='https://www.instagram.com/darkaceapparel/' target='_blank' rel="noopener"><IgIcon /></StyledLink>
-    </IconWrapper>
-
 
   return (
     <HeaderWrapper>
@@ -302,7 +270,6 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
             Listen To Metal
           </ListenToMetalText>
           {links}
-          {/* {extLinks} */}
         </Navbox>
       </Nav>
     </HeaderWrapper>

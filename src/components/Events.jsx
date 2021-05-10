@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import Img from 'gatsby-image'
-import { BsCaretDown, BsCaretUp } from 'react-icons/bs';
-import FlexBox from './Flexbox'
 
 import { colors, BrandButton } from '../utils/styles'
 
@@ -37,17 +35,6 @@ const EventWrapper = styled.div`
    }
 `
 
-const DateWrapper = styled.div`
-  font-size: 16px;
-  text-align: center;
-  margin-bottom: 10px; 
-  border-bottom: 1px solid ${colors.lightest};
-`
-
-const InfoWrapper = styled(FlexBox)`
-  align-self: stretch;
-`
-
 
 const StyledButton = styled(BrandButton)`
   display: block;
@@ -65,21 +52,6 @@ padding: 10px;
 
 const Event = ({ event }) => {
 
-  const dateParser = (date) => {
-    const options = {
-      month: 'short',
-      day: 'numeric'
-    }
-    const partArray = new Intl.DateTimeFormat('en-US', options).formatToParts(date)
-    const month = partArray.find(el => el.type === 'month').value
-    const day = partArray.find(el => el.type === 'day').value
-
-    return { month, day }
-  }
-
-  const { day, month } = dateParser(event.date)
-
-
   return (
     <>
       <EventWrapper
@@ -89,15 +61,6 @@ const Event = ({ event }) => {
         <Img
           fluid={event.image}
         />
-        {/* <InfoWrapper
-          dir='column'
-          ai='center'
-        >
-          <DateWrapper>{`${month} ${day}`}</DateWrapper>
-          <div>{event.title}</div>
-          <div>at</div>
-          <div>{event.location}</div>
-        </InfoWrapper> */}
       </EventWrapper>
       <Details>
         <p>
@@ -151,26 +114,13 @@ const Event = ({ event }) => {
 
 
 
-const Events = ({ events, minimized, setMinimized }) => {
-
-  // console.log(events[0].date.getDate())
-
-  const icon = minimized ? <BsCaretDown /> : <BsCaretUp />;
-  const title = 'Play Disc Golf'
-  // const title = minimized ? 'Show Upcoming Events' : 'Hide Upcoming Events'
-
+const Events = ({ events }) => {
 
   return (
-    <Wrapper
-    // minimized={minimized}
-    >
+    <Wrapper>
       <div className='content'>
         {events.map(event => <Event event={event} key={event.link} />)}
       </div>
-      {/* <Toggle onClick={() => setMinimized(!minimized)}>
-        <div>{title}</div>
-        <div>{icon}</div>
-      </Toggle> */}
     </Wrapper>
   )
 }

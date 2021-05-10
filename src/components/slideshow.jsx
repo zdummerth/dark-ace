@@ -123,9 +123,6 @@ const SlideShow = ({ setIsSlideshowOpen, startingIndex }) => {
           className='slide-img'
           imgStyle={{
             objectFit: 'contain',
-            // objectPosition: 'center center',
-            // width: '100%',
-            // height: '100%',
           }}
         />
       </Slide>
@@ -136,8 +133,8 @@ const SlideShow = ({ setIsSlideshowOpen, startingIndex }) => {
 
   const handleNext = () =>
     index === images.length - 1 ? setIndex(0) : setIndex(index + 1)
-  const handlePrevious = () =>
-    index === 0 ? setIndex(images.length - 1) : setIndex(index - 1)
+  // const handlePrevious = () =>
+  //   index === 0 ? setIndex(images.length - 1) : setIndex(index - 1)
 
 
 
@@ -149,7 +146,6 @@ const SlideShow = ({ setIsSlideshowOpen, startingIndex }) => {
           clearInterval(interval);
         };
       },
-      [handleNext]
     );
 
   return (
