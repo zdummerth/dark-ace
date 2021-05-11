@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { graphql, Link } from "gatsby"
-// import Img from "gatsby-image"
+// import { CaretDown } from 'grommet-icons';
+import Img from "gatsby-image"
 import styled from 'styled-components'
 import { useShopify } from '../hooks/useShopify'
 
@@ -8,7 +9,7 @@ import ProductListingItem from '../components/products/ProducListingItem'
 import SlideShow from '../components/slideshow'
 import SEO from "../components/seo"
 
-import { DarkBrandButton, Listing, Spacer } from '../utils/styles'
+import { DarkBrandButton, Listing, Spacer, dimensions, breakpoints, colors } from '../utils/styles'
 
 const Container = styled.div`
   display: flex;
@@ -21,23 +22,34 @@ const Container = styled.div`
 const Landing = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100vh - ${dimensions.headerHeight} - 45px);
+  height: calc(100vh - ${dimensions.headerHeight});
 `
 
 const Banner = styled.div`
   width: 100%;
   align-self: center;
-  height: 20%;
+  height: 22%;
 `
 
 const LandingImgWrapper = styled.div`
   // height: calc(100% - 150px);
   height: 75%;
+  width: 100%;
 
-  @media (min-width: ${breakpoints.tablet}) {
-    height: calc(100% - 250px);
-  }
+  // @media (min-width: ${breakpoints.tablet}) {
+  //   height: calc(100% - 250px);
+  // }
 
+`
+
+const KeepScrolling = styled.div`
+  background: ${colors.darkToBottom};
+  height: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: ${({ scrolled }) => scrolled ? '0' : '1'};
+  transition: opacity .5s ease-in-out;
 `
 
 
@@ -48,8 +60,28 @@ const StyledLink = styled(Link)`
 
 
 const IndexPage = ({ data }) => {
+  console.log('index rendered')
 
   const { newLine, headware } = useShopify()
+  const [scrolled, setScrolled] = useState(false)
+
+  const isScrolled = () => {
+    if (window.pageYOffset > 0) {
+      setScrolled(true)
+    }
+    else {
+      setScrolled(false)
+    }
+  }
+
+  useEffect(() => {
+
+    window.addEventListener('scroll', isScrolled, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', isScrolled);
+    };
+  }, []);
 
   return (
     <>
@@ -59,9 +91,26 @@ const IndexPage = ({ data }) => {
           <Banner>
             <SlideShow />
           </Banner>
+          <LandingImgWrapper>
+            <Img
+              fluid={data.squareBanner.childImageSharp.fluid}
+              alt={'bone basket background'}
+              style={{
+                height: '100%',
+              }}
+              imgStyle={{
+                objectFit: 'contain'
+              }}
+            />
+          </LandingImgWrapper>
+          <KeepScrolling scrolled={scrolled}>
+            {/* <CaretDown
+              color={colors.lightest}
+            /> */}
+          </KeepScrolling>
         </Landing>
 
-        <Spacer />
+        {/* <Spacer /> */}
         {/* <Feature
           product={feature}
           showThumbs={true}
@@ -100,16 +149,6 @@ const IndexPage = ({ data }) => {
           ))}
 
         </Listing>
-        {/* <Subtitle>{accessories.products[0].title}</Subtitle>
-        <AltProductContainer>
-          <Accessory
-            product={accessories.products[0]}
-            style={{
-              marginBottom: '40px'
-            }}
-          />
-          <GiftCard style={{ marginTop: '30px' }} />
-        </AltProductContainer> */}
         <StyledLink to='/shop'>
           <DarkBrandButton>
             View All Products
@@ -137,7 +176,7 @@ query {
       }
     }
   }
-  winterWizards: file(relativePath: { eq: "winter-wizards.jpg" }) {
+  squareBanner: file(relativePath: { eq: "da-square-banner.png" }) {
     childImageSharp {
       fluid(maxWidth: 1280) {
         ...GatsbyImageSharpFluid

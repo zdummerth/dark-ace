@@ -105,7 +105,7 @@ const FeatureContainer = styled.div`
 
 const ProductListingItem = ({ product, className, showThumbs, style }) => {
   const [index, setIndex] = useState(0);
-  console.log(product.availableForSale)
+  // console.log(product.availableForSale)
 
   return (
     <ProductContainer

@@ -73,7 +73,7 @@ const Cart = () => {
           <p>
             Your Cart Is Empty
           </p>
-          <StyledLink to='/'>Continue Shopping</StyledLink>
+          <StyledLink to='/shop'>Continue Shopping</StyledLink>
 
         </>
         :
