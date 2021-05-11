@@ -49,6 +49,11 @@ const StyledLink = styled(Link)`
     max-width: 300px;
 `
 
+const Italic = styled.i`
+  display: block;
+  padding-bottom: 25px;
+`
+
 const Cart = () => {
   const {
     store: { checkout },
@@ -66,6 +71,7 @@ const Cart = () => {
         <p>{`Subtotal (${totalQuantity} ${totalQuantity > 1 ? 'items' : 'item'}): `}</p>
         <h4>$ {checkout.subtotalPrice}</h4>
       </Subtotal>
+      <Italic>taxes and shipping calculated at checkout</Italic>
 
       {checkout.lineItems.length === 0
         ?
