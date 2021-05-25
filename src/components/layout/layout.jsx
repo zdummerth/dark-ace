@@ -1,14 +1,9 @@
 import React, { useContext, useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import { StoreContext } from '../../context/StoreContextProvider'
 import styled, { createGlobalStyle } from "styled-components"
 import { dimensions, colors, breakpoints } from '../../utils/styles';
 
-import Header from './header'
-import Footer from './footer'
-import Spotify from '../spotify'
-import { CartStatus } from './cartStatus'
 
 
 const GlobalStyle = createGlobalStyle`
@@ -104,19 +99,7 @@ const ContentWrapper = styled.main`
 
 `
 
-// When header is fixed, it's removed from doc flow
-// This offsets that
-const HeaderMargin = styled.div`
-  margin-top: ${dimensions.headerHeight};
-`
 
-const StyledAddingToCart = styled(CartStatus)`
-  position: fixed;
-  top: ${dimensions.headerHeight};
-  z-index: 50;
-  width: ${({ error }) => error ? '100%' : 'auto'}
-
-`
 
 
 const Layout = ({ children, location, history }) => {
@@ -138,55 +121,13 @@ const Layout = ({ children, location, history }) => {
   `)
 
 
-  const {
-    resetError,
-    setStatus,
-    store: { status, error, checkout: { lineItems } },
-  } = useContext(StoreContext)
-
-  const [spotifyMinimized, setSpotifyMinimized] = useState(true);
-
-  useEffect(() => {
-    //This makes sure the menus close when the user clicks on a page link
-    setSpotifyMinimized(true)
-  }, [location])
-
-
-  const cartCount = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
-
   return (
     <>
       <GlobalStyle />
       <Wrapper>
-        <StyledAddingToCart
-          status={status}
-          setStatus={setStatus}
-          error={error}
-          resetError={resetError}
-        />
-        <Header
-          siteTitle={data.site.siteMetadata.title}
-          cartCount={cartCount}
-          setSpotifyMinimized={setSpotifyMinimized}
-          spotifyMinimized={spotifyMinimized}
-          // setEventsMinimized={setEventsMinimized}
-        />
-        <HeaderMargin />
-        {/* <Events
-          minimized={eventsMinimized}
-          setMinimized={setEventsMinimized}
-          events={eventData}
-        /> */}
-        <Spotify
-          minimized={spotifyMinimized}
-          setMinimized={setSpotifyMinimized}
-        />
-        <ContentWrapper
-          onClick={() => setSpotifyMinimized(true)}
-        >
+        <ContentWrapper>
           {children}
         </ContentWrapper>
-        <Footer />
       </Wrapper>
     </>
   )

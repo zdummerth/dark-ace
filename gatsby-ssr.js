@@ -1,11 +1,7 @@
 const React = require("react")
-const StoreContextProvider = require("./src/context/StoreContextProvider").default
 const Layout = require("./src/components/layout/layout").default
 
 
-exports.wrapRootElement = ({ element }) => {
-  return <StoreContextProvider>{element}</StoreContextProvider>
-}
 
 
 exports.wrapPageElement = ({ element, props }) => {

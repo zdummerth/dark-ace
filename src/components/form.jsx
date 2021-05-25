@@ -75,19 +75,19 @@ const InputWrapper = styled.div`
 
 
 const MyTextInput = ({ label, ...props }) => {
-  // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-  // which we can spread on <input> and alse replace ErrorMessage entirely.
-  const [field, meta] = useField(props);
-  return (
-    <InputWrapper>
-      <label htmlFor={props.id || props.name}>{label}
-      <input {...field} {...props} />
-      </label>
-      {meta.touched && meta.error ? (
-        <StyledErrorMessage>{meta.error}</StyledErrorMessage>
-      ) : null}
-    </InputWrapper>
-  );
+    // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
+    // which we can spread on <input> and alse replace ErrorMessage entirely.
+    const [field, meta] = useField(props);
+    return (
+        <InputWrapper>
+            <label htmlFor={props.id || props.name}>{label}
+                <input {...field} {...props} />
+            </label>
+            {meta.touched && meta.error ? (
+                <StyledErrorMessage>{meta.error}</StyledErrorMessage>
+            ) : null}
+        </InputWrapper>
+    );
 };
 
 const MyTextArea = ({ label, ...props }) => {
@@ -95,16 +95,16 @@ const MyTextArea = ({ label, ...props }) => {
     // which we can spread on <input> and alse replace ErrorMessage entirely.
     const [field, meta] = useField(props);
     return (
-      <InputWrapper>
-        <label htmlFor={props.id || props.name}>{label}
-        <textarea {...field} {...props} />
-        </label>
-        {meta.touched && meta.error ? (
-            <StyledErrorMessage>{meta.error}</StyledErrorMessage>
-        ) : null}
-      </InputWrapper>
+        <InputWrapper>
+            <label htmlFor={props.id || props.name}>{label}
+                <textarea {...field} {...props} />
+            </label>
+            {meta.touched && meta.error ? (
+                <StyledErrorMessage>{meta.error}</StyledErrorMessage>
+            ) : null}
+        </InputWrapper>
     );
-  };
+};
 
 
 // const MySelect = ({ label, ...props }) => {
@@ -145,9 +145,9 @@ const SuccessMessage = () => {
 
 
 const BasicForm = () => {
-    const [ submitted, setSubmitted ] = useState(false)
-    const [ isSubmitting, setIsSubmitting ] = useState(false)
-    const [ isError, setIsError ] = useState(false)
+    const [submitted, setSubmitted] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [isError, setIsError] = useState(false)
 
 
     const submitData = async (values) => {
@@ -157,87 +157,87 @@ const BasicForm = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
-                  },
+                },
                 body: JSON.stringify(values)
             })
 
             response.ok ? setSubmitted(true) : setIsError(true)
             setIsSubmitting(false)
-   
-        } catch(err) {
+
+        } catch (err) {
             setIsError(true)
             setIsSubmitting(false)
         }
-    
+
     };
-  return (
-    <>
-      <Formik
-        initialValues={{
-          name: "",
-          email: "",
-          // subject: "",
-          message: ""
-        }}
-        validationSchema={Yup.object({
-            name: Yup.string()
-            .max(50, "Must be 50 characters or less")
-            .required("Required"),
-            email: Yup.string()
-            .email("Invalid email addresss`")
-            .required("Required"),
-            // subject: Yup.string()
-            // // @see http://bit.ly/yup-mixed-oneOf
-            // .oneOf(
-            //     ["wholesale", "shipping", "sponsorship", "other"],
-            //     "Invalid Subject"
-            // )
-            // .required("Required"),  
-            message: Yup.string()
-            .required("Required"),
-        })}
-        onSubmit={async (values, { resetForm }) => {
-            await submitData(values)
-            resetForm();
-        }}
-      >
-            <StyledForm>
-                {isError ? <ErrorMessage /> : isSubmitting ? <p>Submitting...</p> : submitted ? <SuccessMessage /> 
-                    : 
-                    <>
-                        <MyTextInput
-                        label="Name"
-                        name="name"
-                        type="text"
-                        className='form-child'
-                        />
-                        <MyTextInput
-                        label="Email Address"
-                        name="email"
-                        type="email"
-                        className='form-child'
-                        />
-                        {/* <MySelect label="Subject" name="subject" className='form-child'>
+    return (
+        <>
+            <Formik
+                initialValues={{
+                    name: "",
+                    email: "",
+                    // subject: "",
+                    message: ""
+                }}
+                validationSchema={Yup.object({
+                    name: Yup.string()
+                        .max(50, "Must be 50 characters or less")
+                        .required("Required"),
+                    email: Yup.string()
+                        .email("Invalid email addresss`")
+                        .required("Required"),
+                    // subject: Yup.string()
+                    // // @see http://bit.ly/yup-mixed-oneOf
+                    // .oneOf(
+                    //     ["wholesale", "shipping", "sponsorship", "other"],
+                    //     "Invalid Subject"
+                    // )
+                    // .required("Required"),  
+                    message: Yup.string()
+                        .required("Required"),
+                })}
+                onSubmit={async (values, { resetForm }) => {
+                    await submitData(values)
+                    resetForm();
+                }}
+            >
+                <StyledForm>
+                    {isError ? <ErrorMessage /> : isSubmitting ? <p>Submitting...</p> : submitted ? <SuccessMessage />
+                        :
+                        <>
+                            <MyTextInput
+                                label="Name"
+                                name="name"
+                                type="text"
+                                className='form-child'
+                            />
+                            <MyTextInput
+                                label="Email Address"
+                                name="email"
+                                type="email"
+                                className='form-child'
+                            />
+                            {/* <MySelect label="Subject" name="subject" className='form-child'>
                           <option value="">Select a subject</option>
                           <option value="wholesale">Wholesale</option>
                           <option value="shipping">Shipping</option>
                           <option value="sponsorship">Sponsorship</option>
                           <option value="other">Other</option>
                         </MySelect> */}
-                        <MyTextArea
-                          label="Message"
-                          name="message"
-                          className='form-child'
-                          rows='5'
-                          cols='50'
-                        />
-                        <BrandButton type='submit' id='submit-button'>Submit</BrandButton>
-                    </>
-                }
-            </StyledForm>
-      </Formik>
-    </>
-  );
+                            <MyTextArea
+                                label="Message"
+                                name="message"
+                                className='form-child'
+                                rows='5'
+                                cols='50'
+                            />
+                            <BrandButton type='submit' id='submit-button'>Submit</BrandButton>
+                        </>
+                    }
+                </StyledForm>
+            </Formik>
+        </>
+    );
 };
 
 

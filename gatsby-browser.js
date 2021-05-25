@@ -1,10 +1,5 @@
 import React from "react"
-import StoreContextProvider from "./src/context/StoreContextProvider"
 import Layout from './src/components/layout/layout'
-
-export const wrapRootElement = ({ element }) => {
-  return <StoreContextProvider>{element}</StoreContextProvider>
-}
 
 
 /*

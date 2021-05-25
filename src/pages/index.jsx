@@ -3,10 +3,7 @@ import { graphql, Link } from "gatsby"
 // import { CaretDown } from 'grommet-icons';
 import Img from "gatsby-image"
 import styled from 'styled-components'
-import { useShopify } from '../hooks/useShopify'
 
-import ProductListingItem from '../components/products/ProducListingItem'
-import SlideShow from '../components/slideshow'
 import SEO from "../components/seo"
 
 import { DarkBrandButton, Listing, Spacer, dimensions, breakpoints, colors } from '../utils/styles'
@@ -15,73 +12,57 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   //Having align-items set to center prevents side scrolling for products
-
+  align-items: center;
   width: 100%;
 `
 
 const Landing = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100vh - ${dimensions.headerHeight});
+  justify-content: space-around;
+  align-items: center;
+  // height: 100vh;
+  width: 100vw;
 `
 
 const Banner = styled.div`
   width: 100%;
+  max-width: 500px;
   align-self: center;
-  height: 22%;
+  height: 40%;
 `
 
-const LandingImgWrapper = styled.div`
-  // height: calc(100% - 150px);
-  height: 75%;
-  width: 100%;
+const ImgWrapper = styled.div`
+  height: 120px;
+  width: 120px;
+  margin: 5px;
 
-  // @media (min-width: ${breakpoints.tablet}) {
-  //   height: calc(100% - 250px);
-  // }
-
+  @media (min-width: ${breakpoints.tablet}) {
+    height: 200px;
+    width: 200px;
+  }
 `
 
-const KeepScrolling = styled.div`
-  background: ${colors.darkToBottom};
-  height: 3%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: ${({ scrolled }) => scrolled ? '0' : '1'};
-  transition: opacity .5s ease-in-out;
-`
 
 
 const StyledLink = styled(Link)`
   align-self: center;
   margin-top: 30px;
+  margin-bottom: 30px;
+`
+
+const I = styled.i`
+  font-size: 22px;
+  margin: 20px 0;
 `
 
 
 const IndexPage = ({ data }) => {
-  console.log('index rendered')
+  console.log(data)
 
-  const { newLine, headware } = useShopify()
-  const [scrolled, setScrolled] = useState(false)
-
-  const isScrolled = () => {
-    if (window.pageYOffset > 0) {
-      setScrolled(true)
-    }
-    else {
-      setScrolled(false)
-    }
-  }
-
-  useEffect(() => {
-
-    window.addEventListener('scroll', isScrolled, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', isScrolled);
-    };
-  }, []);
+  const firstHalf = data.allFile.edges.slice(0, 2)
+  const secHalf = data.allFile.edges.slice(2, 4)
+  const all = data.allFile.edges
 
   return (
     <>
@@ -89,12 +70,9 @@ const IndexPage = ({ data }) => {
       <Container>
         <Landing>
           <Banner>
-            <SlideShow />
-          </Banner>
-          <LandingImgWrapper>
             <Img
-              fluid={data.squareBanner.childImageSharp.fluid}
-              alt={'bone basket background'}
+              fluid={data.banner.childImageSharp.fluid}
+              alt={'new product image'}
               style={{
                 height: '100%',
               }}
@@ -102,56 +80,34 @@ const IndexPage = ({ data }) => {
                 objectFit: 'contain'
               }}
             />
-          </LandingImgWrapper>
-          <KeepScrolling scrolled={scrolled}>
-            {/* <CaretDown
-              color={colors.lightest}
-            /> */}
-          </KeepScrolling>
+          </Banner>
+          <I>
+            Coming June 6th, 2021
+          </I>
+          <Listing>
+            {all.map(({ node }) => {
+              return (
+                <ImgWrapper key={node.name}>
+                  <Img
+                    fluid={node.childImageSharp.fluid}
+                    alt={'new product image'}
+                    style={{
+                      height: '100%',
+                    }}
+                    imgStyle={{
+                      // objectFit: 'contain'
+                    }}
+                  />
+                </ImgWrapper>
+              )
+            })}
+          </Listing>
         </Landing>
 
-        {/* <Spacer /> */}
-        {/* <Feature
-          product={feature}
-          showThumbs={true}
-          style={{
-            width: '80vw',
-            maxWidth: '400px',
-          }}
-        /> */}
-        {/* <Subtitle>{newLine.title}</Subtitle> */}
-        <Listing>
-          {newLine.products.map(product => (
-            <ProductListingItem
-              product={product}
-              key={product.shopifyId}
-              showThumbs={true}
-              style={{
-                width: '60vw',
-                maxWidth: '300px',
-              }}
-            />
-          ))}
-        </Listing>
-        <Spacer />
-        {/* <Subtitle>{headware.title}</Subtitle> */}
-        <Listing>
-          {headware.products.map(product => (
-            <ProductListingItem
-              product={product}
-              key={product.shopifyId}
-              showThumbs={true}
-              style={{
-                width: '60vw',
-                maxWidth: '300px',
-              }}
-            />
-          ))}
 
-        </Listing>
-        <StyledLink to='/shop'>
+        <StyledLink to='/contact'>
           <DarkBrandButton>
-            View All Products
+            Contact Us
           </DarkBrandButton>
         </StyledLink>
       </Container>
@@ -162,28 +118,19 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
 query {
-   motto: file(relativePath: { eq: "motto.png" }) {
-    childImageSharp {
-      fluid(maxWidth: 1280) {
-        ...GatsbyImageSharpFluid
+  allFile(filter: {relativeDirectory: {eq: "newItems"}}) {
+    edges {
+      node {
+        name
+        childImageSharp {
+          fluid(maxWidth: 1280) {
+            ...GatsbyImageSharpFluid
+          }
+        }
       }
     }
   }
-  giveBack: file(relativePath: { eq: "da-giveback-banner.png" }) {
-    childImageSharp {
-      fluid(maxWidth: 1280) {
-        ...GatsbyImageSharpFluid
-      }
-    }
-  }
-  squareBanner: file(relativePath: { eq: "da-square-banner.png" }) {
-    childImageSharp {
-      fluid(maxWidth: 1280) {
-        ...GatsbyImageSharpFluid
-      }
-    }
-  }
-  anarchy: file(relativePath: { eq: "anarchy.png" }) {
+  banner: file(name: {eq: "da-square-banner"}) {
     childImageSharp {
       fluid(maxWidth: 1280) {
         ...GatsbyImageSharpFluid

@@ -141,28 +141,12 @@ export const scrollbarStyles = {
 
 const StyledListing = styled.div`
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: ${({ isSingleItem }) => isSingleItem ? 'center' : 'flex-start'};
-  overflow-x: auto;
-  margin: 0 ${spacing.xs};
-
-  & > * {
-    margin-right: ${({ isSingleItem }) => isSingleItem ? '0' : `${spacing.md}`};
-    // margin-top: ${spacing.md};
-  }
-
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 
 
   @media (min-width: ${breakpoints.tablet}) {
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    // justify-content: ${({ isSingleItem }) => isSingleItem ? 'flex-start' : 'space-evenly'};
-    margin-top: ${spacing.md};
-    & > * {
-      margin-top: ${spacing.md};
-    }
 
-    margin-right: 0;
   }
 `
 
