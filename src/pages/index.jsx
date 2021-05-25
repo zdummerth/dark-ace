@@ -82,7 +82,7 @@ const IndexPage = ({ data }) => {
             />
           </Banner>
           <I>
-            Coming June 6th, 2021
+            Coming June 8th, 2021
           </I>
           <Listing>
             {all.map(({ node }) => {
