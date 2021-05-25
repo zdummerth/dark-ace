@@ -141,7 +141,7 @@ export const scrollbarStyles = {
 
 const StyledListing = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
 
 

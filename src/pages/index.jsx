@@ -35,7 +35,7 @@ const Banner = styled.div`
 const ImgWrapper = styled.div`
   height: 120px;
   width: 120px;
-  margin: 5px;
+  margin: 10px;
 
   @media (min-width: ${breakpoints.tablet}) {
     height: 200px;
@@ -105,11 +105,11 @@ const IndexPage = ({ data }) => {
         </Landing>
 
 
-        <StyledLink to='/contact'>
+        {/* <StyledLink to='/contact'>
           <DarkBrandButton>
             Contact Us
           </DarkBrandButton>
-        </StyledLink>
+        </StyledLink> */}
       </Container>
 
     </>
