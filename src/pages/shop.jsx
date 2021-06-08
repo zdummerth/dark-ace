@@ -16,12 +16,12 @@ const Container = styled.div`
 const Tabs = styled.div`
   display: flex;
   justify-content: center;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid ${colors.brand};
 `
 
 const Tab = styled.div`
-  border: 1px solid gray;
-  border-radius: 5px 0;
+  border: 1px solid ${colors.brand};
+  border-radius: 5px 5px 0 0;
   border-bottom: none;
   padding: 5px;
   background: ${({ selected }) => selected ? colors.brand : 'transparent'};
@@ -34,8 +34,8 @@ const Margin = styled.div`
 
 
 const Shop = () => {
-  const { tShirts, longsleeves, driFits, headware, accessories, discs } = useShopify()
-  console.log({discs})
+  const { tShirts, longsleeves, driFits, headware, accessories, discs, featured } = useShopify()
+  console.log({ discs })
 
   const [MainCat, setMainCat] = useState('apparel')
   const [SecCat, setSecCat] = useState('t-shirts')
@@ -46,6 +46,11 @@ const Shop = () => {
       <SEO title="Shop" />
       <Margin />
       <Tabs>
+        <Tab
+          selected={MainCat === 'featured'}
+          onClick={() => setMainCat('featured')}
+        >Featured</Tab>
+        <Margin />
         <Tab
           selected={MainCat === 'apparel'}
           onClick={() => setMainCat('apparel')}
@@ -83,6 +88,24 @@ const Shop = () => {
 
       <Container>
         <Margin />
+        {MainCat === 'featured' && (
+          <>
+            <Subtitle>{featured.title}</Subtitle>
+            <Listing>
+              {featured.products.map(product => (
+                <ProductListingItem
+                  product={product}
+                  key={product.shopifyId}
+                  showThumbs={false}
+                  style={{
+                    // width: '60vw',
+                    // maxWidth: '300px',
+                  }}
+                />
+              ))}
+            </Listing>
+          </>
+        )}
         {MainCat === 'discs' && (
           <>
             <Subtitle>{discs.title}</Subtitle>
