@@ -68,6 +68,7 @@ const SoldOut = styled.div`
 
 const Thumbs = styled.div`
   display: flex; 
+  flex-wrap: wrap;
   // justify-content: center;
 `
 const ThumbButton = styled.button`

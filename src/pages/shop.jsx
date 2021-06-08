@@ -34,7 +34,8 @@ const Margin = styled.div`
 
 
 const Shop = () => {
-  const { tShirts, longsleeves, driFits, headware, accessories } = useShopify()
+  const { tShirts, longsleeves, driFits, headware, accessories, discs } = useShopify()
+  console.log({discs})
 
   const [MainCat, setMainCat] = useState('apparel')
   const [SecCat, setSecCat] = useState('t-shirts')
@@ -49,11 +50,11 @@ const Shop = () => {
           selected={MainCat === 'apparel'}
           onClick={() => setMainCat('apparel')}
         >Apparel</Tab>
-        {/* <Margin /> */}
-        {/* <Tab
+        <Margin />
+        <Tab
           selected={MainCat === 'discs'}
           onClick={() => setMainCat('discs')}
-        >Discs</Tab> */}
+        >Discs</Tab>
       </Tabs>
       <Margin />
       { MainCat === 'apparel' && (
@@ -82,7 +83,25 @@ const Shop = () => {
 
       <Container>
         <Margin />
-        {SecCat === 't-shirts' && (
+        {MainCat === 'discs' && (
+          <>
+            <Subtitle>{discs.title}</Subtitle>
+            <Listing>
+              {discs.products.map(product => (
+                <ProductListingItem
+                  product={product}
+                  key={product.shopifyId}
+                  showThumbs={false}
+                  style={{
+                    // width: '60vw',
+                    // maxWidth: '300px',
+                  }}
+                />
+              ))}
+            </Listing>
+          </>
+        )}
+        {SecCat === 't-shirts' && MainCat === 'apparel' && (
           <>
             <Subtitle>{tShirts.title}</Subtitle>
             {/* <Margin /> */}
@@ -112,7 +131,7 @@ const Shop = () => {
             </Listing>
           </>
         )}
-        {SecCat === 'dri-fits' && (
+        {SecCat === 'dri-fits' && MainCat === 'apparel' && (
           <>
             <Subtitle>{driFits.title}</Subtitle>
             {/* <Margin /> */}
@@ -131,7 +150,7 @@ const Shop = () => {
             </Listing>
           </>
         )}
-        {SecCat === 'headware' && (
+        {SecCat === 'headware' && MainCat === 'apparel' && (
           <>
             <Subtitle>{headware.title}</Subtitle>
             <Margin />
@@ -150,7 +169,7 @@ const Shop = () => {
             </Listing>
           </>
         )}
-        {SecCat === 'accessories' && (
+        {SecCat === 'accessories' && MainCat === 'apparel' && (
           <>
             <Subtitle>{accessories.title}</Subtitle>
             <Margin />

@@ -20,7 +20,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 3rem auto;
-  width: 100%;
+  width: 95%;
+  // padding: 0 5px;
 
   .hidden {
     display: none;

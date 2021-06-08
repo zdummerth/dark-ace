@@ -104,6 +104,8 @@ export const useShopify = () => {
 
   const allCollections = data.allShopifyCollection.edges.map(({ node }) => node)
 
+  console.log({allCollections})
+
   const accessories = allCollections.find(c => c.handle === 'accessories')
   const discs = allCollections.find(c => c.handle === 'discs')
   const headware = allCollections.find(c => c.handle === 'headware')
