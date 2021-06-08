@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import Img from 'gatsby-image'
+import { FaExternalLinkAlt } from 'react-icons/fa'
+
 
 import { colors, BrandButton } from '../utils/styles'
 
@@ -37,8 +39,9 @@ const EventWrapper = styled.div`
 
 
 const StyledButton = styled(BrandButton)`
-  display: block;
-  width: 75px;
+  display: flex;
+  justify-content: space-around;
+  width: 100px;
   margin-bottom: 10px;
   text-align: center;
 `
@@ -63,49 +66,51 @@ const Event = ({ event }) => {
         />
       </EventWrapper>
       <Details>
+        <h2>
+          NADGT Exclusive @ Barracks and The Bunker Presented by Dark Ace
+        </h2>
         <p>
-          Dark Ace and The St.Louis Disc Golf Club Present: 2021 USDGC Amateur Doubles Qualifer
+          PDGA B-Tier consisting of two rounds: One at Jefferson Barracks OG and one at The Bunker.
         </p>
         <p>
-          ***This is a Amateur only tournament. Make sure your PDGA certification states AM and not PRO. If it has Pro, contact the PDGA to inquire how to get it changed to Amateur.***
+          Check in will be from 7:30-8:30
+          Player meeting will be at 8:45
+          Tee off for round 1 will be at 9:05
+          We will break 1 hour for lunch (not provided)
+          Round 2 will start 1 hour after the final card's come in
         </p>
         <p>
-          FORMAT:
+          Single Event Divisions offered:
         </p>
         <p>
-          BYOP doubles (Bring Your Own Partner)
+          -MA1/MA2/MA3
         </p>
         <p>
-          Captain's Choice (Best Shot)
+          -FA1/FA2
         </p>
         <p>
-          $50 a team
+          Age Protected Divisions offered:
         </p>
         <p>
-          Each player get a premium INNOVA disc with the US Doubles hotstamp, a mini, and a Dark Ace hat.
+          -MA40/MA50+
         </p>
         <p>
-          The winning team/s qualify to play in the US Doubles Championships in Rock Hill at Winthrop Gold the weekend before USDGC. October 1st-3rd
+          -FA40+
         </p>
         <p>
-          0-14 Teams = 1 Team qualifies
+          -MJ18
         </p>
         <p>
-          15-24 Teams = 2 Teams qualifies
-        </p>
-        <p>
-          25+ Teams = 3 Teams qualifies
-        </p>
-        <p>
-          This will be 2 rounds, 1 round at Endicott and 1 round at Carrollton.
+          -FJ18
         </p>
         <StyledButton
           as='a'
           href={event.link}
           id='no-btm-border'
         >
-          Register
-      </StyledButton>
+          <div>Register</div>
+          <FaExternalLinkAlt />
+        </StyledButton>
       </Details>
 
     </>

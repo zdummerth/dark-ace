@@ -40,7 +40,6 @@ const LoadingSpinner = styled.div`
     margin-right: 8px;
 
     animation: ${rotate} 1s linear infinite;
-
 `
 
 const Button = styled(StyledButton)`

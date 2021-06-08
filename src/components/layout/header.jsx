@@ -190,10 +190,10 @@ const ListenToMetalLogo = styled.div`
 const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
 
   const MenuItems = [
-    {
-      path: '/',
-      title: 'Home'
-    },
+    // {
+    //   path: '/',
+    //   title: 'Home'
+    // },
     {
       path: '/shop',
       title: 'Shop'

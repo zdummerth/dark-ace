@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import "@fontsource/covered-by-your-grace"; // Defaults to weight 400.
+
 
 
 /*
@@ -39,7 +41,7 @@ export const BrandButton = styled.button`
   border: none;
   border-radius: 5px;
   padding: 10px;
-  width: 150px;
+  // width: 150px;
   color: white;
 
   :hover {
@@ -141,28 +143,20 @@ export const scrollbarStyles = {
 
 const StyledListing = styled.div`
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: ${({ isSingleItem }) => isSingleItem ? 'center' : 'flex-start'};
+  flex-wrap: wrap;
+  // justify-content: ${({ isSingleItem }) => isSingleItem ? 'center' : 'flex-start'};
+  justify-content: center;
   overflow-x: auto;
-  margin: 0 ${spacing.xs};
+  // margin: 0 ${spacing.xs};
+  // margin-bottom: ${spacing.me};
 
-  & > * {
-    margin-right: ${({ isSingleItem }) => isSingleItem ? '0' : `${spacing.md}`};
-    // margin-top: ${spacing.md};
+  &:first-child {
+    // margin: 100px;
   }
-
-
-
-  @media (min-width: ${breakpoints.tablet}) {
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    // justify-content: ${({ isSingleItem }) => isSingleItem ? 'flex-start' : 'space-evenly'};
-    margin-top: ${spacing.md};
-    & > * {
-      margin-top: ${spacing.md};
-    }
-
-    margin-right: 0;
+  & > * {
+    // margin-right: ${({ isSingleItem }) => isSingleItem ? '0' : `${spacing.lg}`};
+    // margin-top: ${spacing.md};
+    // margin-bottom: ${spacing.lg};
   }
 `
 
@@ -181,7 +175,17 @@ export const Listing = ({ children, style }) => {
 
 export const Subtitle = styled.h2`
   // font-size: rem;
-  margin-bottom: 0;
-  margin-top: 0;
+  margin-bottom: 10px;
+  text-decoration: underline;
+  margin-top: 10px;
   text-align: center;
+  font-family: 'Covered By Your Grace';
+  font-size: 2rem;
+`
+
+export const H3 = styled.h3`
+  margin-top: 10px;
+  text-align: center;
+  font-family: 'Covered By Your Grace';
+  font-size: 1.5rem;
 `

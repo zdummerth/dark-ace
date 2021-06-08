@@ -5,13 +5,14 @@ import Img from 'gatsby-image'
 import Price from './Price'
 
 
-import { breakpoints, colors, spacing, Subtitle } from '../../utils/styles';
+import { breakpoints, colors, spacing, Subtitle, H3 } from '../../utils/styles';
 
 
 const ProductContainer = styled.div`
   text-align: center; 
-  border: 1px solid ${colors.gray};
-  background: ${colors.grayGradient};
+  // border: 1px solid ${colors.gray};
+  // background: ${colors.grayGradient};
+  padding: 10px;
 
   display: flex;
   flex-direction: column;
@@ -21,8 +22,10 @@ const ProductContainer = styled.div`
   }
 `
 const ImgContainer = styled.div`
-  width: inherit;
-  max-width: inherit;
+  width: 60vw;
+  max-width: 300px;
+  min-height: 30vh;
+  max-height: 300px;
   position: relative;
   overflow: hidden;
 `
@@ -40,8 +43,9 @@ const Thumbnail = styled.button`
   ::-moz-focus-inner {border:0;}
 `
 const ImgLink = styled(Link)`
-
   width: 100%;
+  height: 100%;
+
   .gatsby-image-wrapper {
     transition: all 250ms;
   }
@@ -112,14 +116,6 @@ const ProductListingItem = ({ product, className, showThumbs, style }) => {
       className={className}
       style={style}
     >
-      <ImgContainer>
-        <ImgLink to={`/shop/${product.handle}`}>
-          <Img
-            fluid={product.images[index].localFile.childImageSharp.fluid}
-            alt={'Product Image'}
-          />
-        </ImgLink>
-      </ImgContainer>
       <InfoContainer>
         {showThumbs ?
           <ThumbnailContainer>
@@ -136,22 +132,28 @@ const ProductListingItem = ({ product, className, showThumbs, style }) => {
         <TextWrapper
           to={`/shop/${product.handle}`}
         >
-          <h3>{product.title}</h3>
-          {product.availableForSale ? (
-            <Price
-              price={product.variants[0].priceV2}
-              compareAtPrice={product.variants[0].compareAtPriceV2}
-            />
-          )
-            :
+          <H3>{product.title}</H3>
+
+          {!product.availableForSale &&
             <p>Sold Out!</p>
           }
-          {/* <Price
-            price={product.variants[0].priceV2}
-            compareAtPrice={product.variants[0].compareAtPriceV2}
-          /> */}
         </TextWrapper>
       </InfoContainer>
+      <ImgContainer>
+        <ImgLink to={`/shop/${product.handle}`}>
+          <Img
+            fluid={product.images[index].localFile.childImageSharp.fluid}
+            alt={'Product Image'}
+            style={{
+              height: '100%',
+              width: '100%'
+            }}
+            imgStyle={{
+              // objectFit: 'contain'
+            }}
+          />
+        </ImgLink>
+      </ImgContainer>
     </ProductContainer >
   )
 }

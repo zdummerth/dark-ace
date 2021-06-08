@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram } from 'react-icons/fa'
 
 
 

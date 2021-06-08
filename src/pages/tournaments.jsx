@@ -11,15 +11,14 @@ const Container = styled.div`
   align-items: center;
 `
 const Tournaments = ({ data }) => {
-  const doublesLink = 'https://events.discgolfunited.com/disc-golf-tournaments/event-detail.cfm/tourn_id/10567'
 
   const eventData = [
     {
       date: new Date(2021, 4, 22),
-      title: 'USDGC Doubles Qualifier',
+      title: 'NADGT Exclusive @ Barracks and The Bunker Presented by Dark Ace',
       location: 'Endicott/Carrolton',
-      link: doublesLink,
-      image: data.doublesResponsive.childImageSharp.fluid,
+      link: 'https://www.discgolfscene.com/tournaments/NADGT_Exclusive_at_Barracks_and_The_Bunker_Presented_by_Dark_Ace_2021',
+      image: data.nagdt.childImageSharp.fluid,
       
     }
   ]
@@ -38,14 +37,7 @@ const Tournaments = ({ data }) => {
 
 export const query = graphql`
 query {
-  doubles: file(relativePath: { eq: "usdgc.jpg" }) {
-    childImageSharp {
-      fixed(width: 80, height: 80) {
-        ...GatsbyImageSharpFixed
-      }
-    }
-  }
-  doublesResponsive: file(relativePath: { eq: "usdgc.jpg" }) {
+  nagdt: file(relativePath: { eq: "nagdt.jpg" }) {
     childImageSharp {
       fluid(maxWidth: 600) {
         ...GatsbyImageSharpFluid

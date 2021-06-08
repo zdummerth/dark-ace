@@ -9,7 +9,7 @@ import ProductListingItem from '../components/products/ProducListingItem'
 import SlideShow from '../components/slideshow'
 import SEO from "../components/seo"
 
-import { DarkBrandButton, Listing, Spacer, dimensions, breakpoints, colors } from '../utils/styles'
+import { DarkBrandButton, Listing, Spacer, dimensions, breakpoints, colors, Subtitle } from '../utils/styles'
 
 const Container = styled.div`
   display: flex;
@@ -42,6 +42,10 @@ const LandingImgWrapper = styled.div`
 
 `
 
+const Margin = styled.div`
+  margin-bottom: 10px;
+`
+
 const KeepScrolling = styled.div`
   background: ${colors.darkToBottom};
   height: 3%;
@@ -62,8 +66,11 @@ const StyledLink = styled(Link)`
 const IndexPage = ({ data }) => {
   console.log('index rendered')
 
-  const { newLine, headware } = useShopify()
+  const { featured } = useShopify()
   const [scrolled, setScrolled] = useState(false)
+
+  console.log('featured', featured)
+
 
   const isScrolled = () => {
     if (window.pageYOffset > 0) {
@@ -103,52 +110,24 @@ const IndexPage = ({ data }) => {
               }}
             />
           </LandingImgWrapper>
-          <KeepScrolling scrolled={scrolled}>
-            {/* <CaretDown
-              color={colors.lightest}
-            /> */}
-          </KeepScrolling>
+          <KeepScrolling scrolled={scrolled} />
         </Landing>
-
-        {/* <Spacer /> */}
-        {/* <Feature
-          product={feature}
-          showThumbs={true}
-          style={{
-            width: '80vw',
-            maxWidth: '400px',
-          }}
-        /> */}
-        {/* <Subtitle>{newLine.title}</Subtitle> */}
+        <Subtitle>Featured Products</Subtitle>
         <Listing>
-          {newLine.products.map(product => (
+          {featured.products.map(product => (
             <ProductListingItem
               product={product}
               key={product.shopifyId}
-              showThumbs={true}
+              showThumbs={false}
               style={{
-                width: '60vw',
-                maxWidth: '300px',
+                // width: '60vw',
+                // height: '300px',
+                // maxWidth: '300px',
               }}
             />
           ))}
         </Listing>
         <Spacer />
-        {/* <Subtitle>{headware.title}</Subtitle> */}
-        <Listing>
-          {headware.products.map(product => (
-            <ProductListingItem
-              product={product}
-              key={product.shopifyId}
-              showThumbs={true}
-              style={{
-                width: '60vw',
-                maxWidth: '300px',
-              }}
-            />
-          ))}
-
-        </Listing>
         <StyledLink to='/shop'>
           <DarkBrandButton>
             View All Products

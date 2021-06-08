@@ -20,7 +20,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 3rem auto;
-  width: 90%;
+  width: 100%;
 
   .hidden {
     display: none;
@@ -32,6 +32,16 @@ const Container = styled.div`
 `
 const ImgContainer = styled.div`
   width: 100%;
+  height: 50vh;
+
+  @media (min-width: ${breakpoints.tablet}) {
+    height: 60vh;
+  }
+
+  @media (min-width: ${breakpoints.tablet}) {
+    height: 70vh;
+  }
+
 `
 const ImagesWrapper = styled.div`
   display: flex;
@@ -42,6 +52,7 @@ const ImagesWrapper = styled.div`
 `
 const InfoWrapper = styled.div`
   max-width: 400px;
+  // min-width: 300px;
   display: flex;
   flex-direction: column;
   // align-items: center;
@@ -206,8 +217,12 @@ const ProductPage = ({ data }) => {
             <Img
               fluid={imageFluid}
               alt={product.title}
+              style={{
+                height: '100%',
+                width: '100%'
+              }}
               imgStyle={{
-                objectFit: 'contain',
+                objectFit: 'scale-down'
               }}
             />
           </ImgContainer>

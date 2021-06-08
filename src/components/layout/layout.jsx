@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { StoreContext } from '../../context/StoreContextProvider'
+import "@fontsource/covered-by-your-grace"; // Defaults to weight 400.
 import styled, { createGlobalStyle } from "styled-components"
 import { dimensions, colors, breakpoints } from '../../utils/styles';
 
@@ -15,10 +16,9 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: ${colors.background};
     color: white;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 0;
-
   }
 
   // html {
