@@ -87,7 +87,7 @@ const IndexPage = ({ data }) => {
 
   const { tShirts, longsleeves, driFits, headware, accessories, discs, featured } = useShopify()
   const [scrolled, setScrolled] = useState(false)
-  const [MainCat, setMainCat] = useState('apparel')
+  const [MainCat, setMainCat] = useState('featured')
   const [SecCat, setSecCat] = useState('t-shirts')
 
   console.log('featured', featured)

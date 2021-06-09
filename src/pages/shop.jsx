@@ -37,7 +37,7 @@ const Shop = () => {
   const { tShirts, longsleeves, driFits, headware, accessories, discs, featured } = useShopify()
   console.log({ discs })
 
-  const [MainCat, setMainCat] = useState('apparel')
+  const [MainCat, setMainCat] = useState('featured')
   const [SecCat, setSecCat] = useState('t-shirts')
 
 
