@@ -5,7 +5,7 @@ import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
 import styled from 'styled-components'
 import { colors, breakpoints, spacing, Subtitle, DarkBrandButton } from '../utils/styles'
-
+import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useCheckout } from '../hooks/useCheckout'
 
 import ProductForm from '../components/products/product-form'
@@ -19,7 +19,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 3rem auto;
+  margin: 0 auto;
   width: 95%;
   // padding: 0 5px;
 
@@ -92,6 +92,10 @@ const Thumbnail = styled.button`
 const StyledLink = styled(Link)`
   align-self: center;
   margin-top: 30px;
+`
+
+const BackLink = styled(Link)`
+  margin: 10px;
 `
 const Thumbnails = ({ imgWithOption, handleClick }) => {
   return (
@@ -212,7 +216,13 @@ const ProductPage = ({ data }) => {
   return (
     <>
       <SEO title={product.title} description={product.description} />
+      <BackLink to='/shop'>
+        <DarkBrandButton>
+          <AiOutlineArrowLeft size={18} />
+        </DarkBrandButton>
+      </BackLink>
       <Container>
+
         <ImagesWrapper>
           <ImgContainer>
             <Img
@@ -227,7 +237,7 @@ const ProductPage = ({ data }) => {
               }}
             />
           </ImgContainer>
-          {thumbs.length > 1 &&
+          {(thumbs.length > 1 && thumbs.length < 6) &&
             <Thumbnails imgWithOption={imgWithOption} handleClick={handleThumbClick} />
           }
         </ImagesWrapper>
