@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 import styled from 'styled-components'
-import ProductGrid from '../components/products/ProductGrid'
 import SlideShow from '../components/slideshow'
+import { useShopify } from '../hooks/useShopify'
+import { Listing, Subtitle } from '../utils/styles'
+import ProductListingItem from '../components/products/ProducListingItem'
+
+
 import SEO from "../components/seo"
 
 import { DarkBrandButton, dimensions, colors } from '../utils/styles'
@@ -29,7 +33,7 @@ const Banner = styled.div`
 `
 
 const LandingImgWrapper = styled.div`
-  height: 75%;
+  height: 60%;
   width: 100%;
 `
 
@@ -47,6 +51,29 @@ const KeepScrolling = styled.div`
 const StyledLink = styled(Link)`
   align-self: center;
   margin-top: 30px;
+`
+
+const TabContainer = styled.div`
+  height: 15%;
+`
+
+const Tabs = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+const Tab = styled(Link)`
+  border: 1px solid ${colors.brand};
+  // border-radius: 5px 5px 0 0;
+  border-radius: 50px;
+  // border-bottom: none;
+  padding: 5px 10px;
+  background: ${({ selected }) => selected ? colors.brand : 'transparent'};
+  cursor: pointer;
+`
+
+const Margin = styled.div`
+  margin: 5px;
 `
 
 
@@ -72,6 +99,9 @@ const IndexPage = ({ data }) => {
     };
   }, []);
 
+  const { featured, accessories } = useShopify()
+
+
   return (
     <>
       <SEO title="Home" />
@@ -80,6 +110,39 @@ const IndexPage = ({ data }) => {
           <Banner>
             <SlideShow />
           </Banner>
+          <TabContainer>
+            <Tabs>
+              <Tab
+                to='/shop?featured'
+              >Featured</Tab>
+              <Margin />
+              <Tab
+                to='/shop?discs'
+              >Discs</Tab>
+              <Margin />
+              <Tab
+                to='/shop?t-shirts'
+              >Shirts</Tab>
+              <Margin />
+              <Tab
+                to='/shop?dri-fits'
+              >Dri Fits</Tab>
+            </Tabs>
+            <Margin />
+            <Tabs>
+              <Tab
+                to='/shop?headware'
+              >Hats</Tab>
+              <Margin />
+              <Tab
+                to='/shop?accessories'
+              >Accessories</Tab>
+              <Margin />
+              <Tab
+                to='/shop?giftCard'
+              >Gift Cards</Tab>
+            </Tabs>
+          </TabContainer>
           <LandingImgWrapper>
             <Img
               fluid={data.squareBanner.childImageSharp.fluid}
@@ -94,7 +157,21 @@ const IndexPage = ({ data }) => {
           </LandingImgWrapper>
           <KeepScrolling scrolled={scrolled} />
         </Landing>
-        <ProductGrid />
+        {/* <ProductGrid /> */}
+        <Subtitle>{featured.title}</Subtitle>
+        <Listing>
+          {featured.products.map(product => (
+            <ProductListingItem
+              product={product}
+              key={product.shopifyId}
+              showThumbs={false}
+              style={{
+                width: '70vw',
+                maxWidth: '300px',
+              }}
+            />
+          ))}
+        </Listing>
         <StyledLink to='/shop'>
           <DarkBrandButton>
             View All Products

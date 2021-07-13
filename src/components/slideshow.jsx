@@ -118,7 +118,7 @@ const SlideShow = ({ setIsSlideshowOpen, startingIndex }) => {
 
   const slides = images.map((img, ind) => {
     return (
-      <Slide active={ind === index}>
+      <Slide active={ind === index} key={img.childImageSharp.fluid + ind}>
         <Img
           fluid={img.childImageSharp.fluid}
           className='slide-img'

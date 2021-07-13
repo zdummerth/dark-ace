@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import { Link } from "gatsby"
 import Events from '../components/Events'
+import { DarkBrandButton } from '../utils/styles'
 
 import SEO from '../components/seo'
 
@@ -10,6 +11,12 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
 `
+
+const StyledLink = styled(Link)`
+  align-self: center;
+  margin-top: 30px;
+`
+
 const Tournaments = ({ data }) => {
 
   const eventData = [
@@ -19,17 +26,23 @@ const Tournaments = ({ data }) => {
       location: 'Endicott/Carrolton',
       link: 'https://www.discgolfscene.com/tournaments/NADGT_Exclusive_at_Barracks_and_The_Bunker_Presented_by_Dark_Ace_2021',
       image: data.nagdt.childImageSharp.fluid,
-      
+
     }
   ]
   return (
     <>
       <SEO title="Tournaments" />
       <Container>
-        <h2>Upcoming Tournaments</h2>
-        <Events
+        <h2>No Upcoming Events</h2>
+        <StyledLink to='/shop'>
+          <DarkBrandButton>
+            View Shop
+          </DarkBrandButton>
+        </StyledLink>
+        {/* <h2>Upcoming Tournaments</h2> */}
+        {/* <Events
           events={eventData}
-        />
+        /> */}
       </Container>
     </>
   )

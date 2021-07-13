@@ -9,12 +9,22 @@ const Margin = styled.div`
 `
 
 
-const Shop = () => {
+const Shop = ({ location }) => {
+  // console.log('location', location.search)
+  const category = location.search.slice(1)
+
+  const initialCategory = category !== '' ? category : 'featured'
+
+  console.log({ category })
+  console.log({ initialCategory })
+
+
+
   return (
     <>
       <SEO title="Shop" />
       <Margin />
-      <ProductGrid />
+      <ProductGrid initialCategory={initialCategory} />
     </>
   )
 }
