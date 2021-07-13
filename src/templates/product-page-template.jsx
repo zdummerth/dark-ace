@@ -136,6 +136,8 @@ const ProductPage = ({ data }) => {
     setVariant
   } = useCheckout(product)
 
+  // console.log('the current variant', variant)
+
   const [imageFluid, setImageFluid] = useState(variant.image.localFile.childImageSharp.fluid)
 
 
