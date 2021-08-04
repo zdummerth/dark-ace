@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { StoreContext } from '../context/StoreContextProvider'
 
 import LineItem from '../components/cart/line-item'
+import Suggestions from '../components/cart/Suggestions'
 
 import { colors } from '../utils/styles'
 
@@ -67,6 +68,7 @@ const Cart = () => {
 
   return (
     <Container>
+      <Suggestions />
       <Subtotal>
         <p>{`Subtotal (${totalQuantity} ${totalQuantity > 1 ? 'items' : 'item'}): `}</p>
         <h4>$ {checkout.subtotalPrice}</h4>
@@ -79,7 +81,7 @@ const Cart = () => {
           <p>
             Your Cart Is Empty
           </p>
-          <StyledLink to='/shop'>Continue Shopping</StyledLink>
+          <StyledLink to='/shop/collection/featured'>Continue Shopping</StyledLink>
 
         </>
         :

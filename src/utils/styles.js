@@ -31,7 +31,31 @@ export const colors = {
   gray: '#454545',
   spacer: 'linear-gradient(to right, #020202, #C00A0A, #020202)',
   specialGradient: `linear-gradient(to right, #C00A0A, #fff)`,
-};
+}
+
+export const DarkTheme = {
+  colors: {
+    neon: '#6FFFB0',
+    brand: '#C00A0A',
+    text: 'white',
+    error: 'red',
+    background: 'black',
+    gray: 'gray',
+    lightblue: 'rgb(164,232,242)',
+    uncompleted: '#ffea8a',
+    button: {
+      // background: 'rgb(0, 128, 96)',
+      background: `linear-gradient(to bottom right, #C00A0A 45%, #020202)`,
+      remove: '#C00A0A',
+      cancel: 'transparent',
+      color: 'white',
+      disabled: 'rgba(0,0,0,.6)'
+    },
+    input: {
+      background: '#202020',
+    }
+  }
+}
 
 
 
@@ -144,9 +168,10 @@ export const scrollbarStyles = {
 const StyledListing = styled.div`
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
   // justify-content: ${({ isSingleItem }) => isSingleItem ? 'center' : 'flex-start'};
   justify-content: center;
-  overflow-x: auto;
+  // overflow-x: auto;
   // margin: 0 ${spacing.xs};
   // margin-bottom: ${spacing.me};
 

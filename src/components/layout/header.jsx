@@ -195,7 +195,7 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
     //   title: 'Home'
     // },
     {
-      path: '/shop',
+      path: '/shop/collection/featured',
       title: 'Shop'
     },
     {

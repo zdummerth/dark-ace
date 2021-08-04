@@ -3,7 +3,8 @@ import { useCheckout } from '../../hooks/useCheckout'
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 import { formatPrice } from '../../utils/helpers';
-import { colors, spacing, BrandButton } from '../../utils/styles';
+import { colors, spacing, BrandButton } from '../../utils/styles'
+import Flex from '../Flexbox'
 
 import Quantity from './quantity'
 
@@ -11,20 +12,23 @@ import Quantity from './quantity'
 
 const ProductWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   border: 1px solid ${colors.gray};
+  padding: 5px;
+  height: 120px;
 `
-const TextWrapper = styled.div`
-  background: ${colors.grayGradient};
-  padding-right: ${spacing.sm};
-  padding-left: ${spacing.sm};
-  padding-top: ${spacing.lg};
-
-  & > * {
-    margin-bottom: ${spacing.lg};
-  }
+const TextWrapper = styled(Flex)`
+  width: 70%;
+  padding-left: 5px;
 `
 
+const ImageWrapper = styled.div`
+  align-self: center;
+  width: 30%;
+  height: 100%;
+  // overflow: hidden;
+
+`
 const PriceAndCartWrapper = styled.div`
     display: flex;
     align-items: center;
@@ -49,22 +53,33 @@ const Accessory = ({ product, style }) => {
 
   return (
     <ProductWrapper style={style}>
-      <Img
-        fluid={images[0].localFile.childImageSharp.fluid}
-        alt={title}
-      />
-      <TextWrapper>
+      <ImageWrapper>
+        <Img
+          fluid={images[0].localFile.childImageSharp.fluid}
+          alt={title}
+          style={{
+            height: '100%',
+            width: '100%'
+          }}
+          imgStyle={{
+            objectFit: 'contain'
+          }}
+        />
+      </ImageWrapper>
+      <TextWrapper dir='column' ai='stretch' jc='space-between'>
         {available ?
           (<>
-            <PriceAndCartWrapper>
-              <Quantity
-                quantity={quantity}
-                increase={increaseQuantity}
-                decrease={decreaseQuantity}
-              />
-              <h3>{formatPrice(variant.priceV2)}</h3>
-            </PriceAndCartWrapper>
-            <BrandButton onClick={addToCart}>Add To Cart</BrandButton>
+            <div>{product.title}</div>
+
+            <Quantity
+              quantity={quantity}
+              increase={increaseQuantity}
+              decrease={decreaseQuantity}
+            />
+            <Flex ai='center' jc='space-around'>
+              <p>{formatPrice(variant.priceV2)}</p>
+              <BrandButton onClick={addToCart}>Add To Cart</BrandButton>
+            </Flex>
 
           </>
           ) : (

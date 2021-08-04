@@ -1,24 +1,23 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components'
 import { FaFacebookF, FaInstagram } from 'react-icons/fa'
+import EmailForm from '../forms/NewEmailSubscriberForm'
+import Flex from '../Flexbox'
+import useSiteMetaData from '../../hooks/useSiteMetaData'
 
 
 
 import { breakpoints, colors } from '../../utils/styles';
 
 
-const StyledFooter = styled.footer`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+const StyledFooter = styled(Flex)`
   color: ${colors.lightest};
   width: 100%;
   padding: 0 2vh;
-  margin-top: 3vh;
+  margin-top: 100px;
   background-color: ${colors.grayBackground};
 
-  @media (max-width: ${breakpoints.desktop}px) {
-    flex-direction: column;
+  @media (min-width: ${breakpoints.desktop}) {
     p {
       margin-bottom: 0;
     }
@@ -80,15 +79,21 @@ const StyledLink = styled.a`
   }
 `
 
+const Title = styled.h3`
+  margin-top: 30px;
+`
 
-const Footer = () => {
+
+const Footer = ({ resetForm }) => {
+  const { title } = useSiteMetaData()
   return (
-    <StyledFooter>
-        <div>DARK ACE APPAREL</div>
-        <IconWrapper>
+    <StyledFooter dir='column' ai='center'>
+      <EmailForm reset={resetForm} />
+      <Title>{title}</Title>
+      <IconWrapper>
         <StyledLink href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' target='_blank' rel="noopener"><FbIcon /></StyledLink>
         <StyledLink href='https://www.instagram.com/darkaceapparel/' target='_blank' rel="noopener"><IgIcon /></StyledLink>
-        </IconWrapper>
+      </IconWrapper>
     </StyledFooter>
   )
 }

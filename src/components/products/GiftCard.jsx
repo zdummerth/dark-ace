@@ -5,6 +5,8 @@ import styled from 'styled-components'
 import Img from 'gatsby-image'
 import { useShopify } from '../../hooks/useShopify'
 import { useCheckout } from '../../hooks/useCheckout'
+import Button from '../shared/Button'
+
 
 
 import { colors, spacing, BrandButton, DarkBrandButton } from '../../utils/styles';
@@ -16,6 +18,7 @@ const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 400px;
   // align-items: center;
   align-self: center;
   border: 1px solid ${colors.gray};
@@ -58,9 +61,9 @@ const ListControls = styled.div`
   }
 `
 
-const CurrentPrice = styled(BrandButton)`
+const CurrentPrice = styled(Button)`
   display: flex;
-  width: 80px;
+  // width: 80px;
 `
 
 
@@ -93,6 +96,11 @@ const List = styled.div`
 }
 `
 
+const StyledCaretUp = styled(BsCaretUp)`
+  // font-size: 40px;
+  // font-weight: bold;
+`
+
 
 
 const GiftCard = () => {
@@ -118,7 +126,7 @@ const GiftCard = () => {
   const toggleListOpen = () => setListOpen(!listOpen)
 
   const price = <div>{formatPrice(variant.priceV2)}</div>
-  const icon = listOpen ? <BsCaretDown /> : <BsCaretUp />;
+  const icon = listOpen ? <BsCaretDown size={16} /> : <BsCaretUp />;
 
 
   return (
@@ -145,7 +153,7 @@ const GiftCard = () => {
         </List>
       </ImgContainer>
       <ButtonContainer>
-        <BrandButton onClick={handleAddToCart}>Add To Cart</BrandButton>
+        <Button onClick={handleAddToCart}>Add To Cart</Button>
         <ListControls>
           <CurrentPrice onClick={toggleListOpen}>
             {price}{icon}

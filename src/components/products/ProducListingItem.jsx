@@ -10,9 +10,9 @@ import { breakpoints, colors, spacing, Subtitle, H3 } from '../../utils/styles';
 
 const ProductContainer = styled.div`
   text-align: center; 
-  // border: 1px solid ${colors.gray};
-  // background: ${colors.grayGradient};
-  padding: 10px;
+  border: .5px solid ${colors.brand};
+  background: ${colors.grayGradient};
+  padding: 20px;
 
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@ const ProductContainer = styled.div`
   }
 `
 const ImgContainer = styled.div`
-  width: 60vw;
+  width: 100%;
   max-width: 300px;
   min-height: 30vh;
   max-height: 300px;
@@ -149,7 +149,7 @@ const ProductListingItem = ({ product, className, showThumbs, style }) => {
               width: '100%'
             }}
             imgStyle={{
-              // objectFit: 'contain'
+              objectFit: 'contain'
             }}
           />
         </ImgLink>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql, Link, navigate } from 'gatsby'
 import Img from 'gatsby-image'
 import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
@@ -117,7 +117,8 @@ const Thumbnails = ({ imgWithOption, handleClick }) => {
   )
 }
 
-const ProductPage = ({ data }) => {
+const ProductPage = ({ data, location }) => {
+  // console.log({ location })
   const product = data.shopifyProduct
   const {
     thumbs,
@@ -218,13 +219,12 @@ const ProductPage = ({ data }) => {
   return (
     <>
       <SEO title={product.title} description={product.description} />
-      <BackLink to='/shop'>
-        <DarkBrandButton>
-          <AiOutlineArrowLeft size={18} />
-        </DarkBrandButton>
-      </BackLink>
+      {/* <BackLink to='/shop/collections'> */}
+      {/* <DarkBrandButton onClick={() => window.history.back()}>
+        <AiOutlineArrowLeft size={18} />
+      </DarkBrandButton> */}
+      {/* </BackLink> */}
       <Container>
-
         <ImagesWrapper>
           <ImgContainer>
             <Img
@@ -276,7 +276,7 @@ const ProductPage = ({ data }) => {
 
           </FormContainer>
           <GiftCard />
-          <StyledLink to='/shop'>
+          <StyledLink to='/shop/collection/featured'>
             <DarkBrandButton>
               View All Products
             </DarkBrandButton>

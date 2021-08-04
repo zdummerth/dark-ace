@@ -10,6 +10,7 @@ import ProductListingItem from './ProducListingItem'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
 `
 
@@ -27,7 +28,7 @@ const Tab = styled.div`
   border-radius: 50px;
   // border-bottom: none;
   padding: 5px 10px;
-  background: ${({ selected }) => selected ? colors.brand : 'transparent'};
+  background: ${({ selected }) => selected ? colors.gradient : 'transparent'};
   cursor: pointer;
 `
 
@@ -105,7 +106,7 @@ const ProductGrid = ({ initialCategory }) => {
                   key={product.shopifyId}
                   showThumbs={false}
                   style={{
-                    width: '60vw',
+                    width: '50vw',
                     maxWidth: '300px',
                   }}
                 />
@@ -123,8 +124,8 @@ const ProductGrid = ({ initialCategory }) => {
                   key={product.shopifyId}
                   showThumbs={false}
                   style={{
-                    width: '60vw',
-                    maxWidth: '300px',
+                    width: '50%',
+                    maxWidth: '400px',
                   }}
                 />
               ))}
@@ -142,8 +143,8 @@ const ProductGrid = ({ initialCategory }) => {
                   key={product.shopifyId}
                   showThumbs={false}
                   style={{
-                    width: '60vw',
-                    maxWidth: '300px',
+                    width: '50%',
+                    maxWidth: '400px',
                   }}
                 />
               ))}
@@ -153,8 +154,8 @@ const ProductGrid = ({ initialCategory }) => {
                   key={product.shopifyId}
                   showThumbs={false}
                   style={{
-                    width: '60vw',
-                    maxWidth: '300px',
+                    width: '50%',
+                    maxWidth: '400px',
                   }}
                 />
               ))}
@@ -172,8 +173,8 @@ const ProductGrid = ({ initialCategory }) => {
                   key={product.shopifyId}
                   showThumbs={false}
                   style={{
-                    width: '60vw',
-                    maxWidth: '300px',
+                    width: '50%',
+                    maxWidth: '400px',
                   }}
                 />
               ))}
@@ -191,8 +192,8 @@ const ProductGrid = ({ initialCategory }) => {
                   key={product.shopifyId}
                   showThumbs={false}
                   style={{
-                    width: '60vw',
-                    maxWidth: '300px',
+                    width: '50%',
+                    maxWidth: '400px',
                   }}
                 />
               ))}
@@ -210,8 +211,8 @@ const ProductGrid = ({ initialCategory }) => {
                   key={product.shopifyId}
                   showThumbs={false}
                   style={{
-                    width: '60vw',
-                    maxWidth: '300px',
+                    width: '50%',
+                    maxWidth: '400px',
                   }}
                 />
               ))}

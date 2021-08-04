@@ -1,9 +1,18 @@
 import React from "react"
 import StoreContextProvider from "./src/context/StoreContextProvider"
 import Layout from './src/components/layout/layout'
+import { DarkTheme } from './src/utils/styles'
+import { ThemeProvider } from 'styled-components'
+
 
 export const wrapRootElement = ({ element }) => {
-  return <StoreContextProvider>{element}</StoreContextProvider>
+  return (
+    <StoreContextProvider>
+      <ThemeProvider theme={DarkTheme}>
+        {element}
+      </ThemeProvider>
+    </StoreContextProvider>
+  )
 }
 
 

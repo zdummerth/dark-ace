@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 // import { Link } from 'gatsby'
-import { Formik, Form, useField } from 'formik';
-import * as Yup from 'yup';
-import styled from 'styled-components';
+import { Formik, Form, useField } from 'formik'
+import * as Yup from 'yup'
+import styled from 'styled-components'
 
 
 import { colors, BrandButton } from '../utils/styles';

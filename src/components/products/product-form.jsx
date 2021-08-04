@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import Quantity from './quantity'
+import Button from '../shared/Button'
 
 import { colors, BrandButton } from '../../utils/styles'
 
@@ -123,6 +124,8 @@ const ProductForm = ({
   imgWithOption,
 }) => {
 
+  console.log({ variant })
+
   const {
     options,
     variants,
@@ -187,7 +190,7 @@ const ProductForm = ({
     const currentValue = getCurrentValue(name)
     return (
       <>
-        <CurrentOption  style={{marginBottom: '0'}}>{`${name}: ${currentValue.toUpperCase()}`}</CurrentOption>
+        <CurrentOption style={{ marginBottom: '0' }}>{`${name}: ${currentValue.toUpperCase()}`}</CurrentOption>
         <Values>
           {values.map((value) => {
             return (
@@ -218,20 +221,20 @@ const ProductForm = ({
             // const currentValue = getCurrentValue(name)
             const selected = checkImageSelected(imageId)
             return (
-                <ThumbContainer
-                  selected={selected}
-                  key={imageId}
+              <ThumbContainer
+                selected={selected}
+                key={imageId}
+              >
+                <ThumbButton
+                  type='button'
+                  onClick={() => handleOptionClick(name, value, true)}
                 >
-                  <ThumbButton
-                    type='button'
-                    onClick={() => handleOptionClick(name, value, true)}
-                  >
-                    <Img
-                      fixed={thumb}
-                    />
-                    {selected || <Overlay />}
-                  </ThumbButton>
-                </ThumbContainer>
+                  <Img
+                    fixed={thumb}
+                  />
+                  {selected || <Overlay />}
+                </ThumbButton>
+              </ThumbContainer>
             )
           })}
         </Thumbs>
@@ -252,7 +255,7 @@ const ProductForm = ({
                 increase={increaseQuantity}
                 decrease={decreaseQuantity}
               />
-              <BrandButton
+              <Button
                 type="submit"
                 disabled={status === 'Adding'}
                 style={{
@@ -260,17 +263,20 @@ const ProductForm = ({
                   marginBottom: '0',
                 }}
               >
-                {`ADD TO CART`}
-          </BrandButton>
+                {`Add To Cart`}
+              </Button>
             </>
           )
           :
           <SoldOut>
-            {`Out of Stock! Please select another `}
-            {variant.selectedOptions.length === 1 ?
-              variant.selectedOptions[0].name
+            {`Out of Stock! `}
+            {variant.selectedOptions[0].name === 'Title' ?
+              ''
               :
-              `${variant.selectedOptions[0].name} or ${variant.selectedOptions[1].name}.`}
+              variant.selectedOptions.length === 1 ?
+                ` Please select another ${variant.selectedOptions[0].name}`
+                :
+                `Please select another ${variant.selectedOptions[0].name} or ${variant.selectedOptions[1].name}.`}
           </SoldOut>
         }
 

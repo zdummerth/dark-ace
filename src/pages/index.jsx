@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
+import ProductNav from '../components/layout/productCollectionNavigation'
+
 import styled from 'styled-components'
 import SlideShow from '../components/slideshow'
 import { useShopify } from '../hooks/useShopify'
@@ -29,7 +31,15 @@ const Landing = styled.div`
 const Banner = styled.div`
   width: 100%;
   align-self: center;
-  height: 22%;
+  // height: 22%;
+  // height: 200px;
+  flex: 1;
+`
+
+const StyledProductNav = styled(ProductNav)`
+  // height: 15%;
+  flex: 1;
+
 `
 
 const LandingImgWrapper = styled.div`
@@ -52,30 +62,6 @@ const StyledLink = styled(Link)`
   align-self: center;
   margin-top: 30px;
 `
-
-const TabContainer = styled.div`
-  height: 15%;
-`
-
-const Tabs = styled.div`
-  display: flex;
-  justify-content: center;
-`
-
-const Tab = styled(Link)`
-  border: 1px solid ${colors.brand};
-  // border-radius: 5px 5px 0 0;
-  border-radius: 50px;
-  // border-bottom: none;
-  padding: 5px 10px;
-  background: ${({ selected }) => selected ? colors.brand : 'transparent'};
-  cursor: pointer;
-`
-
-const Margin = styled.div`
-  margin: 5px;
-`
-
 
 
 
@@ -100,6 +86,7 @@ const IndexPage = ({ data }) => {
   }, []);
 
   const { featured, accessories } = useShopify()
+  const collections = data.collectionData.edges.map(({ node }) => node)
 
 
   return (
@@ -110,39 +97,8 @@ const IndexPage = ({ data }) => {
           <Banner>
             <SlideShow />
           </Banner>
-          <TabContainer>
-            <Tabs>
-              <Tab
-                to='/shop?featured'
-              >Featured</Tab>
-              <Margin />
-              <Tab
-                to='/shop?discs'
-              >Discs</Tab>
-              <Margin />
-              <Tab
-                to='/shop?t-shirts'
-              >Shirts</Tab>
-              <Margin />
-              <Tab
-                to='/shop?dri-fits'
-              >Dri Fits</Tab>
-            </Tabs>
-            <Margin />
-            <Tabs>
-              <Tab
-                to='/shop?headware'
-              >Hats</Tab>
-              <Margin />
-              <Tab
-                to='/shop?accessories'
-              >Accessories</Tab>
-              <Margin />
-              <Tab
-                to='/shop?giftCard'
-              >Gift Cards</Tab>
-            </Tabs>
-          </TabContainer>
+          <StyledProductNav collections={collections} />
+
           <LandingImgWrapper>
             <Img
               fluid={data.squareBanner.childImageSharp.fluid}
@@ -166,13 +122,13 @@ const IndexPage = ({ data }) => {
               key={product.shopifyId}
               showThumbs={false}
               style={{
-                width: '70vw',
-                maxWidth: '300px',
+                width: '50%',
+                maxWidth: '400px',
               }}
             />
           ))}
         </Listing>
-        <StyledLink to='/shop'>
+        <StyledLink to='/shop/collection/featured'>
           <DarkBrandButton>
             View All Products
           </DarkBrandButton>
@@ -213,6 +169,14 @@ query {
       }
     }
   }
+  collectionData: allShopifyCollection {
+      edges {
+        node {
+          handle
+          title
+        }
+      }
+    }
 }
 `
 

@@ -21,12 +21,12 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
-  // html {
-  //   box-sizing: border-box;
-  // }
-  // *, *:before, *:after {
-  //   box-sizing: inherit;
-  // }
+  html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
 
   a {
     text-decoration: none;
@@ -144,11 +144,13 @@ const Layout = ({ children, location, history }) => {
     store: { status, error, checkout: { lineItems } },
   } = useContext(StoreContext)
 
-  const [spotifyMinimized, setSpotifyMinimized] = useState(true);
+  const [spotifyMinimized, setSpotifyMinimized] = useState(true)
+  const [resetEmailForm, setResetEmailForm] = useState(false)
 
   useEffect(() => {
     //This makes sure the menus close when the user clicks on a page link
     setSpotifyMinimized(true)
+    setResetEmailForm(true)
   }, [location])
 
 
@@ -186,7 +188,7 @@ const Layout = ({ children, location, history }) => {
         >
           {children}
         </ContentWrapper>
-        <Footer />
+        <Footer resetForm={resetEmailForm} />
       </Wrapper>
     </>
   )
