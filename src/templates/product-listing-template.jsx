@@ -51,7 +51,7 @@ const ProductListingPage = ({ data }) => {
     <>
       {/* <SEO title={product.title} description={product.description} /> */}
       <Container>
-        <Nav collections={collections} />
+        {/* <Nav collections={collections} />
         <Subtitle>{title}</Subtitle>
         {handle === 'gift-card' ? (
           <GiftCard style />
@@ -69,7 +69,7 @@ const ProductListingPage = ({ data }) => {
               />
             ))}
           </Listing>
-        )}
+        )} */}
         {/* <Nav className='hide-gt-mobile' collections={collections} /> */}
       </Container>
     </>

@@ -33,12 +33,12 @@ const Tournaments = ({ data }) => {
     <>
       <SEO title="Tournaments" />
       <Container>
-        <h2>No Upcoming Events</h2>
+        {/* <h2>No Upcoming Events</h2>
         <StyledLink to='/shop'>
           <DarkBrandButton>
             View Shop
           </DarkBrandButton>
-        </StyledLink>
+        </StyledLink> */}
         {/* <h2>Upcoming Tournaments</h2> */}
         {/* <Events
           events={eventData}

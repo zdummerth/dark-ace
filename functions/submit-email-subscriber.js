@@ -1,44 +1,83 @@
 const fetch = require('node-fetch');
+const isEmail = require('validator/lib/isEmail')
 
-const key = process.env.SENDGRID_CREATE_CONTACT_KEY
+const key = process.env.FAUNA_CREATE_CONTACT
 
+const endpoint = `https://graphql.fauna.com/graphql`
 
-exports.handler = async event => {
+const queryFauna = async ({ query, variables }) => {
 
-  const body = JSON.parse(event.body)
-  console.log('in submit email function', body)
-  const url = 'https://sendgrid.com/v3/marketing/contacts'
-  try {
-    const newContact = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${key}`
-      },
-      body: JSON.stringify({
-        contacts: [
-          {
-            email: body
-          }
-        ]
-      })
+  const res = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${key}`,
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    },
+    body: JSON.stringify({
+      query,
+      variables
     })
+  })
 
-    console.log('new contact status', newContact.status)
-    console.log('new contact status Text', newContact.statusText)
+  // const json1 = await res.json()
+  // console.log('response from graphql fetcher', res)
+  if (res.status === 200) {
+    const json = await res.json()
+    console.log('json from graphql fetcher', json)
+    if (json.errors) {
+      // console.log('errors from graphql fetcher', json.errors)
+      return { errors: json.errors }
 
-    if (newContact.status !== 202) throw new Error('error adding contact')
-
-    return {
-      statusCode: 200,
-      body: 'success',
+    } else {
+      return { data: json.data }
     }
-  } catch (err) {
-    console.log('error', err)
+  } else {
     return {
-      statusCode: 401,
-      body: 'error',
+      error: {
+        message: "There was an error in fetching the graphql endpoint"
+      }
     }
   }
 
+}
+
+
+exports.handler = async event => {
+  console.log('in submit email function')
+
+  const email = JSON.parse(event.body)
+  const trimmedEmail = email.trim()
+
+  if (!isEmail(trimmedEmail)) {
+    return {
+      statusCode: 400,
+      body: 'must be an email'
+    }
+  } else {
+    const { data, errors } = await queryFauna({
+      variables: {
+        email: trimmedEmail
+      },
+      query: `mutation($email: String!) {
+        createContact( data:{
+          email: $email
+        }) {
+          email
+        }
+      }`
+    })
+
+    if (!errors) {
+      return {
+        statusCode: 200,
+        body: 'success',
+      }
+    } else {
+      return {
+        statusCode: 400,
+        body: 'error',
+      }
+    }
+  }
 }

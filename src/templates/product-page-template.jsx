@@ -225,7 +225,7 @@ const ProductPage = ({ data, location }) => {
       </DarkBrandButton> */}
       {/* </BackLink> */}
       <Container>
-        <ImagesWrapper>
+        {/* <ImagesWrapper>
           <ImgContainer>
             <Img
               fluid={imageFluid}
@@ -282,7 +282,7 @@ const ProductPage = ({ data, location }) => {
             </DarkBrandButton>
           </StyledLink>
 
-        </InfoWrapper>
+        </InfoWrapper> */}
       </Container>
     </>
   )

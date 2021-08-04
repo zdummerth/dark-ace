@@ -95,6 +95,7 @@ const ContentWrapper = styled.main`
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-height: calc(100vh - ${dimensions.headerHeight});
   // align-items: center;
   position: relative;
   width: 100%;

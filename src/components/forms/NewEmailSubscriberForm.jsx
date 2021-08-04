@@ -8,6 +8,9 @@ import Loading from '../shared/LoadingIndicator'
 
 const Form = styled.form`
     max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `
 
 const Label = styled.label`
@@ -20,9 +23,8 @@ const SubmitError = styled.div`
     margin: 20px 0;
 `
 
-export default function EmailSubscriberForm({ reset }) {
+export default function EmailSubscriberForm({className}) {
 
-    console.log('reset', reset)
 
     const [email, setEmail] = useState('')
     const [error, setError] = useState(null)
@@ -31,8 +33,9 @@ export default function EmailSubscriberForm({ reset }) {
     const [submitted, setSubmitted] = useState(null)
 
     const handleSubmit = async (e) => {
+        const trimmedEmail = email.trim()
         e.preventDefault()
-        if (!isEmail(email)) {
+        if (!isEmail(trimmedEmail)) {
             setError('* Must be a valid email')
             return
         }
@@ -44,7 +47,7 @@ export default function EmailSubscriberForm({ reset }) {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(email)
+                body: JSON.stringify(trimmedEmail)
             })
 
             console.log('client res for new email sub', res)
@@ -65,16 +68,9 @@ export default function EmailSubscriberForm({ reset }) {
     }
 
 
-    useEffect(() => {
-        if (reset) {
-            setSubmitted(false)
-        }
-    }, [reset])
-
-
     return (
-        <Form onSubmit={handleSubmit}>
-            {/* <strong>Newsletter</strong> */}
+        <Form onSubmit={handleSubmit} className={className}>
+            <strong>Newsletter</strong>
             <Label htmlFor='email'>
                 {submitError ? (
                     <SubmitError>
@@ -93,8 +89,7 @@ export default function EmailSubscriberForm({ reset }) {
                 <>
                     {submitted ? (
                         <div>
-                            Thank you for signing up. You should
-                            be receiving a welcome email soon!
+                            Thank you for signing up!
                         </div>
                     ) : (
                         <>

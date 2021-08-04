@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 import ProductNav from '../components/layout/productCollectionNavigation'
-
+import EmailForm from '../components/forms/NewEmailSubscriberForm'
 import styled from 'styled-components'
 import SlideShow from '../components/slideshow'
 import { useShopify } from '../hooks/useShopify'
@@ -25,6 +25,7 @@ const Container = styled.div`
 const Landing = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: calc(100vh - ${dimensions.headerHeight});
 `
 
@@ -62,7 +63,14 @@ const StyledLink = styled(Link)`
   align-self: center;
   margin-top: 30px;
 `
-
+  ;
+const Message = styled.div`
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  max-width: 400px;
+  align-self: center;
+`
 
 
 const IndexPage = ({ data }) => {
@@ -94,10 +102,15 @@ const IndexPage = ({ data }) => {
       <SEO title="Home" />
       <Container>
         <Landing>
-          <Banner>
+          {/* <Banner>
             <SlideShow />
           </Banner>
-          <StyledProductNav collections={collections} />
+          <StyledProductNav collections={collections} /> */}
+          <Message>
+            Our site is currently under construction, and we are not accepting
+            new orders at this time. Check back with us in a few days.
+          </Message>
+          <EmailForm className='email-form'/>
 
           <LandingImgWrapper>
             <Img
@@ -111,10 +124,10 @@ const IndexPage = ({ data }) => {
               }}
             />
           </LandingImgWrapper>
-          <KeepScrolling scrolled={scrolled} />
+          {/* <KeepScrolling scrolled={scrolled} /> */}
         </Landing>
         {/* <ProductGrid /> */}
-        <Subtitle>{featured.title}</Subtitle>
+        {/* <Subtitle>{featured.title}</Subtitle>
         <Listing>
           {featured.products.map(product => (
             <ProductListingItem
@@ -132,7 +145,7 @@ const IndexPage = ({ data }) => {
           <DarkBrandButton>
             View All Products
           </DarkBrandButton>
-        </StyledLink>
+        </StyledLink> */}
       </Container>
 
     </>

@@ -195,8 +195,8 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
     //   title: 'Home'
     // },
     {
-      path: '/shop/collection/featured',
-      title: 'Shop'
+      // path: '/shop/collection/featured',
+      // title: 'Shop'
     },
     {
       path: '/media',
@@ -207,8 +207,8 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
       title: 'Contact'
     },
     {
-      path: '/cart',
-      title: `Cart (${cartCount})`
+      // path: '/cart',
+      // title: `Cart (${cartCount})`
     }
   ]
 
@@ -246,7 +246,7 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
               onClick={() => setSpotifyMinimized(prev => !prev)}
             />
           </ListenToMetalLogo>
-          <CartLink useIcon={true} />
+          {/* <CartLink useIcon={true} /> */}
 
           <Toggle
             navbarClosed={navbarClosed}
@@ -257,13 +257,13 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
         </div>
         <Navbox closed={navbarClosed}>
           <GlobalStyle closed={navbarClosed} />
-          <StyledLink
+          {/* <StyledLink
             to='/tournaments'
             name='Play Disc Golf'
             onClick={() => setNavbarClosed(true)}
           >
             Play Disc Golf
-          </StyledLink>
+          </StyledLink> */}
           <ListenToMetalText
             onClick={() => setSpotifyMinimized(prev => !prev)}
           >

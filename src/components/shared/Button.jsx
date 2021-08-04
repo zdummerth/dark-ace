@@ -2,16 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 
 const getColor = ({ cancel, remove, theme }) => {
-    if(cancel) return theme.colors.button.cancel
-    if(remove) return theme.colors.button.remove
-    return theme.colors.button.background
+    // if(cancel) return theme.colors.button.cancel
+    // if(remove) return theme.colors.button.remove
+    // return theme.colors.button.background
+    console.log({ theme })
 }
 
 const StyledButton = styled.button`
     position: relative;
-    background: ${getColor};
-    color: ${({ theme }) => theme.colors.button.color};
-    border: ${({ cancel }) => cancel ? `2px solid gray` : 'none'};
+    background: linear-gradient(to bottom right, #C00A0A 45%, #020202);
+    color: white;
+    // border: ${({ cancel }) => cancel ? `2px solid gray` : 'none'};
+    border: none;
     min-width: 70px;
     height: 40px;
     text-align: center;
@@ -32,7 +34,7 @@ const DisabledOverlay = styled.div`
     right: 0;
     top: 0;
     bottom: 0;
-    background: ${({ theme }) => theme.colors.button.disabled};
+    // background: ${({ theme }) => theme.colors.button.disabled};
 `
 
 const Button = ({ children, disabled, onClick, ...rest }) => {
