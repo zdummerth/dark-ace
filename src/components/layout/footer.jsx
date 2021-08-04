@@ -88,7 +88,7 @@ const Footer = ({ resetForm }) => {
   const { title } = useSiteMetaData()
   return (
     <StyledFooter dir='column' ai='center'>
-      <EmailForm reset={resetForm} />
+      {/* <EmailForm reset={resetForm} /> */}
       <Title>{title}</Title>
       <IconWrapper>
         <StyledLink href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' target='_blank' rel="noopener"><FbIcon /></StyledLink>
