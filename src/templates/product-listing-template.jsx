@@ -49,7 +49,7 @@ const ProductListingPage = ({ data }) => {
 
   return (
     <>
-      {/* <SEO title={product.title} description={product.description} /> */}
+      <SEO title={title} />
       <Container>
         <Nav collections={collections} />
         <Subtitle>{title}</Subtitle>
@@ -65,7 +65,7 @@ const ProductListingPage = ({ data }) => {
                 hideBorder={products.length === 1 ? true : false}
                 style={{
                   width: products.length === 1 ? '80%' : '50%',
-                  maxWidth: products.length === 1 ? '600px' : '350px',
+                  maxWidth: products.length === 1 ? '600px' : '300px',
                 }}
               />
             ))}

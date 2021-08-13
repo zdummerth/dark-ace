@@ -154,15 +154,15 @@ const SlideShow = ({ setIsSlideshowOpen, startingIndex }) => {
       <ImagesContainer>
         {slides}
       </ImagesContainer>
-      <SlideshowControls>
-        {/* <SlideshowButton onClick={handlePrevious}><RiArrowLeftLine /></SlideshowButton> */}
+      {/* <SlideshowControls>
+        <SlideshowButton onClick={handlePrevious}><RiArrowLeftLine /></SlideshowButton>
 
-        {/* <DotContainer>
+        <DotContainer>
           {dots}
-        </DotContainer> */}
+        </DotContainer>
 
-        {/* <SlideshowButton onClick={handleNext}><RiArrowRightLine /></SlideshowButton> */}
-      </SlideshowControls>
+        <SlideshowButton onClick={handleNext}><RiArrowRightLine /></SlideshowButton>
+      </SlideshowControls> */}
     </SlideshowContainer>
   )
 }

@@ -6,7 +6,7 @@ import ProductNav from '../components/layout/productCollectionNavigation'
 import styled from 'styled-components'
 import SlideShow from '../components/slideshow'
 import { useShopify } from '../hooks/useShopify'
-import { Listing, Subtitle } from '../utils/styles'
+import { Listing, Subtitle, breakpoints } from '../utils/styles'
 import ProductListingItem from '../components/products/ProducListingItem'
 
 
@@ -26,21 +26,20 @@ const Landing = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  // justify-content: start;
   height: calc(100vh - ${dimensions.headerHeight});
 `
 
 const Banner = styled.div`
   width: 100%;
+  max-width: 700px;
   align-self: center;
-  // height: 22%;
-  // height: 200px;
-  flex: 1;
+  // flex: 1;
+  height: 25vh;
 `
 
 const StyledProductNav = styled(ProductNav)`
-  // height: 15%;
-  flex: 1;
-
+  max-width: 500px;
 `
 
 const LandingImgWrapper = styled.div`
@@ -68,6 +67,20 @@ const Margin = styled.div`
   margin: 20px;
 `
 
+const ProductContainer = styled.div`
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  // overflow: hidden;
+  flex: 1;
+  // height: 50%;
+
+  @media (min-width: ${breakpoints.tablet}) {
+    // height: 50%;
+  }
+
+`
+
 
 
 const IndexPage = ({ data }) => {
@@ -91,6 +104,8 @@ const IndexPage = ({ data }) => {
   }, []);
 
   const { featured, preOrder } = useShopify()
+
+  const feature = preOrder.products[0]
   const collections = data.collectionData.edges.map(({ node }) => node)
 
 
@@ -100,32 +115,27 @@ const IndexPage = ({ data }) => {
       <Container>
         <Landing>
 
-          <StyledProductNav collections={collections} />
-          <Link to='/shop/biohazard-t-shirt'>
-            <h1>Biohazard Pre-Order</h1>
-          </Link>
-          <Listing style={{ height: '55%' }}>
-            {preOrder.products.map(product => (
-              <ProductListingItem
-                product={product}
-                key={product.shopifyId}
-                showThumbs={false}
-                hideBorder={true}
-                hideTitle={true}
-                containImage={true}
-                style={{
-                  width: '100%',
-                  maxWidth: '600px',
-                  // height: '45vh'
-                  height: '100%'
+          <StyledProductNav />
+          <ProductContainer>
+            <Link to='/shop/biohazard-t-shirt'>
+              <h1>Biohazard Pre-Order</h1>
+            </Link>
+            <ProductListingItem
+              product={feature}
+              key={feature.shopifyId}
+              showThumbs={false}
+              hideBorder={true}
+              hideTitle={true}
+              containImage={true}
+              style={{
+                width: '100%',
+                maxWidth: '600px',
+                // height: '45vh'
+                // height: '100%'
 
-                }}
-              />
-            ))}
-          </Listing>
-          <Banner>
-            <SlideShow />
-          </Banner>
+              }}
+            />
+          </ProductContainer>
 
           {/* <LandingImgWrapper>
             <Img
@@ -138,34 +148,12 @@ const IndexPage = ({ data }) => {
                 objectFit: 'contain'
               }}
             />
-          </LandingImgWrapper>
-          <KeepScrolling scrolled={scrolled} /> */}
-          <Margin />
-
+          </LandingImgWrapper> */}
+          {/* <KeepScrolling scrolled={scrolled} /> */}
         </Landing>
-        {/* <ProductGrid /> */}
-        {/* <Subtitle>{featured.title}</Subtitle>
-        <Listing>
-          {featured.products.map(product => (
-            <ProductListingItem
-              product={product}
-              key={product.shopifyId}
-              showThumbs={false}
-              style={{
-                width: '50%',
-                maxWidth: '400px',
-                // height: '40vh'
-              }}
-            />
-          ))}
-        </Listing> */}
-        {/* <StyledLink to='/shop/collection/featured'>
-          <DarkBrandButton>
-            View All Products
-          </DarkBrandButton>
-        </StyledLink> */}
-        {/* <StyledProductNav collections={collections} />/ */}
-
+        <Banner>
+          <SlideShow />
+        </Banner>
       </Container>
 
     </>

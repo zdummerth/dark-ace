@@ -5,7 +5,7 @@ import { StoreContext } from '../../context/StoreContextProvider'
 import "@fontsource/covered-by-your-grace"; // Defaults to weight 400.
 import styled, { createGlobalStyle } from "styled-components"
 import { dimensions, colors, breakpoints } from '../../utils/styles';
-
+import randomMargins from '../../../randomMargins'
 import Header from './header'
 import Footer from './footer'
 import Spotify from '../spotify'
@@ -116,6 +116,25 @@ const ContentWrapper = styled.main`
 
 `
 
+const StarryBackground = styled.div`
+  position: fixed;
+  top: 0;
+  background: ${colors.background};
+  height: 100vh;
+  width: 100vw;
+  z-index: -2;
+`
+
+const StyledStar = styled.div`
+  display: inline-block;
+  width: 1px;
+  height: 1px;
+  margin: ${({ rMargin }) => `${rMargin}px`};
+  // margin: 10px;
+  background: ${colors.brand};
+  // background: #6FFFB0;
+`
+
 // When header is fixed, it's removed from doc flow
 // This offsets that
 const HeaderMargin = styled.div`
@@ -129,6 +148,19 @@ const StyledAddingToCart = styled(CartStatus)`
   width: ${({ error }) => error ? '100%' : 'auto'}
 
 `
+
+const Stars = () => {
+  return (
+    <>
+      {randomMargins.map((rmar, index) => (
+        <StyledStar
+          key={index}
+          rMargin={rmar + ''}
+        />
+      ))}
+    </>
+  )
+}
 
 
 const Layout = ({ children, location, history }) => {
@@ -183,14 +215,8 @@ const Layout = ({ children, location, history }) => {
           cartCount={cartCount}
           setSpotifyMinimized={setSpotifyMinimized}
           spotifyMinimized={spotifyMinimized}
-        // setEventsMinimized={setEventsMinimized}
         />
         <HeaderMargin />
-        {/* <Events
-          minimized={eventsMinimized}
-          setMinimized={setEventsMinimized}
-          events={eventData}
-        /> */}
         <Spotify
           minimized={spotifyMinimized}
           setMinimized={setSpotifyMinimized}

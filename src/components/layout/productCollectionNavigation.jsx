@@ -18,7 +18,7 @@ const StyledLink = styled(Link)`
   border-radius: 50px;
   padding: 5px 10px;
   margin: 5px;
-  background: ${({ selected }) => selected ? colors.gradient : 'transparent'};
+  background: ${({ selected }) => selected ? colors.gradient : colors.background};
 `
 
 
