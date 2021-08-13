@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 
 const StyledInput = styled.input`
-  background: '#202020';
+  background: #202020;
   color: white;
 //   outline: 1px solid ${({ theme, error }) => error ? 'red' : 'inherit'};
   width: 100%;
