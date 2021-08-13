@@ -93,8 +93,7 @@ export default function EmailSubscriberForm({ reset }) {
                 <>
                     {submitted ? (
                         <div>
-                            Thank you for signing up. You should
-                            be receiving a welcome email soon!
+                            Thank you for signing up!
                         </div>
                     ) : (
                         <>

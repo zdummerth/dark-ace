@@ -25,6 +25,7 @@ const Container = styled.div`
 const Landing = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: calc(100vh - ${dimensions.headerHeight});
 `
 
@@ -63,6 +64,10 @@ const StyledLink = styled(Link)`
   margin-top: 30px;
 `
 
+const Margin = styled.div`
+  margin: 20px;
+`
+
 
 
 const IndexPage = ({ data }) => {
@@ -85,7 +90,7 @@ const IndexPage = ({ data }) => {
     };
   }, []);
 
-  const { featured, accessories } = useShopify()
+  const { featured, preOrder } = useShopify()
   const collections = data.collectionData.edges.map(({ node }) => node)
 
 
@@ -94,12 +99,34 @@ const IndexPage = ({ data }) => {
       <SEO title="Home" />
       <Container>
         <Landing>
+
+          <StyledProductNav collections={collections} />
+          <Link to='/shop/biohazard-t-shirt'>
+            <h1>Biohazard Pre-Order</h1>
+          </Link>
+          <Listing style={{ height: '55%' }}>
+            {preOrder.products.map(product => (
+              <ProductListingItem
+                product={product}
+                key={product.shopifyId}
+                showThumbs={false}
+                hideBorder={true}
+                hideTitle={true}
+                style={{
+                  width: '100%',
+                  maxWidth: '600px',
+                  // height: '45vh'
+                  height: '100%'
+
+                }}
+              />
+            ))}
+          </Listing>
           <Banner>
             <SlideShow />
           </Banner>
-          <StyledProductNav collections={collections} />
 
-          <LandingImgWrapper>
+          {/* <LandingImgWrapper>
             <Img
               fluid={data.squareBanner.childImageSharp.fluid}
               alt={'bone basket background'}
@@ -111,10 +138,12 @@ const IndexPage = ({ data }) => {
               }}
             />
           </LandingImgWrapper>
-          <KeepScrolling scrolled={scrolled} />
+          <KeepScrolling scrolled={scrolled} /> */}
+          <Margin />
+
         </Landing>
         {/* <ProductGrid /> */}
-        <Subtitle>{featured.title}</Subtitle>
+        {/* <Subtitle>{featured.title}</Subtitle>
         <Listing>
           {featured.products.map(product => (
             <ProductListingItem
@@ -124,15 +153,18 @@ const IndexPage = ({ data }) => {
               style={{
                 width: '50%',
                 maxWidth: '400px',
+                // height: '40vh'
               }}
             />
           ))}
-        </Listing>
-        <StyledLink to='/shop/collection/featured'>
+        </Listing> */}
+        {/* <StyledLink to='/shop/collection/featured'>
           <DarkBrandButton>
             View All Products
           </DarkBrandButton>
-        </StyledLink>
+        </StyledLink> */}
+        {/* <StyledProductNav collections={collections} />/ */}
+
       </Container>
 
     </>

@@ -10,9 +10,8 @@ import { breakpoints, colors, spacing, Subtitle, H3 } from '../../utils/styles';
 
 const ProductContainer = styled.div`
   text-align: center; 
-  border: .5px solid ${colors.brand};
-  background: ${colors.grayGradient};
-  padding: 20px;
+  border: ${({ hideBorder }) => hideBorder ? 'none' : `1px solid ${colors.brand}`};
+  padding: 10px;
 
   display: flex;
   flex-direction: column;
@@ -23,9 +22,10 @@ const ProductContainer = styled.div`
 `
 const ImgContainer = styled.div`
   width: 100%;
-  max-width: 300px;
-  min-height: 30vh;
-  max-height: 300px;
+  flex: 1;
+  // max-width: 300px;
+  // min-height: 30vh;
+  // max-height: 300px;
   position: relative;
   overflow: hidden;
 `
@@ -60,20 +60,17 @@ const ImgLink = styled(Link)`
 `
 const TextWrapper = styled(Link)`
   display: flex;
-  height: 100%;
+  // height: 100%;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-
-  // height: 100%;
-  padding-top: ${spacing.xs};
+  // justify-content: space-between;
 `
 
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  flex: 1;
+  // flex: 1;
 `
 
 const Text = styled.div`
@@ -107,7 +104,8 @@ const FeatureContainer = styled.div`
 `
 
 
-const ProductListingItem = ({ product, className, showThumbs, style }) => {
+
+const ProductListingItem = ({ product, className, showThumbs, style, hideBorder, hideTitle }) => {
   const [index, setIndex] = useState(0);
   // console.log(product.availableForSale)
 
@@ -115,6 +113,7 @@ const ProductListingItem = ({ product, className, showThumbs, style }) => {
     <ProductContainer
       className={className}
       style={style}
+      hideBorder={hideBorder}
     >
       <InfoContainer>
         {showThumbs ?
@@ -132,8 +131,9 @@ const ProductListingItem = ({ product, className, showThumbs, style }) => {
         <TextWrapper
           to={`/shop/${product.handle}`}
         >
-          <H3>{product.title}</H3>
-
+          {!hideTitle && (
+            <H3>{product.title}</H3>
+          )}
           {!product.availableForSale &&
             <p>Sold Out!</p>
           }
@@ -149,7 +149,7 @@ const ProductListingItem = ({ product, className, showThumbs, style }) => {
               width: '100%'
             }}
             imgStyle={{
-              objectFit: 'contain'
+              // objectFit: 'contain'
             }}
           />
         </ImgLink>

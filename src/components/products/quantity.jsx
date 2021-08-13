@@ -23,21 +23,23 @@ const ControllWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    // border: 1px solid white;
     border: none;
     background: ${colors.gradient};
-    box-shadow: 0 0 8px ${colors.brand};
+    // background: none;
+    // box-shadow: 0 0 8px ${colors.brand};
     border-radius: 50%;
     color: ${colors.lightest};
-    font-size: 22px;
+    font-size: 20px;
     padding: 0;
-    height: 22px;
-    width: 22px;
+    height: 20px;
+    width: 20px;
   }
 
   p {
-      font-size: 22px;
-      margin-right: 15px;
-      margin-left: 15px;
+      font-size: 18px;
+      margin-right: 10px;
+      margin-left: 10px;
   }
 `
 

@@ -28,6 +28,17 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: inherit;
   }
 
+  h1, h2, h3 {
+    font-family: 'Covered By Your Grace', Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  h1 {
+    @media (min-width: ${breakpoints.desktop}) {
+      font-size: 40px;
+    }
+  }
+
   a {
     text-decoration: none;
     color: inherit;
@@ -98,6 +109,7 @@ const ContentWrapper = styled.main`
   // align-items: center;
   position: relative;
   width: 100%;
+  min-height: calc(100vh - ${dimensions.headerHeight});
   max-width: 1300px;
   margin: 0 auto;
   // padding: 0 10px;
@@ -171,7 +183,7 @@ const Layout = ({ children, location, history }) => {
           cartCount={cartCount}
           setSpotifyMinimized={setSpotifyMinimized}
           spotifyMinimized={spotifyMinimized}
-          // setEventsMinimized={setEventsMinimized}
+        // setEventsMinimized={setEventsMinimized}
         />
         <HeaderMargin />
         {/* <Events

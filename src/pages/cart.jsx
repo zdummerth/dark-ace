@@ -68,7 +68,7 @@ const Cart = () => {
 
   return (
     <Container>
-      <Suggestions />
+      {/* <Suggestions /> */}
       <Subtotal>
         <p>{`Subtotal (${totalQuantity} ${totalQuantity > 1 ? 'items' : 'item'}): `}</p>
         <h4>$ {checkout.subtotalPrice}</h4>

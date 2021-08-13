@@ -26,7 +26,7 @@ const StyledLink = styled(Link)`
 const ProductNav = ({ collections, className }) => {
 
   const featured = collections.filter(c => c.handle === 'featured')
-  const rest = collections.filter(c => c.handle !== 'featured')
+  const rest = collections.filter(c => (c.handle !== 'featured') && (c.handle !== 'pre-order'))
 
   console.log('de arrya', featured)
   return (

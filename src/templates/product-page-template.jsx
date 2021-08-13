@@ -219,11 +219,11 @@ const ProductPage = ({ data, location }) => {
   return (
     <>
       <SEO title={product.title} description={product.description} />
-      {/* <BackLink to='/shop/collections'> */}
-      {/* <DarkBrandButton onClick={() => window.history.back()}>
-        <AiOutlineArrowLeft size={18} />
-      </DarkBrandButton> */}
-      {/* </BackLink> */}
+      <BackLink to='/shop/collection/featured'>
+        <DarkBrandButton>
+          <AiOutlineArrowLeft size={18} />
+        </DarkBrandButton>
+      </BackLink>
       <Container>
         <ImagesWrapper>
           <ImgContainer>
@@ -248,7 +248,7 @@ const ProductPage = ({ data, location }) => {
 
           <Subtitle>{product.title}</Subtitle>
 
-          {isPreOrder ? <h2>This Is A Pre-Order Item</h2> : null}
+          {/* {isPreOrder ? <h2>This Is A Pre-Order Item</h2> : null} */}
           <div style={{ height: '10px' }} />
           <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
           <FormContainer>

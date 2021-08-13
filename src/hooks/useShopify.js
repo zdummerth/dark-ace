@@ -113,15 +113,11 @@ export const useShopify = () => {
   const tShirts = allCollections.find(c => c.handle === 't-shirts')
   const longsleeves = allCollections.find(c => c.handle === 'longsleeves')
   const driFits = allCollections.find(c => c.handle === 'dri-fits')
-
-
-
-  const collections = allCollections.filter(c => (c.handle !== 'pre-order' && c.handle !== 'accessories'))
-
+  const preOrder = allCollections.find(c => c.handle === 'pre-order')
 
 
   const { giftCard } = data
 
-  return { discs, headware, accessories, featured, giftCard, longsleeves, tShirts, driFits }
+  return { discs, headware, accessories, featured, giftCard, longsleeves, tShirts, driFits, preOrder }
 
 }

@@ -169,20 +169,7 @@ const StyledListing = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  // justify-content: ${({ isSingleItem }) => isSingleItem ? 'center' : 'flex-start'};
   justify-content: center;
-  // overflow-x: auto;
-  // margin: 0 ${spacing.xs};
-  // margin-bottom: ${spacing.me};
-
-  &:first-child {
-    // margin: 100px;
-  }
-  & > * {
-    // margin-right: ${({ isSingleItem }) => isSingleItem ? '0' : `${spacing.lg}`};
-    // margin-top: ${spacing.md};
-    // margin-bottom: ${spacing.lg};
-  }
 `
 
 export const Listing = ({ children, style }) => {
@@ -202,15 +189,19 @@ export const Subtitle = styled.h2`
   // font-size: rem;
   margin-bottom: 10px;
   text-decoration: underline;
-  margin-top: 10px;
+  margin: 30px;
   text-align: center;
   font-family: 'Covered By Your Grace';
   font-size: 2rem;
 `
 
 export const H3 = styled.h3`
-  margin-top: 10px;
+  // margin-top: 10px;
   text-align: center;
   font-family: 'Covered By Your Grace';
-  font-size: 1.5rem;
+  font-size: 22px;
+  @media (min-width: ${breakpoints.desktop}) {
+    font-size: 28px;
+  }
+}
 `
