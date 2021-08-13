@@ -87,7 +87,7 @@ const LineItem = props => {
             return null
           }
           return (
-            <div>
+            <div key={`${opt.name}:${opt.value}`}>
               {`${opt.name}: ${opt.value.toUpperCase()}`}
             </div>
           )

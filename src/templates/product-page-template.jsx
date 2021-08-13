@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { colors, breakpoints, spacing, Subtitle, DarkBrandButton } from '../utils/styles'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useCheckout } from '../hooks/useCheckout'
-
+import ProductNav from '../components/layout/productCollectionNavigation'
 import ProductForm from '../components/products/product-form'
 import GiftCard from '../components/products/GiftCard'
 
@@ -276,12 +276,7 @@ const ProductPage = ({ data, location }) => {
 
           </FormContainer>
           <GiftCard />
-          <StyledLink to='/shop/collection/featured'>
-            <DarkBrandButton>
-              View All Products
-            </DarkBrandButton>
-          </StyledLink>
-
+          <ProductNav />
         </InfoWrapper>
       </Container>
     </>
@@ -290,7 +285,7 @@ const ProductPage = ({ data, location }) => {
 
 export const query = graphql`
   query($handle: String!) {
-    shopifyProduct(handle: { eq: $handle }) {
+    shopifyProduct: shopifyProduct(handle: { eq: $handle }) {
       id
       title
       handle

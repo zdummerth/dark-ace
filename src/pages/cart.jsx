@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { StoreContext } from '../context/StoreContextProvider'
-
+import ProductNav from '../components/layout/productCollectionNavigation'
 import LineItem from '../components/cart/line-item'
 import Suggestions from '../components/cart/Suggestions'
 
@@ -13,6 +13,10 @@ const Container = styled.div`
   // color: white;
   // width: 95%;
   // margin: 0 auto;
+  // text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   #lineItems {
     // border-top: 1px solid #C00A0A;
@@ -21,7 +25,10 @@ const Container = styled.div`
 
 const Subtotal = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
+  text-align: center;
+
 
   p {
     margin-right: 1rem;
@@ -32,7 +39,7 @@ const CheckoutLink = styled.a`
   display: block;
   background: ${colors.gradient};
   box-shadow: 0 0 5px ${colors.brand};
-  padding: .8rem 0;
+  padding: 10px;
   margin-bottom: 2rem;
   text-align: center;
   border-radius: 5px;
@@ -81,17 +88,24 @@ const Cart = () => {
           <p>
             Your Cart Is Empty
           </p>
-          <StyledLink to='/shop/collection/featured'>Continue Shopping</StyledLink>
-
+          <p>
+            Please Select A Category
+          </p>
         </>
         :
-        <CheckoutLink href={checkout.webUrl}>Proceed to checkout</CheckoutLink>
+        <>
+          <CheckoutLink href={checkout.webUrl}>Proceed to checkout</CheckoutLink>
+          <p style={{ textAlign: 'center', width: '90%'}}>If your cart contains a pre-order item, all items will be shipped with the pre-order</p>
+        </>
       }
       <div id='lineItems'>
         {lineItems}
       </div>
+      <ProductNav />
+
     </Container>
   )
 }
+
 
 export default Cart

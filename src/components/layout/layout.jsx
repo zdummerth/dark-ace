@@ -45,7 +45,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   p, h3 {
-    margin: 0;
+    // margin: 0;
   }
 
   .flex {

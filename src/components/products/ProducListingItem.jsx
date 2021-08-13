@@ -105,7 +105,7 @@ const FeatureContainer = styled.div`
 
 
 
-const ProductListingItem = ({ product, className, showThumbs, style, hideBorder, hideTitle }) => {
+const ProductListingItem = ({ product, className, showThumbs, style, hideBorder, hideTitle, containImage }) => {
   const [index, setIndex] = useState(0);
   // console.log(product.availableForSale)
 
@@ -149,7 +149,7 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
               width: '100%'
             }}
             imgStyle={{
-              // objectFit: 'contain'
+              objectFit: `${containImage ? 'contain' : 'cover'}`
             }}
           />
         </ImgLink>

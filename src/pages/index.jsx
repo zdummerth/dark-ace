@@ -112,6 +112,7 @@ const IndexPage = ({ data }) => {
                 showThumbs={false}
                 hideBorder={true}
                 hideTitle={true}
+                containImage={true}
                 style={{
                   width: '100%',
                   maxWidth: '600px',

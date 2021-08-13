@@ -36,7 +36,7 @@ const ControllWrapper = styled.div`
     width: 20px;
   }
 
-  p {
+  div {
       font-size: 18px;
       margin-right: 10px;
       margin-left: 10px;
@@ -52,7 +52,7 @@ const Quantity = ({ quantity, increase, decrease, className }) => {
           <button onClick={decrease}>
               <AiOutlineMinus /> 
           </button>
-          <p>{quantity}</p> 
+          <div>{quantity}</div> 
           <button onClick={increase}>
               <IoMdAdd />
           </button>

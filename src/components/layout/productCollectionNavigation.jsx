@@ -1,6 +1,7 @@
 import { Link } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
+import { useShopify } from '../../hooks/useShopify'
 
 import { colors } from '../../utils/styles'
 
@@ -25,10 +26,13 @@ const StyledLink = styled(Link)`
 
 const ProductNav = ({ collections, className }) => {
 
-  const featured = collections.filter(c => c.handle === 'featured')
-  const rest = collections.filter(c => (c.handle !== 'featured') && (c.handle !== 'pre-order'))
+  const { allCollections } = useShopify()
 
-  console.log('de arrya', featured)
+
+  const featured = allCollections.filter(c => c.handle === 'featured')
+  const rest = allCollections.filter(c => (c.handle !== 'featured') && (c.handle !== 'pre-order'))
+
+  // console.log('de arrya', featured)
   return (
     <Nav className={className}>
       {[...featured, ...rest].map((c, index) => (

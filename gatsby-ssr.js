@@ -3,6 +3,7 @@ const StoreContextProvider = require("./src/context/StoreContextProvider").defau
 const Layout = require("./src/components/layout/layout").default
 
 
+
 exports.wrapRootElement = ({ element }) => {
   return <StoreContextProvider>{element}</StoreContextProvider>
 }

@@ -115,9 +115,11 @@ export const useShopify = () => {
   const driFits = allCollections.find(c => c.handle === 'dri-fits')
   const preOrder = allCollections.find(c => c.handle === 'pre-order')
 
+  const collectionNames = allCollections.map(c => c.title)
+
 
   const { giftCard } = data
 
-  return { discs, headware, accessories, featured, giftCard, longsleeves, tShirts, driFits, preOrder }
+  return { discs, headware, accessories, featured, giftCard, longsleeves, tShirts, driFits, preOrder, collectionNames, allCollections }
 
 }
