@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-// import { IoMdAdd } from 'react-icons/io';
-// import { AiOutlineMinus } from 'react-icons/ai';
+import { IoMdAdd } from 'react-icons/io';
+import { AiOutlineMinus } from 'react-icons/ai';
 
 
 import { colors } from 'src/styles';
@@ -50,11 +50,11 @@ const Quantity = ({ quantity, increase, decrease, className }) => {
         <div>Qty:</div>
         <ControllWrapper>
           <button onClick={decrease}>
-              {/* <AiOutlineMinus />  */}
+              <AiOutlineMinus /> 
           </button>
           <div>{quantity}</div> 
           <button onClick={increase}>
-              {/* <IoMdAdd /> */}
+              <IoMdAdd />
           </button>
         </ControllWrapper>
     </QuantityWrapper>
