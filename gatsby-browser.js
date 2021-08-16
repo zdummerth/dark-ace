@@ -1,7 +1,27 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/browser-apis/
- */
+import React from "react"
+import StoreContextProvider from "src/context/StoreContextProvider"
+import Layout from 'src/components/layout/layout'
+import { DarkTheme } from 'src/styles'
+import { ThemeProvider } from 'styled-components'
 
-// You can delete this file if you're not using it
+
+export const wrapRootElement = ({ element }) => {
+  return (
+    <StoreContextProvider>
+      <ThemeProvider theme={DarkTheme}>
+        {element}
+      </ThemeProvider>
+    </StoreContextProvider>
+  )
+}
+
+
+/*
+Since the spotify component can't be unmounted in order to continue playing through page changes,
+this wraps Layout around the site so I don't need to import layout in each page file
+*/
+export const wrapPageElement = ({ element, props }) => {
+  // props provide same data to Layout as Page element will get
+  // including location, data, etc - you don't need to pass it
+  return <Layout {...props}>{element}</Layout>
+}

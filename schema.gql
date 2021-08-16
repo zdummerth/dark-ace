@@ -1,0 +1,9 @@
+type Contact {
+    email: String!
+}
+
+type FormSubmission {
+    name: String!
+    email: String!
+    message: String!
+}

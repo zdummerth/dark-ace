@@ -1,7 +1,64 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/node-apis/
- */
+const path = require(`path`)
 
-// You can delete this file if you're not using it
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions
+  const productPageResult = await graphql(`
+    {
+      allShopifyProduct {
+        edges {
+          node {
+            handle
+          }
+        }
+      }
+    }
+  `)
+
+  if (productPageResult.errors) {
+    reporter.panicOnBuild(`Error while running product page GraphQL query.`)
+    return
+  }
+
+  console.log('the products handles', productPageResult)
+
+  productPageResult.data.allShopifyProduct.edges.forEach(({ node }) => {
+    createPage({
+      path: `shop/${node.handle}/`,
+      component: path.resolve(`./src/pageTemplates/product-page-template.jsx`),
+      context: {
+        // Data passed to context is available
+        // in page queries as GraphQL variables.
+        handle: node.handle,
+      },
+    })
+  })
+
+  const productListingResult = await graphql(`
+  {
+    allShopifyCollection {
+      edges {
+        node {
+          handle
+        }
+      }
+    }
+  }
+`)
+
+  if (productListingResult.errors) {
+    reporter.panicOnBuild(`Error while running product page GraphQL query.`)
+    return
+  }
+
+  productListingResult.data.allShopifyCollection.edges.forEach(({ node }) => {
+    createPage({
+      path: `shop/collection/${node.handle}/`,
+      component: path.resolve(`./src/pageTemplates/product-listing-template.jsx`),
+      context: {
+        // Data passed to context is available
+        // in page queries as GraphQL variables.
+        handle: node.handle,
+      },
+    })
+  })
+}

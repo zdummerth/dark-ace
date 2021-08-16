@@ -5,6 +5,8 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@fontsource/covered-by-your-grace": "^4.5.0",
+    "@styled-icons/boxicons-regular": "^10.37.0",
     "gatsby": "^3.11.1",
     "gatsby-plugin-gatsby-cloud": "^2.11.0",
     "gatsby-plugin-image": "^1.11.0",
@@ -13,13 +15,21 @@
     "gatsby-plugin-react-helmet": "^4.11.0",
     "gatsby-plugin-sharp": "^3.11.0",
     "gatsby-source-filesystem": "^3.11.0",
+    "gatsby-source-shopify": "^5.3.0",
     "gatsby-transformer-sharp": "^3.11.0",
+    "lodash": "^4.17.21",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "react-icons": "^4.2.0",
+    "shopify-buy": "^2.11.0",
+    "styled-components": "^5.3.0",
+    "validator": "^13.6.0"
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "^1.13.2",
+    "gatsby-plugin-root-import": "^2.0.7",
     "prettier": "2.3.2"
   },
   "keywords": [

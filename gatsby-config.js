@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -8,6 +12,7 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
+    'gatsby-plugin-root-import',
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -27,6 +32,16 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-source-shopify`,
+      options: {
+        // The domain name of your Shopify shop.
+        storeUrl: process.env.GATSBY_SHOP_NAME,
+        // The storefront access token
+        password: process.env.SHOPIFY_ADMIN_PASSWORD,
+        shopifyConnections: ['collections']
       },
     },
     `gatsby-plugin-gatsby-cloud`,
