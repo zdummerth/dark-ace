@@ -27,6 +27,7 @@ const Nav = styled(Flex)`
   z-index: 2;
   height: ${dimensions.headerHeight};
   width: 100%;
+  max-width: 800px;
   // background: rgba(0,0,0,.7);
   background: black;
   // text-transform: uppercase;

@@ -94,7 +94,6 @@ const IndexPage = () => {
       <SEO title="Home" />
       <Container>
         <Landing>
-
           <StyledProductNav />
           <ProductContainer>
             <ProductListingItem
