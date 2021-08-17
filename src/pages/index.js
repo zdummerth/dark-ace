@@ -100,9 +100,9 @@ const IndexPage = () => {
               product={feature}
               key={feature.shopifyId}
               showThumbs={false}
-              hideBorder={true}
+              // hideBorder={true}
               // hideTitle={true}
-              containImage={true}
+              // containImage={true}
               style={{
                 width: '100%',
                 maxWidth: '600px',

@@ -20,18 +20,18 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-
-const Nav = styled(Flex)`
+const FullWidth = styled(Flex)`
+  background: ${colors.darkGradient}; 
+  width: 100vw;
   position: fixed;
   top: 0;
   z-index: 2;
+`
+
+const Nav = styled(Flex)`
   height: ${dimensions.headerHeight};
   width: 100%;
   max-width: 800px;
-  // background: rgba(0,0,0,.7);
-  background: black;
-  // text-transform: uppercase;
-  padding-right: 20px;
 `
 
 
@@ -58,54 +58,56 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
 
 
   return (
-    <Nav jc='space-between'>
-      <LogoLink to='/' name='home'>
+    <FullWidth>
+      <Nav jc='space-around'>
+        {/* <LogoLink to='/' name='home'>
         <Logo />
-      </LogoLink>
-      {/* <div
+      </LogoLink> */}
+        {/* <div
         style={{ display: 'flex', alignItems: 'center' }}
       > */}
-      <StyledLink
-        to='/shop/collection/featured'
-        name='Play Disc Golf'
-        onClick={() => setNavbarClosed(true)}
-      >
-        <Flex dir='column'>
-          <ShoppingBag size='28' />
-          <I>Shop</I>
-        </Flex>
-      </StyledLink>
-      <StyledLink
-        to='/tournaments'
-        name='Play Disc Golf'
-        onClick={() => setNavbarClosed(true)}
-      >
-        <Flex dir='column'>
-          <Trophy size='28' />
-          <I>Events</I>
-        </Flex>
-      </StyledLink>
-      <StyledLink
-        to='/cart'
-        name='Play Disc Golf'
-        onClick={() => setNavbarClosed(true)}
-      >
-        <Flex dir='column'>
-          <CartLink />
-          <I>Cart</I>
-        </Flex>
-      </StyledLink>
-      <StyledLink
-        to='/contact'
-        name='Play Disc Golf'
-        onClick={() => setNavbarClosed(true)}
-      >
-        <Flex dir='column'>
-          <Message size='28' />
-          <I>Contact</I>
-        </Flex>
-      </StyledLink>
-    </Nav>
+        <StyledLink
+          to='/shop/collection/featured'
+          name='Play Disc Golf'
+          onClick={() => setNavbarClosed(true)}
+        >
+          <Flex dir='column'>
+            <ShoppingBag size='28' />
+            <I>Shop</I>
+          </Flex>
+        </StyledLink>
+        <StyledLink
+          to='/cart'
+          name='Play Disc Golf'
+          onClick={() => setNavbarClosed(true)}
+        >
+          <Flex dir='column'>
+            <CartLink />
+            <I>Cart</I>
+          </Flex>
+        </StyledLink>
+        <StyledLink
+          to='/tournaments'
+          name='Play Disc Golf'
+          onClick={() => setNavbarClosed(true)}
+        >
+          <Flex dir='column'>
+            <Trophy size='28' />
+            <I>Events</I>
+          </Flex>
+        </StyledLink>
+        <StyledLink
+          to='/contact'
+          name='Play Disc Golf'
+          onClick={() => setNavbarClosed(true)}
+        >
+          <Flex dir='column'>
+            <Message size='28' />
+            <I>Contact</I>
+          </Flex>
+        </StyledLink>
+      </Nav>
+    </FullWidth>
   )
 }
 

@@ -7,15 +7,19 @@ import styled from 'styled-components'
 
 import Quantity from 'src/components/products/quantity'
 import Button from 'src/components/shared/Button'
+import Flex from 'src/components/shared/Flexbox'
+
 
 import { colors } from 'src/styles'
 
 const StyledQuantity = styled(Quantity)`
-  justify-content: flex-start;
+  // justify-content: flex-start;
+  margin: 40px;
 `
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 90%;
 
   & .out-of-stock {
@@ -23,11 +27,11 @@ const Form = styled.form`
   }
 
   & > * {
-      margin-bottom: 1.3rem;
+      // margin-bottom: 1.3rem;
   }
 `
 
-const OptionContainer = styled.div`
+const OptionContainer = styled(Flex)`
   // display: flex;
   // flex-wrap: wrap;
   // align-items: center;
@@ -240,7 +244,7 @@ const ProductForm = ({
 
         {/* {Product with no variants produces option with name === 'Title', So check for that to prevent unwanted select menu} */}
         {options.map(({ id, name, values }) => name !== 'Title' && name !== 'Color' && (
-          <OptionContainer key={id}>
+          <OptionContainer key={id} dir='column'>
             {optionDisplay({ name, values })}
           </OptionContainer>
         ))}
@@ -257,8 +261,7 @@ const ProductForm = ({
                 type="submit"
                 disabled={status === 'Adding'}
                 style={{
-                  alignSelf: 'flex-start',
-                  marginBottom: '0',
+                  width: '200px'
                 }}
               >
                 {`Add To Cart`}

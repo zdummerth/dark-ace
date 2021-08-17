@@ -63,9 +63,9 @@ const ProductListingPage = ({ data }) => {
                 product={product}
                 key={product.shopifyId}
                 showThumbs={false}
-                hideBorder={products.length === 1 ? true : false}
+                // hideBorder={products.length === 1 ? true : false}
                 style={{
-                  width: products.length === 1 ? '80%' : '50%',
+                  width: products.length === 1 ? '100%' : '50%',
                   maxWidth: products.length === 1 ? '600px' : '300px',
                 }}
               />

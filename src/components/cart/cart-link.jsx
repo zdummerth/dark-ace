@@ -32,8 +32,8 @@ const CartWrapper = styled.div`
     color: ${colors.lightest};
 
     position: absolute;
-    bottom: 18px;
-    left: 17px;
+    bottom: 13px;
+    left: 20px;
 
     background-image: ${colors.gradient};
     border-radius: 50%;
@@ -41,7 +41,6 @@ const CartWrapper = styled.div`
     font-size: 1.1rem;
     width: 22px;
     height: 22px;
-
   }
 
   // @media (max-width: ${breakpoints.desktop}) {
@@ -55,19 +54,20 @@ const CartLink = () => {
   const {
     store: { checkout: { lineItems } },
   } = useContext(StoreContext)
-  
+
   const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
 
   return (
     <>
       <Link to='/cart'>
         <CartWrapper>
-          <span>{totalQuantity}</span>
-          <Cart size='28'/>
+          {totalQuantity > 0 && <span>{totalQuantity}</span>}
+          {/* <span>{totalQuantity}</span> */}
+          <Cart size='28' />
         </CartWrapper>
       </Link>
 
-  </>
+    </>
   )
 }
 

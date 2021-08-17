@@ -5,7 +5,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
 import styled from 'styled-components'
-import { colors, breakpoints, spacing, Subtitle, DarkBrandButton } from 'src/styles'
+import { colors, breakpoints, spacing, Subtitle, DarkBrandButton, dimensions } from 'src/styles'
 // import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useCheckout } from 'src/hooks/useCheckout'
 import ProductNav from 'src/components/layout/productCollectionNavigation'
@@ -17,71 +17,62 @@ import Flex from 'src/components/shared/Flexbox'
 // import SEO from '../components/seo'
 
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  width: 95%;
-  // padding: 0 5px;
+const Container = styled(Flex)`
+  width: 100%;
 
-  .hidden {
-    display: none;
-  }
   @media (min-width: ${breakpoints.desktop}) {
+    position: relative;
     flex-direction: row;
     align-items: flex-start;
+    // height: calc(90vh - ${dimensions.headerHeight});
   }
 `
 
 const ImgContainer = styled(Flex)`
-  // width: 100%;
-  height: 60vh;
-  overflow: hidden;
-
-  @media (min-width: ${breakpoints.tablet}) {
-    // height: 60vh;
-  }
-
-  @media (min-width: ${breakpoints.tablet}) {
-    // height: 70vh;
-  }
-
-`
-const ImagesWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
-  max-width: 600px;
+  // position: relative;
+  height: 100%;
+  overflow: hidden;
+  padding: 5px;
+  @media (min-width: ${breakpoints.desktop}) {
+    padding: 15px;
+  }
+`
+const ImagesWrapper = styled(Flex)`
+  height: 60vh;
+  // max-width: 600px;
+  width: 100%;
+  border: 1px solid ${colors.gray};
+
+
+  @media (min-width: ${breakpoints.desktop}) {
+    height: 80vh;
+    flex: 1;
+    max-width: 800px;
+
+  }
 `
 const InfoWrapper = styled.div`
-  max-width: 400px;
-  // min-width: 300px;
+  // max-width: 600px;
   display: flex;
+  width: 100%;
   flex-direction: column;
-  // align-items: center;
+
 
   @media (min-width: ${breakpoints.desktop}) {
     margin-left: 15px;
+    width: 500px;
   }
 `
 const StyledPrice = styled.div`
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
 `
-const FormContainer = styled.div`
-  // width: 100%;
-  padding: ${spacing.sm};
-  margin-bottom: 30px;
-  margin-top: 30px;
 
-  border: 2px solid ${colors.gray};
-  background: ${colors.grayGradient};
-
-`
 const ThumbnailContainer = styled.div`  
   margin-top: 5px;
+  margin-bottom: 10px;
 `
 const Thumbnail = styled.button`
     margin-right: 8px;
@@ -92,6 +83,23 @@ const Thumbnail = styled.button`
     background: none;
     :focus {outline:none;}
     ::-moz-focus-inner {border:0;}
+`
+
+const Section = styled.section`
+  background: ${colors.grayGradient};
+  border: 1px solid ${colors.gray};
+  // border-bottom: 1px solid ${colors.gray};
+  padding: 10px;
+  margin-top: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: ${breakpoints.desktop}) {
+    &.top {
+      margin-top: 0;
+    }
+  }
 `
 
 const BackLink = styled(Link)`
@@ -140,7 +148,7 @@ const ProductPage = ({ data, location }) => {
     setVariant
   } = useCheckout(product)
 
-  // // console.log('the current variant', variant)
+  console.log('the current variant', variant)
 
   const [imageFluid, setImageFluid] = useState(fulls[0].gatsbyImageData)
 
@@ -231,14 +239,14 @@ const ProductPage = ({ data, location }) => {
         </DarkBrandButton>
       </BackLink> */}
 
-      <Container>
-        <ImagesWrapper>
+      <Container dir='column'>
+        <ImagesWrapper dir='column'>
           <ImgContainer>
             <GatsbyImage
               image={imageFluid}
               alt={title}
-              // width={200}
-              // height={200}
+              style={{ height: '100%', width: '100%' }}
+              objectFit={'contain'}
             />
           </ImgContainer>
           {(thumbs.length > 1 && thumbs.length < 6) &&
@@ -246,17 +254,14 @@ const ProductPage = ({ data, location }) => {
           }
         </ImagesWrapper>
         <InfoWrapper>
-          <div style={{ height: '10px' }} />
-
-          <Subtitle>{product.title}</Subtitle>
-
-          <div style={{ height: '10px' }} />
-          <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
-          <FormContainer>
-            <StyledPrice
-              price={variant.price}
-              compareAtPrice={variant.compareAtPrice}
-            />
+          <Section className='top'>
+            <Subtitle>{product.title}</Subtitle>
+            <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+          </Section>
+          <Section>
+            <StyledPrice>
+              ${variant.price}
+            </StyledPrice>
             <ProductForm
               product={product}
               variant={variant}
@@ -275,9 +280,10 @@ const ProductPage = ({ data, location }) => {
               imgWithOption={variantImgWithOption}
             />
 
-          </FormContainer>
-          {/* <GiftCard /> */}
-          <ProductNav />
+          </Section>
+          <Section>
+            <ProductNav />
+          </Section>
         </InfoWrapper>
       </Container>
     </>
@@ -304,7 +310,7 @@ export const query = graphql`
       fulls: images {
         id
         shopifyId
-        gatsbyImageData(width: 350)
+        gatsbyImageData(width: 800)
       }
       thumbs: images {
         id
@@ -329,7 +335,7 @@ export const query = graphql`
         }
         image {
           id
-          gatsbyImageData(width: 350)
+          gatsbyImageData(width: 450)
         }
       }
     }

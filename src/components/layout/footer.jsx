@@ -14,7 +14,8 @@ const StyledFooter = styled(Flex)`
   width: 100%;
   padding: 0 2vh;
   margin-top: 100px;
-  background-color: ${colors.grayBackground};
+  background: ${colors.darkGradient};
+  border-top: 1px solid ${colors.gray};
 
   @media (min-width: ${breakpoints.desktop}) {
     p {

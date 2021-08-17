@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { StoreContext } from 'src/context/StoreContextProvider'
 import ProductNav from 'src/components/layout/productCollectionNavigation'
 import LineItem from 'src/components/cart/line-item'
+
 // import Suggestions from '../components/cart/Suggestions'
 
 import { colors } from 'src/styles'
@@ -75,6 +76,8 @@ const Cart = () => {
           <p>
             Please Select A Category
           </p>
+          <ProductNav />
+
         </>
         :
         <>
@@ -85,8 +88,6 @@ const Cart = () => {
       <div id='lineItems'>
         {lineItems}
       </div>
-      <ProductNav />
-
     </Container>
   )
 }

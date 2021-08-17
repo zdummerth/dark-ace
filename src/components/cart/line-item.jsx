@@ -2,6 +2,8 @@ import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { DarkBrandButton, colors } from 'src/styles';
+import Button from 'src/components/shared/Button'
+
 
 
 
@@ -102,14 +104,15 @@ const LineItem = props => {
         }}>
           Qty:
           {item.quantity}
-          <DarkBrandButton
+          <Button
+            cancel
             onClick={handleRemove}
             style={{
-              width: '80px'
+              // width: '80px'
             }}
           >
             Delete
-        </DarkBrandButton>
+          </Button>
         </span>
       </div>
     </Container>

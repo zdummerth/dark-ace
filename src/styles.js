@@ -24,7 +24,7 @@ export const colors = {
   grayBackground: '#262626',
   background: '#020202',
   gradient: `linear-gradient(to bottom right, #C00A0A 45%, #020202)`,
-  darkGradient: `linear-gradient(to bottom right, #020202 45%, #C00A0A)`,
+  darkGradient: `linear-gradient(to bottom right, #020202 65%, #C00A0A)`,
   darkToBottom: `radial-gradient(ellipse at 50% 100%, #C00A0A, #020202 75%)`,
   grayGradient: `linear-gradient(to bottom right, #020202 45%, #454545)`,
   lightGradient: `linear-gradient(to bottom right, #fff 45%, #C00A0A)`,

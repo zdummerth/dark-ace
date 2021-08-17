@@ -36,7 +36,7 @@ const Logo = () => {
         <StaticImage src='../../images/da-logo-square.png' alt='logo' width={60} height={60} />
       </MobileLogo>
       <DesktopLogo>
-        <StaticImage src='../../images/logo.png' alt='logo' width={200} height={70} />
+        <StaticImage src='../../images/logo.png' alt='logo' width={206} height={70} quality={100} />
       </DesktopLogo>
     </>
   )
