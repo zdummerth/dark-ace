@@ -1,7 +1,6 @@
 import React, { useContext } from "react"
 import styled from 'styled-components'
 import { Link } from 'gatsby'
-import { RiShoppingCartLine } from 'react-icons/ri';
 import { Cart } from '@styled-icons/boxicons-regular'
 
 import { StoreContext } from 'src/context/StoreContextProvider'

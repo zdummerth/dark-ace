@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
-import { DarkBrandButton, colors } from 'src/styles';
+import { colors } from 'src/styles';
 import Button from 'src/components/shared/Button'
 
 

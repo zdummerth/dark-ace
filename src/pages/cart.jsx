@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { StoreContext } from 'src/context/StoreContextProvider'
 import ProductNav from 'src/components/layout/productCollectionNavigation'
 import LineItem from 'src/components/cart/line-item'
+import SEO from 'src/components/SEO'
 
 // import Suggestions from '../components/cart/Suggestions'
 
@@ -59,36 +60,39 @@ const Cart = () => {
   ))
 
   return (
-    <Container>
-      {/* <Suggestions /> */}
-      <Subtotal>
-        <p>{`Subtotal (${totalQuantity} ${totalQuantity > 1 ? 'items' : 'item'}): `}</p>
-        <h4>$ {checkout.subtotalPrice}</h4>
-      </Subtotal>
-      <Italic>taxes and shipping calculated at checkout</Italic>
+    <>
+      <SEO title='Cart' />
+      <Container>
+        {/* <Suggestions /> */}
+        <Subtotal>
+          <p>{`Subtotal (${totalQuantity} ${totalQuantity > 1 ? 'items' : 'item'}): `}</p>
+          <h4>$ {checkout.subtotalPrice}</h4>
+        </Subtotal>
+        <Italic>taxes and shipping calculated at checkout</Italic>
 
-      {checkout.lineItems.length === 0
-        ?
-        <>
-          <p>
-            Your Cart Is Empty
-          </p>
-          <p>
-            Please Select A Category
-          </p>
-          <ProductNav />
+        {checkout.lineItems.length === 0
+          ?
+          <>
+            <p>
+              Your Cart Is Empty
+            </p>
+            <p>
+              Please Select A Category
+            </p>
+            <ProductNav />
 
-        </>
-        :
-        <>
-          <CheckoutLink href={checkout.webUrl}>Proceed to checkout</CheckoutLink>
-          {/* <p style={{ textAlign: 'center', width: '90%'}}>If your cart contains a pre-order item, all items will be shipped with the pre-order</p> */}
-        </>
-      }
-      <div id='lineItems'>
-        {lineItems}
-      </div>
-    </Container>
+          </>
+          :
+          <>
+            <CheckoutLink href={checkout.webUrl}>Proceed to checkout</CheckoutLink>
+            {/* <p style={{ textAlign: 'center', width: '90%'}}>If your cart contains a pre-order item, all items will be shipped with the pre-order</p> */}
+          </>
+        }
+        <div id='lineItems'>
+          {lineItems}
+        </div>
+      </Container>
+    </>
   )
 }
 

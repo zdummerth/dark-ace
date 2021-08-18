@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Link } from "gatsby"
 import { GatsbyImage } from 'gatsby-plugin-image'
 import styled from 'styled-components'
-import { breakpoints, colors, spacing, Subtitle, H3 } from 'src/styles';
+import { breakpoints, colors, spacing, H3 } from 'src/styles';
 import Flex from 'src/components/shared/Flexbox'
 
 
@@ -57,17 +57,13 @@ const ImgLink = styled(Link)`
 `
 const TextWrapper = styled(Link)`
   display: flex;
-  // height: 100%;
   flex-direction: column;
   align-items: center;
-  // justify-content: space-between;
 `
 
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-
-  // flex: 1;
 `
 
 const Text = styled.div`
@@ -85,22 +81,6 @@ const Text = styled.div`
     }
   }
 `
-
-const FeatureContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 15px;
-  @media (min-width: ${breakpoints.tablet}) {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    margin-top: 35px;
-  }
-`
-
-
 
 const ProductListingItem = ({ product, className, showThumbs, style, hideBorder, hideTitle, containImage }) => {
   const [index, setIndex] = useState(0);

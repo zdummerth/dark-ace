@@ -6,6 +6,7 @@ import Flex from 'src/components/shared/Flexbox'
 import Button from 'src/components/shared/Button'
 import LoadingIndicator from 'src/components/shared/LoadingIndicator'
 
+const Container = styled(Flex)``
 
 const Form = styled.form`
   border: 1px solid gray;
@@ -15,18 +16,6 @@ const Form = styled.form`
   text-align: center;
 `
 
-const Span = styled.span`
-  color: ${({ theme }) => theme.colors.brand};
-  :hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-`
-
-const P = styled.p`
-  margin-top: 30px;
-`
-
 const StyledButton = styled(Button)`
   display: flex;
   align-items: center;
@@ -34,11 +23,6 @@ const StyledButton = styled(Button)`
   width: 100%;
   margin-top: 30px;
 `
-
-
-const Error = styled.div``
-
-const Container = styled(Flex)``
 
 export default function ContactForm() {
     const [submitted, setSubmitted] = useState(false)

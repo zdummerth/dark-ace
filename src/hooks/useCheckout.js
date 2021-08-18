@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react'
+import { useState, useEffect, useContext, useCallback } from 'react'
 import { StoreContext } from 'src/context/StoreContextProvider'
 
 
@@ -64,7 +64,7 @@ export const useCheckout = product => {
           setAvailable(data)
         })
     },
-    [variant.id, checkAvailability, id]
+    [variant.storefrontId, checkAvailability, storefrontId]
   )
 
   useEffect(() => {

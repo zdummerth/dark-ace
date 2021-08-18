@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { graphql, Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
-
 import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
 import styled from 'styled-components'
-import { colors, breakpoints, spacing, Subtitle, DarkBrandButton, dimensions } from 'src/styles'
+import { colors, breakpoints, Subtitle, dimensions } from 'src/styles'
 // import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useCheckout } from 'src/hooks/useCheckout'
 import ProductNav from 'src/components/layout/productCollectionNavigation'
@@ -13,8 +12,7 @@ import ProductForm from 'src/components/products/product-form'
 import Flex from 'src/components/shared/Flexbox'
 // import GiftCard from '../components/products/GiftCard'
 
-// import Price from '../components/products/Price'
-// import SEO from '../components/seo'
+import SEO from 'src/components/SEO'
 
 
 const Container = styled(Flex)`
@@ -132,7 +130,6 @@ const ProductPage = ({ data, location }) => {
     thumbs,
     fulls,
     title,
-    featuredImage
   } = product
 
   const variants = product.variants ? product.variants : []
@@ -232,8 +229,8 @@ const ProductPage = ({ data, location }) => {
 
   return (
     <>
-      {/* <SEO title={product.title} description={product.description} />
-      <BackLink to='/shop/collection/featured'>
+      <SEO title={title} description={product.description} />
+      {/* <BackLink to='/shop/collection/featured'>
         <DarkBrandButton>
           <AiOutlineArrowLeft size={18} />
         </DarkBrandButton>
@@ -303,10 +300,6 @@ export const query = graphql`
       descriptionHtml
       shopifyId
       tags
-      featuredImage {
-        id
-        gatsbyImageData(width: 500)
-      }
       fulls: images {
         id
         shopifyId

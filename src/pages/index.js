@@ -1,5 +1,4 @@
 import React from 'react'
-import { graphql, Link } from "gatsby"
 import ProductNav from 'src/components/layout/productCollectionNavigation'
 import styled from 'styled-components'
 // import SlideShow from 'src/components/slideshow'
@@ -8,7 +7,7 @@ import { breakpoints } from 'src/styles'
 import ProductListingItem from 'src/components/products/ProducListingItem'
 
 
-import SEO from "src/components/Seo"
+import SEO from "src/components/SEO"
 
 import { dimensions } from 'src/styles'
 

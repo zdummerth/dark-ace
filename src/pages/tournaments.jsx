@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link } from "gatsby"
 import { DarkBrandButton } from 'src/styles'
 
-import SEO from 'src/components/Seo'
+import SEO from 'src/components/SEO'
 
 const Container = styled.div`
   display: flex;

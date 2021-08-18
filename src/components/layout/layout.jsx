@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
 import { StoreContext } from 'src/context/StoreContextProvider'
 import "@fontsource/covered-by-your-grace"; // Defaults to weight 400.
 import styled, { createGlobalStyle } from "styled-components"

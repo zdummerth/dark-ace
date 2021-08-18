@@ -1,24 +1,20 @@
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import styled, { createGlobalStyle } from 'styled-components'
+import styled from 'styled-components'
 import { ShoppingBag, Trophy, Message } from '@styled-icons/boxicons-regular'
-
 import Flex from 'components/shared/Flexbox'
-
 import { breakpoints, dimensions, colors } from 'src/styles';
-
-import Logo from "./logo"
 import StyledLink from 'src/components/shared/Link'
 import CartLink from 'src/components/cart/cart-link'
 
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    overflow-y: ${props => (props.closed ? "" : "hidden")};
-    height: ${props => (props.closed ? "" : "100vh")};
-  }
-`
+// const GlobalStyle = createGlobalStyle`
+//   body {
+//     overflow-y: ${props => (props.closed ? "" : "hidden")};
+//     height: ${props => (props.closed ? "" : "100vh")};
+//   }
+// `
 
 const FullWidth = styled(Flex)`
   background: ${colors.darkGradient}; 

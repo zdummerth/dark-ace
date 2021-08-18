@@ -7,7 +7,7 @@ import ProductListingItem from 'src/components/products/ProducListingItem'
 
 import GiftCard from 'src/components/products/GiftCard'
 
-import SEO from 'src/components/Seo'
+import SEO from 'src/components/SEO'
 
 
 const Container = styled.div`

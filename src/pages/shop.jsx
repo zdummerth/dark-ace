@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { navigate } from 'gatsby'
-import SEO from 'src/components/Seo'
+import SEO from 'src/components/SEO'
 
 
 const Shop = () => {
