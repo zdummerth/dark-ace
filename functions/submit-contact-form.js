@@ -1,5 +1,8 @@
 const fetch = require('node-fetch');
 const isEmail = require('validator/lib/isEmail')
+const sendEmail = require('lib/send-email.js')
+
+
 
 const key = process.env.FAUNA_CREATE_CONTACT
 
