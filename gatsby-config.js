@@ -3,12 +3,15 @@ require("dotenv").config({
 })
 
 module.exports = {
+  flags: {
+    FUNCTIONS: true,
+  },
   siteMetadata: {
     title: `Dark Ace Apparel`,
     description: `Established in 2020, and hailing from St. Louis, MO, Dark Ace Apparel is a brand on a mission to merge the worlds of headbangers and chainbangers. PLAY DISC GOLF. LISTEN TO METAL.`,
     author: `George Fiorini`,
     keywords: ['disc', 'golf', 'heavy', 'metal', 'clothing', 'apparel']
-},
+  },
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,

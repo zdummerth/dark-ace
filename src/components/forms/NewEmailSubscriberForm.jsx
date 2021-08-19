@@ -33,18 +33,18 @@ export default function EmailSubscriberForm({ reset }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (!isEmail(email)) {
-            setError('* Must be a valid email')
-            return
+            // setError('* Must be a valid email')
+            // return
         }
 
         setSubmitting(true)
         try {
-            const res = await fetch('/.netlify/functions/submit-email-subscriber', {
+            const res = await fetch('/api/submit-email-subscriber', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'content-type': 'application/json'
                 },
-                body: JSON.stringify(email)
+                body: JSON.stringify({ email })
             })
 
             console.log('client res for new email sub', res)
@@ -105,7 +105,7 @@ export default function EmailSubscriberForm({ reset }) {
                                 error={error}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
-                            <Button style={{marginTop: '15px'}}>Subscribe</Button>
+                            <Button style={{ marginTop: '15px' }}>Subscribe</Button>
                         </>
                     )}
                 </>

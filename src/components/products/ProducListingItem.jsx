@@ -66,22 +66,6 @@ const InfoContainer = styled.div`
   flex-direction: column;
 `
 
-const Text = styled.div`
-  width: 80%;
-  max-width: 400px;
-  text-align: center;
-  margin-top: 30px;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-bottom: 10px;
-  font-size: 1.25rem;
-  @media (min-width: ${breakpoints.tablet}) {
-    h2 {
-      margin-top: 0;
-    }
-  }
-`
-
 const ProductListingItem = ({ product, className, showThumbs, style, hideBorder, hideTitle, containImage }) => {
   const [index, setIndex] = useState(0);
   // console.log(product.availableForSale)

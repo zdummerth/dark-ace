@@ -1,10 +1,9 @@
-import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { ShoppingBag, Trophy, Message } from '@styled-icons/boxicons-regular'
 import Flex from 'components/shared/Flexbox'
-import { breakpoints, dimensions, colors } from 'src/styles';
+import { dimensions, colors } from 'src/styles';
 import StyledLink from 'src/components/shared/Link'
 import CartLink from 'src/components/cart/cart-link'
 
@@ -28,18 +27,6 @@ const Nav = styled(Flex)`
   height: ${dimensions.headerHeight};
   width: 100%;
   max-width: 800px;
-`
-
-
-
-const LogoLink = styled(Link)`
-  height: 60px;
-  margin-left: 10px;
-
-  @media (min-width: ${breakpoints.desktop}) {
-    margin-left: 0;
-    height: 70px;
-  }
 `
 
 const I = styled.i`
