@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
@@ -12,7 +12,7 @@ import ProductForm from 'src/components/products/product-form'
 import Flex from 'src/components/shared/Flexbox'
 // import GiftCard from '../components/products/GiftCard'
 
-import SEO from 'src/components/SEO'
+import Seo from 'src/components/SEO'
 
 
 const Container = styled(Flex)`
@@ -100,9 +100,9 @@ const Section = styled.section`
   }
 `
 
-const BackLink = styled(Link)`
-  margin: 10px;
-`
+// const BackLink = styled(Link)`
+//   margin: 10px;
+// `
 const Thumbnails = ({ imgWithOption, handleClick }) => {
   return (
     <ThumbnailContainer>
@@ -229,7 +229,7 @@ const ProductPage = ({ data, location }) => {
 
   return (
     <>
-      <SEO title={title} description={product.description} />
+      <Seo title={title} description={product.description} />
       {/* <BackLink to='/shop/collection/featured'>
         <DarkBrandButton>
           <AiOutlineArrowLeft size={18} />

@@ -5,7 +5,7 @@ import { Cart } from '@styled-icons/boxicons-regular'
 
 import { StoreContext } from 'src/context/StoreContextProvider'
 
-import { breakpoints, colors } from 'src/styles';
+import { colors } from 'src/styles';
 
 
 

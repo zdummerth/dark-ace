@@ -7,7 +7,7 @@ import ProductListingItem from 'src/components/products/ProducListingItem'
 
 import GiftCard from 'src/components/products/GiftCard'
 
-import SEO from 'src/components/SEO'
+import Seo from 'src/components/SEO'
 
 
 const Container = styled.div`
@@ -42,13 +42,10 @@ const ProductListingPage = ({ data }) => {
   // } = product
   const { products, title, handle } = data.collection
 
-  const collections = data.collectionNames.edges.map(({ node }) => node)
-  // console.log(collections)
-
 
   return (
     <>
-      <SEO title={title} />
+      <Seo title={title} />
       <Container>
         <Nav />
         <Subtitle>{title}</Subtitle>

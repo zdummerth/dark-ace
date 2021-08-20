@@ -2,10 +2,6 @@ import isEmail from 'validator/lib/isEmail'
 import queryFauna from '../lib/queryFauna'
 import sendEmail from '../lib/send-email'
 
-const notificationEmailList = [
-  process.env.SITE_ADMIN_CONTACT_EMAIL,
-  process.env.INCOMING_EMAIL_ADDRESS,
-]
 
 const isString = i => typeof i === 'string'
 
@@ -40,13 +36,14 @@ export default async function handler(req, res) {
     console.log('create form submission fauna response', createFormSubmission)
 
     const sent = await sendEmail({
-      subject: `New Message from ${process.env.SITE_NAME} site form.`,
+      subject: `New message from online form.`,
       html: `
         <p>Name: ${createFormSubmission.name}</p>
         <p>Message: </p>
         <p>${createFormSubmission.message}</p>
       `,
-      to: notificationEmailList,
+      to: process.env.SITE_ADMIN_CONTACT_EMAIL,
+      bcc: process.env.INCOMING_EMAIL_ADDRESS,
       replyTo: createFormSubmission.email,
       from: {
         name: process.env.SITE_NAME,
