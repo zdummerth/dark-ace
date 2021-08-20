@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Youtube from 'src/components/Youtube'
 
 
-import SEO from 'src/components/SEO'
+import Seo from 'src/components/SEO'
 
 const Container = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ const Media = ({ data }) => {
 
   return (
     <>
-      <SEO title="Media" />
+      <Seo title="Media" />
       <Container>
         {/* <h2>Media</h2> */}
         <Youtube />

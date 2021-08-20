@@ -1,6 +1,5 @@
-// import fetch from 'node-fetch'
-import sendEmail from '../lib/send-email'
 import isEmail from 'validator/lib/isEmail'
+import queryFauna from '../lib/queryFauna'
 
 const isString = i => typeof i === 'string'
 
@@ -13,20 +12,24 @@ export default async function handler(req, res) {
     if (!email) throw new Error('Email is required')
     if (!isString(email)) throw new Error('Email must be a string')
     if (!isEmail(email.trim())) throw new Error('Email must be a valid email')
-    const sent = await sendEmail({
-      subject: `Welcome to ${process.env.SITE_NAME}`,
-      html: `
-        <h1>Hello/</h1>
-      `,
-      to: email,
-      from: {
-        name: process.env.SITE_NAME,
-        address: process.env.EMAIL_ADDRESS
+
+    const { createContact } = await queryFauna({
+      variables: {
+        email: email.trim()
       },
+      secret: process.env.FAUNA_CREATE_CONTACT,
+      query: `mutation($email: String!) {
+        createContact( data:{
+          email: $email
+        }) {
+          email
+        }
+      }`
     })
 
-    console.log('email sent: ', sent)
-    res.status(200).json({ test: 'Testers' })
+    console.log('create subscriber fauna resonse', createContact)
+
+    res.status(200).send('success')
 
   } catch (error) {
     console.log('ERROR MOTHERFUCKER: ', error.message);

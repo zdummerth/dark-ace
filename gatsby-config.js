@@ -3,9 +3,9 @@ require("dotenv").config({
 })
 
 module.exports = {
-  flags: {
-    FUNCTIONS: true,
-  },
+  // flags: {
+  //   FUNCTIONS: true,
+  // },
   siteMetadata: {
     title: `Dark Ace Apparel`,
     description: `Established in 2020, and hailing from St. Louis, MO, Dark Ace Apparel is a brand on a mission to merge the worlds of headbangers and chainbangers. PLAY DISC GOLF. LISTEN TO METAL.`,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-// import isEmail from 'validator/lib/isEmail';
+import isEmail from 'validator/lib/isEmail'
 import Input from 'src/components/forms/Inputs'
 import Flex from 'src/components/shared/Flexbox'
 import Button from 'src/components/shared/Button'
@@ -39,6 +39,12 @@ export default function ContactForm() {
         message: ''
     })
 
+    const resetError = () => setError({
+        email: null,
+        name: null,
+        message: null
+    })
+
     const handleChange = e => {
         e.preventDefault()
         setFormState({
@@ -52,20 +58,19 @@ export default function ContactForm() {
         e.preventDefault()
         const err = {}
 
-        // if (!isEmail(email)) {
-        //   err.email = 'must be valid email address'
-        // }
-        // if (password === '') {
-        //   err.password = 'password is required'
-        // }
+        if (!isEmail(formState.email)) {
+            err.email = '* Must be valid email address'
+        }
 
-        if (err.email || err.password) {
+
+        if (err.email) {
             setError(err)
             return
         } else {
             console.log({ formState })
+            resetError()
             setIsSubmitting(true)
-            const response = await fetch('/.netlify/functions/submit-contact-form', {
+            const response = await fetch('/api/submit-contact-form', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

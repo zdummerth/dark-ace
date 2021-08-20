@@ -1,3 +1,4 @@
+import fetch from 'node-fetch'
 const endpoint = `https://graphql.fauna.com/graphql`
 
 const queryFauna = async ({ query, variables, secret }) => {

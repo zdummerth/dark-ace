@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link } from "gatsby"
 import { DarkBrandButton } from 'src/styles'
 
-import SEO from 'src/components/SEO'
+import Seo from 'src/components/SEO'
 
 const Container = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const StyledLink = styled(Link)`
 const Tournaments = ({ data }) => {
   return (
     <>
-      <SEO title="Tournaments" />
+      <Seo title="Tournaments" />
       <Container>
         <h2>No Upcoming Events</h2>
         <StyledLink to='/shop'>

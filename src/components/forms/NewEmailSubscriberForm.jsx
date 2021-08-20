@@ -33,8 +33,8 @@ export default function EmailSubscriberForm({ reset }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (!isEmail(email)) {
-            // setError('* Must be a valid email')
-            // return
+            setError('* Must be a valid email')
+            return
         }
 
         setSubmitting(true)
@@ -74,7 +74,6 @@ export default function EmailSubscriberForm({ reset }) {
 
     return (
         <Form onSubmit={handleSubmit}>
-            {/* <strong>Newsletter</strong> */}
             <Label htmlFor='email'>
                 {submitError ? (
                     <SubmitError>

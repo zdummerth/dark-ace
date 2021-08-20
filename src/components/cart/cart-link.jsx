@@ -13,15 +13,7 @@ const CartWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  // padding: 20px 0;
-
-  //This margin offsets the quantity which is shifted 17px
-  // margin-right: 17px;
-
   position: relative;
-  // font-size: 1.75rem;
-  // color: ${colors.brand};
-
 
 
   span {
@@ -41,11 +33,6 @@ const CartWrapper = styled.div`
     width: 22px;
     height: 22px;
   }
-
-  // @media (max-width: ${breakpoints.desktop}) {
-  //   display: flex;
-  // }
-
 `
 
 

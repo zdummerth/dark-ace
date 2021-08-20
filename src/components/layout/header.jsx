@@ -59,16 +59,10 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
             <I>Shop</I>
           </Flex>
         </StyledLink>
-        <StyledLink
-          to='/cart'
-          name='Play Disc Golf'
-          onClick={() => setNavbarClosed(true)}
-        >
-          <Flex dir='column'>
-            <CartLink />
-            <I>Cart</I>
-          </Flex>
-        </StyledLink>
+        <Flex dir='column'>
+          <CartLink />
+          <I>Cart</I>
+        </Flex>
         <StyledLink
           to='/tournaments'
           name='Play Disc Golf'

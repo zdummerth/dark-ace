@@ -7,7 +7,7 @@ import { breakpoints } from 'src/styles'
 import ProductListingItem from 'src/components/products/ProducListingItem'
 
 
-import SEO from "src/components/SEO"
+import Seo from "src/components/SEO"
 
 import { dimensions } from 'src/styles'
 
@@ -90,7 +90,7 @@ const IndexPage = () => {
 
   return (
     <>
-      <SEO title="Home" />
+      <Seo title="Home" />
       <Container>
         <Landing>
           <StyledProductNav />

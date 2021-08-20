@@ -1,90 +1,65 @@
-const fetch = require('node-fetch');
-const isEmail = require('validator/lib/isEmail')
-const sendEmail = require('lib/send-email.js')
+import isEmail from 'validator/lib/isEmail'
+import queryFauna from '../lib/queryFauna'
+import sendEmail from '../lib/send-email'
+
+const notificationEmailList = [
+  process.env.SITE_ADMIN_CONTACT_EMAIL,
+  process.env.INCOMING_EMAIL_ADDRESS,
+]
+
+const isString = i => typeof i === 'string'
 
 
+export default async function handler(req, res) {
+  console.log('in submit contact function', req.body)
 
-const key = process.env.FAUNA_CREATE_CONTACT
-
-const endpoint = `https://graphql.fauna.com/graphql`
-
-const queryFauna = async ({ query, variables }) => {
-
-  const res = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${key}`,
-      'Content-Type': 'application/json',
-      Accept: 'application/json'
-    },
-    body: JSON.stringify({
-      query,
-      variables
-    })
-  })
-
-  // const json1 = await res.json()
-  // console.log('response from graphql fetcher', res)
-  if (res.status === 200) {
-    const json = await res.json()
-    console.log('json from graphql fetcher', json)
-    if (json.errors) {
-      // console.log('errors from graphql fetcher', json.errors)
-      // return { errors: json.errors }
-      throw new Error('Error from fauna')
-
-    } else {
-      return { data: json.data }
-    }
-  } else {
-    throw new Error("There was an error in fetching the graphql endpoint")
-  }
-
-}
-
-
-exports.handler = async event => {
-  // console.log('in submit email function')
-
-  const { email, name, message } = JSON.parse(event.body)
-  console.log('in submit email function', email)
-
+  const { email, name, message } = req.body
   try {
-    if ((typeof email !== 'string') || (typeof name !== 'string') || (typeof message !== 'string')) throw new Error('Missing Arguments')
+    if (!email || !name || !message) throw new Error('Missing Argument')
+    if (!isString(email) || !isString(name) || !isString(message)) throw new Error('Arguments must be a string')
+    if (!isEmail(email.trim())) throw new Error('Email must be a valid email')
 
-    const trimmedEmail = email.trim()
-    if (!isEmail(trimmedEmail)) throw new Error('Must be email')
-
-    const { data, errors } = await queryFauna({
+    const { createFormSubmission } = await queryFauna({
       variables: {
         data: {
-          email: trimmedEmail,
+          email: email.trim(),
           name,
           message
         }
       },
+      secret: process.env.FAUNA_CREATE_CONTACT,
       query: `mutation($data: FormSubmissionInput!) {
-          createFormSubmission( data: $data) {
-            email
-            name
-            message
-          }
-        }`
+        createFormSubmission(data: $data) {
+          email
+          message
+          name
+        }
+      }`
     })
 
-    console.log({ data })
+    console.log('create form submission fauna response', createFormSubmission)
 
-    return {
-      statusCode: 200,
-      body: 'success',
-    }
+    const sent = await sendEmail({
+      subject: `New Message from ${process.env.SITE_NAME} form.`,
+      html: `
+        <p>Name: ${createFormSubmission.name}</p>
+        <p>Message: </p>
+        <p>${createFormSubmission.message}</p>
+      `,
+      to: notificationEmailList,
+      replyTo: createFormSubmission.email,
+      from: {
+        name: process.env.SITE_NAME,
+        address: process.env.OUTGOING_EMAIL_ADDRESS
+      },
+    })
 
+    console.log('email sent: ', sent)
+
+    res.status(200).send('success')
 
   } catch (error) {
-    return {
-      statusCode: 400,
-      body: error.message,
-    }
+    console.log('ERROR MOTHERFUCKER: ', error.message);
+    res.status(400).json({ error })
   }
-
 }

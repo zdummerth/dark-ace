@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { StoreContext } from 'src/context/StoreContextProvider'
 import ProductNav from 'src/components/layout/productCollectionNavigation'
 import LineItem from 'src/components/cart/line-item'
-import SEO from 'src/components/SEO'
+import Seo from 'src/components/SEO'
 
 // import Suggestions from '../components/cart/Suggestions'
 
@@ -61,7 +61,7 @@ const Cart = () => {
 
   return (
     <>
-      <SEO title='Cart' />
+      <Seo title='Cart' />
       <Container>
         {/* <Suggestions /> */}
         <Subtotal>

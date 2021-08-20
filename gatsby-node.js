@@ -24,7 +24,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   productPageResult.data.allShopifyProduct.edges.forEach(({ node }) => {
     createPage({
       path: `shop/${node.handle}/`,
-      component: path.resolve(`./src/pageTemplates/product-page-template.jsx`),
+      component: path.resolve(`./src/templates/product-page-template.jsx`),
       context: {
         // Data passed to context is available
         // in page queries as GraphQL variables.
@@ -53,7 +53,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   productListingResult.data.allShopifyCollection.edges.forEach(({ node }) => {
     createPage({
       path: `shop/collection/${node.handle}/`,
-      component: path.resolve(`./src/pageTemplates/product-listing-template.jsx`),
+      component: path.resolve(`./src/templates/product-listing-template.jsx`),
       context: {
         // Data passed to context is available
         // in page queries as GraphQL variables.
