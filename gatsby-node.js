@@ -19,7 +19,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  console.log('the products handles', productPageResult)
+  // console.log('the products handles', productPageResult)
 
   productPageResult.data.allShopifyProduct.edges.forEach(({ node }) => {
     createPage({
