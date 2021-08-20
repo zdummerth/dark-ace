@@ -36,9 +36,10 @@ export default async function handler(req, res) {
     console.log('create form submission fauna response', createFormSubmission)
 
     const sent = await sendEmail({
-      subject: `New message from ${process.env.SITE_NAME}.`,
+      subject: `New message from ${process.env.SITE_NICKNAME}.`,
       html: `
         <p>Name: ${createFormSubmission.name}</p>
+        <p>-----------------------</p>
         <p>Message: </p>
         <p>${createFormSubmission.message}</p>
       `,
@@ -46,7 +47,7 @@ export default async function handler(req, res) {
       bcc: process.env.INCOMING_EMAIL_ADDRESS,
       replyTo: createFormSubmission.email,
       from: {
-        name: process.env.SITE_NAME,
+        name: process.env.SITE_NICKNAME,
         address: process.env.OUTGOING_EMAIL_ADDRESS
       },
     })

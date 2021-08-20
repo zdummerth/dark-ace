@@ -69,6 +69,8 @@ export default function ContactForm() {
         } else {
             console.log({ formState })
             resetError()
+            setSubmitted(false)
+            setSubmitError(false)
             setIsSubmitting(true)
             const response = await fetch('/api/submit-contact-form', {
                 method: 'POST',
@@ -94,13 +96,7 @@ export default function ContactForm() {
 
     return (
         <Container dir='column' ai='center'>
-            {submitError ? (
-                <div style={{ margin: '20px' }}>There was an error submitting your message. Please try again.</div>
-            ) : (
-                <>
-                    <h1>Contact Us</h1>
-                </>
-            )}
+            <h1>Contact Us</h1>
             <Form onSubmit={handleSubmit}>
                 <Input
                     name='name'
@@ -144,7 +140,9 @@ export default function ContactForm() {
                 </StyledButton>
                 {submitted && (
                     <div style={{ margin: '20px' }}>Thank you for the message. We'll get back to you soon.</div>
-
+                )}
+                {submitError && (
+                    <div style={{ margin: '20px', color: 'red' }}>There was an error submitting your message. Please try again.</div>
                 )}
             </Form>
         </Container>
