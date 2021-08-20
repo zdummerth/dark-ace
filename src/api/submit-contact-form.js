@@ -40,7 +40,7 @@ export default async function handler(req, res) {
     console.log('create form submission fauna response', createFormSubmission)
 
     const sent = await sendEmail({
-      subject: `New Message from ${process.env.SITE_NAME} form.`,
+      subject: `New Message from ${process.env.SITE_NAME} site form.`,
       html: `
         <p>Name: ${createFormSubmission.name}</p>
         <p>Message: </p>
