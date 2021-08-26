@@ -28,9 +28,8 @@ const Landing = styled.div`
   flex-direction: column;
   align-items: center;
   min-height: calc(100vh - ${dimensions.headerHeight});
-  @media (min-width: ${breakpoints.desktop}) {
+  @media (min-width: ${breakpoints.hd}) {
     flex-direction: row;
-    
   }
 `
 

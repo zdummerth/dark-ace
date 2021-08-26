@@ -278,7 +278,7 @@ const ProductPage = ({ data, location }) => {
               <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
             )}
           </Section>
-          {earlyAccess && (
+          {(!isWhiteChapel || (isWhiteChapel && earlyAccess)) && (
             <Section>
               <StyledPrice>
                 ${variant.price}
