@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { ShoppingBag, Trophy, Message } from '@styled-icons/boxicons-regular'
+import { ShoppingBag, Trophy, Message, Home } from '@styled-icons/boxicons-regular'
 import Flex from 'components/shared/Flexbox'
 import { dimensions, colors } from 'src/styles';
 import StyledLink from 'src/components/shared/Link'
@@ -49,6 +49,14 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
         {/* <div
         style={{ display: 'flex', alignItems: 'center' }}
       > */}
+        <StyledLink
+          to='/'
+        >
+          <Flex dir='column'>
+            <Home size='28' />
+            <I>Home</I>
+          </Flex>
+        </StyledLink>
         <StyledLink
           to='/shop/collection/featured'
           name='Play Disc Golf'

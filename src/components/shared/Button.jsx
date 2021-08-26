@@ -9,6 +9,9 @@ const getColor = ({ cancel, remove }) => {
 
 const StyledButton = styled.button`
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: ${getColor};
     color: white;
     border: ${({ cancel }) => cancel ? `2px solid gray` : 'none'};

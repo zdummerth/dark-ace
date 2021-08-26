@@ -1,4 +1,6 @@
 import React from 'react'
+import { StaticImage } from 'gatsby-plugin-image'
+
 import ProductNav from 'src/components/layout/productCollectionNavigation'
 import styled from 'styled-components'
 // import SlideShow from 'src/components/slideshow'
@@ -9,11 +11,13 @@ import ProductListingItem from 'src/components/products/ProducListingItem'
 
 import Seo from "src/components/SEO"
 
-import { dimensions } from 'src/styles'
+import { dimensions, colors, H2 } from 'src/styles'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+
   //Having align-items set to center prevents side scrolling for products
 
   width: 100%;
@@ -23,7 +27,11 @@ const Landing = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100vh - ${dimensions.headerHeight});
+  min-height: calc(100vh - ${dimensions.headerHeight});
+  @media (min-width: ${breakpoints.desktop}) {
+    flex-direction: row;
+    
+  }
 `
 
 const Banner = styled.div`
@@ -35,6 +43,13 @@ const Banner = styled.div`
 
 const StyledProductNav = styled(ProductNav)`
   max-width: 500px;
+`
+
+const Spacer = styled.div`
+  width: 100%;
+  height: 40px;
+  margin: 40px 0;
+  background: ${colors.darkGradient}
 `
 
 
@@ -93,22 +108,34 @@ const IndexPage = () => {
       <Seo title="Home" />
       <Container>
         <Landing>
-          <StyledProductNav />
-          <ProductContainer>
-            <ProductListingItem
-              product={feature}
-              key={feature.shopifyId}
-              showThumbs={false}
-              // hideBorder={true}
-              // hideTitle={true}
-              // containImage={true}
-              style={{
-                width: '100%',
-                maxWidth: '600px',
-              }}
-            />
-          </ProductContainer>
+          {/* <StyledProductNav /> */}
+          <StaticImage
+            src='../images/WC-Banner.jpg'
+            alt='logo'
+          />
+          <StaticImage
+            src='../images/WC-Text.jpg'
+            alt='logo'
+          />
         </Landing>
+        <Spacer />
+        <H2>
+          Featured
+        </H2>
+        <ProductContainer>
+          <ProductListingItem
+            product={feature}
+            key={feature.shopifyId}
+            showThumbs={false}
+            // hideBorder={true}
+            // hideTitle={true}
+            // containImage={true}
+            style={{
+              width: '100%',
+              maxWidth: '600px',
+            }}
+          />
+        </ProductContainer>
         <Banner>
           {/* <SlideShow /> */}
         </Banner>
