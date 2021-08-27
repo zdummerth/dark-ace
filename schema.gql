@@ -7,3 +7,7 @@ type FormSubmission {
     email: String!
     message: String!
 }
+
+type Query {
+    allContacts: [Contact]
+}
