@@ -12,7 +12,7 @@ const Form = styled.form`
 
 const Label = styled.label`
     display: block;
-    margin: 20px 0;
+    // margin-top: 20px;
 `
 
 const SubmitError = styled.div`

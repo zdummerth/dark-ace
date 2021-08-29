@@ -19,36 +19,30 @@ import Seo from 'src/components/SEO'
 
 const Container = styled(Flex)`
   width: 100%;
+  margin-top: 30px;
 
   @media (min-width: ${breakpoints.desktop}) {
     position: relative;
     flex-direction: row;
     align-items: flex-start;
-    // height: calc(90vh - ${dimensions.headerHeight});
+    // min-height: calc(100vh - ${dimensions.headerHeight});
   }
 `
 
 const ImgContainer = styled(Flex)`
   width: 100%;
-  // position: relative;
   height: 100%;
   overflow: hidden;
-  padding: 5px;
-  @media (min-width: ${breakpoints.desktop}) {
-    padding: 15px;
-  }
 `
 const ImagesWrapper = styled(Flex)`
   height: 60vh;
-  // max-width: 600px;
   width: 100%;
+  padding: 10px;
   border: 1px solid ${colors.gray};
-
 
   @media (min-width: ${breakpoints.desktop}) {
     height: 80vh;
     flex: 1;
-    max-width: 800px;
   }
 `
 const InfoWrapper = styled.div`
@@ -71,12 +65,10 @@ const StyledPrice = styled.div`
 
 const ThumbnailContainer = styled.div`  
   margin-top: 5px;
-  margin-bottom: 10px;
+  height: 60px;
 `
 const Thumbnail = styled.button`
     margin-right: 8px;
-    width: 48px;
-    height: 60px;
     border: 0;
     outline: 0;
     background: none;
@@ -165,7 +157,7 @@ const ProductPage = ({ data, location }) => {
     } else {
       localStorage.setItem('earlyAccess', null)
     }
-  })
+  }, [earlyAccess])
 
 
 

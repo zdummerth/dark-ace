@@ -21,7 +21,7 @@ const ProductContainer = styled.div`
 const ImgContainer = styled(Flex)`
   width: 100%;
   flex: 1;
-  position: relative;
+  // position: relative;
   overflow: hidden;
 `
 const ThumbnailContainer = styled.div`  
@@ -105,6 +105,7 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
           <GatsbyImage
             image={product.images[index].gatsbyImageData}
             alt={'Product Image'}
+            // objectFit='contain'
           />
         </ImgLink>
       </ImgContainer>

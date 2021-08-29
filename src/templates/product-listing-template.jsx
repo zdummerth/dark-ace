@@ -60,10 +60,10 @@ const ProductListingPage = ({ data }) => {
                 product={product}
                 key={product.shopifyId}
                 showThumbs={false}
-                // hideBorder={products.length === 1 ? true : false}
+                hideBorder={products.length === 1 ? true : false}
                 style={{
                   width: products.length === 1 ? '100%' : '50%',
-                  maxWidth: products.length === 1 ? '600px' : '300px',
+                  maxWidth: products.length === 1 ? '830px' : '350px',
                 }}
               />
             ))}
@@ -87,7 +87,7 @@ export const query = graphql`
         handle
         images {
           id
-          gatsbyImageData(width: 350)
+          gatsbyImageData(width: 850)
         }
       }
     }

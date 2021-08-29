@@ -23,15 +23,15 @@ const CartWrapper = styled.div`
     color: ${colors.lightest};
 
     position: absolute;
-    bottom: 13px;
+    bottom: 5px;
     left: 20px;
 
     background-image: ${colors.gradient};
     border-radius: 50%;
     box-shadow: 0 0 5px  ${colors.brand};
-    font-size: 1.1rem;
-    width: 22px;
-    height: 22px;
+    // font-size: 1.1rem;
+    width: 20px;
+    height: 20px;
   }
 `
 
@@ -48,8 +48,7 @@ const CartLink = () => {
       <Link to='/cart'>
         <CartWrapper>
           {totalQuantity > 0 && <span>{totalQuantity}</span>}
-          {/* <span>{totalQuantity}</span> */}
-          <Cart size='28' />
+          <Cart size='22' />
         </CartWrapper>
       </Link>
 

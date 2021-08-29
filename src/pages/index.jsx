@@ -1,79 +1,36 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
-
 import ProductNav from 'src/components/layout/productCollectionNavigation'
 import styled from 'styled-components'
 // import SlideShow from 'src/components/slideshow'
 import { useShopify } from 'src/hooks/useShopify'
 import { breakpoints } from 'src/styles'
-import ProductListingItem from 'src/components/products/ProducListingItem'
+import { Plus } from '@styled-icons/boxicons-regular'
+import Flex from 'src/components/shared/Flexbox'
+import Link from 'src/components/shared/Link'
 
 
 import Seo from "src/components/SEO"
 
 import { dimensions, colors, H2 } from 'src/styles'
 
-const Container = styled.div`
-  display: flex;
+const Container = styled(Flex)``
+
+const Landing = styled(Flex)`
   flex-direction: column;
-  align-items: center;
-
-  //Having align-items set to center prevents side scrolling for products
-
-  width: 100%;
-`
-
-const Landing = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-evenly;
   min-height: calc(100vh - ${dimensions.headerHeight});
+
   @media (min-width: ${breakpoints.hd}) {
-    flex-direction: row;
+    // flex-direction: row;
   }
 `
 
-const Banner = styled.div`
-  width: 100%;
-  max-width: 700px;
-  align-self: center;
-  height: 25vh;
-`
-
-const StyledProductNav = styled(ProductNav)`
-  max-width: 500px;
-`
-
-const Spacer = styled.div`
-  width: 100%;
-  height: 40px;
-  margin: 40px 0;
-  background: ${colors.darkGradient}
-`
-
-
-// const KeepScrolling = styled.div`
-//   background: ${colors.darkToBottom};
-//   height: 3%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   opacity: ${({ scrolled }) => scrolled ? '0' : '1'};
-//   transition: opacity .5s ease-in-out;
-// `
-
-
-
-const ProductContainer = styled.div`
-  width: 90%;
-  max-width: 600px;
-  text-align: center;
-  flex: 1;
-
-  @media (min-width: ${breakpoints.tablet}) {
-    // height: 50%;
-  }
-
+const StyledLink = styled(Link)`
+  background: ${colors.gradient};
+  padding: 15px;
+  margin-top: 30px;
+  border-radius: 10px;
 `
 
 
@@ -108,16 +65,32 @@ const IndexPage = () => {
       <Container>
         <Landing>
           {/* <StyledProductNav /> */}
+          <Flex>
+            <StaticImage
+              src='../images/da-logo-square.png'
+              alt='logo'
+              width={125}
+              height={125}
+            />
+            <Plus size='22' />
+            <StaticImage
+              src='../images/wc-sawblade.png'
+              alt='logo'
+              width={125}
+              height={125}
+            />
+          </Flex>
           <StaticImage
             src='../images/WC-Banner.jpg'
             alt='logo'
           />
-          <StaticImage
-            src='../images/WC-Text.jpg'
-            alt='logo'
-          />
+          <StyledLink
+            to={`/shop/${feature.handle}`}
+          >
+            Pre Order Now
+          </StyledLink>
         </Landing>
-        <Spacer />
+        {/* <Spacer />
         <H2>
           Featured
         </H2>
@@ -134,10 +107,10 @@ const IndexPage = () => {
               maxWidth: '600px',
             }}
           />
-        </ProductContainer>
-        <Banner>
-          {/* <SlideShow /> */}
-        </Banner>
+        </ProductContainer> */}
+        {/* <Banner>
+          <SlideShow />
+        </Banner> */}
       </Container>
 
     </>

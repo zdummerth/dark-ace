@@ -147,7 +147,7 @@ export const fonts = {
 };
 
 export const dimensions = {
-  headerHeight: '70px',
+  headerHeight: '50px',
   cartWidthDesktop: '400px',
 
   pictureBrowserAction: {

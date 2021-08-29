@@ -31,7 +31,7 @@ const Nav = styled(Flex)`
 
 const I = styled.i`
   position: relative;
-  font-size: 14px;
+  font-size: 12px;
 `
 
 const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
@@ -53,7 +53,7 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
           to='/'
         >
           <Flex dir='column'>
-            <Home size='28' />
+            <Home size='22' />
             <I>Home</I>
           </Flex>
         </StyledLink>
@@ -63,7 +63,7 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
           onClick={() => setNavbarClosed(true)}
         >
           <Flex dir='column'>
-            <ShoppingBag size='28' />
+            <ShoppingBag size='22' />
             <I>Shop</I>
           </Flex>
         </StyledLink>
@@ -71,23 +71,23 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
           <CartLink />
           <I>Cart</I>
         </Flex>
-        <StyledLink
+        {/* <StyledLink
           to='/tournaments'
           name='Play Disc Golf'
           onClick={() => setNavbarClosed(true)}
         >
           <Flex dir='column'>
-            <Trophy size='28' />
+            <Trophy size='22' />
             <I>Events</I>
           </Flex>
-        </StyledLink>
+        </StyledLink> */}
         <StyledLink
           to='/contact'
           name='Play Disc Golf'
           onClick={() => setNavbarClosed(true)}
         >
           <Flex dir='column'>
-            <Message size='28' />
+            <Message size='22' />
             <I>Contact</I>
           </Flex>
         </StyledLink>
