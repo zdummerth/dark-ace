@@ -21,7 +21,7 @@ const Container = styled(Flex)`
 const Landing = styled(Flex)`
   flex-direction: column;
   justify-content: space-evenly;
-  min-height: calc(100vh - ${dimensions.headerHeight});
+  min-height: calc(95vh - ${dimensions.headerHeight});
 
   @media (min-width: ${breakpoints.hd}) {
     // flex-direction: row;
