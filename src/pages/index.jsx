@@ -12,9 +12,11 @@ import Link from 'src/components/shared/Link'
 
 import Seo from "src/components/SEO"
 
-import { dimensions, colors, H2 } from 'src/styles'
+import { dimensions, colors } from 'src/styles'
 
-const Container = styled(Flex)``
+const Container = styled(Flex)`
+
+`
 
 const Landing = styled(Flex)`
   flex-direction: column;
@@ -80,10 +82,16 @@ const IndexPage = () => {
               height={125}
             />
           </Flex>
-          <StaticImage
-            src='../images/WC-Banner.jpg'
-            alt='logo'
-          />
+          <Link
+            to={`/shop/${feature.handle}`}
+            className='fullWidth'
+          >
+            <StaticImage
+              src='../images/WC-Banner.jpg'
+              alt='logo'
+              width={650}
+            />
+          </Link>
           <StyledLink
             to={`/shop/${feature.handle}`}
           >

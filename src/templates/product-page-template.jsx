@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import find from 'lodash/find'
@@ -9,7 +9,6 @@ import { colors, breakpoints, Subtitle, dimensions } from 'src/styles'
 import { useCheckout } from 'src/hooks/useCheckout'
 import ProductNav from 'src/components/layout/productCollectionNavigation'
 import ProductForm from 'src/components/products/product-form'
-import EarlyAccessForm from 'src/components/forms/EarlyAccessCode'
 import Flex from 'src/components/shared/Flexbox'
 
 // import GiftCard from '../components/products/GiftCard'
@@ -139,26 +138,8 @@ const ProductPage = ({ data, location }) => {
   } = useCheckout(product)
 
   // console.log('the current product', product)
-  const isWhiteChapel = product.id === '6ffd5827-fe9a-5bc7-94ee-2ca72e4758ac'
-  // console.log('isWhiteCahpel: ', isWhiteChapel)
 
   const [imageFluid, setImageFluid] = useState(fulls[0].gatsbyImageData)
-  const [earlyAccess, setEarlyAccess] = useState(false)
-
-  useEffect(() => {
-    const isBrowser = typeof window !== 'undefined'
-    const hasEarlyAccess = isBrowser
-      ? localStorage.getItem('earlyAccess')
-      : 'false'
-
-    console.log('hasEarly Access', hasEarlyAccess);
-    if (hasEarlyAccess === 'true') {
-      setEarlyAccess(true)
-    } else {
-      localStorage.setItem('earlyAccess', null)
-    }
-  }, [earlyAccess])
-
 
 
   const handleOptionClick = (name, value, isImage) => {
@@ -264,37 +245,31 @@ const ProductPage = ({ data, location }) => {
         <InfoWrapper>
           <Section className='top'>
             <Subtitle>{product.title}</Subtitle>
-            {isWhiteChapel && !earlyAccess ? (
-              <EarlyAccessForm setEarlyAccess={setEarlyAccess} />
-            ) : (
-              <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
-            )}
+            <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
           </Section>
-          {(!isWhiteChapel || (isWhiteChapel && earlyAccess)) && (
-            <Section>
-              <StyledPrice>
-                ${variant.price}
-              </StyledPrice>
-              <ProductForm
-                product={product}
-                variant={variant}
-                quantity={quantity}
-                increaseQuantity={increaseQuantity}
-                decreaseQuantity={decreaseQuantity}
-                available={available}
-                status={status}
-                addToCart={addToCart}
-                setImageFluid={setImageFluid}
-                setVariant={setVariant}
-                thumbs={thumbs}
-                fulls={fulls}
-                Thumbnails={Thumbnails}
-                handleThumbClick={handleThumbClick}
-                imgWithOption={variantImgWithOption}
-              />
+          <Section>
+            <StyledPrice>
+              ${variant.price}
+            </StyledPrice>
+            <ProductForm
+              product={product}
+              variant={variant}
+              quantity={quantity}
+              increaseQuantity={increaseQuantity}
+              decreaseQuantity={decreaseQuantity}
+              available={available}
+              status={status}
+              addToCart={addToCart}
+              setImageFluid={setImageFluid}
+              setVariant={setVariant}
+              thumbs={thumbs}
+              fulls={fulls}
+              Thumbnails={Thumbnails}
+              handleThumbClick={handleThumbClick}
+              imgWithOption={variantImgWithOption}
+            />
 
-            </Section>
-          )}
+          </Section>
 
           <Section>
             <ProductNav />
