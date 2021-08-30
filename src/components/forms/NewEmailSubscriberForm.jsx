@@ -91,7 +91,7 @@ export default function EmailSubscriberForm({ reset }) {
             ) : (
                 <>
                     {submitted ? (
-                        <div>
+                        <div style={{margin: '10px 0'}}>
                             Thank you for signing up!
                         </div>
                     ) : (
