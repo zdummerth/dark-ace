@@ -8,9 +8,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         edges {
           node {
             handle
-            collections {
-              handle
-            }
           }
         }
       }
@@ -32,7 +29,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         // Data passed to context is available
         // in page queries as GraphQL variables.
         handle: node.handle,
-        collectionHandle: node.collections[0]?.handle
       },
     })
   })

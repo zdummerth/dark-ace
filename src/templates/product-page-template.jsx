@@ -281,7 +281,7 @@ const ProductPage = ({ data }) => {
 }
 
 export const query = graphql`
-  query($handle: String! $collectionHandle: String!) {
+  query($handle: String!) {
     shopifyProduct: shopifyProduct(handle: { eq: $handle }) {
       id
       storefrontId
@@ -323,11 +323,6 @@ export const query = graphql`
           id
           gatsbyImageData(width: 450)
         }
-      }
-    }
-    relatedItems: shopifyCollection(handle: {eq: $collectionHandle}) {
-      products {
-        handle
       }
     }
   }
