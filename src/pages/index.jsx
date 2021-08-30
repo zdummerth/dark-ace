@@ -79,7 +79,7 @@ const IndexPage = () => {
       <Seo title="Home" />
       <Container>
         <Landing>
-          <Flex>
+          <Flex style={{ marginTop: '10px' }}>
             <StaticImage
               src='../images/da-logo-square.png'
               alt='logo'
