@@ -192,7 +192,7 @@ export const Subtitle = styled.h2`
   margin: 30px;
   text-align: center;
   font-family: 'Covered By Your Grace';
-  font-size: 2rem;
+  font-size: 1.75rem;
 `
 
 export const H3 = styled.h3`

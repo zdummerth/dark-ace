@@ -29,8 +29,8 @@ const ThumbnailContainer = styled.div`
 `
 const Thumbnail = styled.button`
   margin-right: 8px;
-  width: 45px;
-  height: 60px;
+  // width: 45px;
+  // height: 60px;
   border: 0;
   outline: 0;
   background: none;
@@ -77,18 +77,6 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
       hideBorder={hideBorder}
     >
       <InfoContainer>
-        {showThumbs ?
-          <ThumbnailContainer>
-            {product.thumbs.map((thumb, ind) => (
-              <Thumbnail key={thumb.id} onClick={() => setIndex(ind)}>
-                <GatsbyImage
-                  image={thumb.gatsbyImageData}
-                  alt={product.title}
-                />
-              </Thumbnail>
-            ))}
-          </ThumbnailContainer>
-          : null}
         <TextWrapper
           to={`/shop/${product.handle}`}
         >
@@ -98,6 +86,18 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
           {!product.totalInventory > 0 &&
             <p>Sold Out!</p>
           }
+          {
+            product.title === 'Anarchy Dad Hat' && (
+              <div style={{ padding: '5px' }}>
+                <div>Available in: </div>
+                <div>Turquoise, Green, Red, Black, Purple</div>
+                {/* <div>Green</div>
+            <div>Red</div>
+            <div>Black</div>
+            <div>Purple</div> */}
+              </div>
+            )
+          }
         </TextWrapper>
       </InfoContainer>
       <ImgContainer>
@@ -106,9 +106,23 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
             image={product.images[index].gatsbyImageData}
             alt={'Product Image'}
             // objectFit='contain'
+            objectFit={product.title === 'Anarchy Dad Hat' ? 'contain' : 'cover'}
+
           />
         </ImgLink>
       </ImgContainer>
+      {showThumbs ?
+        <ThumbnailContainer>
+          {product.thumbs.map((thumb, ind) => (
+            <Thumbnail key={thumb.id} onClick={() => setIndex(ind)}>
+              <GatsbyImage
+                image={thumb.gatsbyImageData}
+                alt={product.title}
+              />
+            </Thumbnail>
+          ))}
+        </ThumbnailContainer>
+        : null}
     </ProductContainer >
   )
 }

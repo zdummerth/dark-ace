@@ -59,11 +59,13 @@ const ProductListingPage = ({ data }) => {
               <ProductListingItem
                 product={product}
                 key={product.shopifyId}
+                // showThumbs={handle === 'headware' && product.title === 'Anarchy Dad Hat'}
                 showThumbs={false}
                 hideBorder={products.length === 1 ? true : false}
                 style={{
-                  width: products.length === 1 ? '100%' : '50%',
+                  width: products.length === 1 || product.title === 'Anarchy Dad Hat' ? '100%' : '50%',
                   maxWidth: products.length === 1 ? '830px' : '350px',
+                  // height: product.title === 'Anarchy Dad Hat' ? '60vh' : 'inherit',
                 }}
               />
             ))}
@@ -88,6 +90,10 @@ export const query = graphql`
         images {
           id
           gatsbyImageData(width: 850)
+        }
+        thumbs: images {
+          id
+          gatsbyImageData(width: 48)
         }
       }
     }

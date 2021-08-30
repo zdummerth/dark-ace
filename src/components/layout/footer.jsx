@@ -14,9 +14,7 @@ const StyledFooter = styled(Flex)`
   position: relative;
   color: ${colors.lightest};
   width: 100%;
-  // height: 600px;
   padding: 20px;
-  margin-top: 100px;
   // background: ${colors.darkGradient};
   border-top: 1px solid ${colors.gray};
 

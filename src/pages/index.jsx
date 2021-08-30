@@ -15,7 +15,9 @@ import Seo from "src/components/SEO"
 import { dimensions, colors } from 'src/styles'
 
 const Container = styled(Flex)`
-
+  .fullWidth {
+    position: relative;
+  }
 `
 
 const Landing = styled(Flex)`
@@ -28,11 +30,22 @@ const Landing = styled(Flex)`
   }
 `
 
-const StyledLink = styled(Link)`
-  background: ${colors.gradient};
+const StyledLink = styled.div`
+  position: absolute;
+  bottom: 80px;
+  right: 10px;
+  background: transparent;
+  // background: ${colors.gradient};
+  // border: 1px solid #2596be;
+  // border: 1px solid ${colors.brand};
+  border: 1px solid white;
   padding: 15px;
   margin-top: 30px;
   border-radius: 10px;
+  @media (min-width: ${breakpoints.phablet}) {
+    bottom: 100px; 
+    right: 30px;
+  }
 `
 
 
@@ -66,20 +79,19 @@ const IndexPage = () => {
       <Seo title="Home" />
       <Container>
         <Landing>
-          {/* <StyledProductNav /> */}
           <Flex>
             <StaticImage
               src='../images/da-logo-square.png'
               alt='logo'
-              width={125}
-              height={125}
+              width={140}
+              height={140}
             />
             <Plus size='22' />
             <StaticImage
               src='../images/wc-sawblade.png'
               alt='logo'
-              width={125}
-              height={125}
+              width={140}
+              height={140}
             />
           </Flex>
           <Link
@@ -91,12 +103,13 @@ const IndexPage = () => {
               alt='logo'
               width={650}
             />
+            <StyledLink
+              to={`/shop/${feature.handle}`}
+            >
+              {'Pre Order Now >'}
+            </StyledLink>
           </Link>
-          <StyledLink
-            to={`/shop/${feature.handle}`}
-          >
-            Pre Order Now
-          </StyledLink>
+          <ProductNav />
         </Landing>
         {/* <Spacer />
         <H2>
