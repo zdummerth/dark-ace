@@ -135,7 +135,7 @@ const StoreContextProvider = ({ children }) => {
         },
 
         checkAvailability: (productId, variantId) => {
-          // console.log({ productId, variantId })
+          console.log({ productId, variantId })
           
           return client.product
             .fetch(productId)
@@ -145,7 +145,7 @@ const StoreContextProvider = ({ children }) => {
                 v => v.id === variantId
               )
 
-              // console.log('result of availability', result)
+              console.log('result of availability', result)
               if (result.length > 0) {
                 return { data: result[0].available }
               } else {

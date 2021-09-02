@@ -126,7 +126,7 @@ const ProductForm = ({
   imgWithOption,
 }) => {
 
-  console.log('form img with opt', imgWithOption)
+  // console.log('form img with opt', imgWithOption)
 
   const {
     options,
@@ -233,6 +233,7 @@ const ProductForm = ({
                 >
                   <GatsbyImage
                     image={thumb}
+                    alt={name + ' ' + value}
                   />
                   {selected || <Overlay />}
                 </ThumbButton>

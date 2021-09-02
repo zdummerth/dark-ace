@@ -33,7 +33,7 @@ const Listing = styled.div`
 
 
 const ProductListingPage = ({ data }) => {
-  console.log({ data })
+  // console.log({ data })
   // const product = data.shopifyProduct
   // const {
   //   thumbs,
@@ -87,6 +87,13 @@ export const query = graphql`
         shopifyId
         title
         handle
+        storefrontId
+        variants {
+          id
+          storefrontId
+          availableForSale
+          shopifyId
+        }
         images {
           id
           gatsbyImageData(width: 850)

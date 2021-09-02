@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
 import { GatsbyImage } from 'gatsby-plugin-image'
+import { useCheckout } from 'src/hooks/useCheckout'
 import styled from 'styled-components'
 import { breakpoints, colors, spacing, H3 } from 'src/styles';
 import Flex from 'src/components/shared/Flexbox'
@@ -68,7 +69,11 @@ const InfoContainer = styled.div`
 
 const ProductListingItem = ({ product, className, showThumbs, style, hideBorder, hideTitle, containImage }) => {
   const [index, setIndex] = useState(0);
-  // console.log(product.availableForSale)
+
+  const {
+    available,
+  } = useCheckout(product)
+  console.log('availbitlit', available)
 
   return (
     <ProductContainer
@@ -83,11 +88,11 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
           {!hideTitle && (
             <H3>{product.title}</H3>
           )}
-          {!product.totalInventory > 0 &&
+          {!available > 0 &&
             <p>Sold Out!</p>
           }
           {
-            product.title === 'Anarchy Dad Hat' && (
+            product.title === 'Anarchy Dad Hat' && available && (
               <div style={{ padding: '5px' }}>
                 <div>Available in: </div>
                 <div>Turquoise, Green, Red, Black, Purple</div>

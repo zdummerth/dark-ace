@@ -124,6 +124,8 @@ const ProductPage = ({ data }) => {
     title,
   } = product
 
+  console.log({ title })
+
   const variants = product.variants ? product.variants : []
 
   const {
@@ -244,7 +246,7 @@ const ProductPage = ({ data }) => {
         </ImagesWrapper>
         <InfoWrapper>
           <Section className='top'>
-            <Subtitle>{product.title}</Subtitle>
+            <Subtitle>{title}</Subtitle>
             <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
           </Section>
           <Section>

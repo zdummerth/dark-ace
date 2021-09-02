@@ -60,7 +60,7 @@ export const useCheckout = product => {
       // console.log('checking availability')
       checkAvailability(storefrontId, variant.storefrontId)
         .then(({ data }) => {
-          // console.log('available result', data)
+          console.log('available result', data)
           setAvailable(data)
         })
     },
