@@ -12,7 +12,7 @@ export const useCheckout = product => {
     storefrontId
   } = product
 
-  // console.log('product', product)
+  console.log('product', product)
 
 
   // finds first available variant
@@ -60,7 +60,7 @@ export const useCheckout = product => {
       // console.log('checking availability')
       checkAvailability(storefrontId, variant.storefrontId)
         .then(({ data }) => {
-          console.log('available result', data)
+          // console.log('available result', data)
           setAvailable(data)
         })
     },

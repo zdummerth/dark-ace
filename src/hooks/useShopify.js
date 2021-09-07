@@ -12,6 +12,7 @@ export const useShopify = () => {
               handle
               title
               shopifyId
+              storefrontId
               description
               totalInventory
               variants {

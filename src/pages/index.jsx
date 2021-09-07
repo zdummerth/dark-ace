@@ -1,8 +1,10 @@
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
+import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
 import ProductNav from 'src/components/layout/productCollectionNavigation'
 import styled from 'styled-components'
 // import SlideShow from 'src/components/slideshow'
+import ProductListingItem from 'src/components/products/ProducListingItem'
+
 import { useShopify } from 'src/hooks/useShopify'
 import { breakpoints } from 'src/styles'
 import { Plus } from '@styled-icons/boxicons-regular'
@@ -30,22 +32,8 @@ const Landing = styled(Flex)`
   }
 `
 
-const StyledLink = styled.div`
-  position: absolute;
-  bottom: 80px;
-  right: 10px;
-  background: transparent;
-  // background: ${colors.gradient};
-  // border: 1px solid #2596be;
-  // border: 1px solid ${colors.brand};
-  border: 1px solid white;
-  padding: 15px;
-  margin-top: 30px;
-  border-radius: 10px;
-  @media (min-width: ${breakpoints.phablet}) {
-    bottom: 100px; 
-    right: 30px;
-  }
+const ProductContainer = styled.div`
+  position: relative;
 `
 
 
@@ -86,49 +74,23 @@ const IndexPage = () => {
               width={140}
               height={140}
             />
-            <Plus size='22' />
-            <StaticImage
-              src='../images/wc-sawblade.png'
-              alt='logo'
-              width={140}
-              height={140}
-            />
           </Flex>
-          <Link
-            to={`/shop/${feature.handle}`}
-            className='fullWidth'
-          >
-            <StaticImage
-              src='../images/WC-Banner.jpg'
-              alt='logo'
-              width={650}
+          <ProductContainer>
+            <ProductListingItem
+              product={feature}
+              key={feature.shopifyId}
+              showThumbs={false}
+              hideBorder={true}
+              // hideTitle={true}
+              // containImage={true}
+              style={{
+                width: '100%',
+                maxWidth: '600px',
+              }}
             />
-            <StyledLink
-              to={`/shop/${feature.handle}`}
-            >
-              {'Pre Order Now >'}
-            </StyledLink>
-          </Link>
+          </ProductContainer>
           <ProductNav />
         </Landing>
-        {/* <Spacer />
-        <H2>
-          Featured
-        </H2>
-        <ProductContainer>
-          <ProductListingItem
-            product={feature}
-            key={feature.shopifyId}
-            showThumbs={false}
-            // hideBorder={true}
-            // hideTitle={true}
-            // containImage={true}
-            style={{
-              width: '100%',
-              maxWidth: '600px',
-            }}
-          />
-        </ProductContainer> */}
         {/* <Banner>
           <SlideShow />
         </Banner> */}
