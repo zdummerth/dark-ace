@@ -64,7 +64,7 @@ const ProductListingPage = ({ data }) => {
                 hideBorder={products.length === 1 ? true : false}
                 style={{
                   width: products.length === 1 || product.title === 'Anarchy Dad Hat' ? '100%' : '50%',
-                  maxWidth: products.length === 1 ? '830px' : '350px',
+                  maxWidth: products.length === 1 ? '500px' : '350px',
                   // height: product.title === 'Anarchy Dad Hat' ? '60vh' : 'inherit',
                 }}
               />
