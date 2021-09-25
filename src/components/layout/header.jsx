@@ -49,14 +49,14 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
         {/* <div
         style={{ display: 'flex', alignItems: 'center' }}
       > */}
-        <StyledLink
+        {/* <StyledLink
           to='/'
         >
           <Flex dir='column'>
             <Home size='22' />
             <I>Home</I>
           </Flex>
-        </StyledLink>
+        </StyledLink> */}
         <StyledLink
           to='/shop/collection/featured'
           name='Play Disc Golf'

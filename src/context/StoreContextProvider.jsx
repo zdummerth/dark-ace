@@ -136,10 +136,15 @@ const StoreContextProvider = ({ children }) => {
 
         checkAvailability: (productId, variantId) => {
           console.log({ productId, variantId })
-          
+
           return client.product
             .fetch(productId)
             .then(fetchedProduct => {
+              console.log('fetched product', fetchedProduct)
+              if (!fetchedProduct) {
+                return { data: false }
+              }
+
               // this checks the currently selected variant for availability
               const result = fetchedProduct.variants.filter(
                 v => v.id === variantId

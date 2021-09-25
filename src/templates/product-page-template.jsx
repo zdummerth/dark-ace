@@ -124,7 +124,7 @@ const ProductPage = ({ data }) => {
     title,
   } = product
 
-  console.log({ title })
+  // console.log({ title })
 
   const variants = product.variants ? product.variants : []
 
@@ -139,7 +139,7 @@ const ProductPage = ({ data }) => {
     setVariant
   } = useCheckout(product)
 
-  // console.log('the current product', product)
+  // console.log('variant', variant)
 
   const [imageFluid, setImageFluid] = useState(fulls[0].gatsbyImageData)
 
