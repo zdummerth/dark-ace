@@ -1,9 +1,12 @@
-import React, { useContext, useState, useEffect } from "react"
-import PropTypes from "prop-types"
+import React, { useContext, useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { StoreContext } from 'src/context/StoreContextProvider'
 import "@fontsource/covered-by-your-grace"; // Defaults to weight 400.
-import styled, { createGlobalStyle } from "styled-components"
-import { dimensions, colors, breakpoints } from 'src/styles';
+import styled, { createGlobalStyle } from 'styled-components'
+import { CaretUp } from '@styled-icons/boxicons-regular'
+import { dimensions, colors, breakpoints } from 'src/styles'
+import Collapsable from 'src/components/shared/Collapsable'
+import { BlankButton } from 'src/components/shared/Button'
 import Header from './header'
 import Footer from './footer'
 // import Spotify from '../spotify'
@@ -108,6 +111,7 @@ const Layout = ({ children, location }) => {
   } = useContext(StoreContext)
 
   const [spotifyMinimized, setSpotifyMinimized] = useState(true)
+  const [shippingOpen, setShippingOpen] = useState(true)
   const [resetEmailForm, setResetEmailForm] = useState(false)
 
   useEffect(() => {
@@ -133,7 +137,6 @@ const Layout = ({ children, location }) => {
         />
 
         <Header
-          // siteTitle={data.site.siteMetadata.title}
           cartCount={cartCount}
           setSpotifyMinimized={setSpotifyMinimized}
           spotifyMinimized={spotifyMinimized}
@@ -147,6 +150,18 @@ const Layout = ({ children, location }) => {
         <ContentWrapper
           onClick={() => setSpotifyMinimized(true)}
         >
+          <Collapsable
+            top={dimensions.headerHeight}
+            height='50px'
+            open={shippingOpen}
+            // jc='space-around'
+            // dir='column'
+          >
+            <div>Spend $50 or more for free shipping</div>
+            <BlankButton onClick={() => setShippingOpen(false)}>
+              <CaretUp color='white' size='24' />
+            </BlankButton>
+          </Collapsable>
           {children}
         </ContentWrapper>
         <Footer resetForm={resetEmailForm} />

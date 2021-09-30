@@ -38,6 +38,11 @@ const DisabledOverlay = styled.div`
 
 `
 
+export const BlankButton = styled.button`
+    border: none;
+    background: transparent;
+`
+
 const Button = ({ children, disabled, onClick, ...rest }) => {
     return (
         <StyledButton disabled={disabled} onClick={onClick} {...rest} >

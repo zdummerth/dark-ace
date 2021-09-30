@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { ShoppingBag, Trophy, Message, Home } from '@styled-icons/boxicons-regular'
+import { ShoppingBag, Trophy, Message, Home, X } from '@styled-icons/boxicons-regular'
 import Flex from 'components/shared/Flexbox'
 import { dimensions, colors } from 'src/styles';
 import StyledLink from 'src/components/shared/Link'
