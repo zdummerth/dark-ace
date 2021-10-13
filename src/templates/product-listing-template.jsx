@@ -61,7 +61,8 @@ const ProductListingPage = ({ data }) => {
                 key={product.shopifyId}
                 // showThumbs={handle === 'headware' && product.title === 'Anarchy Dad Hat'}
                 showThumbs={false}
-                hideBorder={products.length === 1 ? true : false}
+                // hideBorder={products.length === 1 ? true : false}
+                hideBorder={true}
                 style={{
                   width: products.length === 1 || product.title === 'Anarchy Dad Hat' ? '100%' : '50%',
                   maxWidth: products.length === 1 ? '500px' : '350px',

@@ -30,12 +30,14 @@ const ProductNav = ({ collections, className }) => {
 
 
   const featured = allCollections.filter(c => c.handle === 'featured')
-  const rest = allCollections.filter(c => (c.handle !== 'featured') && (c.handle !== 'pre-order'))
+  const rest = allCollections.filter(c => (c.handle !== 'featured') && (c.handle !== 'pre-order') && (c.handle !== 'gift-card'))
+  const giftCard = allCollections.filter(c => c.handle === 'gift-card')
+
 
   // console.log('de arrya', featured)
   return (
     <Nav className={className}>
-      {[...featured, ...rest].map((c, index) => (
+      {[...featured, ...rest, ...giftCard].map((c, index) => (
         <StyledLink
           key={c.handle + index}
           to={`/shop/collection/${c.handle}`}

@@ -150,7 +150,7 @@ const Layout = ({ children, location }) => {
         <ContentWrapper
           onClick={() => setSpotifyMinimized(true)}
         >
-          <Collapsable
+          {/* <Collapsable
             top={dimensions.headerHeight}
             height='50px'
             open={shippingOpen}
@@ -161,7 +161,7 @@ const Layout = ({ children, location }) => {
             <BlankButton onClick={() => setShippingOpen(false)}>
               <CaretUp color='white' size='24' />
             </BlankButton>
-          </Collapsable>
+          </Collapsable> */}
           {children}
         </ContentWrapper>
         <Footer resetForm={resetEmailForm} />
