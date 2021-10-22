@@ -81,6 +81,10 @@ export const useShopify = () => {
   const allCollections = data.allShopifyCollection.edges.map(({ node }) => node)
 
   // console.log({allCollections})
+  const allProducts = allCollections.map(c => c.products).flat()
+  // console.log({ allProducts })
+  const singleVariantProducts = allProducts.filter(p => p.variants.length === 1)
+  // console.log({ singleVariantProducts })
 
   const accessories = allCollections.find(c => c.handle === 'accessories')
   const discs = allCollections.find(c => c.handle === 'discs')
@@ -96,6 +100,6 @@ export const useShopify = () => {
 
   const { giftCard } = data
 
-  return { discs, headware, accessories, featured, giftCard, longsleeves, tShirts, driFits, preOrder, collectionNames, allCollections }
+  return { discs, headware, accessories, featured, giftCard, longsleeves, tShirts, driFits, preOrder, collectionNames, allCollections, singleVariantProducts }
 
 }

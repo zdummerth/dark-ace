@@ -46,7 +46,7 @@ const Container = styled.div`
 const LineItem = props => {
   const { item } = props
 
-  console.log('variant', item.variant.selectedOptions)
+  // console.log('variant', item.variant.selectedOptions)
   const {
     removeLineItem,
     // updateLineItem,
@@ -60,7 +60,7 @@ const LineItem = props => {
     />
   ) : null
 
-  console.log({ item })
+  // console.log({ item })
 
   const price = item.variant.price
 

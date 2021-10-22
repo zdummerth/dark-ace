@@ -12,7 +12,7 @@ export const useCheckout = product => {
     storefrontId
   } = product
 
-  console.log('product', product)
+  // console.log('product', product)
 
 
   // finds first available variant
@@ -26,7 +26,7 @@ export const useCheckout = product => {
   const {
     addVariantToCart,
     checkAvailability,
-    store: { status }
+    store: { status, checkout }
   } = useContext(StoreContext)
 
 
@@ -76,6 +76,7 @@ export const useCheckout = product => {
     quantity,
     available,
     status,
+    checkout,
     increaseQuantity,
     decreaseQuantity,
     addToCart,

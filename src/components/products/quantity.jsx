@@ -19,14 +19,15 @@ const ControllWrapper = styled.div`
   display: flex;
   margin-left: 15px;
 
+
   & button {
     display: flex;
     justify-content: center;
     align-items: center;
     // border: 1px solid white;
     border: none;
-    background: ${colors.gradient};
-    // background: none;
+    // background: ${colors.gradient};
+    background: none;
     // box-shadow: 0 0 8px ${colors.brand};
     border-radius: 50%;
     color: ${colors.lightest};
