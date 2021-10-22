@@ -17,7 +17,7 @@ const Container = styled.div`
     // box-shadow: 0 0 10px ${colors.brand};
     margin: 15px 0;
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
 
 
     height: 175px;

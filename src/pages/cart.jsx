@@ -19,8 +19,8 @@ const Container = styled.div`
   width: 100%;
 
   #lineItems {
-    // border-top: 1px solid #C00A0A;
-    width: 100%;
+    // width: 100%;
+    // margin: 0 auto;
   }
 `
 
