@@ -88,7 +88,7 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
           {!hideTitle && (
             <H3>{product.title}</H3>
           )}
-          {!available > 0 &&
+          {!available &&
             <p>Sold Out!</p>
           }
           {

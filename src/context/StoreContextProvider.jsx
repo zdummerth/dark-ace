@@ -32,6 +32,8 @@ const StoreContextProvider = ({ children }) => {
   const [store, updateStore] = useState(initialStoreState);
 
   const handleError = error => {
+    console.error('store context error', error)
+
     updateStore(prevState => {
       return { ...prevState, error, status: 'idle' }
     })
@@ -45,7 +47,7 @@ const StoreContextProvider = ({ children }) => {
         ? localStorage.getItem('shopify_checkout_id')
         : null
 
-      console.log({ existingCheckoutID })
+      // console.log({ existingCheckoutID })
 
       const setCheckoutInState = checkout => {
         if (isBrowser) {
@@ -107,6 +109,7 @@ const StoreContextProvider = ({ children }) => {
             .addLineItems(checkoutId, lineItemsToUpdate)
             .then(checkout => {
               updateStore(prevState => {
+
                 return { ...prevState, checkout, status: 'Added' }
               })
             }, (error) => handleError(error))
@@ -145,12 +148,12 @@ const StoreContextProvider = ({ children }) => {
         },
 
         checkAvailability: (productId, variantId) => {
-          console.log({ productId, variantId })
+          console.log({ productId, variantId, client })
 
           return client.product
             .fetch(productId)
             .then(fetchedProduct => {
-              console.log('fetched product', fetchedProduct)
+              // console.log('fetched product', fetchedProduct)
               if (!fetchedProduct) {
                 return { data: false }
               }
@@ -160,7 +163,7 @@ const StoreContextProvider = ({ children }) => {
                 v => v.id === variantId
               )
 
-              console.log('result of availability', result)
+              // console.log('result of availability', result)
               if (result.length > 0) {
                 return { data: result[0].available }
               } else {
@@ -168,7 +171,7 @@ const StoreContextProvider = ({ children }) => {
               }
             },
               (error) => {
-                console.log('error of availability', error)
+                // console.log('error of availability', error)
                 return { data: false }
               })
 
