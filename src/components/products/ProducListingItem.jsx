@@ -73,7 +73,7 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
   const {
     available,
   } = useCheckout(product)
-  console.log('availbitlit', available)
+  // console.log('availbitlit', available)
 
   return (
     <ProductContainer

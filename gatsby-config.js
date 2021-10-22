@@ -42,9 +42,11 @@ module.exports = {
       resolve: `gatsby-source-shopify`,
       options: {
         // The domain name of your Shopify shop.
-        storeUrl: process.env.GATSBY_SHOP_NAME,
+        // storeUrl: process.env.GATSBY_SHOP_NAME,
+        storeUrl: process.env.GATSBY_SHOPIFY_TEST_SHOP_NAME,
         // The storefront access token
-        password: process.env.SHOPIFY_ADMIN_PASSWORD,
+        password: process.env.SHOPIFY_TEST_ADMIN_PASSWORD,
+        // password: process.env.SHOPIFY_ADMIN_PASSWORD,
         shopifyConnections: ['collections']
       },
     },

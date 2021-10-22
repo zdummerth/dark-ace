@@ -3,12 +3,20 @@ import Client from 'shopify-buy'
 export const StoreContext = React.createContext()
 
 
+// const client = Client.buildClient({
+//   storefrontAccessToken: process.env.GATSBY_ACCESS_TOKEN,
+//   domain: process.env.GATSBY_SHOP_NAME,
+// })
+
+console.log('key', process.env.GATSBY_SHOPIFY_TEST_STOREFRONT_KEY, process.env.GATSBY_SHOPIFY_TEST_SHOP_NAME)
+
+
 const client = Client.buildClient({
-  storefrontAccessToken: process.env.GATSBY_ACCESS_TOKEN,
-  domain: process.env.GATSBY_SHOP_NAME,
+  storefrontAccessToken: process.env.GATSBY_SHOPIFY_TEST_STOREFRONT_KEY,
+  domain: process.env.GATSBY_SHOPIFY_TEST_SHOP_NAME,
 })
 
-// console.log('shopif  buy client', client)
+console.log('shopify  buy client', client)
 
 
 const StoreContextProvider = ({ children }) => {
@@ -36,6 +44,8 @@ const StoreContextProvider = ({ children }) => {
       const existingCheckoutID = isBrowser
         ? localStorage.getItem('shopify_checkout_id')
         : null
+
+      console.log({ existingCheckoutID })
 
       const setCheckoutInState = checkout => {
         if (isBrowser) {
@@ -161,6 +171,7 @@ const StoreContextProvider = ({ children }) => {
                 console.log('error of availability', error)
                 return { data: false }
               })
+
         },
 
         resetError: () => {
