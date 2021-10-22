@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { StoreContext } from 'src/context/StoreContextProvider'
 import ProductNav from 'src/components/layout/productCollectionNavigation'
-import { useShopify } from 'src/hooks/useShopify'
+// import { useShopify } from 'src/hooks/useShopify'
 import LineItem from 'src/components/cart/line-item'
 import Seo from 'src/components/SEO'
-import Button from 'src/components/shared/Button'
+// import Button from 'src/components/shared/Button'
 
-import Suggestions from 'src/components/products/suggestions/view'
+// import Suggestions from 'src/components/products/suggestions/view'
 
 import { colors } from 'src/styles'
 
@@ -57,15 +57,15 @@ const Cart = () => {
     store: { checkout },
   } = useContext(StoreContext)
 
-  const [isOpen, setIsOpen] = useState(false)
+  // const [isOpen, setIsOpen] = useState(false)
 
-  const { singleVariantProducts } = useShopify()
+  // const { singleVariantProducts } = useShopify()
 
-  const lineItemProducts = checkout.lineItems.map(li => li.variant.product)
+  // const lineItemProducts = checkout.lineItems.map(li => li.variant.product)
 
-  const suggestions = singleVariantProducts.filter(s => (
-    !lineItemProducts.find(li => li.id === s.storefrontId)
-  ))
+  // const suggestions = singleVariantProducts.filter(s => (
+  //   !lineItemProducts.find(li => li.id === s.storefrontId)
+  // ))
 
   const totalQuantity = checkout.lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
 
@@ -77,7 +77,7 @@ const Cart = () => {
     <>
       <Seo title='Cart' />
       <Container>
-        <Suggestions suggestions={suggestions} isOpen={isOpen} setIsOpen={setIsOpen} checkoutUrl={checkout.webUrl} />
+        {/* <Suggestions suggestions={suggestions} isOpen={isOpen} setIsOpen={setIsOpen} checkoutUrl={checkout.webUrl} /> */}
         <Subtotal>
           <p>{`Subtotal (${totalQuantity} ${totalQuantity > 1 ? 'items' : 'item'}): `}</p>
           <h4>$ {checkout.subtotalPrice}</h4>
@@ -98,14 +98,13 @@ const Cart = () => {
           </>
           :
           <>
-            {suggestions.length > 0 ? (
+            {/* {suggestions.length > 0 ? (
               <Button type='button' onClick={() => setIsOpen(true)}>Go to checkout</Button>
 
             ) : (
               <CheckoutLink href={checkout.webUrl}>Proceed to checkout</CheckoutLink>
-            )}
-
-            {/* <p style={{ textAlign: 'center', width: '90%'}}>If your cart contains a pre-order item, all items will be shipped with the pre-order</p> */}
+            )} */}
+            <CheckoutLink href={checkout.webUrl}>Proceed to checkout</CheckoutLink>
           </>
         }
         <div id='lineItems'>

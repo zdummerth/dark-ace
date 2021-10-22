@@ -73,7 +73,6 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
   const {
     available,
   } = useCheckout(product)
-  console.log('availbitlit', available)
 
   return (
     <ProductContainer
@@ -88,20 +87,8 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
           {!hideTitle && (
             <H3>{product.title}</H3>
           )}
-          {!available > 0 &&
+          {!available &&
             <p>Sold Out!</p>
-          }
-          {
-            product.title === 'Anarchy Dad Hat' && available && (
-              <div style={{ padding: '5px' }}>
-                <div>Available in: </div>
-                <div>Turquoise, Green, Red, Black, Purple</div>
-                {/* <div>Green</div>
-            <div>Red</div>
-            <div>Black</div>
-            <div>Purple</div> */}
-              </div>
-            )
           }
         </TextWrapper>
       </InfoContainer>
