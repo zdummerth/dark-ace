@@ -1,6 +1,4 @@
 import React, { useContext, useState } from 'react'
-import { Link } from "gatsby"
-
 import styled from 'styled-components'
 import { StoreContext } from 'src/context/StoreContextProvider'
 import ProductNav from 'src/components/layout/productCollectionNavigation'
@@ -49,17 +47,6 @@ const CheckoutLink = styled.a`
   max-width: 300px;
 `
 
-const InternalLink = styled(Link)`
-  display: block;
-  background: ${colors.gradient};
-  box-shadow: 0 0 5px ${colors.brand};
-  padding: 10px;
-  margin-bottom: 2rem;
-  text-align: center;
-  border-radius: 5px;
-  max-width: 300px;
-`
-
 const Italic = styled.i`
   display: block;
   padding-bottom: 25px;
@@ -88,43 +75,9 @@ const Cart = () => {
 
   return (
     <>
-      <Seo title='Cart' />
+      <Seo title='Suggestions' />
       <Container>
-        <Suggestions suggestions={[...suggestions]} isOpen={isOpen} setIsOpen={setIsOpen} checkoutUrl={checkout.webUrl} />
-        <Subtotal>
-          <p>{`Subtotal (${totalQuantity} ${totalQuantity > 1 ? 'items' : 'item'}): `}</p>
-          <h4>$ {checkout.subtotalPrice}</h4>
-        </Subtotal>
-        <Italic>taxes and shipping calculated at checkout</Italic>
-
-        {checkout.lineItems.length === 0
-          ?
-          <>
-            <p>
-              Your Cart Is Empty
-            </p>
-            <p>
-              Please Select A Category
-            </p>
-            <ProductNav />
-
-          </>
-          :
-          <>
-            {suggestions.length > 0 ? (
-              <Button type='button' onClick={() => setIsOpen(true)}>Go to checkout</Button>
-              // <Link href={checkout.webUrl}>Proceed to checkout</Link>
-
-            ) : (
-              <CheckoutLink href={checkout.webUrl}>Proceed to checkout</CheckoutLink>
-            )}
-
-            {/* <p style={{ textAlign: 'center', width: '90%'}}>If your cart contains a pre-order item, all items will be shipped with the pre-order</p> */}
-          </>
-        }
-        <div id='lineItems'>
-          {lineItems}
-        </div>
+        <Suggestions suggestions={suggestions} isOpen={isOpen} setIsOpen={setIsOpen} checkoutUrl={checkout.webUrl} />
       </Container>
     </>
   )

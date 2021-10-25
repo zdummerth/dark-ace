@@ -56,10 +56,7 @@ const Span = styled.span`
   justify-content: center;
   align-items: center;
 
-  // padding: 10px;
-
-  height: 50px;
-  width: 50px;
+  padding: 10px;
   border-radius: 5px;
   :hover {
       cursor: pointer;
@@ -200,7 +197,7 @@ const ProductForm = ({
                 value={value}
                 key={`${name}-${value}`}
                 selected={checkSelected(name, value)}
-                onClick={() => handleOptionClick(name, value)}
+                onClick={() => handleOptionClick(name, value, name === 'Putter')}
               >
                 {value.toUpperCase()}
               </Span>

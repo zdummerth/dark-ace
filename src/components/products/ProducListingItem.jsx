@@ -91,18 +91,6 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
           {!available &&
             <p>Sold Out!</p>
           }
-          {
-            product.title === 'Anarchy Dad Hat' && available && (
-              <div style={{ padding: '5px' }}>
-                <div>Available in: </div>
-                <div>Turquoise, Green, Red, Black, Purple</div>
-                {/* <div>Green</div>
-            <div>Red</div>
-            <div>Black</div>
-            <div>Purple</div> */}
-              </div>
-            )
-          }
         </TextWrapper>
       </InfoContainer>
       <ImgContainer>
@@ -111,7 +99,7 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
             image={product.images[index].gatsbyImageData}
             alt={'Product Image'}
             // objectFit='contain'
-            objectFit={product.title === 'Anarchy Dad Hat' ? 'contain' : 'cover'}
+            objectFit={'cover'}
 
           />
         </ImgLink>

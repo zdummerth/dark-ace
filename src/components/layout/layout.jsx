@@ -146,22 +146,22 @@ const Layout = ({ children, location }) => {
           setMinimized={setSpotifyMinimized}
         /> */}
         <HeaderMargin />
-
+        <Collapsable
+          top={dimensions.headerHeight}
+          height='50px'
+          open={shippingOpen}
+        // jc='space-around'
+        // dir='column'
+        >
+          <div>Spend $50 or more for free shipping</div>
+          <BlankButton onClick={() => setShippingOpen(false)}>
+            <CaretUp color='white' size='24' />
+          </BlankButton>
+        </Collapsable>
         <ContentWrapper
           onClick={() => setSpotifyMinimized(true)}
         >
-          {/* <Collapsable
-            top={dimensions.headerHeight}
-            height='50px'
-            open={shippingOpen}
-            // jc='space-around'
-            // dir='column'
-          >
-            <div>Spend $50 or more for free shipping</div>
-            <BlankButton onClick={() => setShippingOpen(false)}>
-              <CaretUp color='white' size='24' />
-            </BlankButton>
-          </Collapsable> */}
+
           {children}
         </ContentWrapper>
         <Footer resetForm={resetEmailForm} />

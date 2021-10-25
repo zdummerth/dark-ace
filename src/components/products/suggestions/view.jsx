@@ -6,6 +6,7 @@ import {
     ProductInfoContainer,
     CheckoutLink
 } from './styles'
+import { X } from '@styled-icons/boxicons-regular'
 import { useCheckout } from 'src/hooks/useCheckout'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import Quantity from 'src/components/products/quantity'
@@ -25,6 +26,7 @@ const Product = ({ product }) => {
 
     return (
         <ProductContainer>
+
             <ProductImageContainer>
                 <GatsbyImage
                     image={product.images[0].gatsbyImageData}
@@ -50,10 +52,10 @@ const Product = ({ product }) => {
 const View = ({ suggestions, checkoutUrl, isOpen, setIsOpen }) => {
     return (
         <Container isOpen={isOpen}>
-            <div>Suggested Products</div>
+            <h2>Suggested Products</h2>
             {suggestions.map(s => <Product product={s} key={s.shopifyId} />)}
             <CheckoutLink href={checkoutUrl}>Proceed to checkout</CheckoutLink>
-            <Button type='button' onClick={() => setIsOpen(false)}>Close</Button>
+            <Button type='button' cancel style={{border: 'none', alignSelf: 'flex-end'}} onClick={() => setIsOpen(false)}><X size={26}/></Button>
 
         </Container>
     )

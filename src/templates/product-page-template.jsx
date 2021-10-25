@@ -29,18 +29,23 @@ const Container = styled(Flex)`
 `
 
 const ImgContainer = styled(Flex)`
-  width: 100%;
-  height: 100%;
+  // width: 100%;
+  // height: 100%;
+  height: 50vh;
   overflow: hidden;
+
+  @media (min-width: ${breakpoints.desktop}) {
+    height: 80vh;
+  }
 `
 const ImagesWrapper = styled(Flex)`
-  height: 60vh;
+  // height: 60vh;
   width: 100%;
   padding: 10px;
   border: 1px solid ${colors.gray};
 
   @media (min-width: ${breakpoints.desktop}) {
-    height: 80vh;
+    // height: 80vh;
     flex: 1;
   }
 `
@@ -62,12 +67,13 @@ const StyledPrice = styled.div`
   font-weight: bold;
 `
 
-const ThumbnailContainer = styled.div`  
-  margin-top: 5px;
-  height: 60px;
+const ThumbnailContainer = styled(Flex)`  
+  // margin-top: 5px;
+  flex-wrap: wrap;
+  // height: 60px;
 `
 const Thumbnail = styled.button`
-    margin-right: 8px;
+    margin-top: 5px;
     border: 0;
     outline: 0;
     background: none;
@@ -240,7 +246,7 @@ const ProductPage = ({ data }) => {
               objectFit={'contain'}
             />
           </ImgContainer>
-          {(thumbs.length > 1 && thumbs.length < 6) &&
+          {(thumbs.length > 1 && thumbs.length < 7) &&
             <Thumbnails imgWithOption={imgWithOption} handleClick={handleThumbClick} />
           }
         </ImagesWrapper>
@@ -322,7 +328,7 @@ export const query = graphql`
         }
         image {
           id
-          gatsbyImageData(width: 450)
+          gatsbyImageData(width: 800)
         }
       }
     }

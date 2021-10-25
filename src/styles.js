@@ -40,6 +40,8 @@ export const DarkTheme = {
     text: 'white',
     error: 'red',
     background: 'black',
+    gradient: `linear-gradient(to bottom right, #C00A0A 45%, #020202)`,
+    darkGradient: `linear-gradient(to bottom right, #020202 65%, #C00A0A)`,
     gray: 'gray',
     lightblue: 'rgb(164,232,242)',
     uncompleted: '#ffea8a',
@@ -176,9 +178,9 @@ export const Listing = ({ children, style }) => {
   const isSingleItem = !children.length
   return (
     <StyledListing
-     style={style} 
-     isSingleItem={isSingleItem}
-     >
+      style={style}
+      isSingleItem={isSingleItem}
+    >
       {children}
     </StyledListing>
   )

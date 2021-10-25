@@ -7,7 +7,7 @@ const Container = styled(Flex)`
   max-height: ${({ height, open }) => open ? height : '0'};
   overflow: hidden;
   width: ${({ width }) => width ? width : '100%'};
-  background: #C00A0A;
+  background: ${({ theme }) => theme.colors.darkGradient};
   transition: max-height .3s ease-in;
 `
 

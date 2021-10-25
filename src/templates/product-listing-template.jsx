@@ -33,14 +33,8 @@ const Listing = styled.div`
 
 
 const ProductListingPage = ({ data }) => {
-  // console.log({ data })
-  // const product = data.shopifyProduct
-  // const {
-  //   thumbs,
-  //   fulls,
-  //   variants
-  // } = product
-  const { products, title, handle } = data.collection
+  console.log({ data })
+  const { products, title, handle, description } = data.collection
 
 
   return (
@@ -54,25 +48,29 @@ const ProductListingPage = ({ data }) => {
             <GiftCard />
           </>
         ) : (
-          <Listing>
-            {products.map(product => (
-              <ProductListingItem
-                product={product}
-                key={product.shopifyId}
-                // showThumbs={handle === 'headware' && product.title === 'Anarchy Dad Hat'}
-                showThumbs={false}
-                // hideBorder={products.length === 1 ? true : false}
-                hideBorder={true}
-                style={{
-                  width: products.length === 1 || product.title === 'Anarchy Dad Hat' ? '100%' : '50%',
-                  maxWidth: products.length === 1 ? '500px' : '350px',
-                  // height: product.title === 'Anarchy Dad Hat' ? '60vh' : 'inherit',
-                }}
-              />
-            ))}
-          </Listing>
+          <>
+            {handle === 'bundle' && (
+              <p>{description}</p>
+            )}
+            <Listing>
+              {products.map(product => (
+                <ProductListingItem
+                  product={product}
+                  key={product.shopifyId}
+                  // showThumbs={handle === 'headware' && product.title === 'Anarchy Dad Hat'}
+                  showThumbs={false}
+                  // hideBorder={products.length === 1 ? true : false}
+                  hideBorder={true}
+                  hideTitle={handle === 'bundle'}
+                  style={{
+                    width: products.length === 1 ? '100%' : '50%',
+                    maxWidth: products.length === 1 ? '500px' : '350px',
+                  }}
+                />
+              ))}
+            </Listing>
+          </>
         )}
-        {/* <Nav className='hide-gt-mobile' collections={collections} /> */}
       </Container>
     </>
   )
@@ -83,6 +81,7 @@ export const query = graphql`
     collection: shopifyCollection(handle: {eq: $handle}) {
       title
       handle
+      description
       products {
         totalInventory
         shopifyId
