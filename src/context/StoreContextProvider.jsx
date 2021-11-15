@@ -135,12 +135,12 @@ const StoreContextProvider = ({ children }) => {
         },
 
         checkAvailability: (productId, variantId) => {
-          console.log({ productId, variantId })
+          // console.log({ productId, variantId })
 
           return client.product
             .fetch(productId)
             .then(fetchedProduct => {
-              console.log('fetched product', fetchedProduct)
+              // console.log('fetched product', fetchedProduct)
               if (!fetchedProduct) {
                 return { data: false }
               }
@@ -158,7 +158,26 @@ const StoreContextProvider = ({ children }) => {
               }
             },
               (error) => {
-                console.log('error of availability', error)
+                // console.log('error of availability', error)
+                return { data: false }
+              })
+        },
+        checkProductAvailability: (productId, variantId) => {
+          // console.log({ productId, variantId })
+
+          return client.product
+            .fetch(productId)
+            .then(fetchedProduct => {
+              // console.log('fetched product', fetchedProduct)
+              if (!fetchedProduct) {
+                return { data: false }
+              }
+              return {
+                data: fetchedProduct.availableForSale
+              }
+            },
+              (error) => {
+                // console.log('error of availability', error)
                 return { data: false }
               })
         },

@@ -18,7 +18,7 @@ const StyledLink = styled(Link)`
   border-radius: 50px;
   padding: 5px 10px;
   margin: 5px;
-  background: ${({ selected }) => selected ? colors.gradient : colors.background};
+  background: ${({ selected }) => selected ? colors.gradient : colors.darkGradient};
 `
 
 
@@ -43,7 +43,7 @@ const ProductNav = ({ collections, className }) => {
           to={`/shop/collection/${c.handle}`}
           activeStyle={{
             background: colors.gradient,
-            border: 'none'
+            // border: 'none'
           }}
         >
           {c.title}

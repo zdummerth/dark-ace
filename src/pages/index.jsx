@@ -1,34 +1,47 @@
 import React, { useEffect } from 'react'
 // import { StaticImage } from 'gatsby-plugin-image'
-import { navigate } from 'gatsby'
+import { navigate, Link } from 'gatsby'
 // import ProductNav from 'src/components/layout/productCollectionNavigation'
-// import styled from 'styled-components'
+import styled from 'styled-components'
 // import SlideShow from 'src/components/slideshow'
 // import ProductListingItem from 'src/components/products/ProducListingItem'
 // import { useShopify } from 'src/hooks/useShopify'
 // import { breakpoints } from 'src/styles'
 // import Flex from 'src/components/shared/Flexbox'
 import Seo from "src/components/SEO"
-// import { dimensions } from 'src/styles'
+// import { dimensions, breakpoints, H1, colors } from 'src/styles'
 
-// const Container = styled(Flex)`
-//   .fullWidth {
-//     position: relative;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%
+`
+
+// const Listing = styled(Flex)`
+//   display: flex;
+//   flex-wrap: wrap;
+//   width: 100%;
+//   justify-content: center;
+// `
+
+// const ImagesWrapper = styled.div`
+//   // position: relative;
+//   display: flex;
+//   width: 100%;
+//   // height: 30vh;
+
+//   & > * {
+//     flex: 1;
 //   }
 // `
 
-// const Landing = styled(Flex)`
-//   flex-direction: column;
-//   justify-content: space-evenly;
-//   min-height: calc(95vh - ${dimensions.headerHeight});
-
-//   @media (min-width: ${breakpoints.hd}) {
-//     // flex-direction: row;
-//   }
-// `
-
-// const ProductContainer = styled.div`
-//   position: relative;
+// const StyledLink = styled(Link)`
+//   border: 1px solid ${colors.brand};
+//   border-radius: 5px;
+//   padding: 10px;
+//   margin: 20px 0 50px 0;
+//   background: ${colors.darkGradient};
 // `
 
 
@@ -63,33 +76,56 @@ const IndexPage = () => {
   return (
     <>
       <Seo title="Home" />
-      {/* <Container>
-        <Landing>
-          <Flex style={{ marginTop: '10px' }}>
-            <StaticImage
-              src='../images/da-logo-square.png'
-              alt='logo'
-              width={140}
-              height={140}
-            />
-          </Flex>
-          <ProductContainer>
+      <Container dir='column'>
+        {/* <StaticImage
+          src='../images/banner-hearse.png'
+          alt='logo'
+        />
+
+        <H1>Featured Products</H1>
+        <Listing ai='stretch'>
+          {featured.products.map(product => (
             <ProductListingItem
-              product={feature}
-              key={feature.shopifyId}
+              product={product}
+              key={product.shopifyId}
               showThumbs={false}
               hideBorder={true}
-              // hideTitle={true}
-              // containImage={true}
               style={{
-                width: '100%',
-                maxWidth: '600px',
+                width: featured.length === 1 ? '100%' : '50%',
+                maxWidth: featured.length === 1 ? '500px' : '350px',
               }}
             />
-          </ProductContainer>
-          <ProductNav />
-        </Landing>
-      </Container> */}
+          ))}
+        </Listing>
+
+        <StyledLink
+          to={`/shop/collection/featured`}
+        >
+          View All Products
+        </StyledLink>
+
+        <StaticImage
+          src='../images/group.jpg'
+          alt='logo'
+        />
+        <ImagesWrapper>
+          <StaticImage
+            src='../images/burrs.jpg'
+            alt='logo'
+          />
+          <StaticImage
+            src='../images/homies.jpg'
+            alt='logo'
+          />
+        </ImagesWrapper>
+        <StaticImage
+          src='../images/biofreezearmy.jpg'
+          alt='logo'
+        /> */}
+
+        {/* <ProductNav /> */}
+
+      </Container>
     </>
   )
 }

@@ -72,6 +72,7 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
 
   const {
     available,
+    productAvailable
   } = useCheckout(product)
 
   return (
@@ -87,7 +88,7 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
           {!hideTitle && (
             <H3>{product.title}</H3>
           )}
-          {!available &&
+          {!productAvailable &&
             <p>Sold Out!</p>
           }
         </TextWrapper>
@@ -98,7 +99,7 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
             image={product.images[index].gatsbyImageData}
             alt={'Product Image'}
             // objectFit='contain'
-            objectFit={product.title === 'Anarchy Dad Hat' ? 'contain' : 'cover'}
+            // objectFit={'cover'}
 
           />
         </ImgLink>

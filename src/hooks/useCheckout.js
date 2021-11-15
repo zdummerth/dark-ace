@@ -26,6 +26,7 @@ export const useCheckout = product => {
   const {
     addVariantToCart,
     checkAvailability,
+    checkProductAvailability,
     store: { status, checkout }
   } = useContext(StoreContext)
 
@@ -36,6 +37,7 @@ export const useCheckout = product => {
 
   const [quantity, setQuantity] = useState(1)
   const [available, setAvailable] = useState(variant.availableForSale)
+  const [productAvailable, setProductAvailable] = useState(product.totalInventory > 0)
   // console.log('availability', available)
 
 
@@ -67,9 +69,22 @@ export const useCheckout = product => {
     [variant.storefrontId, checkAvailability, storefrontId]
   )
 
+  const productAvailability = useCallback(
+    () => {
+      // console.log('checking availability')
+      checkProductAvailability(storefrontId)
+        .then(({ data }) => {
+          // console.log('available result', data)
+          setProductAvailable(data)
+        })
+    },
+    [checkProductAvailability, storefrontId]
+  )
+
   useEffect(() => {
     availability(id)
-  }, [id, availability]);
+    productAvailability(storefrontId)
+  }, [storefrontId, id, availability, productAvailability])
 
   return {
     variant,
@@ -77,6 +92,7 @@ export const useCheckout = product => {
     available,
     status,
     checkout,
+    productAvailable,
     increaseQuantity,
     decreaseQuantity,
     addToCart,

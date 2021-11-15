@@ -214,5 +214,9 @@ export const H2 = styled.h3`
   @media (min-width: ${breakpoints.desktop}) {
     font-size: 28px;
   }
-}
+`
+
+export const H1 = styled.h1`
+  // text-align: center;
+  font-family: 'Covered By Your Grace';
 `

@@ -67,7 +67,11 @@ const Span = styled.span`
     
 `
 const SoldOut = styled.div`
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
   font-size: 1.2rem;
+  height: 150px;
 `
 
 const Thumbs = styled.div`
@@ -250,37 +254,39 @@ const ProductForm = ({
           </OptionContainer>
         ))}
 
-        {available ?
-          (
+        <SoldOut>
+          {available ?
+            (
+              <>
+                <StyledQuantity
+                  quantity={quantity}
+                  increase={increaseQuantity}
+                  decrease={decreaseQuantity}
+                />
+                <Button
+                  type="submit"
+                  disabled={status === 'Adding'}
+                  style={{
+                    width: '200px'
+                  }}
+                >
+                  {`Add To Cart`}
+                </Button>
+              </>
+            )
+            :
             <>
-              <StyledQuantity
-                quantity={quantity}
-                increase={increaseQuantity}
-                decrease={decreaseQuantity}
-              />
-              <Button
-                type="submit"
-                disabled={status === 'Adding'}
-                style={{
-                  width: '200px'
-                }}
-              >
-                {`Add To Cart`}
-              </Button>
-            </>
-          )
-          :
-          <SoldOut>
-            {`Out of Stock! `}
-            {variant.selectedOptions[0].name === 'Title' ?
-              ''
-              :
-              variant.selectedOptions.length === 1 ?
-                ` Please select another ${variant.selectedOptions[0].name}`
+              {`Out of Stock! `}
+              {variant.selectedOptions[0].name === 'Title' ?
+                ''
                 :
-                `Please select another ${variant.selectedOptions[0].name} or ${variant.selectedOptions[1].name}.`}
-          </SoldOut>
-        }
+                variant.selectedOptions.length === 1 ?
+                  ` Please select another ${variant.selectedOptions[0].name}`
+                  :
+                  `Please select another ${variant.selectedOptions[0].name} or ${variant.selectedOptions[1].name}.`}
+            </>
+          }
+        </SoldOut>
 
       </Form>
     </>
