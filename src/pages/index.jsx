@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
-// import { StaticImage } from 'gatsby-plugin-image'
+import { StaticImage } from 'gatsby-plugin-image'
 import { navigate, Link } from 'gatsby'
 // import ProductNav from 'src/components/layout/productCollectionNavigation'
 import styled from 'styled-components'
 // import SlideShow from 'src/components/slideshow'
-// import ProductListingItem from 'src/components/products/ProducListingItem'
-// import { useShopify } from 'src/hooks/useShopify'
-// import { breakpoints } from 'src/styles'
-// import Flex from 'src/components/shared/Flexbox'
+import ProductListingItem from 'src/components/products/ProducListingItem'
+import CollectionListingItem from 'src/components/products/CollectionListingItem'
+import { useShopify } from 'src/hooks/useShopify'
+import Flex from 'src/components/shared/Flexbox'
 import Seo from "src/components/SEO"
-// import { dimensions, breakpoints, H1, colors } from 'src/styles'
+import { dimensions, breakpoints, H1, colors } from 'src/styles'
+
 
 const Container = styled.div`
   display: flex;
@@ -18,31 +19,52 @@ const Container = styled.div`
   width: 100%
 `
 
-// const Listing = styled(Flex)`
-//   display: flex;
-//   flex-wrap: wrap;
-//   width: 100%;
-//   justify-content: center;
-// `
+const Listing = styled(Flex)`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+`
 
-// const ImagesWrapper = styled.div`
-//   // position: relative;
-//   display: flex;
-//   width: 100%;
-//   // height: 30vh;
+const ImagesWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  max-height: 40vh;
+  padding: 5px;
 
-//   & > * {
-//     flex: 1;
-//   }
-// `
+  & > * {
+    flex: 1;
+  }
+`
 
-// const StyledLink = styled(Link)`
-//   border: 1px solid ${colors.brand};
-//   border-radius: 5px;
-//   padding: 10px;
-//   margin: 20px 0 50px 0;
-//   background: ${colors.darkGradient};
-// `
+const AllImagesWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+
+  @media (min-width: ${breakpoints.tablet}) {
+    flex-direction: row;
+  }
+`
+
+const StyledLink = styled(Link)`
+  border: 1px solid ${colors.brand};
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px 0 50px 0;
+  background: ${colors.darkGradient};
+`
+
+const Spacer = styled.div`
+  position: relative;
+  top: 34px;
+  background: ${colors.radialGradient};
+  height: 10px;
+  width: 100%;
+  margin: 10px 0;
+
+`
 
 
 
@@ -66,18 +88,18 @@ const IndexPage = () => {
   //   };
   // }, []);
 
-  // const { featured } = useShopify()
+  const { featured, homePageCollectionListing } = useShopify()
 
   // const feature = featured.products[0]
 
-  useEffect(() => navigate('/shop/collection/featured'))
+  // useEffect(() => navigate('/shop/collection/featured'))
 
 
   return (
     <>
       <Seo title="Home" />
       <Container dir='column'>
-        {/* <StaticImage
+        <StaticImage
           src='../images/banner-hearse.png'
           alt='logo'
         />
@@ -97,32 +119,57 @@ const IndexPage = () => {
             />
           ))}
         </Listing>
+        <Spacer />
+        <StaticImage src='../../images/da-logo-square.png' alt='logo' width={40} height={40} />
+
+        <H1>Our Collections</H1>
+        <Listing ai='stretch'>
+          {homePageCollectionListing.map(c => (
+            <CollectionListingItem
+              collection={c}
+              key={c.shopifyId}
+              showThumbs={false}
+              hideBorder={true}
+              style={{
+                width: '50%',
+                maxHeight: '50vh',
+                maxWidth: '350px',
+              }}
+            />
+          ))}
+        </Listing>
 
         <StyledLink
           to={`/shop/collection/featured`}
         >
           View All Products
         </StyledLink>
-
-        <StaticImage
-          src='../images/group.jpg'
-          alt='logo'
-        />
-        <ImagesWrapper>
-          <StaticImage
-            src='../images/burrs.jpg'
-            alt='logo'
-          />
-          <StaticImage
-            src='../images/homies.jpg'
-            alt='logo'
-          />
-        </ImagesWrapper>
-        <StaticImage
-          src='../images/biofreezearmy.jpg'
-          alt='logo'
-        /> */}
-
+        <Spacer />
+        <StaticImage src='../../images/da-logo-square.png' alt='logo' width={40} height={40} />
+        <AllImagesWrapper>
+          <ImagesWrapper>
+            <StaticImage
+              src='../images/group.jpg'
+              alt='logo'
+            />
+          </ImagesWrapper>
+          <ImagesWrapper>
+            <StaticImage
+              src='../images/burrs.jpg'
+              alt='logo'
+            />
+            <StaticImage
+              src='../images/homies.jpg'
+              alt='logo'
+            />
+          </ImagesWrapper>
+          <ImagesWrapper>
+            <StaticImage
+              src='../images/biofreezearmy.jpg'
+              alt='logo'
+            />
+          </ImagesWrapper>
+        </AllImagesWrapper>
         {/* <ProductNav /> */}
 
       </Container>

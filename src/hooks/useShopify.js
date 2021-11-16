@@ -6,8 +6,13 @@ export const useShopify = () => {
       allShopifyCollection {
         edges {
           node {
+            shopifyId
             handle 
             title
+            image {
+              id
+              gatsbyImageData(width: 600)
+            }
             products {
               handle
               title
@@ -80,7 +85,7 @@ export const useShopify = () => {
 
   const allCollections = data.allShopifyCollection.edges.map(({ node }) => node)
 
-  // console.log({allCollections})
+  // console.log({ allCollections })
   const allProducts = allCollections.map(c => c.products).flat()
   // console.log({ allProducts })
   const singleVariantProducts = allProducts.filter(p => p.variants.length === 1)
@@ -97,9 +102,22 @@ export const useShopify = () => {
 
   const collectionNames = allCollections.map(c => c.title)
 
+  const collectionListingData = allCollections.map(c => ({
+    title: c.title,
+    handle: c.handle,
+    image: c.image?.gatsbyImageData,
+    shopifyId: c.shopifyId
+  }))
+
+  const homePageCollectionHandles = ['socks', 'dri-fits', 'longsleeves']
+  const homePageCollectionListing = collectionListingData.filter(c => homePageCollectionHandles.includes(c.handle))
+
+
+
+  console.log({ homePageCollectionListing })
 
   const { giftCard } = data
 
-  return { discs, headware, accessories, featured, giftCard, longsleeves, tShirts, driFits, preOrder, collectionNames, allCollections, singleVariantProducts }
+  return { discs, headware, homePageCollectionListing, accessories, featured, giftCard, longsleeves, tShirts, driFits, preOrder, collectionNames, allCollections, singleVariantProducts }
 
 }

@@ -24,6 +24,8 @@ export const colors = {
   grayBackground: '#262626',
   background: '#020202',
   gradient: `linear-gradient(to bottom right, #C00A0A 45%, #020202)`,
+  radialGradient: `radial-gradient(#020202 58%, #C00A0A)`,
+  downGradient: `linear-gradient(to bottom, #C00A0A, #020202 60%)`,
   darkGradient: `linear-gradient(to bottom right, #020202 65%, #C00A0A)`,
   darkToBottom: `radial-gradient(ellipse at 50% 100%, #C00A0A, #020202 75%)`,
   grayGradient: `linear-gradient(to bottom right, #020202 45%, #454545)`,
@@ -176,9 +178,9 @@ export const Listing = ({ children, style }) => {
   const isSingleItem = !children.length
   return (
     <StyledListing
-     style={style} 
-     isSingleItem={isSingleItem}
-     >
+      style={style}
+      isSingleItem={isSingleItem}
+    >
       {children}
     </StyledListing>
   )
