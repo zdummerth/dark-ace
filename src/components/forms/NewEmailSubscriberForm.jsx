@@ -81,7 +81,7 @@ export default function EmailSubscriberForm({ reset }) {
                     </SubmitError>
                 ) : (
                     <i>
-                        Sign up to receive emails about our
+                        Sign up to receive emails about
                         our latest products and events
                     </i>
                 )}
