@@ -11,12 +11,25 @@ import Flex from 'src/components/shared/Flexbox'
 import Seo from "src/components/SEO"
 import { dimensions, breakpoints, H1, colors } from 'src/styles'
 
+import Slideshow from 'src/components/Slideshow'
+
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%
+  width: 100%;
+`
+
+const StyledSlideshow = styled(Slideshow)`
+  width: 100vw;
+  max-width: 100%;
+
+  //Banner aspect ratio is 3:1
+  height: calc(100vw / 3);
+
+  //Max content width is 1300px
+  max-height: calc(1300px / 3);
 `
 
 const Listing = styled(Flex)`
@@ -90,20 +103,22 @@ const IndexPage = () => {
 
   const { featured, homePageCollectionListing } = useShopify()
 
-  // const feature = featured.products[0]
-
-  // useEffect(() => navigate('/shop/collection/featured'))
-
-
   return (
     <>
       <Seo title="Home" />
       <Container dir='column'>
-        <StaticImage
-          src='../images/banner-hearse.png'
-          alt='logo'
-        />
-
+        <StyledSlideshow interval={3500}>
+          <StaticImage
+            src='../images/banner-hearse.png'
+            alt='logo'
+          />
+          <StaticImage
+            src='../images/banner-mvp.png'
+            alt='logo'
+          />
+        </StyledSlideshow>
+        <Spacer />
+        <StaticImage src='../images/da-logo-square.png' alt='logo' width={45} height={45} />
         <H1>Featured Products</H1>
         <Listing ai='stretch'>
           {featured.products.map(product => (
@@ -120,7 +135,7 @@ const IndexPage = () => {
           ))}
         </Listing>
         <Spacer />
-        <StaticImage src='../../images/da-logo-square.png' alt='logo' width={40} height={40} />
+        <StaticImage src='../images/da-logo-square.png' alt='logo' width={45} height={45} />
 
         <H1>Our Collections</H1>
         <Listing ai='stretch'>
@@ -145,7 +160,7 @@ const IndexPage = () => {
           View All Products
         </StyledLink>
         <Spacer />
-        <StaticImage src='../../images/da-logo-square.png' alt='logo' width={40} height={40} />
+        <StaticImage src='../images/da-logo-square.png' alt='logo' width={40} height={40} />
         <AllImagesWrapper>
           <ImagesWrapper>
             <StaticImage

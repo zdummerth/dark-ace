@@ -98,8 +98,8 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
           <GatsbyImage
             image={product.images[index].gatsbyImageData}
             alt={'Product Image'}
-            // objectFit='contain'
-            // objectFit={'cover'}
+          // objectFit='contain'
+          // objectFit={'cover'}
 
           />
         </ImgLink>
