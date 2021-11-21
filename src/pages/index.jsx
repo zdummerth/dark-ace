@@ -9,7 +9,7 @@ import CollectionListingItem from 'src/components/products/CollectionListingItem
 import { useShopify } from 'src/hooks/useShopify'
 import Flex from 'src/components/shared/Flexbox'
 import Seo from "src/components/SEO"
-import { dimensions, breakpoints, H1, colors } from 'src/styles'
+import { dimensions, breakpoints, H1, H2, colors } from 'src/styles'
 
 import Slideshow from 'src/components/Slideshow'
 
@@ -19,6 +19,13 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+
+  .announcement {
+    padding: 8px;
+    width: 100%;
+    text-align: center;
+    background: ${({theme}) => theme.colors.brand};
+  }
 `
 
 const StyledSlideshow = styled(Slideshow)`
@@ -107,6 +114,9 @@ const IndexPage = () => {
     <>
       <Seo title="Home" />
       <Container dir='column'>
+        <div className='announcement'>
+          Spend $100 or more and get a free beanie
+        </div>
         <StyledSlideshow interval={3500}>
           <StaticImage
             src='../images/banner-hearse.png'

@@ -140,7 +140,7 @@ const Header = ({ open, setOpen }) => {
             open={!open}
             size='28'
           />
-          <I>Menu</I>
+          {/* <I>Menu</I> */}
         </Flex>
         {/* <Link
           to='/shop/collection/featured'
@@ -256,15 +256,6 @@ const Header = ({ open, setOpen }) => {
           >
             <CartIcon />
             <I>Cart</I>
-          </Link>
-          <Link
-            to='/about-us'
-            name='Play Disc Golf'
-            className='menu-item'
-            onClick={() => setOpen(false)}
-          >
-            <Pencil size='22' />
-            <I>Blog</I>
           </Link>
           <Link
             to='/about-us'
