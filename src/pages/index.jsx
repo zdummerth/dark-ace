@@ -70,12 +70,12 @@ const StyledLink = styled(Link)`
 `
 
 const Spacer = styled.div`
-  position: relative;
-  top: 34px;
+  // position: relative;
+  // top: 34px;
   background: ${colors.radialGradient};
   height: 10px;
   width: 100%;
-  margin: 10px 0;
+  margin: 20px 0;
 
 `
 
@@ -117,8 +117,6 @@ const IndexPage = () => {
             alt='logo'
           />
         </StyledSlideshow>
-        <Spacer />
-        <StaticImage src='../images/da-logo-square.png' alt='logo' width={45} height={45} />
         <H1>Featured Products</H1>
         <Listing ai='stretch'>
           {featured.products.map(product => (
@@ -135,7 +133,7 @@ const IndexPage = () => {
           ))}
         </Listing>
         <Spacer />
-        <StaticImage src='../images/da-logo-square.png' alt='logo' width={45} height={45} />
+        {/* <StaticImage src='../images/da-logo-square.png' alt='logo' width={45} height={45} /> */}
 
         <H1>Our Collections</H1>
         <Listing ai='stretch'>
@@ -160,7 +158,7 @@ const IndexPage = () => {
           View All Products
         </StyledLink>
         <Spacer />
-        <StaticImage src='../images/da-logo-square.png' alt='logo' width={40} height={40} />
+        {/* <StaticImage src='../images/da-logo-square.png' alt='logo' width={40} height={40} /> */}
         <AllImagesWrapper>
           <ImagesWrapper>
             <StaticImage

@@ -2,20 +2,11 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { Link } from "gatsby"
 import styled from 'styled-components'
-import { ShoppingBag, Trophy, Message, Home, X, CaretDownCircle, Pencil, UserPin } from '@styled-icons/boxicons-regular'
+import { ShoppingBag, Trophy, Message, Home, X, CaretDownCircle, Pencil, UserPin, Menu, NetworkChart } from '@styled-icons/boxicons-regular'
 import Flex from 'src/components/shared/Flexbox'
 import Logo from 'src/components/layout/logo'
 import { dimensions, colors, breakpoints } from 'src/styles';
-import StyledLink from 'src/components/shared/Link'
-import CartLink from 'src/components/cart/cart-link'
-
-
-// const GlobalStyle = createGlobalStyle`
-//   body {
-//     overflow-y: ${props => (props.closed ? "" : "hidden")};
-//     height: ${props => (props.closed ? "" : "100vh")};
-//   }
-// `
+import CartIcon from 'src/components/cart/cart-icon'
 
 const FullWidth = styled(Flex)`
   background: ${colors.darkGradient}; 
@@ -24,10 +15,14 @@ const FullWidth = styled(Flex)`
   top: 0;
   z-index: 5;
 `
+const I = styled.i`
+  position: relative;
+  font-size: 12px;
+`
 
 const Nav = styled(Flex)`
   height: ${dimensions.headerHeight};
-  background: ${colors.darkGradient}; 
+  background: ${colors.radialGradient}; 
   width: 100%;
   max-width: 800px;
   position: absolute;
@@ -47,32 +42,72 @@ const Nav = styled(Flex)`
     }
   }
 
+  .menuButton:hover {
+    cursor: pointer;
+  }
+
   @media (min-width: ${breakpoints.tablet}) {
     position: static;
     background: transparent;
   }
 `
 
-const I = styled.i`
-  position: relative;
-  font-size: 12px;
-`
-
 const MobileNavbox = styled.div`
   position: fixed;
-  width: 100%;
-  z-index: 4;
-  height: ${dimensions.headerHeight};
-  top: ${({ open }) => open ? dimensions.headerHeight : '0'};
-  // top: ${dimensions.headerHeight};
-
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  width: 100%;
+  z-index: 6;
+  height: 100%;
+  width: 100%;
+  left: ${({ open }) => open ? '0' : '-100%'};
+  top: 0;
 
-  transition: all 0.3s ease-in;
-  background: ${colors.darkGradient};
+  transition: all 0.2s ease-in;
 
+  ${I} {
+    font-size: 18px;
+    padding-left: 30px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 85%;
+    background: ${colors.darkGradient};
+
+    #close-button {
+      align-self: flex-end;
+      padding: 8px; 
+
+      ${I} {
+        padding: 0;
+      }
+    }
+  }
+
+  .filler {
+    flex: 1;
+    background: rgba(0,0,0,.8);
+    display: ${({ open }) => open ? 'block' : 'none'};
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    // flex-direction: row;
+    width: 100%;
+    padding: 15px 0 15px 20px;
+    border-bottom: 1px solid gray;
+  }
+
+  #close-button:hover {
+    cursor: pointer;
+  }
+
+  #first {
+    border-top: 1px solid gray;
+  }
 
   @media (min-width: ${breakpoints.tablet}) {
     display: none;
@@ -84,12 +119,7 @@ const StyledCaretUp = styled(CaretDownCircle)`
   transition: all 0.3s ease-in;
 `
 
-const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
-
-
-  const [navbarClosed, setNavbarClosed] = useState(true);
-
-
+const Header = ({ open, setOpen }) => {
 
   return (
     <FullWidth>
@@ -100,107 +130,182 @@ const Header = ({ cartCount, setSpotifyMinimized, spotifyMinimized }) => {
         {/* <div
         style={{ display: 'flex', alignItems: 'center' }}
       > */}
-        <StyledLink
-          to='/'
+        <Flex
+          ai='center'
+          dir='column'
+          className='menuButton'
+          onClick={() => setOpen(!open)}
         >
-          <Flex dir='column'>
-            <Home size='22' />
-            <I>Home</I>
-          </Flex>
-        </StyledLink>
-        <StyledLink
+          <Menu
+            open={!open}
+            size='28'
+          />
+          <I>Menu</I>
+        </Flex>
+        {/* <Link
           to='/shop/collection/featured'
           name='Play Disc Golf'
-          onClick={() => setNavbarClosed(true)}
+          onClick={() => setOpen(false)}
         >
           <Flex dir='column'>
             <ShoppingBag size='22' />
             <I>Shop</I>
           </Flex>
-        </StyledLink>
-        <Flex dir='column'>
-          <CartLink />
-          <I>Cart</I>
-        </Flex>
-        <Flex
-          ai='center'
-          dir='column'
-          className='menuButton'
-          onClick={() => setNavbarClosed(!navbarClosed)}
-        >
-          <StyledCaretUp
-            open={!navbarClosed}
-            size='28'
-          />
-          <I>Menu</I>
-        </Flex>
-        <StyledLink
-          to='/about-us'
+        </Link> */}
+        <Link to='/' name='home'>
+          <Logo />
+        </Link>
+        <Link
+          to='/shop/collection/featured'
           name='Play Disc Golf'
           className='hide-mobile'
-          onClick={() => setNavbarClosed(true)}
+          onClick={() => setOpen(false)}
         >
-          <Flex dir='column'>
-            <UserPin size='22' />
-            <I>About Us</I>
-          </Flex>
-        </StyledLink>
-        <StyledLink
-          to='/about-us'
-          name='Play Disc Golf'
-          className='hide-mobile'
-          onClick={() => setNavbarClosed(true)}
-        >
-          <Flex dir='column'>
-            <Pencil size='22' />
-            <I>Blog</I>
-          </Flex>
-        </StyledLink>
-        <StyledLink
+          {/* <ShoppingBag size='22' /> */}
+          <I>Shop</I>
+        </Link>
+
+        <Link
           to='/contact'
           name='Play Disc Golf'
           className='hide-mobile'
-          onClick={() => setNavbarClosed(true)}
+          onClick={() => setOpen(false)}
         >
           <Flex dir='column'>
-            <Message size='22' />
+            {/* <Message size='22' /> */}
             <I>Contact</I>
           </Flex>
-        </StyledLink>
+        </Link>
+        <Link
+          to='/about-us'
+          name='Play Disc Golf'
+          className='hide-mobile'
+          onClick={() => setOpen(false)}
+        >
+          {/* <UserPin size='22' /> */}
+          <I>About Us</I>
+        </Link>
+        <Link
+          to='/partners'
+          name='Play Disc Golf'
+          className='hide-mobile'
+          onClick={() => setOpen(false)}
+        >
+          {/* <NetworkChart size='22' /> */}
+          <I>Our Partners</I>
+        </Link>
+        <Link
+          to='/about-us'
+          name='Play Disc Golf'
+          className='hide-mobile'
+          onClick={() => setOpen(false)}
+        >
+
+          <Flex dir='column'>
+            {/* <Pencil size='22' /> */}
+            <I>Blog</I>
+          </Flex>
+        </Link>
+        <Link
+          to='/cart'
+          name='Play Disc Golf'
+          onClick={() => setOpen(false)}
+        >
+          <Flex>
+            <I className='hide-mobile'>Cart</I>
+            <div className='hide-mobile' style={{ width: '15px' }} />
+            <CartIcon />
+          </Flex>
+        </Link>
       </Nav>
-      <MobileNavbox open={!navbarClosed}>
-        <StyledLink
-          to='/about-us'
-          name='Play Disc Golf'
-          onClick={() => setNavbarClosed(true)}
-        >
-          <Flex dir='column'>
-            <UserPin size='22' />
-            <I>About Us</I>
+      <MobileNavbox open={open}>
+        <div className="content">
+          <Flex
+            ai='center'
+            dir='column'
+            id='close-button'
+            onClick={() => setOpen(false)}
+          >
+            <X size='28' />
+            <I>Close</I>
           </Flex>
-        </StyledLink>
-        <StyledLink
-          to='/about-us'
-          name='Play Disc Golf'
-          onClick={() => setNavbarClosed(true)}
-        >
-          <Flex dir='column'>
+          <Link
+            to='/'
+            name='Play Disc Golf'
+            id='first'
+            className='menu-item'
+            onClick={() => setOpen(false)}
+          >
+            <Home size='22' />
+            <I>Home</I>
+          </Link>
+          <Link
+            to='/shop/collection/featured'
+            name='Play Disc Golf'
+            className='menu-item'
+            onClick={() => setOpen(false)}
+          >
+            <ShoppingBag size='22' />
+            <I>Shop</I>
+          </Link>
+          <Link
+            to='/cart'
+            name='Play Disc Golf'
+            className='menu-item'
+            onClick={() => setOpen(false)}
+          >
+            <CartIcon />
+            <I>Cart</I>
+          </Link>
+          <Link
+            to='/about-us'
+            name='Play Disc Golf'
+            className='menu-item'
+            onClick={() => setOpen(false)}
+          >
             <Pencil size='22' />
             <I>Blog</I>
-          </Flex>
-        </StyledLink>
-        <StyledLink
-          to='/contact'
-          name='Play Disc Golf'
-          onClick={() => setNavbarClosed(true)}
-        >
-          <Flex dir='column'>
+          </Link>
+          <Link
+            to='/about-us'
+            name='Play Disc Golf'
+            className='menu-item'
+            onClick={() => setOpen(false)}
+          >
+            <UserPin size='22' />
+            <I>About Us</I>
+          </Link>
+          <Link
+            to='/about-us'
+            name='Play Disc Golf'
+            className='menu-item'
+            onClick={() => setOpen(false)}
+          >
+            <Pencil size='22' />
+            <I>Blog</I>
+          </Link>
+          <Link
+            to='/partners'
+            name='Play Disc Golf'
+            className='menu-item'
+            onClick={() => setOpen(false)}
+          >
+            <NetworkChart size='22' />
+            <I>Our Partners</I>
+          </Link>
+          <Link
+            to='/contact'
+            name='Play Disc Golf'
+            className='menu-item'
+            onClick={() => setOpen(false)}
+          >
             <Message size='22' />
             <I>Contact</I>
-          </Flex>
-        </StyledLink>
+          </Link>
+        </div>
+        <div className="filler" />
       </MobileNavbox>
-    </FullWidth>
+    </FullWidth >
   )
 }
 

@@ -20,6 +20,8 @@ const GlobalStyle = createGlobalStyle`
     font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 0;
+    // overflow-y: hidden;
+    overflow-y: ${({ open }) => open ? 'hidden' : 'visible'};
   }
 
   html {
@@ -62,7 +64,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  // min-height: 100vh;
   overflow: hidden;
 `
 
@@ -76,6 +78,12 @@ const ContentWrapper = styled.main`
   min-height: calc(100vh - ${dimensions.headerHeight});
   max-width: 1300px;
   margin: 0 auto;
+  background: ${({ theme }) => theme.colors.background};
+
+  &.navbar-open {
+    // position: fixed;
+    // z-index: 3;
+  }
 `
 
 // When header is fixed, it's removed from doc flow
@@ -111,12 +119,12 @@ const Layout = ({ children, location }) => {
   } = useContext(StoreContext)
 
   const [spotifyMinimized, setSpotifyMinimized] = useState(true)
-  const [shippingOpen, setShippingOpen] = useState(true)
   const [resetEmailForm, setResetEmailForm] = useState(false)
+  const [navbarOpen, setNavbarOpen] = useState(false)
 
   useEffect(() => {
     //This makes sure the menus close when the user clicks on a page link
-    setSpotifyMinimized(true)
+    setNavbarOpen(false)
     setResetEmailForm(true)
   }, [location])
 
@@ -127,7 +135,7 @@ const Layout = ({ children, location }) => {
 
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyle open={navbarOpen} />
       <Wrapper>
         <StyledAddingToCart
           status={status}
@@ -136,11 +144,7 @@ const Layout = ({ children, location }) => {
           resetError={resetError}
         />
 
-        <Header
-          cartCount={cartCount}
-          setSpotifyMinimized={setSpotifyMinimized}
-          spotifyMinimized={spotifyMinimized}
-        />
+        <Header {...{ open: navbarOpen, setOpen: setNavbarOpen }} />
         {/* <Spotify
           minimized={spotifyMinimized}
           setMinimized={setSpotifyMinimized}
@@ -149,6 +153,7 @@ const Layout = ({ children, location }) => {
 
         <ContentWrapper
           onClick={() => setSpotifyMinimized(true)}
+          className={navbarOpen ? 'navbar-open' : ''}
         >
           {/* <Collapsable
             top={dimensions.headerHeight}

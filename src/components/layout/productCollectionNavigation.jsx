@@ -11,6 +11,7 @@ const Nav = styled.nav`
   align-content: center;
   flex-wrap: wrap;
   margin: 10px 0;
+  // width: 200px;
 `
 
 const StyledLink = styled(Link)`
@@ -49,6 +50,15 @@ const ProductNav = ({ collections, className }) => {
           {c.title}
         </StyledLink>
       ))}
+      <StyledLink
+        to={`/shop/all-products`}
+        activeStyle={{
+          background: colors.gradient,
+          // border: 'none'
+        }}
+      >
+        All Products
+      </StyledLink>
     </Nav>
   )
 }

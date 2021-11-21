@@ -1,6 +1,5 @@
 import React, { useContext } from "react"
 import styled from 'styled-components'
-import { Link } from 'gatsby'
 import { Cart } from '@styled-icons/boxicons-regular'
 
 import { StoreContext } from 'src/context/StoreContextProvider'
@@ -44,15 +43,10 @@ const CartLink = () => {
   const totalQuantity = lineItems.reduce((acc, cv) => acc + cv.quantity, 0)
 
   return (
-    <>
-      <Link to='/cart'>
-        <CartWrapper>
-          {totalQuantity > 0 && <span>{totalQuantity}</span>}
-          <Cart size='22' />
-        </CartWrapper>
-      </Link>
-
-    </>
+    <CartWrapper>
+      {totalQuantity > 0 && <span>{totalQuantity}</span>}
+      <Cart size='22' />
+    </CartWrapper>
   )
 }
 
