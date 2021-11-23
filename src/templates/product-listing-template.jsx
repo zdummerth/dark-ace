@@ -89,11 +89,23 @@ export const query = graphql`
         title
         handle
         storefrontId
+        priceRangeV2 {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+        }
         variants {
           id
           storefrontId
           availableForSale
           shopifyId
+          price
+          compareAtPrice
         }
         images {
           id

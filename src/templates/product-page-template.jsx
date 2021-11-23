@@ -10,6 +10,7 @@ import { useCheckout } from 'src/hooks/useCheckout'
 import ProductNav from 'src/components/layout/productCollectionNavigation'
 import ProductForm from 'src/components/products/product-form'
 import Flex from 'src/components/shared/Flexbox'
+import Price from 'src/components/shared/Price'
 
 // import GiftCard from '../components/products/GiftCard'
 
@@ -56,10 +57,10 @@ const InfoWrapper = styled.div`
     width: 500px;
   }
 `
-const StyledPrice = styled.div`
+const StyledPrice = styled(Price)`
   margin-bottom: 20px;
   font-size: 20px;
-  font-weight: bold;
+  // font-weight: bold;
 `
 
 const ThumbnailContainer = styled.div`  
@@ -81,10 +82,17 @@ const Section = styled.section`
   // border-bottom: 1px solid ${colors.gray};
   padding: 10px;
   margin-top: 20px;
+  // width: 100%;
+
 
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .description {
+    max-width: 500px;
+  }
+
   @media (min-width: ${breakpoints.desktop}) {
     &.top {
       margin-top: 0;
@@ -247,12 +255,16 @@ const ProductPage = ({ data }) => {
         <InfoWrapper>
           <Section className='top'>
             <Subtitle>{title}</Subtitle>
-            <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+            <div className='description' dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
           </Section>
           <Section>
-            <StyledPrice>
+            {/* <StyledPrice>
               ${variant.price}
-            </StyledPrice>
+            </StyledPrice> */}
+            <StyledPrice
+              price={variant.price}
+              compareAtPrice={variant.compareAtPrice}
+            />
             <ProductForm
               product={product}
               variant={variant}
@@ -314,6 +326,7 @@ export const query = graphql`
         storefrontId
         title
         price
+        compareAtPrice
         availableForSale
         shopifyId
         selectedOptions {

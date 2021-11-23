@@ -29,6 +29,7 @@ export const useShopify = () => {
                   id
                 }
                 price
+                compareAtPrice
               }
               priceRangeV2 {
                 minVariantPrice {

@@ -5,6 +5,7 @@ import { useCheckout } from 'src/hooks/useCheckout'
 import styled from 'styled-components'
 import { breakpoints, colors, spacing, H3 } from 'src/styles';
 import Flex from 'src/components/shared/Flexbox'
+import Price from 'src/components/shared/Price'
 
 
 const ProductContainer = styled.div`
@@ -15,6 +16,10 @@ const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  h3 {
+    margin-bottom: 8px;
+  }
   @media (max-width: ${breakpoints.tablet}) {
     
   }
@@ -75,6 +80,10 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
     productAvailable
   } = useCheckout(product)
 
+  const comparePrice = product.variants[0].compareAtPrice
+  const actualPrice = product.priceRangeV2.minVariantPrice.amount
+  const price = parseFloat(comparePrice && actualPrice).toFixed(2)
+
   return (
     <ProductContainer
       className={className}
@@ -86,7 +95,13 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
           to={`/shop/${product.handle}`}
         >
           {!hideTitle && (
-            <H3>{product.title}</H3>
+            <div>
+              <H3>{product.title}</H3>
+              <Price
+                price={product.priceRangeV2.minVariantPrice.amount}
+                compareAtPrice={product.variants[0].compareAtPrice}
+              />
+            </div>
           )}
           {!productAvailable &&
             <p>Sold Out!</p>
@@ -104,6 +119,7 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
           />
         </ImgLink>
       </ImgContainer>
+
       {showThumbs ?
         <ThumbnailContainer>
           {product.thumbs.map((thumb, ind) => (
