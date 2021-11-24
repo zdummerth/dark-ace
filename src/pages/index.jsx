@@ -39,74 +39,14 @@ const StyledSlideshow = styled(Slideshow)`
   max-height: 500px;
 `
 
-const Listing = styled(Flex)`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  justify-content: center;
-`
 
-const ImagesWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  max-width: 600px;
-  max-height: 40vh;
-  padding: 5px;
 
-  & > * {
-    flex: 1;
-  }
-`
 
-const AllImagesWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
 
-  @media (min-width: ${breakpoints.tablet}) {
-    flex-direction: row;
-  }
-`
-
-const StyledLink = styled(Link)`
-  border: 1px solid ${colors.brand};
-  border-radius: 5px;
-  padding: 10px;
-  margin: 20px 0 50px 0;
-  background: ${colors.darkGradient};
-`
-
-const Spacer = styled.div`
-  // position: relative;
-  // top: 34px;
-  background: ${colors.radialGradient};
-  height: 10px;
-  width: 100%;
-  margin: 20px 0;
-
-`
 
 
 
 const IndexPage = () => {
-  // const [scrolled, setScrolled] = useState(false)
-
-  // const isScrolled = () => {
-  //   if (window.pageYOffset > 0) {
-  //     setScrolled(true)
-  //   }
-  //   else {
-  //     setScrolled(false)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   window.addEventListener('scroll', isScrolled, { passive: true });
-
-  //   return () => {
-  //     window.removeEventListener('scroll', isScrolled);
-  //   };
-  // }, []);
 
   const { featured, homePageCollectionListing } = useShopify()
 
@@ -114,9 +54,6 @@ const IndexPage = () => {
     <>
       <Seo title="Home" />
       <Container dir='column'>
-        <div className='announcement'>
-          Spend $100 or more and get a free beanie while supplies last
-        </div>
         <StyledSlideshow interval={3500}>
           <StaticImage
             src='../images/sales/dark-friday-announcement.jpg'
@@ -139,72 +76,6 @@ const IndexPage = () => {
             alt='logo'
           />
         </StyledSlideshow>
-        <H1>Featured Products</H1>
-        <Listing ai='stretch'>
-          {featured.products.map(product => (
-            <ProductListingItem
-              product={product}
-              key={product.shopifyId}
-              showThumbs={false}
-              hideBorder={true}
-              style={{
-                // width: '100%',
-                width: featured.products.length === 1 ? '100%' : '50%',
-                maxWidth: featured.products.length === 1 ? '500px' : '350px',
-              }}
-            />
-          ))}
-        </Listing>
-        {/* <H1>Our Collections</H1>
-        <Listing ai='stretch'>
-          {homePageCollectionListing.map(c => (
-            <CollectionListingItem
-              collection={c}
-              key={c.shopifyId}
-              showThumbs={false}
-              hideBorder={true}
-              style={{
-                width: '50%',
-                maxHeight: '50vh',
-                maxWidth: '350px',
-              }}
-            />
-          ))}
-        </Listing> */}
-
-        <StyledLink
-          to={`/shop/collection/featured`}
-        >
-          View All Products
-        </StyledLink>
-        <Spacer />
-        {/* <StaticImage src='../images/da-logo-square.png' alt='logo' width={40} height={40} /> */}
-        <AllImagesWrapper>
-          <ImagesWrapper>
-            <StaticImage
-              src='../images/group.jpg'
-              alt='logo'
-            />
-          </ImagesWrapper>
-          <ImagesWrapper>
-            <StaticImage
-              src='../images/burrs.jpg'
-              alt='logo'
-            />
-            <StaticImage
-              src='../images/homies.jpg'
-              alt='logo'
-            />
-          </ImagesWrapper>
-          <ImagesWrapper>
-            <StaticImage
-              src='../images/biofreezearmy.jpg'
-              alt='logo'
-            />
-          </ImagesWrapper>
-        </AllImagesWrapper>
-        {/* <ProductNav /> */}
-
       </Container>
     </>
   )
