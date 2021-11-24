@@ -18,7 +18,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
+  // height: 100vh;
+  text-align: center;
+
 
   .announcement {
     padding: 8px;
@@ -42,18 +46,21 @@ const StyledSlideshow = styled(Slideshow)`
 
 
 
-
-
-
-
 const IndexPage = () => {
-
-  const { featured, homePageCollectionListing } = useShopify()
 
   return (
     <>
       <Seo title="Home" />
       <Container dir='column'>
+        <StaticImage
+          src='../images/da-logo-square.png'
+          alt='logo'
+          width={150}
+          height={150}
+        />
+
+        <H1>Prepare For The Weekend Of Darkness</H1>
+
         <StyledSlideshow interval={3500}>
           <StaticImage
             src='../images/sales/dark-friday-announcement.jpg'

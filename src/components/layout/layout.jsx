@@ -143,8 +143,7 @@ const Layout = ({ children, location }) => {
           error={error}
           resetError={resetError}
         />
-
-        <Header {...{ open: navbarOpen, setOpen: setNavbarOpen }} />
+        {/* <Header {...{ open: navbarOpen, setOpen: setNavbarOpen }} /> */}
         {/* <Spotify
           minimized={spotifyMinimized}
           setMinimized={setSpotifyMinimized}
