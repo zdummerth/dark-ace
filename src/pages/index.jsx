@@ -24,19 +24,18 @@ const Container = styled.div`
     padding: 8px;
     width: 100%;
     text-align: center;
-    background: ${({theme}) => theme.colors.brand};
+    background: ${({ theme }) => theme.colors.brand};
   }
 `
 
 const StyledSlideshow = styled(Slideshow)`
   width: 100vw;
-  max-width: 100%;
+  max-width: 500px;
 
-  //Banner aspect ratio is 3:1
-  height: calc(100vw / 3);
+  height: 100vw;
 
   //Max content width is 1300px
-  max-height: calc(1300px / 3);
+  max-height: 500px;
 `
 
 const Listing = styled(Flex)`
@@ -115,15 +114,27 @@ const IndexPage = () => {
       <Seo title="Home" />
       <Container dir='column'>
         <div className='announcement'>
-          Spend $100 or more and get a free beanie
+          Spend $100 or more and get a free beanie while supplies last
         </div>
         <StyledSlideshow interval={3500}>
           <StaticImage
-            src='../images/banner-hearse.png'
+            src='../images/sales/dark-friday-announcement.jpg'
             alt='logo'
           />
           <StaticImage
-            src='../images/banner-mvp.png'
+            src='../images/sales/dark-friday.jpg'
+            alt='logo'
+          />
+          <StaticImage
+            src='../images/sales/shredder-saturday.jpg'
+            alt='logo'
+          />
+          <StaticImage
+            src='../images/sales/slasher-sunday.jpg'
+            alt='logo'
+          />
+          <StaticImage
+            src='../images/sales/metal-monday.jpg'
             alt='logo'
           />
         </StyledSlideshow>
@@ -136,16 +147,14 @@ const IndexPage = () => {
               showThumbs={false}
               hideBorder={true}
               style={{
-                width: featured.length === 1 ? '100%' : '50%',
-                maxWidth: featured.length === 1 ? '500px' : '350px',
+                // width: '100%',
+                width: featured.products.length === 1 ? '100%' : '50%',
+                maxWidth: featured.products.length === 1 ? '500px' : '350px',
               }}
             />
           ))}
         </Listing>
-        <Spacer />
-        {/* <StaticImage src='../images/da-logo-square.png' alt='logo' width={45} height={45} /> */}
-
-        <H1>Our Collections</H1>
+        {/* <H1>Our Collections</H1>
         <Listing ai='stretch'>
           {homePageCollectionListing.map(c => (
             <CollectionListingItem
@@ -160,7 +169,7 @@ const IndexPage = () => {
               }}
             />
           ))}
-        </Listing>
+        </Listing> */}
 
         <StyledLink
           to={`/shop/collection/featured`}

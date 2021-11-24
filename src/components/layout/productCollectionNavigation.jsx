@@ -50,7 +50,7 @@ const ProductNav = ({ collections, className }) => {
           {c.title}
         </StyledLink>
       ))}
-      <StyledLink
+      {/* <StyledLink
         to={`/shop/all-products`}
         activeStyle={{
           background: colors.gradient,
@@ -58,7 +58,7 @@ const ProductNav = ({ collections, className }) => {
         }}
       >
         All Products
-      </StyledLink>
+      </StyledLink> */}
     </Nav>
   )
 }

@@ -194,18 +194,7 @@ const Header = ({ open, setOpen }) => {
           {/* <NetworkChart size='22' /> */}
           <I>Our Partners</I>
         </Link>
-        <Link
-          to='/about-us'
-          name='Play Disc Golf'
-          className='hide-mobile'
-          onClick={() => setOpen(false)}
-        >
 
-          <Flex dir='column'>
-            {/* <Pencil size='22' /> */}
-            <I>Blog</I>
-          </Flex>
-        </Link>
         <Link
           to='/cart'
           name='Play Disc Golf'
@@ -265,15 +254,6 @@ const Header = ({ open, setOpen }) => {
           >
             <UserPin size='22' />
             <I>About Us</I>
-          </Link>
-          <Link
-            to='/about-us'
-            name='Play Disc Golf'
-            className='menu-item'
-            onClick={() => setOpen(false)}
-          >
-            <Pencil size='22' />
-            <I>Blog</I>
           </Link>
           <Link
             to='/partners'
