@@ -33,6 +33,7 @@ const StyledSlideshow = styled(Slideshow)`
   max-width: 500px;
 
   height: 100vw;
+  margin-top: 8px;
 
   //Max content width is 1300px
   max-height: 500px;
