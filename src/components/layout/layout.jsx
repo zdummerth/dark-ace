@@ -75,7 +75,8 @@ const ContentWrapper = styled.main`
   align-items: center;
   position: relative;
   width: 100%;
-  min-height: calc(100vh - ${dimensions.headerHeight});
+  // min-height: calc(100vh - ${dimensions.headerHeight});
+  min-height: 100vh;
   max-width: 1300px;
   margin: 0 auto;
   background: ${({ theme }) => theme.colors.background};
@@ -148,7 +149,7 @@ const Layout = ({ children, location }) => {
           minimized={spotifyMinimized}
           setMinimized={setSpotifyMinimized}
         /> */}
-        <HeaderMargin />
+        {/* <HeaderMargin /> */}
 
         <ContentWrapper
           onClick={() => setSpotifyMinimized(true)}
