@@ -24,11 +24,8 @@ const Container = styled.div`
   text-align: center;
 
 
-  .announcement {
-    padding: 8px;
-    width: 100%;
-    text-align: center;
-    background: ${({ theme }) => theme.colors.brand};
+  h1 {
+    max-width: 300px;
   }
 `
 
