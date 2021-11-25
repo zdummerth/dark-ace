@@ -59,8 +59,7 @@ const ProductListingPage = ({ data }) => {
               <ProductListingItem
                 product={product}
                 key={product.shopifyId}
-                // showThumbs={handle === 'headware' && product.title === 'Anarchy Dad Hat'}
-                showThumbs={false}
+                // showThumbs={true}
                 // hideBorder={products.length === 1 ? true : false}
                 hideBorder={true}
                 style={{
@@ -106,6 +105,10 @@ export const query = graphql`
           shopifyId
           price
           compareAtPrice
+          image { 
+            id
+            gatsbyImageData(width: 600)
+          }
         }
         images {
           id

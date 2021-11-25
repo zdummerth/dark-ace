@@ -72,6 +72,47 @@ const InfoContainer = styled.div`
   flex-direction: column;
 `
 
+const ColorButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 8px;
+`
+
+const ColorButton = styled.button`
+  display: flex;
+
+  & > * {
+    flex: 1;
+  }
+
+  padding: 0;
+  width: 22px;
+  height: 22px;
+  transform: rotate(0.125turn);
+  border: 1px solid red;
+  border-radius: 50%;
+  background: transparent;
+  overflow: hidden;
+`
+
+const colorData = [
+  {
+    imageId: 'bf8723b3-74df-5584-bd4e-150c1e9545db',
+    color1: 'black',
+    color2: 'gray'
+  },
+  {
+    imageId: '6057812a-7597-57d4-a55e-9bc83e4f5bdc',
+    color1: 'red',
+    color2: 'black'
+  },
+  {
+    imageId: 'e097e48c-e9d5-5411-ade3-128d43c86df7',
+    color1: 'white',
+    color2: 'black'
+  }
+]
+
 const ProductListingItem = ({ product, className, showThumbs, style, hideBorder, hideTitle, containImage }) => {
   const [index, setIndex] = useState(0);
 
@@ -80,9 +121,10 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
     productAvailable
   } = useCheckout(product)
 
-  const comparePrice = product.variants[0].compareAtPrice
-  const actualPrice = product.priceRangeV2.minVariantPrice.amount
-  const price = parseFloat(comparePrice && actualPrice).toFixed(2)
+
+  if (product.handle === 'black-flag-baseball-tee') {
+    console.log('product', product)
+  }
 
   return (
     <ProductContainer
@@ -97,16 +139,33 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
           {!hideTitle && (
             <div>
               <H3>{product.title}</H3>
-              <Price
-                price={product.priceRangeV2.minVariantPrice.amount}
-                compareAtPrice={product.variants[0].compareAtPrice}
-              />
             </div>
           )}
           {!productAvailable &&
             <p>Sold Out!</p>
           }
         </TextWrapper>
+        {product.handle === 'black-flag-baseball-tee' && (
+          <ColorButtonContainer>
+            {colorData.map(d => {
+              const handleClick = () => {
+                const image = product.images.findIndex(i => i.id === d.imageId)
+                // console.log('imageIndex', image)
+                setIndex(image)
+              }
+              return (
+                <ColorButton key={d.imageId} onClick={handleClick}>
+                  <div className='left' style={{ backgroundColor: d.color1 }} />
+                  <div className='right' style={{ backgroundColor: d.color2 }} />
+                </ColorButton>
+              )
+            })}
+          </ColorButtonContainer>
+        )}
+        <Price
+          price={product.priceRangeV2.minVariantPrice.amount}
+          compareAtPrice={product.variants[0].compareAtPrice}
+        />
       </InfoContainer>
       <ImgContainer>
         <ImgLink to={`/shop/${product.handle}`}>

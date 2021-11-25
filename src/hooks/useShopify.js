@@ -27,6 +27,7 @@ export const useShopify = () => {
                 availableForSale
                 image { 
                   id
+                  gatsbyImageData(width: 600)
                 }
                 price
                 compareAtPrice
