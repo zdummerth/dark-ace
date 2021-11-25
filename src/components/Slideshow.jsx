@@ -17,6 +17,7 @@ const StyledSlide = styled.div`
   height: 100%;
   width: 100%;
   opacity: ${props => props.active ? '1' : '0'};
+  z-index: ${props => props.active ? '2' : '0'};
   transition: opacity .3s ease-in;
 `
 
@@ -42,9 +43,11 @@ const Dot = styled.button`
 
 const DotContainer = styled(Flex)`
   position: absolute;
+  z-index: 3;
   bottom: 5px;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 10px;
   left: 0;
   right: 0;
 `

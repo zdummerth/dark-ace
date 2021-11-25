@@ -83,6 +83,7 @@ const ColorButton = styled.button`
 
   & > * {
     flex: 1;
+    height: 100%;
   }
 
   padding: 0;
@@ -91,6 +92,7 @@ const ColorButton = styled.button`
   transform: rotate(0.125turn);
   border: 1px solid red;
   border-radius: 50%;
+  // background: blue;
   background: transparent;
   overflow: hidden;
 `
@@ -98,18 +100,18 @@ const ColorButton = styled.button`
 const colorData = [
   {
     imageId: 'bf8723b3-74df-5584-bd4e-150c1e9545db',
-    color1: 'black',
+    color1: '#000000',
     color2: 'gray'
   },
   {
     imageId: '6057812a-7597-57d4-a55e-9bc83e4f5bdc',
-    color1: 'red',
-    color2: 'black'
+    color1: colors.brand,
+    color2: '#000000'
   },
   {
     imageId: 'e097e48c-e9d5-5411-ade3-128d43c86df7',
-    color1: 'white',
-    color2: 'black'
+    color1: '#ffffff',
+    color2: '#000000'
   }
 ]
 
@@ -156,7 +158,10 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
               return (
                 <ColorButton key={d.imageId} onClick={handleClick}>
                   <div className='left' style={{ backgroundColor: d.color1 }} />
+                  {/* <div className='left' style={{ background: d.color1 }} /> */}
+                  {/* <div className='right' /> */}
                   <div className='right' style={{ backgroundColor: d.color2 }} />
+
                 </ColorButton>
               )
             })}

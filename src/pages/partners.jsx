@@ -17,6 +17,12 @@ const Wrapper = styled.div`
     max-width: 400px;
     text-align: center;
   }
+
+  a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 const ImgContainer = styled(Flex)`
@@ -33,29 +39,33 @@ const PartnersPage = () => (
     <Wrapper>
       <H1>Our Partners</H1>
 
-      <H2>Local Line Apparel</H2>
-      <ImgContainer>
-        <StaticImage
-          src='../images/local-line-logo.jpg'
-          alt={'Product Image'}
-        // style={{width: '100%', height: '100%'}}
-        // objectFit='contain'
-        // objectFit={'cover'}
-        />
-      </ImgContainer>
+      <a href="https://www.locallineapparel.com/">
+        <H2>Local Line Apparel</H2>
+        <ImgContainer>
+          <StaticImage
+            src='../images/local-line-logo.jpg'
+            alt={'Product Image'}
+          // style={{width: '100%', height: '100%'}}
+          // objectFit='contain'
+          // objectFit={'cover'}
+          />
+        </ImgContainer>
+      </a>
 
-      <H2>Ripper Studios</H2>
-      <ImgContainer>
-        <StaticImage
-          src='../images/ripper-studios-logo.jpg'
-          alt={'Product Image'}
-        // style={{width: '100%', height: '100%'}}
-        // objectFit='contain'
-        // objectFit={'cover'}
-        />
-      </ImgContainer>
-
+      <a href="https://ripper-studios.com/">
+        <H2>Ripper Studios</H2>
+        <ImgContainer>
+          <StaticImage
+            src='../images/ripper-studios-logo.jpg'
+            alt={'Product Image'}
+          // style={{width: '100%', height: '100%'}}
+          // objectFit='contain'
+          // objectFit={'cover'}
+          />
+        </ImgContainer>
+      </a>
     </Wrapper>
+
   </>
 )
 
