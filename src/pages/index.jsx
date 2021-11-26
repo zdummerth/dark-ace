@@ -180,7 +180,7 @@ const IndexPage = () => {
         </Listing> */}
 
         <StyledLink
-          to={`/shop/collection/featured`}
+          to={`/shop/collection/fall-collection`}
         >
           View All Products
         </StyledLink>
