@@ -26,6 +26,7 @@ export const useCheckout = product => {
   const {
     addVariantToCart,
     checkAvailability,
+    removeLineItem,
     checkProductAvailability,
     store: { status, checkout }
   } = useContext(StoreContext)
@@ -54,6 +55,8 @@ export const useCheckout = product => {
   }
 
   const addToCart = () => {
+      console.log('adding to cart', variant)
+
     addVariantToCart(variant.storefrontId, quantity)
   }
 
@@ -93,6 +96,7 @@ export const useCheckout = product => {
     status,
     checkout,
     productAvailable,
+    removeLineItem,
     increaseQuantity,
     decreaseQuantity,
     addToCart,

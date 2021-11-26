@@ -3,11 +3,6 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { colors } from 'src/styles';
 import Button from 'src/components/shared/Button'
-
-
-
-
-
 import { StoreContext } from 'src/context/StoreContextProvider'
 
 const Container = styled.div`
@@ -46,7 +41,7 @@ const Container = styled.div`
 const LineItem = props => {
   const { item } = props
 
-  // console.log('variant', item.variant.selectedOptions)
+  console.log('variant', item.variant.id)
   const {
     removeLineItem,
     // updateLineItem,
@@ -62,7 +57,7 @@ const LineItem = props => {
 
   // console.log({ item })
 
-  const price = item.variant.price
+  const price = item.variant.id === 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zOTcxODM0MjM5NDAwOQ==' ? 'FREE' : item.variant.price
 
   const options = item.variant.selectedOptions
 
@@ -71,12 +66,14 @@ const LineItem = props => {
   //   : null
 
   const handleRemove = () => {
-    removeLineItem(client, checkout.id, item.id)
+    removeLineItem(item.id)
   }
+
+  const link = item.variant.id === 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zOTcxODM0MjM5NDAwOQ==' ? '/cart' : `/shop/${item.variant.product.handle}/`
 
   return (
     <Container>
-      <Link to={`/shop/${item.variant.product.handle}/`}>
+      <Link to={link}>
         {variantImage}
       </Link>
       <div id='product-info'>
@@ -104,15 +101,17 @@ const LineItem = props => {
         }}>
           Qty:
           {item.quantity}
-          <Button
-            cancel
-            onClick={handleRemove}
-            style={{
-              // width: '80px'
-            }}
-          >
-            Delete
-          </Button>
+          {item.variant.id === 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zOTcxODM0MjM5NDAwOQ==' || (
+            <Button
+              cancel
+              onClick={handleRemove}
+              style={{
+                // width: '80px'
+              }}
+            >
+              Delete
+            </Button>
+          )}
         </span>
       </div>
     </Container>

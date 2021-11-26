@@ -1,7 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components'
+import { graphql } from 'gatsby'
 import { StoreContext } from 'src/context/StoreContextProvider'
 import ProductNav from 'src/components/layout/productCollectionNavigation'
+import { useCheckout } from 'src/hooks/useCheckout'
 // import { useShopify } from 'src/hooks/useShopify'
 import LineItem from 'src/components/cart/line-item'
 import Seo from 'src/components/SEO'
@@ -10,6 +12,7 @@ import Seo from 'src/components/SEO'
 // import Suggestions from 'src/components/products/suggestions/view'
 
 import { colors } from 'src/styles'
+import { initial } from 'lodash'
 
 
 const Container = styled.div`
@@ -52,10 +55,23 @@ const Italic = styled.i`
   padding-bottom: 25px;
 `
 
-const Cart = () => {
+const Cart = ({ data }) => {
   const {
     store: { checkout },
   } = useContext(StoreContext)
+
+  // console.log('checkout', checkout?.lineItems[0]?.variant)
+
+  const {
+    variant,
+    available,
+    addToCart,
+    removeLineItem,
+  } = useCheckout(data.shopifyProduct)
+
+  // console.log('variant data', variant)
+  // console.log('parse int', parseInt(checkout.totalPrice))
+  // console.log('cart data', data.shopifyProduct)
 
   // const [isOpen, setIsOpen] = useState(false)
 
@@ -72,6 +88,27 @@ const Cart = () => {
   const lineItems = checkout.lineItems.map(item => (
     <LineItem key={item.id.toString()} item={item} />
   ))
+
+  useEffect(() => {
+    const init = async () => {
+      const found = checkout?.lineItems?.find(li => li.variant.id === variant.storefrontId)
+      console.log('found', found)
+
+      if (checkout.subtotalPrice < 100 && found) {
+        // console.log('found', found)
+        removeLineItem(found.id)
+        return
+      }
+      if (parseInt(checkout.subtotalPrice) >= 100 && found) {
+        return
+      }
+      if (parseInt(checkout.subtotalPrice) >= 100 && !found) {
+        await addToCart()
+      }
+    }
+
+    init()
+  }, [checkout.subtotalPrice, available])
 
   return (
     <>
@@ -114,6 +151,30 @@ const Cart = () => {
     </>
   )
 }
+
+export const query = graphql`
+  query MyQuery {
+  shopifyProduct(
+    storefrontId: {eq: "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzY2NzA3ODg3ODgzNzc="}
+  ) {
+    handle
+    storefrontId
+    title
+    totalInventory
+    images {
+      gatsbyImageData
+    }
+    variants {
+      storefrontId
+      id
+      displayName
+      inventoryQuantity
+      availableForSale
+      price
+    }
+  }
+}
+`
 
 
 export default Cart

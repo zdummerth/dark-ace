@@ -82,9 +82,12 @@ const StoreContextProvider = ({ children }) => {
             return
           }
 
-          updateStore(prevState => {
-            return { ...prevState, status: 'Adding' }
-          })
+          if (variantId !== 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzY2NzA3ODg3ODgzNzc=') {
+            updateStore(prevState => {
+              return { ...prevState, status: 'Adding' }
+            })
+          }
+
 
           const { checkout, client } = store
 
@@ -102,13 +105,17 @@ const StoreContextProvider = ({ children }) => {
             }, (error) => handleError(error))
         },
 
-        removeLineItem: (client, checkoutID, lineItemID) => {
+        removeLineItem: (lineItemID) => {
+
+          const { checkout, client } = store
+
+          const checkoutId = checkout.id
           updateStore(prevState => {
             return { ...prevState, status: 'Removing' }
           })
 
           return client.checkout
-            .removeLineItems(checkoutID, [lineItemID])
+            .removeLineItems(checkoutId, [lineItemID])
             .then(checkout => {
               updateStore(prevState => {
                 return { ...prevState, checkout, status: 'Removed' }
