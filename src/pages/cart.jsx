@@ -64,9 +64,9 @@ const Cart = ({ data }) => {
 
   const {
     variant,
-    available,
     addToCart,
     removeLineItem,
+    available
   } = useCheckout(data.shopifyProduct)
 
   // console.log('variant data', variant)
@@ -102,13 +102,13 @@ const Cart = ({ data }) => {
       if (parseInt(checkout.subtotalPrice) >= 100 && found) {
         return
       }
-      if (parseInt(checkout.subtotalPrice) >= 100 && !found) {
+      if (parseInt(checkout.subtotalPrice) >= 100 && !found && available) {
         await addToCart()
       }
     }
 
     init()
-  }, [checkout.subtotalPrice, available])
+  }, [checkout.subtotalPrice, checkout.lineItems, available, variant.storefrontId])
 
   return (
     <>
