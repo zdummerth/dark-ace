@@ -22,6 +22,7 @@ const StyledPrice = styled.div`
 
     .price {
         font-weight: bold;
+        font-size: 18px;
     }
 `
 

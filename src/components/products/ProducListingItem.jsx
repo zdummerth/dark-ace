@@ -6,6 +6,8 @@ import styled from 'styled-components'
 import { breakpoints, colors, spacing, H3 } from 'src/styles';
 import Flex from 'src/components/shared/Flexbox'
 import Price from 'src/components/shared/Price'
+import CamouflageBG from 'src/components/shared/CamouflageBG'
+
 
 
 const ProductContainer = styled.div`
@@ -87,17 +89,16 @@ const ColorButton = styled.button`
   }
 
   padding: 0;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   transform: rotate(0.125turn);
-  border: 1px solid red;
+  border: 1px solid white;
   border-radius: 50%;
-  // background: blue;
-  background: transparent;
+  // background: transparent;
   overflow: hidden;
 `
 
-const colorData = [
+const baseballTeeColorData = [
   {
     imageId: 'bf8723b3-74df-5584-bd4e-150c1e9545db',
     color1: '#000000',
@@ -112,6 +113,29 @@ const colorData = [
     imageId: 'e097e48c-e9d5-5411-ade3-128d43c86df7',
     color1: '#ffffff',
     color2: '#000000'
+  }
+]
+
+const hoodieColorData = [
+  {
+    imageId: 'b4de29d3-4bf8-5809-913f-c86d146c7138',
+    component: true
+  },
+  {
+    imageId: 'a81e5b09-32dd-598f-b3e6-46267b56233c',
+    color1: '#CDA1DE',
+  },
+  {
+    imageId: '23956480-7ae0-596d-a3d9-9748aac0e883',
+    color1: '#FFC0CB',
+  },
+  {
+    imageId: '542d7efc-4ad0-5331-a1b0-97cd75399202',
+    color1: '#315E4A',
+  },
+  {
+    imageId: '7020c384-fcd9-5269-843d-0b096b3bff2b',
+    color1: '#A5C3EC',
   }
 ]
 
@@ -149,7 +173,7 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
         </TextWrapper>
         {product.handle === 'black-flag-baseball-tee' && (
           <ColorButtonContainer>
-            {colorData.map(d => {
+            {baseballTeeColorData.map(d => {
               const handleClick = () => {
                 const image = product.images.findIndex(i => i.id === d.imageId)
                 // console.log('imageIndex', image)
@@ -158,10 +182,27 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
               return (
                 <ColorButton key={d.imageId} onClick={handleClick}>
                   <div className='left' style={{ backgroundColor: d.color1 }} />
-                  {/* <div className='left' style={{ background: d.color1 }} /> */}
-                  {/* <div className='right' /> */}
                   <div className='right' style={{ backgroundColor: d.color2 }} />
-
+                </ColorButton>
+              )
+            })}
+          </ColorButtonContainer>
+        )}
+        {product.handle === 'forest-green-blood-font-hoodie' && (
+          <ColorButtonContainer>
+            {hoodieColorData.map(d => {
+              const handleClick = () => {
+                const image = product.images.findIndex(i => i.id === d.imageId)
+                // console.log('imageIndex', image)
+                setIndex(image)
+              }
+              return (
+                <ColorButton key={d.imageId} onClick={handleClick}>
+                  {d.component ? (
+                    <CamouflageBG limit={5} />
+                  ) : (
+                    <div style={{ backgroundColor: d.color1 }} />
+                  )}
                 </ColorButton>
               )
             })}

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import { navigate, Link } from 'gatsby'
-// import ProductNav from 'src/components/layout/productCollectionNavigation'
+import ProductNav from 'src/components/layout/productCollectionNavigation'
 import styled from 'styled-components'
 // import SlideShow from 'src/components/slideshow'
 import ProductListingItem from 'src/components/products/ProducListingItem'
@@ -22,9 +22,12 @@ const Container = styled.div`
 
   .announcement {
     padding: 8px;
+    margin: 8px 0;
     width: 100%;
     text-align: center;
-    background: ${({ theme }) => theme.colors.brand};
+    font-weight: bold;
+    font-size: 18px;
+    background: ${colors.downGradient};
   }
 `
 
@@ -33,7 +36,6 @@ const StyledSlideshow = styled(Slideshow)`
   max-width: 500px;
 
   height: 100vw;
-  margin-top: 8px;
 
   //Max content width is 1300px
   max-height: 500px;
@@ -70,7 +72,7 @@ const AllImagesWrapper = styled.div`
 
 const StyledLink = styled(Link)`
   border: 1px solid ${colors.brand};
-  border-radius: 5px;
+  border-radius: 50px;
   padding: 10px;
   margin: 20px 0 50px 0;
   background: ${colors.darkGradient};
@@ -109,6 +111,7 @@ const IndexPage = () => {
   // }, []);
 
   const { featured, homePageCollectionListing } = useShopify()
+  console.log('featured', featured.products[0])
 
   return (
     <>
@@ -157,6 +160,8 @@ const IndexPage = () => {
             />
           ))}
         </Listing>
+
+
         {/* <H1>Our Collections</H1>
         <Listing ai='stretch'>
           {homePageCollectionListing.map(c => (
@@ -179,8 +184,11 @@ const IndexPage = () => {
         >
           View All Products
         </StyledLink>
+
         <Spacer />
+
         {/* <StaticImage src='../images/da-logo-square.png' alt='logo' width={40} height={40} /> */}
+
         <AllImagesWrapper>
           <ImagesWrapper>
             <StaticImage
@@ -205,7 +213,7 @@ const IndexPage = () => {
             />
           </ImagesWrapper>
         </AllImagesWrapper>
-        {/* <ProductNav /> */}
+        <ProductNav />
 
       </Container>
     </>
