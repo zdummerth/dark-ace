@@ -155,7 +155,7 @@ const IndexPage = () => {
               style={{
                 // width: '100%',
                 width: featured.products.length === 1 ? '100%' : '50%',
-                maxWidth: featured.products.length === 1 ? '500px' : '350px',
+                maxWidth: featured.products.length === 2 ? '500px' : '450px',
               }}
             />
           ))}
