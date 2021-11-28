@@ -125,16 +125,6 @@ const IndexPage = () => {
             src='../images/sales/dark-friday-announcement.jpg'
             alt='logo'
           />
-          <Link to='/shop'>
-            <StaticImage
-              src='../images/sales/dark-friday.jpg'
-              alt='logo'
-            />
-          </Link>
-          <StaticImage
-            src='../images/sales/shredder-saturday.jpg'
-            alt='logo'
-          />
           <StaticImage
             src='../images/sales/slasher-sunday.jpg'
             alt='logo'
