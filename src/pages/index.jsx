@@ -122,10 +122,6 @@ const IndexPage = () => {
         </div>
         <StyledSlideshow interval={3500}>
           <StaticImage
-            src='../images/sales/dark-friday-announcement.jpg'
-            alt='logo'
-          />
-          <StaticImage
             src='../images/sales/slasher-sunday.jpg'
             alt='logo'
           />
