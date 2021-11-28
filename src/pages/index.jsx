@@ -19,16 +19,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-
-  .announcement {
-    padding: 8px;
-    margin: 8px 0;
-    width: 100%;
-    text-align: center;
-    font-weight: bold;
-    font-size: 18px;
-    background: ${colors.downGradient};
-  }
 `
 
 const StyledSlideshow = styled(Slideshow)`
@@ -117,9 +107,7 @@ const IndexPage = () => {
     <>
       <Seo title="Home" />
       <Container dir='column'>
-        <div className='announcement'>
-          Spend $100 or more and get a free beanie while supplies last
-        </div>
+        
         <StyledSlideshow interval={3500}>
           <StaticImage
             src='../images/sales/slasher-sunday.jpg'

@@ -84,6 +84,16 @@ const ContentWrapper = styled.main`
     // position: fixed;
     // z-index: 3;
   }
+
+  .announcement {
+    padding: 8px;
+    margin: 8px 0;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    background: ${colors.downGradient};
+  }
 `
 
 // When header is fixed, it's removed from doc flow
@@ -167,6 +177,9 @@ const Layout = ({ children, location }) => {
               <CaretUp color='white' size='24' />
             </BlankButton>
           </Collapsable> */}
+          <div className='announcement'>
+            Spend $100 or more and get a free beanie while supplies last
+          </div>
           {children}
         </ContentWrapper>
         <Footer resetForm={resetEmailForm} />
