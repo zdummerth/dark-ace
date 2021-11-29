@@ -21,7 +21,7 @@ const Container = styled.div`
   width: 100%;
 `
 
-const StyledSlideshow = styled(Slideshow)`
+const StyledSlideshow = styled.div`
   width: 100vw;
   max-width: 500px;
 
@@ -107,12 +107,8 @@ const IndexPage = () => {
     <>
       <Seo title="Home" />
       <Container dir='column'>
-        
-        <StyledSlideshow interval={3500}>
-          <StaticImage
-            src='../images/sales/slasher-sunday.jpg'
-            alt='logo'
-          />
+
+        <StyledSlideshow>
           <StaticImage
             src='../images/sales/metal-monday.jpg'
             alt='logo'
