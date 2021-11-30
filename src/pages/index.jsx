@@ -11,7 +11,7 @@ import Flex from 'src/components/shared/Flexbox'
 import Seo from "src/components/SEO"
 import { dimensions, breakpoints, H1, H2, colors } from 'src/styles'
 
-import Slideshow from 'src/components/Slideshow'
+// import Slideshow from 'src/components/Slideshow'
 
 
 const Container = styled.div`
@@ -107,13 +107,6 @@ const IndexPage = () => {
     <>
       <Seo title="Home" />
       <Container dir='column'>
-
-        <StyledSlideshow>
-          <StaticImage
-            src='../images/sales/metal-monday.jpg'
-            alt='logo'
-          />
-        </StyledSlideshow>
         <H1>Featured Products</H1>
         <Listing ai='stretch'>
           {featured.products.map(product => (

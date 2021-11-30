@@ -177,9 +177,6 @@ const Layout = ({ children, location }) => {
               <CaretUp color='white' size='24' />
             </BlankButton>
           </Collapsable> */}
-          <div className='announcement'>
-            Spend $100 or more and get a free beanie while supplies last
-          </div>
           {children}
         </ContentWrapper>
         <Footer resetForm={resetEmailForm} />

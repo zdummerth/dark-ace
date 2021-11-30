@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { graphql } from 'gatsby'
 import { StoreContext } from 'src/context/StoreContextProvider'
 import ProductNav from 'src/components/layout/productCollectionNavigation'
-import { useCheckout } from 'src/hooks/useCheckout'
 // import { useShopify } from 'src/hooks/useShopify'
 import LineItem from 'src/components/cart/line-item'
 import Seo from 'src/components/SEO'
@@ -62,13 +61,6 @@ const Cart = ({ data }) => {
 
   // console.log('checkout', checkout?.lineItems[0]?.variant)
 
-  const {
-    variant,
-    addToCart,
-    removeLineItem,
-    available
-  } = useCheckout(data.shopifyProduct)
-
   // console.log('variant data', variant)
   // console.log('parse int', parseInt(checkout.totalPrice))
   // console.log('cart data', data.shopifyProduct)
@@ -88,27 +80,6 @@ const Cart = ({ data }) => {
   const lineItems = checkout.lineItems.map(item => (
     <LineItem key={item.id.toString()} item={item} />
   ))
-
-  useEffect(() => {
-    const init = async () => {
-      const found = checkout?.lineItems?.find(li => li.variant.id === variant.storefrontId)
-      console.log('found', found)
-
-      if (checkout.subtotalPrice < 100 && found) {
-        // console.log('found', found)
-        removeLineItem(found.id)
-        return
-      }
-      if (parseInt(checkout.subtotalPrice) >= 100 && found) {
-        return
-      }
-      if (parseInt(checkout.subtotalPrice) >= 100 && !found && available) {
-        await addToCart()
-      }
-    }
-
-    init()
-  }, [checkout.subtotalPrice, checkout.lineItems, available, variant.storefrontId])
 
   return (
     <>
