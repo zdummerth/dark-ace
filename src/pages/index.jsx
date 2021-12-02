@@ -75,7 +75,20 @@ const Spacer = styled.div`
   height: 10px;
   width: 100%;
   margin: 20px 0;
+`
 
+const BannerWrapper = styled.div`
+  // height: 10px;
+  // width: 100%;
+
+  .gatsby-image-wrapper {
+    width: 100%;
+
+    @media (min-width: ${breakpoints.tablet}) {
+      width: 50%;
+      // max-width: 650px;
+    }
+  }
 `
 
 
@@ -107,6 +120,16 @@ const IndexPage = () => {
     <>
       <Seo title="Home" />
       <Container dir='column'>
+        <BannerWrapper>
+          <StaticImage
+            src='../images/dec-banner2.jpg'
+            alt='logo'
+          />
+          <StaticImage
+            src='../images/dec-banner1.jpg'
+            alt='logo'
+          />
+        </BannerWrapper>
         <H1>Featured Products</H1>
         <Listing ai='stretch'>
           {featured.products.map(product => (
