@@ -100,20 +100,20 @@ const ColorButton = styled.button`
 
 const baseballTeeColorData = [
   {
-    imageId: 'bf8723b3-74df-5584-bd4e-150c1e9545db',
-    color1: '#000000',
-    color2: 'gray'
+    imageId: '1d144520-0aff-5cd4-bf07-f1d7e1d9c18a',
+    color1: '#ffffff',
+    color2: '#000000'
   },
   {
-    imageId: '6057812a-7597-57d4-a55e-9bc83e4f5bdc',
+    imageId: '9e2b3f60-ebf2-5c60-a79a-8d99249ab81d',
     color1: colors.brand,
     color2: '#000000'
   },
   {
-    imageId: 'e097e48c-e9d5-5411-ade3-128d43c86df7',
-    color1: '#ffffff',
-    color2: '#000000'
-  }
+    imageId: 'bf8723b3-74df-5584-bd4e-150c1e9545db',
+    color1: '#000000',
+    color2: 'gray'
+  },
 ]
 
 const hoodieColorData = [
@@ -176,6 +176,7 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
             {baseballTeeColorData.map(d => {
               const handleClick = () => {
                 const image = product.images.findIndex(i => i.id === d.imageId)
+                // console.log('images', product.images)
                 // console.log('imageIndex', image)
                 setIndex(image)
               }
