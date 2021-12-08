@@ -149,7 +149,7 @@ const ProductListingItem = ({ product, className, showThumbs, style, hideBorder,
 
 
   if (product.handle === 'black-flag-baseball-tee') {
-    console.log('product', product)
+    // console.log('product', product)
   }
 
   return (
