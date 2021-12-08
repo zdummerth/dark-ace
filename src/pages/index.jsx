@@ -14,6 +14,7 @@ import Seo from "src/components/SEO"
 import { dimensions, breakpoints, H1, H2, colors } from 'src/styles'
 import PromoVideo from 'src/videos/DarkAcePromofinals.mp4'
 import useVideoPlayer from "src/hooks/useVideoPlayer";
+import useCountdown from "src/hooks/useCountdown";
 
 // import Slideshow from 'src/components/Slideshow'
 
@@ -39,6 +40,10 @@ const Container = styled.div`
       right: 8px;
       color: white;
     }
+  }
+
+  .countdown {
+    text-align: center;
   }
 `
 
@@ -172,6 +177,24 @@ const IndexPage = () => {
               <VolumeMute size='28' />
             )}
           </BlankButton>
+        </div>
+        <Spacer />
+        <div className='countdown'>
+          <h2>
+            Pre-order goes live in
+            {useCountdown()}
+          </h2>
+          <div
+            style={{
+              width: '100%',
+              maxWidth: '450px',
+            }}
+          >
+            <StaticImage
+              src='../images/demon-hoodie.png'
+              alt='logo'
+            />
+          </div>
         </div>
         <Spacer />
 
