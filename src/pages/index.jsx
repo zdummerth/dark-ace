@@ -14,7 +14,7 @@ import Seo from "src/components/SEO"
 import { dimensions, breakpoints, H1, H2, colors } from 'src/styles'
 import PromoVideo from 'src/videos/DarkAcePromofinals.mp4'
 import useVideoPlayer from "src/hooks/useVideoPlayer";
-import useCountdown from "src/hooks/useCountdown";
+import Countdown from "src/components/Countdown";
 
 // import Slideshow from 'src/components/Slideshow'
 
@@ -25,12 +25,20 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
 
+  a {
+    margin: 0;
+  }
+
   .video-wrapper {
     position: relative;
-    // width: 100%;
+    width: 100vw;
+    height: calc(100vw/1.77);
+    max-height: calc(100vh - 70px);
 
     video {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .mute {
@@ -40,6 +48,27 @@ const Container = styled.div`
       right: 8px;
       color: white;
     }
+
+    .overlay {
+      position: absolute;
+      z-index: 2;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      color: white;
+      background: rgba(0,0,0,.3);
+      padding-bottom: 8px;
+    }
+  }
+
+  h2 {
+    @media (min-width: ${breakpoints.tablet}) {
+      font-size: 28px;
+    }
   }
 
   .countdown {
@@ -47,15 +76,15 @@ const Container = styled.div`
   }
 `
 
-const StyledSlideshow = styled.div`
-  width: 100vw;
-  max-width: 500px;
+// const StyledSlideshow = styled.div`
+//   width: 100vw;
+//   max-width: 500px;
 
-  height: 100vw;
+//   height: 100vw;
 
-  //Max content width is 1300px
-  max-height: 500px;
-`
+//   //Max content width is 1300px
+//   max-height: 500px;
+// `
 
 const Listing = styled(Flex)`
   display: flex;
@@ -146,16 +175,18 @@ const IndexPage = () => {
   //   setControls(true)
   // }, [controls]);
 
+
+
   const videoElement = useRef(null);
 
   const {
-    togglePlay,
     toggleMute,
-    isMuted
+    isMuted,
+    loaded
   } = useVideoPlayer(videoElement);
 
   const { featured, homePageCollectionListing } = useShopify()
-  // console.log('featured', featured.products[0])
+  console.log('video loaded', loaded)
 
   return (
     <>
@@ -170,19 +201,31 @@ const IndexPage = () => {
           >
             <source src={PromoVideo} type="video/mp4" />
           </video>
-          <BlankButton className='mute' onClick={toggleMute}>
-            {!isMuted ? (
-              <VolumeFull size='28' />
-            ) : (
-              <VolumeMute size='28' />
-            )}
-          </BlankButton>
+          {loaded && (
+            <>
+              <div className="overlay">
+                <BlankButton className='mute' onClick={toggleMute}>
+                  {!isMuted ? (
+                    <VolumeFull size='24' />
+                  ) : (
+                    <VolumeMute size='24' />
+                  )}
+                </BlankButton>
+                <h2>New Arrivals</h2>
+                <StyledLink
+                  to={`/shop/collection/featured`}
+                >
+                  Shop Now
+                </StyledLink>
+              </div>
+            </>
+          )}
         </div>
         <Spacer />
         <div className='countdown'>
           <h2>
             Pre-order goes live in
-            {useCountdown()}
+            <Countdown />
           </h2>
           <div
             style={{

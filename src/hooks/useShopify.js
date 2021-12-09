@@ -115,7 +115,7 @@ export const useShopify = () => {
 
 
 
-  console.log({ homePageCollectionListing })
+  // console.log({ homePageCollectionListing })
 
   const { giftCard } = data
 

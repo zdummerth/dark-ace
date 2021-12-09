@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function useCountdown() {
+function Countdown() {
 
     const calculateTimeLeft = () => {
         let year = new Date().getFullYear();
@@ -38,7 +38,7 @@ function useCountdown() {
         }
 
         timerComponents.push(
-            <span>
+            <span key={interval}>
                 {/* {timeLeft[interval]}{interval === 'secs' ? '' : ':'} */}
                 {timeLeft[interval]} {interval} {interval === 's' ? '' : ' : '}
             </span>
@@ -51,4 +51,4 @@ function useCountdown() {
     )
 }
 
-export default useCountdown;
+export default Countdown;

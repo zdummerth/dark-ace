@@ -4,6 +4,7 @@ const useVideoPlayer = (videoElement) => {
     const [playerState, setPlayerState] = useState({
         isPlaying: false,
         progress: 0,
+        loaded: false,
         speed: 1,
         isMuted: true,
     });
@@ -54,11 +55,28 @@ const useVideoPlayer = (videoElement) => {
             : (videoElement.current.muted = false);
     }, [playerState.isMuted, videoElement]);
 
-    console.log('current', videoElement.current)
+    console.log('current', videoElement.current?.readyState)
+
+    useEffect(() => {
+        if (!videoElement.current) return
+        const handler = () => {
+            if (videoElement.current.readyState >= 3) {
+                setPlayerState({
+                    ...playerState,
+                    loaded: true
+                })
+            }
+        }
+
+        videoElement.current.onloadeddata = handler
+    })
 
     return {
         toggleMute,
-        isMuted: playerState.isMuted
+        setPlayerState,
+        playerState,
+        isMuted: playerState.isMuted,
+        loaded: playerState.loaded
     }
 };
 
