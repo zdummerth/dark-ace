@@ -13,7 +13,7 @@ import Flex from 'src/components/shared/Flexbox'
 import Seo from "src/components/SEO"
 import { dimensions, breakpoints, H1, H2, colors } from 'src/styles'
 import PromoVideo from 'src/videos/DarkAcePromofinals.mp4'
-import useVideoPlayer from "src/hooks/useVideoPlayer";
+import Video from "src/components/Video";
 import Countdown from "src/components/Countdown";
 
 // import Slideshow from 'src/components/Slideshow'
@@ -176,51 +176,34 @@ const IndexPage = () => {
   // }, [controls]);
 
 
-
-  const videoElement = useRef(null);
-
-  const {
-    toggleMute,
-    isMuted,
-    loaded
-  } = useVideoPlayer(videoElement);
-
   const { featured, homePageCollectionListing } = useShopify()
-  console.log('video loaded', loaded)
 
   return (
     <>
       <Seo title="Home" />
       <Container dir='column'>
-        <div className="video-wrapper">
-          <video
-            autoPlay
-            muted
-            loop
-            ref={videoElement}
-          >
-            <source src={PromoVideo} type="video/mp4" />
-          </video>
-          {loaded && (
-            <>
-              <div className="overlay">
-                <BlankButton className='mute' onClick={toggleMute}>
-                  {!isMuted ? (
-                    <VolumeFull size='24' />
-                  ) : (
-                    <VolumeMute size='24' />
-                  )}
-                </BlankButton>
-                <h2>New Arrivals</h2>
-                <StyledLink
-                  to={`/shop/collection/featured`}
-                >
-                  Shop Now
-                </StyledLink>
-              </div>
-            </>
-          )}
-        </div>
+        <Video
+          src={PromoVideo}
+        />
+        {/* {loaded && (
+          <>
+            <div className="overlay">
+              <BlankButton className='mute' onClick={toggleMute}>
+                {!isMuted ? (
+                  <VolumeFull size='24' />
+                ) : (
+                  <VolumeMute size='24' />
+                )}
+              </BlankButton>
+              <h2>New Arrivals</h2>
+              <StyledLink
+                to={`/shop/collection/featured`}
+              >
+                Shop Now
+              </StyledLink>
+            </div>
+          </>
+        )} */}
         <Spacer />
         <div className='countdown'>
           <h2>
