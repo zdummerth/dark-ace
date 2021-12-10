@@ -1,20 +1,20 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
-import { navigate, Link } from 'gatsby'
-import ProductNav from 'src/components/layout/productCollectionNavigation'
+import { Link } from 'gatsby'
+// import ProductNav from 'src/components/layout/productCollectionNavigation'
 import styled from 'styled-components'
 // import SlideShow from 'src/components/slideshow'
-import { VolumeFull, VolumeMute } from '@styled-icons/boxicons-regular'
+// import { VolumeFull, VolumeMute } from '@styled-icons/boxicons-regular'
 import ProductListingItem from 'src/components/products/ProducListingItem'
-import CollectionListingItem from 'src/components/products/CollectionListingItem'
+// import CollectionListingItem from 'src/components/products/CollectionListingItem'
 import { useShopify } from 'src/hooks/useShopify'
-import Button, { BlankButton } from 'src/components/shared/Button'
+// import Button, { BlankButton } from 'src/components/shared/Button'
 import Flex from 'src/components/shared/Flexbox'
 import Seo from "src/components/SEO"
-import { dimensions, breakpoints, H1, H2, colors } from 'src/styles'
-import PromoVideo from 'src/videos/DarkAcePromofinals.mp4'
-import Video from "src/components/Video";
-import Countdown from "src/components/Countdown";
+import { breakpoints, H1, colors } from 'src/styles'
+// import PromoVideo from 'src/videos/DarkAcePromofinals.mp4'
+// import Video from "src/components/Video";
+// import Countdown from "src/components/Countdown";
 
 // import Slideshow from 'src/components/Slideshow'
 
@@ -182,47 +182,6 @@ const IndexPage = () => {
     <>
       <Seo title="Home" />
       <Container dir='column'>
-        <Video
-          src={PromoVideo}
-        />
-        {/* {loaded && (
-          <>
-            <div className="overlay">
-              <BlankButton className='mute' onClick={toggleMute}>
-                {!isMuted ? (
-                  <VolumeFull size='24' />
-                ) : (
-                  <VolumeMute size='24' />
-                )}
-              </BlankButton>
-              <h2>New Arrivals</h2>
-              <StyledLink
-                to={`/shop/collection/featured`}
-              >
-                Shop Now
-              </StyledLink>
-            </div>
-          </>
-        )} */}
-        <Spacer />
-        <div className='countdown'>
-          <h2>
-            Pre-order goes live in
-            <Countdown />
-          </h2>
-          <div
-            style={{
-              width: '100%',
-              maxWidth: '450px',
-            }}
-          >
-            <StaticImage
-              src='../images/demon-hoodie.png'
-              alt='logo'
-            />
-          </div>
-        </div>
-        <Spacer />
 
         <BannerWrapper>
           <StaticImage
