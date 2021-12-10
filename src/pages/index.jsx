@@ -183,18 +183,6 @@ const IndexPage = () => {
       <Seo title="Home" />
       <Container dir='column'>
 
-        <BannerWrapper>
-          <StaticImage
-            src='../images/dec-banner2.jpg'
-            alt='logo'
-          />
-          <StaticImage
-            src='../images/dec-banner1.jpg'
-            alt='logo'
-          />
-        </BannerWrapper>
-        <Spacer />
-
         <H1>Featured Products</H1>
         <Listing ai='stretch'>
           {featured.products.map(product => (
@@ -217,6 +205,18 @@ const IndexPage = () => {
           View All Products
         </StyledLink>
         <Spacer />
+        <BannerWrapper>
+          <StaticImage
+            src='../images/dec-banner2.jpg'
+            alt='logo'
+          />
+          <StaticImage
+            src='../images/dec-banner1.jpg'
+            alt='logo'
+          />
+        </BannerWrapper>
+        <Spacer />
+
         <AllImagesWrapper>
           <ImagesWrapper>
             <StaticImage
