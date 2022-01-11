@@ -200,25 +200,16 @@ export const Subtitle = styled.h2`
 export const H3 = styled.h3`
   // margin-top: 10px;
   text-align: center;
-  font-family: 'Covered By Your Grace';
-  font-size: 22px;
-  @media (min-width: ${breakpoints.desktop}) {
-    font-size: 28px;
-  }
+  // font-family: 'Covered By Your Grace';
 }
 `
 
 export const H2 = styled.h3`
   // margin-top: 10px;
   text-align: center;
-  font-family: 'Covered By Your Grace';
-  font-size: 22px;
-  @media (min-width: ${breakpoints.desktop}) {
-    font-size: 28px;
-  }
 `
 
 export const H1 = styled.h1`
   // text-align: center;
-  font-family: 'Covered By Your Grace';
+  // font-family: 'Covered By Your Grace';
 `

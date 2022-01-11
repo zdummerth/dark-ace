@@ -1,22 +1,12 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
-import { Link } from 'gatsby'
-// import ProductNav from 'src/components/layout/productCollectionNavigation'
+import { LinkExternal } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components'
-// import SlideShow from 'src/components/slideshow'
-// import { VolumeFull, VolumeMute } from '@styled-icons/boxicons-regular'
 import ProductListingItem from 'src/components/products/ProducListingItem'
-// import CollectionListingItem from 'src/components/products/CollectionListingItem'
 import { useShopify } from 'src/hooks/useShopify'
-// import Button, { BlankButton } from 'src/components/shared/Button'
 import Flex from 'src/components/shared/Flexbox'
 import Seo from "src/components/SEO"
 import { breakpoints, H1, colors } from 'src/styles'
-// import PromoVideo from 'src/videos/DarkAcePromofinals.mp4'
-// import Video from "src/components/Video";
-// import Countdown from "src/components/Countdown";
-
-// import Slideshow from 'src/components/Slideshow'
 
 
 const Container = styled.div`
@@ -29,62 +19,30 @@ const Container = styled.div`
     margin: 0;
   }
 
-  .video-wrapper {
-    position: relative;
-    width: 100vw;
-    height: calc(100vw/1.77);
-    max-height: calc(100vh - 70px);
-
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .mute {
-      position: absolute;
-      z-index: 2;
-      bottom: 8px;
-      right: 8px;
-      color: white;
-    }
-
-    .overlay {
-      position: absolute;
-      z-index: 2;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      color: white;
-      background: rgba(0,0,0,.3);
-      padding-bottom: 8px;
-    }
-  }
-
   h2 {
     @media (min-width: ${breakpoints.tablet}) {
       font-size: 28px;
     }
   }
 
-  .countdown {
+  #register {
+    border: 1px solid ${colors.brand};
+    border-radius: 50px;
+    padding: 10px;
+    margin: 20px 0 50px 0;
+    background: ${colors.darkGradient};
+    width: 150px;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+  }
+
+  #league {
     text-align: center;
   }
 `
-
-// const StyledSlideshow = styled.div`
-//   width: 100vw;
-//   max-width: 500px;
-
-//   height: 100vw;
-
-//   //Max content width is 1300px
-//   max-height: 500px;
-// `
 
 const Listing = styled(Flex)`
   display: flex;
@@ -115,14 +73,6 @@ const AllImagesWrapper = styled.div`
   }
 `
 
-const StyledLink = styled(Link)`
-  border: 1px solid ${colors.brand};
-  border-radius: 50px;
-  padding: 10px;
-  margin: 20px 0 50px 0;
-  background: ${colors.darkGradient};
-`
-
 const Spacer = styled.div`
   // position: relative;
   // top: 34px;
@@ -131,21 +81,6 @@ const Spacer = styled.div`
   width: 100%;
   margin: 20px 0;
 `
-
-const BannerWrapper = styled.div`
-  // height: 10px;
-  // width: 100%;
-
-  .gatsby-image-wrapper {
-    width: 100%;
-
-    @media (min-width: ${breakpoints.tablet}) {
-      width: 50%;
-      // max-width: 650px;
-    }
-  }
-`
-
 
 
 const IndexPage = () => {
@@ -199,22 +134,35 @@ const IndexPage = () => {
             />
           ))}
         </Listing>
-        <StyledLink
-          to={`/shop/collection/fall-collection`}
-        >
-          View All Products
-        </StyledLink>
         <Spacer />
-        <BannerWrapper>
-          <StaticImage
-            src='../images/dec-banner2.jpg'
-            alt='logo'
-          />
-          <StaticImage
-            src='../images/dec-banner1.jpg'
-            alt='logo'
-          />
-        </BannerWrapper>
+        <Flex id='league' dir='column' ai='center'>
+          <h2>Putting League At 4 Hands Brewery</h2>
+          <p>
+            Random Draw Doubles
+          </p>
+          <p>
+            The top three teams will receive cash payout as well as all 4Hands products and well liquor comped from their tab!
+          </p>
+          <p>
+            Each player will receive their first beer (either City Wide or Full Life) free as well as 25% off their tab.
+          </p>
+          <h3>Upcoming Dates</h3>
+          <p>
+            - January 24th
+          </p>
+          <p>
+            - January 31st
+          </p>
+          <p>
+            <a
+              id='register'
+              href="https://www.eventbrite.com/e/dark-ace-weekly-putting-league-tickets-238956213467"
+            >
+              Register
+              <LinkExternal size='22' />
+            </a>
+          </p>
+        </Flex>
         <Spacer />
 
         <AllImagesWrapper>

@@ -139,7 +139,7 @@ const Footer = ({ resetForm }) => {
 
         <IconWrapper>
           <StyledLink href='https://www.facebook.com/Dark-Ace-Disc-Golf-Apparel-100462504774316/' target='_blank' rel="noopener"><FbIcon /></StyledLink>
-          <StyledLink href='https://www.instagram.com/darkaceapparel/' target='_blank' rel="noopener"><IgIcon /></StyledLink>
+          {/* <StyledLink href='https://www.instagram.com/darkaceapparel/' target='_blank' rel="noopener"><IgIcon /></StyledLink> */}
         </IconWrapper>
       </TextContainer>
     </StyledFooter>
